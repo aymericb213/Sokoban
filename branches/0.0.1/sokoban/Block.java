@@ -1,6 +1,6 @@
 package sokoban;
 
-public abstract class Block {
+class Block {
 
   private int x;
   private int y;
@@ -9,7 +9,5 @@ public abstract class Block {
     this.x = x;
     this.y = y;
   }
-
-  public abstract String toString();
 
 }

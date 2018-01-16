@@ -1,7 +1,7 @@
 
 package sokoban;
 
-class Player extends Block {
+public class Player extends Block {
 
   private boolean onObjective;
 
@@ -9,4 +9,16 @@ class Player extends Block {
     super(x,y);
   }
 
+  public boolean isOnObjective() {
+    return this.onObjective;
+  }
+
+  @Override
+  public String toString() {
+    if (this.onObjective) {
+      return "+";
+    } else {
+      return "@";
+    }
+  }
 }

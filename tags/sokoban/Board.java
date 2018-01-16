@@ -3,7 +3,7 @@ package sokoban;
 
 import java.util.ArrayList;
 
-class Board {
+public class Board {
 
   private Block[][] map;
   private ArrayList<Crate> listCrate;
@@ -14,8 +14,23 @@ class Board {
   public Board(String file) {
     this.file = file;
   }
-
+ /*
   public Block[][] loadMap(String file) {
-    
+
+  }*/
+
+  public String toString() {
+    String result = "";
+    for (int i=0; i < this.map.length; i++) {
+      for (int j=0; j < this.map.length; j++) {
+        if (this.map[i][j] != null) {
+          result += this.map[i][j].toString();
+        } else {
+          result += " ";
+        }
+      }
+      result += "\n";
+    }
+    return result;
   }
 }

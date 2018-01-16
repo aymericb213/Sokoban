@@ -1,13 +1,25 @@
 
 package sokoban;
 
-class Crate extends Block {
+public class Crate extends Block {
 
   private boolean deadLock;
-  private boolean isPlaced;
+  private boolean placed;
 
   public Crate (int x, int y) {
     super(x,y);
   }
 
+  public boolean isPlaced() {
+    return this.placed;
+  }
+
+  @Override
+  public String toString() {
+    if (this.placed) {
+      return "*";
+    } else {
+      return "$";
+    }
+  }
 }
