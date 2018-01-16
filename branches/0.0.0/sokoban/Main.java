@@ -1,7 +1,7 @@
-package beauchamp-mori-chagneux-leblond;
+package sokoban;
 
 class Main {
   public static void main (String[] args) {
-    System.out.println("Coucou toi ;)");
+    
   }
 }
