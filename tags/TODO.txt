@@ -1,0 +1,8 @@
+lecture fichier
+deplacement joueur
+deplacement caisse
+validation objectif
+gestion collision
+verifier toString
+fin de partie / recharger une map
+IA algo A*
