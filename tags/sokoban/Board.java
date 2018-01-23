@@ -38,8 +38,9 @@ public class Board {
     return result;
   }
 
+
   public void lock (Crate crate) {
-    crate.deadLock = true;
+    crate.setDeadlock(true);
   }
 
   public void deadLocker () {
@@ -59,9 +60,9 @@ public class Board {
     for (int j = 0; j<this.map; j++) {
       for (int i = 0; i<this.map[0]; i++) {
         if (this.map[i][j] instanceof Crate) {
-          if (!this.map[i][j].placed) {
+          if (!this.map[i][j].isPlaced()) {
             return false;
-          } else if (this.map[i][j].deadLock) {
+          } else if (this.map[i][j].isBlocked()) {
             return true;
           }
         }
