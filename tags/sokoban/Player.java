@@ -24,17 +24,17 @@ public class Player extends Block {
     }
   }
 
-  public Board move(Board map, ArrayList<int> position){
+  public Board move(Board map, ArrayList<Integer> position){
     Block new_place = map.map[this.x+position.get(0)][this.y+position.get(1)];
     if ( new_place instanceof Objective ){
       this.x+=position.get(0);
       this.y+=position.get(1);
       this.onObjective=true;
-    }else if ( new_place instanceof Crate && !(new_place.isBlocked()) ){
+    }else if ( new_place instanceof Crate && !(((Crate)new_place).isBlocked()) ){
 
         if ( map.map[this.x+(2*position.get(0))][this.y+(2*position.get(1))] instanceof Objective ){
           map.map[this.x+(2*position.get(0))][this.y+(2*position.get(1))]=map.map[this.x+position.get(0)][this.y+position.get(1)];
-          map.map[this.x+(2*position.get(0))][this.y+(2*position.get(1))].setPlaced(true);
+          ((Crate)map.map[this.x+(2*position.get(0))][this.y+(2*position.get(1))]).setPlaced(true);
         }else if ( !(map.map[this.x+(2*position.get(0))][this.y+(2*position.get(1))] instanceof Wall && map.map[this.x+(2*position.get(0))][this.y+(2*position.get(1))] instanceof Crate) ){
           map.map[this.x+(2*position.get(0))][this.y+(2*position.get(1))]=map.map[this.x+position.get(0)][this.y+position.get(1)];
         }

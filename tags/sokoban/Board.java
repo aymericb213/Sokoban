@@ -8,7 +8,7 @@ import java.util.ArrayList;
 
 public class Board {
 
-  private Block[][] map;
+  protected Block[][] map;
   private ArrayList<Crate> listCrate;
   private ArrayList<Objective> listObjective;
   private Player player;
@@ -44,7 +44,7 @@ public class Board {
         if (this.map[i][j] instanceof Crate) {
           if ((this.map[i-1][j] instanceof Wall || this.map[i+1][j] instanceof Wall) &&
           (this.map[i][j-1] instanceof Wall || this.map[i][j+1] instanceof Wall)) {
-            this.map[i][j].setDeadlock(true);
+            ((Crate)this.map[i][j]).setDeadlock(true);
           }
         }
       }
@@ -55,7 +55,7 @@ public class Board {
     for (int j = 0; j<this.map.length; j++) {
       for (int i = 0; i<this.map[0].length; i++) {
         if (this.map[i][j] instanceof Crate) {
-          if (!(Crate)this.map[i][j].isPlaced()) {
+          if (!((Crate)this.map[i][j]).isPlaced()) {
             return false;
           } else if (((Crate)this.map[i][j]).isBlocked()) {
             return true;
