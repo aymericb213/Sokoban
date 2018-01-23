@@ -8,7 +8,7 @@ import java.util.ArrayList;
 
 public class Board {
 
-  private Block[][] map;
+  protected Block[][] map;
   private ArrayList<Crate> listCrate;
   private ArrayList<Objective> listObjective;
   private Player player;
@@ -38,46 +38,17 @@ public class Board {
     return result;
   }
 
-  public void deadLocker () {
-    for (int j = 0; j<this.map.length; j++) {
-      for (int i = 0; i<this.map[0].length; i++) {
-        if (this.map[i][j] instanceof Crate) {
-          if ((this.map[i-1][j] instanceof Wall || this.map[i+1][j] instanceof Wall) &&
-          (this.map[i][j-1] instanceof Wall || this.map[i][j+1] instanceof Wall)) {
-            (Crate)this.map[i][j].setDeadlock(true);
-          }
-        }
-      }
-    }
-  }
-
-  public boolean isFinished () {
-    for (int j = 0; j<this.map.length; j++) {
-      for (int i = 0; i<this.map[0].length; i++) {
-        if (this.map[i][j] instanceof Crate) {
-          if (!(Crate)this.map[i][j].isPlaced()) {
-            return false;
-          } else if (((Crate)this.map[i][j]).isBlocked()) {
-            return true;
-          }
-        }
-      }
-    }
-    return true;
-  }
-
   public static ArrayList<ArrayList> readingMap(String filename) throws IOException {
     BufferedReader map = new BufferedReader (new FileReader (filename));
     ArrayList<ArrayList> mapToString = new ArrayList<>();
     String line;
     while ((line = map.readLine()) != null) {
       ArrayList<String> lineToString = new ArrayList<>();
-      String[] line2 = line.split("");
-      for (int i = 0; i<line2.length; i++){
-        lineToString.add(line2[i]);
-      }
+      lineToString.add(line);
       mapToString.add(lineToString);
     }
+
     return mapToString;
+
   }
 }

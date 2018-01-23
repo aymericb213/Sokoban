@@ -1,6 +1,8 @@
 
 package sokoban;
 
+import java.util.ArrayList;
+
 public class Player extends Block {
 
   private boolean onObjective;
@@ -22,28 +24,28 @@ public class Player extends Block {
     }
   }
 
-  public Board move(Board map, List<int> position){
-    new_place=map[this.x+position[0]][this.y+position[1]];
+  public Board move(Board map, ArrayList<int> position){
+    Block new_place = map.map[this.x+position.get(0)][this.y+position.get(1)];
     if ( new_place instanceof Objective ){
-      this.x+=position[0];
-      this.y+=position[1];
+      this.x+=position.get(0);
+      this.y+=position.get(1);
       this.onObjective=true;
     }else if ( new_place instanceof Crate && !(new_place.isBlocked()) ){
 
-        if ( map[this.x+(2*position[0])][this.y+(2*position[1])] instanceof Objectif ){
-          map[this.x+(2*position[0])][this.y+(2*position[1])]=map[this.x+position[0]][this.y+position[1]];
-          map[this.x+(2*position[0])][this.y+(2*position[1])].setPlaced=true;
-        }else if ( !(map[this.x+(2*position[0])][this.y+(2*position[1])] instanceof Wall && map[this.x+(2*position[0])][this.y+(2*position[1])] instanceof Crate) ){
-          map[this.x+(2*position[0])][this.y+(2*position[1])]=map[this.x+position[0]][this.y+position[1]];
+        if ( map.map[this.x+(2*position.get(0))][this.y+(2*position.get(1))] instanceof Objective ){
+          map.map[this.x+(2*position.get(0))][this.y+(2*position.get(1))]=map.map[this.x+position.get(0)][this.y+position.get(1)];
+          map.map[this.x+(2*position.get(0))][this.y+(2*position.get(1))].setPlaced(true);
+        }else if ( !(map.map[this.x+(2*position.get(0))][this.y+(2*position.get(1))] instanceof Wall && map.map[this.x+(2*position.get(0))][this.y+(2*position.get(1))] instanceof Crate) ){
+          map.map[this.x+(2*position.get(0))][this.y+(2*position.get(1))]=map.map[this.x+position.get(0)][this.y+position.get(1)];
         }
 
     }else if ( !( new_place instanceof Wall ) ){
-      map[this.x+position[0]][this.y+position[1]]=map[this.x][this.y];
+      map.map[this.x+position.get(0)][this.y+position.get(1)]=map.map[this.x][this.y];
     }
 
     if ( onObjective ){
-      this.x-=position[0];
-      this.y-=position[1];
+      this.x-=position.get(0);
+      this.y-=position.get(1);
       this.onObjective=false;
     }
 
