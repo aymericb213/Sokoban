@@ -1,7 +1,7 @@
 
 package sokoban;
 
-public class Player extends Block {
+public class Player extends Block implements Movable {
 
   private boolean onObjective;
 

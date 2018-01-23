@@ -1,7 +1,7 @@
 
 package sokoban;
 
-public class Crate extends Block {
+public class Crate extends Block implements Movable {
 
   private boolean deadLock;
   private boolean placed;
@@ -13,6 +13,7 @@ public class Crate extends Block {
   public boolean isPlaced() {
     return this.placed;
   }
+
 
   @Override
   public String toString() {
