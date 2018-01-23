@@ -3,6 +3,7 @@ package sokoban;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
+import java.io.*;
 import java.util.ArrayList;
 
 public class Board {
@@ -16,6 +17,7 @@ public class Board {
   public Board(String file) {
     this.file = file;
   }
+
  /*
   public Block[][] loadMap(String file) {
 
@@ -66,5 +68,18 @@ public class Board {
       }
     }
     return true;
+
+  public static ArrayList<ArrayList> readingMap(String filename) throws IOException {
+    BufferedReader map = new BufferedReader (new FileReader (filename));
+    ArrayList<ArrayList> mapToString = new ArrayList<>();
+    String line;
+    while ((line = map.readLine()) != null) {
+      ArrayList<String> lineToString = new ArrayList<>();
+      lineToString.add(line);
+      mapToString.add(lineToString);
+    }
+
+    return mapToString;
+
   }
 }
