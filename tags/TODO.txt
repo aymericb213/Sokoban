@@ -1,11 +1,14 @@
-deplacement joueur
-deplacement caisse
-validation objectif
-gestion collision
-verifier toString
-fin de partie / recharger une map
-IA algo A*
 
+à faire :
+    validation objectif
+    gestion collision
+    verifier toString
+    transformer ArrayList<ArrayList> to Block[][]
+    recharger une map
+    IA algo A*
+
+tester :
+    déplacements / fin de partie / collision
 
 
 
