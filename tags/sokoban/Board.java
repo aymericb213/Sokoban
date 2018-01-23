@@ -35,4 +35,36 @@ public class Board {
     }
     return result;
   }
+
+  public void lock (Crate crate) {
+    crate.deadLock = true;
+  }
+
+  public void deadLocker () {
+    for (int j = 0; j<this.map; j++) {
+      for (int i = 0; i<this.map[0]; i++) {
+        if (this.map[i][j] instanceof Crate) {
+          if ((this.map[i-1][j] instanceof Wall || this.map[i+1][j] instanceof Wall) &&
+          (this.map[i][j-1] instanceof Wall || this.map[i][j+1] instanceof Wall)) {
+            this.lock(this.map[i][j]);
+          }
+        }
+      }
+    }
+  }
+
+  public boolean isFinished () {
+    for (int j = 0; j<this.map; j++) {
+      for (int i = 0; i<this.map[0]; i++) {
+        if (this.map[i][j] instanceof Crate) {
+          if (!this.map[i][j].placed) {
+            return false;
+          } else if (this.map[i][j].deadLock) {
+            return true;
+          }
+        }
+      }
+    }
+    return true;
+  }
 }
