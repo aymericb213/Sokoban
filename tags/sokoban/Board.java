@@ -1,4 +1,3 @@
-
 package sokoban;
 
 import java.io.BufferedReader;
@@ -8,7 +7,7 @@ import java.util.ArrayList;
 
 public class Board {
 
-  protected Block[][] map;
+  protected Block[][] grid;
   private ArrayList<Crate> listCrate;
   private ArrayList<Objective> listObjective;
   private Player player;
@@ -25,10 +24,10 @@ public class Board {
 
   public String toString() {
     String result = "";
-    for (int i=0; i < this.map.length; i++) {
-      for (int j=0; j < this.map.length; j++) {
-        if (this.map[i][j] != null) {
-          result += this.map[i][j].toString();
+    for (int i=0; i < this.grid.length; i++) {
+      for (int j=0; j < this.grid.length; j++) {
+        if (this.grid[i][j] != null) {
+          result += this.grid[i][j].toString();
         } else {
           result += " ";
         }
@@ -38,26 +37,26 @@ public class Board {
     return result;
   }
 
-  public void deadLocker () {
-    for (int j = 0; j<this.map.length; j++) {
-      for (int i = 0; i<this.map[0].length; i++) {
-        if (this.map[i][j] instanceof Crate) {
-          if ((this.map[i-1][j] instanceof Wall || this.map[i+1][j] instanceof Wall) &&
-          (this.map[i][j-1] instanceof Wall || this.map[i][j+1] instanceof Wall)) {
-            ((Crate)this.map[i][j]).setDeadlock(true);
+  public void deadLocker() {
+    for (int j = 0; j<this.grid.length; j++) {
+      for (int i = 0; i<this.grid[0].length; i++) {
+        if (this.grid[i][j] instanceof Crate) {
+          if ((this.grid[i-1][j] instanceof Wall || this.grid[i+1][j] instanceof Wall) &&
+          (this.grid[i][j-1] instanceof Wall || this.grid[i][j+1] instanceof Wall)) {
+            ((Crate)this.grid[i][j]).setDeadlock(true);
           }
         }
       }
     }
   }
 
-  public boolean isFinished () {
-    for (int j = 0; j<this.map.length; j++) {
-      for (int i = 0; i<this.map[0].length; i++) {
-        if (this.map[i][j] instanceof Crate) {
-          if (!((Crate)this.map[i][j]).isPlaced()) {
+  public boolean isFinished() {
+    for (int j = 0; j<this.grid.length; j++) {
+      for (int i = 0; i<this.grid[0].length; i++) {
+        if (this.grid[i][j] instanceof Crate) {
+          if (!((Crate)this.grid[i][j]).isPlaced()) {
             return false;
-          } else if (((Crate)this.map[i][j]).isBlocked()) {
+          } else if (((Crate)this.grid[i][j]).isBlocked()) {
             return true;
           }
         }
