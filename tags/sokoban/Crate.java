@@ -18,6 +18,14 @@ public class Crate extends Block implements Movable {
 		return this.deadLock;
 	}
 
+	public boolean setPlaced(boolean newState) {
+		this.placed=newState;
+	}
+
+	public boolean setDeadlock(boolean newState) {
+		this.deadLock=newState;
+	}
+
   @Override
   public String toString() {
     if (this.placed) {
