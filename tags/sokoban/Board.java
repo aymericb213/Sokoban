@@ -44,7 +44,7 @@ public class Board {
         if (this.map[i][j] instanceof Crate) {
           if ((this.map[i-1][j] instanceof Wall || this.map[i+1][j] instanceof Wall) &&
           (this.map[i][j-1] instanceof Wall || this.map[i][j+1] instanceof Wall)) {
-            this.map[i][j].setDeadlock(true);
+            (Crate)this.map[i][j].setDeadlock(true);
           }
         }
       }
@@ -55,9 +55,9 @@ public class Board {
     for (int j = 0; j<this.map.length; j++) {
       for (int i = 0; i<this.map[0].length; i++) {
         if (this.map[i][j] instanceof Crate) {
-          if (!this.map[i][j].isPlaced()) {
+          if (!(Crate)this.map[i][j].isPlaced()) {
             return false;
-          } else if (this.map[i][j].isBlocked()) {
+          } else if (((Crate)this.map[i][j]).isBlocked()) {
             return true;
           }
         }
@@ -78,8 +78,6 @@ public class Board {
       }
       mapToString.add(lineToString);
     }
-
     return mapToString;
-
   }
 }

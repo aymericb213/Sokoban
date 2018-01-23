@@ -18,11 +18,11 @@ public class Crate extends Block {
 		return this.deadLock;
 	}
 
-	public boolean setPlaced(boolean newState) {
+	public void setPlaced(boolean newState) {
 		this.placed=newState;
 	}
 
-	public boolean setDeadlock(boolean newState) {
+	public void setDeadlock(boolean newState) {
 		this.deadLock=newState;
 	}
 
