@@ -1,4 +1,4 @@
-package edt_java;
+package sokoban;
 
 public interface Movable {
 
