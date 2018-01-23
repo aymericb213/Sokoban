@@ -1,7 +1,7 @@
 
 package sokoban;
 
-public class Crate extends Block implements Movable {
+public class Crate extends Block {
 
   private boolean deadLock;
   private boolean placed;
