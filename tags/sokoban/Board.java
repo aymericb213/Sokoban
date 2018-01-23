@@ -72,7 +72,10 @@ public class Board {
     String line;
     while ((line = map.readLine()) != null) {
       ArrayList<String> lineToString = new ArrayList<>();
-      lineToString.add(line);
+      String[] line2 = line.split("");
+      for (int i = 0; i<line2.length; i++){
+        lineToString.add(line2[i]);
+      }
       mapToString.add(lineToString);
     }
 
