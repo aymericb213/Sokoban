@@ -14,6 +14,9 @@ public class Crate extends Block implements Movable {
     return this.placed;
   }
 
+	public boolean isBlocked() {
+		return this.deadLock;
+	}
 
   @Override
   public String toString() {
