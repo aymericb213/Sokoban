@@ -38,18 +38,13 @@ public class Board {
     return result;
   }
 
-
-  public void lock (Crate crate) {
-    crate.setDeadlock(true);
-  }
-
   public void deadLocker () {
     for (int j = 0; j<this.map.length; j++) {
       for (int i = 0; i<this.map[0].length; i++) {
         if (this.map[i][j] instanceof Crate) {
           if ((this.map[i-1][j] instanceof Wall || this.map[i+1][j] instanceof Wall) &&
           (this.map[i][j-1] instanceof Wall || this.map[i][j+1] instanceof Wall)) {
-            this.lock(this.map[i][j]);
+            this.map[i][j].setDeadlock(true);
           }
         }
       }
@@ -70,7 +65,7 @@ public class Board {
     }
     return true;
   }
-  
+
   public static ArrayList<ArrayList> readingMap(String filename) throws IOException {
     BufferedReader map = new BufferedReader (new FileReader (filename));
     ArrayList<ArrayList> mapToString = new ArrayList<>();
