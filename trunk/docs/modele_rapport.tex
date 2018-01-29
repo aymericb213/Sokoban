@@ -1,0 +1,41 @@
+\documentclass{report} %style de document
+\usepackage[utf8]{inputenc} %encodage des caractères
+\usepackage[french]{babel} %paquet de langue français
+\usepackage[T1]{fontenc} %encodage de la police
+\usepackage[top=2cm,bottom=2cm,left=2cm,right=2cm]{geometry} %marges
+\usepackage{graphicx} %'affichage des images
+\usepackage{url}
+\usepackage{verbatim}
+\usepackage{hyperref}
+\hypersetup{
+	hidelinks,
+    colorlinks,
+    citecolor=black,
+    filecolor=black,
+    linkcolor=black,
+    urlcolor=black
+}
+
+\newcommand{\umlscale}{0.33}
+
+\title{Rapport de projet : Défier l'ordinateur à Sokoban}
+\author{Aymeric BEAUCHAMP}
+\date{2018}
+
+\begin{document}
+
+\maketitle
+
+\tableofcontents
+
+\chapter*{Introduction}
+
+\part{Sokoban}
+
+\chapter{Diagramme UML}
+
+\includegraphics[scale=\umlscale]{diag_sokoban.png}
+
+\chapter*{Conclusion}
+
+\end{document}
