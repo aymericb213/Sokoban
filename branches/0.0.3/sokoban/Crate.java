@@ -5,8 +5,10 @@ public class Crate extends Block {
   private boolean deadLock;
   private boolean placed;
 
-  public Crate(int x, int y) {
+  public Crate(int x, int y,boolean placed) {
     super(x,y);
+    this.deadLock=false;
+    this.placed=placed;
   }
 
   public boolean isPlaced() {
