@@ -2,7 +2,7 @@ package sokoban;
 
 public class Crate extends Block {
 
-  private boolean deadLock;
+  protected boolean deadLock;
   private boolean placed;
 
   public Crate(int x, int y,boolean placed) {
