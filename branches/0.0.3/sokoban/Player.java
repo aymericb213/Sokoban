@@ -6,8 +6,9 @@ public class Player extends Block {
 
   private boolean onObjective;
 
-  public Player(int x, int y) {
+  public Player(int x, int y, boolean onObjective) {
     super(x,y);
+    this.onObjective=onObjective;
   }
 
   public boolean isOnObjective() {
