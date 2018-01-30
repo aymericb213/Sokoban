@@ -37,7 +37,7 @@ public class Player extends Block {
         } else if (!(map.grid[this.x+(2*position.get(0))][this.y+(2*position.get(1))] instanceof Wall && map.grid[this.x+(2*position.get(0))][this.y+(2*position.get(1))] instanceof Crate)){
           map.grid[this.x+(2*position.get(0))][this.y+(2*position.get(1))]=map.grid[this.x+position.get(0)][this.y+position.get(1)];
         }
-    } else if (!( new_place instanceof Wall)){
+    } else if ( new_place instanceof FreeTile){
       map.grid[this.x+position.get(0)][this.y+position.get(1)]=map.grid[this.x][this.y];
     }
     if (onObjective){

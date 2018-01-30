@@ -8,13 +8,15 @@ import java.util.ArrayList;
 public class Board {
 
   protected Block[][] grid;
-  protected ArrayList<Crate> listCrate;
-  private ArrayList<Objective> listObjective;
-  protected Player player;
+  protected ArrayList<Block> listCrate;
+  private ArrayList<Block> listObjective;
+  protected Block player;
   private String file;
 
   public Board(String file) {
     this.file = file;
+		this.listCrate = new ArrayList<>();
+		this.listObjective = new ArrayList<>();
     /*Block[][] grid = new ArrayList<ArrayList<Block>>;*/
   }
 
@@ -29,8 +31,6 @@ public class Board {
       for (int j=0; j < this.grid.length; j++) {
         if (this.grid[i][j] != null) {
           result += this.grid[i][j].toString();
-        } else {
-          result += " ";
         }
       }
       result += "\n";
@@ -79,7 +79,6 @@ public class Board {
       mapToString.add(lineToString);
     }
     this.createGrid(mapToString);
-    System.out.println(this.toString());
     return mapToString;
   }
 
@@ -88,24 +87,30 @@ public class Board {
     for (int i=0;i<mapToString.size();i++) {
       for (int j=0;j<mapToString.get(i).size();j++) {
         if (mapToString.get(i).get(j).equals(" ")){
-          this.grid[i][j]=null;
+					Block t = new FreeTile(i,j);
+          this.grid[i][j] = t;
         }else if (mapToString.get(i).get(j).equals("#")) {
           Block t = new Wall(i,j);
           this.grid[i][j] = t;
         }else if (mapToString.get(i).get(j).equals("$")) {
           Block t = new Crate(i,j,false);
+					this.listCrate.add(t);
           this.grid[i][j] = t;
         }else if (mapToString.get(i).get(j).equals(".")) {
           Block t = new Objective(i,j);
+					this.listObjective.add(t);
           this.grid[i][j] = t;
         }else if (mapToString.get(i).get(j).equals("*")) {
           Block t = new Crate(i,j,true);
+					this.listCrate.add(t);
           this.grid[i][j] = t;
         }else if (mapToString.get(i).get(j).equals("@")) {
           Block t = new Player(i,j,false);
+					this.player=t;
           this.grid[i][j] = t;
         }else if (mapToString.get(i).get(j).equals("+")) {
           Block t = new Player(i,j,true);
+					this.player=t;
           this.grid[i][j] = t;
         }
       }

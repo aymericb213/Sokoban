@@ -13,23 +13,23 @@ public class Main {
 		Scanner sc= new Scanner(System.in);
     b.readingMap();
 		while (!b.isFinished()) {
-			System.out.println(b.grid);
+			System.out.println(b.toString());
 			System.out.println("Entrez votre prochain mouvement parmi H (haut), G (gauche), B (bas), D (droite) :");
 			String input=sc.nextLine();
 			ArrayList<Integer> nextMove = new ArrayList<>();
-			if (input=="H") {
+			if (input.equals("H")) {
 				nextMove.add(-1);
 				nextMove.add(0);
 			}
-			else if (input=="G") {
+			else if (input.equals("G")) {
 				nextMove.add(0);
 				nextMove.add(-1);
 			}
-			else if (input=="D") {
+			else if (input.equals("D")) {
 				nextMove.add(0);
 				nextMove.add(1);
 			}
-			else if (input=="B") {
+			else if (input.equals("B")) {
 				nextMove.add(1);
 				nextMove.add(0);
 			}
@@ -38,12 +38,12 @@ public class Main {
 				nextMove.add(0);
 				System.out.println("Les seules commandes valides sont H,G,D,B.");
 			}
-			b.player.move(b, nextMove);
+			((Player)b.player).move(b, nextMove);
 		}
 		boolean win = true;
-		for(Block o : b.listCrate) {
-			if (o.deadLock){
-				System.out.println("Game Over, you'r so  bad, you lose");
+		for(Block c : b.listCrate) {
+			if (((Crate)c).deadLock){
+				System.out.println("Game Over, you're so bad, you lose");
 				win=false;
 				break;
 			}
