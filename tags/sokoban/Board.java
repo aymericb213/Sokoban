@@ -8,9 +8,9 @@ import java.util.ArrayList;
 public class Board {
 
   protected Block[][] grid;
-  private ArrayList<Crate> listCrate;
+  protected ArrayList<Crate> listCrate;
   private ArrayList<Objective> listObjective;
-  private Player player;
+  protected Player player;
   private String file;
 
   public Board(String file) {
@@ -66,9 +66,9 @@ public class Board {
     return true;
   }
 
-  public ArrayList<ArrayList> readingMap() throws IOException {
+  public ArrayList<ArrayList<String>> readingMap() throws IOException {
     BufferedReader map = new BufferedReader (new FileReader (this.file));
-    ArrayList<ArrayList> mapToString = new ArrayList<>();
+    ArrayList<ArrayList<String>> mapToString = new ArrayList<>();
     String line;
     while ((line = map.readLine()) != null) {
       ArrayList<String> lineToString = new ArrayList<>();
@@ -79,35 +79,37 @@ public class Board {
       mapToString.add(lineToString);
     }
     this.createGrid(mapToString);
+    System.out.println(this.toString());
     return mapToString;
   }
 
-  private void createGrid(ArrayList<ArrayList> mapToString){
+  private void createGrid(ArrayList<ArrayList<String>> mapToString){
+    this.grid = new Block[10][10];
     for (int i=0;i<mapToString.size();i++) {
       for (int j=0;j<mapToString.get(i).size();j++) {
-
-        if (mapToString.get(i).get(j)==" "){
+        if (mapToString.get(i).get(j).equals(" ")){
           this.grid[i][j]=null;
-        }else if (mapToString.get(i).get(j)=="#") {
+        }else if (mapToString.get(i).get(j).equals("#")) {
           Block t = new Wall(i,j);
           this.grid[i][j] = t;
-        }else if (mapToString.get(i).get(j)=="$") {
+        }else if (mapToString.get(i).get(j).equals("$")) {
           Block t = new Crate(i,j,false);
           this.grid[i][j] = t;
-        }else if (mapToString.get(i).get(j)==".") {
+        }else if (mapToString.get(i).get(j).equals(".")) {
           Block t = new Objective(i,j);
           this.grid[i][j] = t;
-        }else if (mapToString.get(i).get(j)=="*") {
+        }else if (mapToString.get(i).get(j).equals("*")) {
           Block t = new Crate(i,j,true);
           this.grid[i][j] = t;
-        }else if (mapToString.get(i).get(j)=="@") {
+        }else if (mapToString.get(i).get(j).equals("@")) {
           Block t = new Player(i,j,false);
           this.grid[i][j] = t;
-        }else if (mapToString.get(i).get(j)=="+") {
+        }else if (mapToString.get(i).get(j).equals("+")) {
           Block t = new Player(i,j,true);
           this.grid[i][j] = t;
         }
       }
     }
+
   }
 }
