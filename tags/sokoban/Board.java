@@ -9,7 +9,7 @@ public class Board {
 
   protected Block[][] grid;
   protected ArrayList<Block> listCrate;
-  private ArrayList<Block> listObjective;
+  protected ArrayList<Block> listObjective;
   protected Block player;
   private String file;
 
