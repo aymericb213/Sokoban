@@ -56,7 +56,8 @@ public class Board {
   }
 
   public void createGrid(ArrayList<ArrayList<String>> mapToString){
-    this.grid = new Block[10][10];
+    int[] gridSize = this.getSize(mapToString);
+    this.grid = new Block[gridSize[0]][gridSize[1]];
     for (int i=0;i<mapToString.size();i++) {
       for (int j=0;j<mapToString.get(i).size();j++) {
         if (mapToString.get(i).get(j).equals(" ")){
@@ -88,6 +89,24 @@ public class Board {
         }
       }
     }
+  }
 
+  public int[] getSize(ArrayList<ArrayList<String>> map) {
+    int[] size = new int[2];
+    int maxHeight = 0;
+    int maxWidth = 0;
+    for (ArrayList<String> line : map) {
+      maxHeight += 1;
+      int widthTemp = 0;
+      for (String val : line) {
+        widthTemp += 1;
+      }
+      if (widthTemp>maxWidth) {
+        maxWidth = widthTemp;
+      }
+    }
+    size[0] = maxWidth+1;
+    size[1] = maxHeight;
+    return size;
   }
 }

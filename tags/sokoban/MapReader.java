@@ -33,8 +33,8 @@ public class MapReader {
   public ArrayList<ArrayList<String>> getMap() {
     ArrayList<ArrayList<String>> mapCopy = new ArrayList<> ();
     for (int i = 0; i<this.map.size(); i++) {
+      mapCopy.add(new ArrayList<String>());
       for (int j = 0; j<this.map.get(i).size(); j++) {
-        mapCopy.add(new ArrayList<String>());
         mapCopy.get(i).add(this.map.get(i).get(j));
       }
     }

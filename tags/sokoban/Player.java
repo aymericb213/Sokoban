@@ -17,7 +17,6 @@ public class Player extends Block {
 
   @Override
   public String toString() {
-    System.out.println(this.onObjective);
     if(this.onObjective) {
       return "+";
     } else {
@@ -40,7 +39,6 @@ public class Player extends Block {
     Block new_place = b.grid[this.x+position.get(0)][this.y+position.get(1)];
     if (new_place instanceof Objective){
 
-      System.out.println("objectif");
 
       b.grid[this.x+position.get(0)][this.y+position.get(1)]=b.grid[this.x][this.y];
 
