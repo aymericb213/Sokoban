@@ -1,11 +1,8 @@
 
 à faire :
-    validation objectif
-    gestion collision
+		annuler un coup
     recharger une map
     IA algo A*
-    définir la taille du board
-    faire une classe reading à part
     faire l'interface graphique en SWAG
 
 tester :
