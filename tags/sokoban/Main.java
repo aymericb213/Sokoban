@@ -10,11 +10,10 @@ public class Main {
     /*ArrayList<ArrayList> map = Board.readingMap("sokoban/maps/map1.xsb");
     System.out.println(map);*/
 
-    Board b= new Board("sokoban/maps/map1.xsb");
+    Board b= new Board();
 		Scanner sc= new Scanner(System.in);
     MapReader map = new MapReader("sokoban/maps/map1.xsb");
     map.readingMap();
-    System.out.println(map.map);
     b.createGrid(map.getMap());
 		while (!b.isFinished()) {
 			System.out.println(b.toString());

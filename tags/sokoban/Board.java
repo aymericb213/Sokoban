@@ -8,19 +8,11 @@ public class Board {
   protected ArrayList<Block> listCrate;
   protected ArrayList<Block> listObjective;
   protected Block player;
-  private String file;
 
-  public Board(String file) {
-    this.file = file;
+  public Board() {
 		this.listCrate = new ArrayList<>();
 		this.listObjective = new ArrayList<>();
-    /*Block[][] grid = new ArrayList<ArrayList<Block>>;*/
   }
-
- /*
-  public Block[][] loadMap(String file) {
-
-  }*/
 
   public String toString() {
     String result = "";
