@@ -27,32 +27,20 @@ public class Board {
     return result;
   }
 
-  public void deadLocker() {
-    for (int j = 0; j<this.grid.length; j++) {
-      for (int i = 0; i<this.grid[0].length; i++) {
-        if (this.grid[i][j] instanceof Crate) {
-          if ((this.grid[i-1][j] instanceof Wall || this.grid[i+1][j] instanceof Wall) &&
-          (this.grid[i][j-1] instanceof Wall || this.grid[i][j+1] instanceof Wall)) {
-            ((Crate)this.grid[i][j]).setDeadlock(true);
-          }
-        }
-      }
-    }
-  }
-
   public boolean isFinished() {
-    for (int j = 0; j<this.grid.length; j++) {
-      for (int i = 0; i<this.grid[0].length; i++) {
-        if (this.grid[i][j] instanceof Crate) {
-          if (!((Crate)this.grid[i][j]).isPlaced()) {
-            return false;
-          } else if (((Crate)this.grid[i][j]).isBlocked()) {
-            return true;
-          }
-        }
+    boolean test = true;
+    for (Block c : this.listCrate) {
+      int i = ((Crate)c).x;
+      int j = ((Crate)c).y;
+      if ((this.grid[i-1][j] instanceof Wall || this.grid[i+1][j] instanceof Wall) &&
+      (this.grid[i][j-1] instanceof Wall || this.grid[i][j+1] instanceof Wall)) {
+        ((Crate)c).setDeadlock(true);
+        return true;
+      } else if (!((Crate)c).isPlaced()) {
+         test = false;
       }
     }
-    return true;
+    return test;
   }
 
   public void createGrid(ArrayList<ArrayList<String>> mapToString){

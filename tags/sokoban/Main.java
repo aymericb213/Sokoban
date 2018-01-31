@@ -43,6 +43,7 @@ public class Main {
 			}
 			((Player)b.player).move(b, nextMove);
 		}
+    System.out.println(b.toString());
 		boolean win = true;
 		for(Block c : b.listCrate) {
 			if (((Crate)c).deadLock){
