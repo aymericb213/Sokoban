@@ -9,9 +9,13 @@ public class Main {
   public static void main (String[] args) throws IOException {
     /*ArrayList<ArrayList> map = Board.readingMap("sokoban/maps/map1.xsb");
     System.out.println(map);*/
+
     Board b= new Board("sokoban/maps/map1.xsb");
 		Scanner sc= new Scanner(System.in);
-    b.readingMap();
+    MapReader map = new MapReader("sokoban/maps/map1.xsb");
+    map.readingMap();
+    System.out.println(map.map);
+    b.createGrid(map.getMap());
 		while (!b.isFinished()) {
 			System.out.println(b.toString());
 			System.out.println("Entrez votre prochain mouvement parmi H (haut), G (gauche), B (bas), D (droite) :");

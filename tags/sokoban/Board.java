@@ -1,8 +1,5 @@
 package sokoban;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.*;
 import java.util.ArrayList;
 
 public class Board {
@@ -66,23 +63,7 @@ public class Board {
     return true;
   }
 
-  public ArrayList<ArrayList<String>> readingMap() throws IOException {
-    BufferedReader map = new BufferedReader (new FileReader (this.file));
-    ArrayList<ArrayList<String>> mapToString = new ArrayList<>();
-    String line;
-    while ((line = map.readLine()) != null) {
-      ArrayList<String> lineToString = new ArrayList<>();
-      String[] line2 = line.split("");
-      for (int i = 0; i<line2.length; i++){
-        lineToString.add(line2[i]);
-      }
-      mapToString.add(lineToString);
-    }
-    this.createGrid(mapToString);
-    return mapToString;
-  }
-
-  private void createGrid(ArrayList<ArrayList<String>> mapToString){
+  public void createGrid(ArrayList<ArrayList<String>> mapToString){
     this.grid = new Block[10][10];
     for (int i=0;i<mapToString.size();i++) {
       for (int j=0;j<mapToString.get(i).size();j++) {
