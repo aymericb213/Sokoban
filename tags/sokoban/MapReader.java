@@ -8,7 +8,7 @@ import java.util.ArrayList;
 public class MapReader {
 
   private String file;
-  private ArrayList<ArrayList<String>> map;
+  protected ArrayList<ArrayList<String>> map;
 
   public MapReader(String file) {
     this.file = file;
