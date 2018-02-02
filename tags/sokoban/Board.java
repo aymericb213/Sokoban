@@ -96,7 +96,6 @@ public class Board {
     }
     size[0] = maxWidth;
     size[1] = maxHeight;
-    System.out.println("x : " + size[0] + " y : " + size[1]);
     return size;
   }
 }

@@ -12,12 +12,12 @@ public class Main {
 		System.out.print("\033[H\033[2J");
     Board b= new Board();
 		Scanner sc= new Scanner(System.in);
-    MapReader map = new MapReader("sokoban/maps/map2.xsb");
+    MapReader map = new MapReader("sokoban/maps/"+args[0]);
     map.readingMap();
     b.createGrid(map.getMap());
 		while (!b.isFinished()) {
 			System.out.println("================ SOKOBAN =================\n");
-			System.out.print("Niveau 1\n");//enlever codage en dur
+			System.out.print("Niveau " + args[0] +"\n");
 			System.out.println("\n" + b.toString());
 			System.out.println("Entrez votre prochain mouvement parmi H (haut), G (gauche), B (bas), D (droite) :");
 			String input=sc.nextLine();
