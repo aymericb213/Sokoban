@@ -12,7 +12,7 @@ public class Main {
 		System.out.print("\033[H\033[2J");
     Board b= new Board();
 		Scanner sc= new Scanner(System.in);
-    MapReader map = new MapReader("sokoban/maps/"+args[0]);
+    MapReader map = new MapReader("sokoban/maps/" + args[0]);
     map.readingMap();
     b.createGrid(map.getMap());
 		while (!b.isFinished()) {
