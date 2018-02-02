@@ -17,7 +17,7 @@ public class Board {
   public String toString() {
     String result = "";
     for (int i=0; i < this.grid.length; i++) {
-      for (int j=0; j < this.grid.length; j++) {
+      for (int j=0; j < this.grid[0].length; j++) {
         if (this.grid[i][j] != null) {
           result += this.grid[i][j].toString();
         }
@@ -45,7 +45,8 @@ public class Board {
 
   public void createGrid(ArrayList<ArrayList<String>> mapToString){
     int[] gridSize = this.getSize(mapToString);
-    this.grid = new Block[gridSize[0]][gridSize[1]];
+    this.grid = new Block[gridSize[1]][gridSize[0]];
+    System.out.println("taille y : " + this.grid.length + " taille x : " + this.grid[0].length);
     for (int i=0;i<mapToString.size();i++) {
       for (int j=0;j<mapToString.get(i).size();j++) {
         if (mapToString.get(i).get(j).equals(" ")){
@@ -93,8 +94,9 @@ public class Board {
         maxWidth = widthTemp;
       }
     }
-    size[0] = maxWidth+1;
+    size[0] = maxWidth;
     size[1] = maxHeight;
+    System.out.println("x : " + size[0] + " y : " + size[1]);
     return size;
   }
 }
