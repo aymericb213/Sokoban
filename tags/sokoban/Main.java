@@ -10,7 +10,7 @@ public class Main {
   public static void main (String[] args) throws IOException {
     /*ArrayList<ArrayList> map = Board.readingMap("sokoban/maps/map1.xsb");
     System.out.println(map);*/
-		System.out.print("\033[H\033[2J");
+		System.out.println("\033[H\033[2J");
     Board b= new Board();
 		Scanner sc= new Scanner(System.in);
 		MapReader map = new MapReader("");
@@ -29,9 +29,13 @@ public class Main {
     b.createGrid(map.getMap());
 		while (!b.isFinished()) {
 			System.out.println("================ SOKOBAN =================\n");
-			System.out.print("Niveau " +"\n");
+			System.out.println("Niveau 1\n");//hard coding
 			System.out.println("\n" + b.toString());
-			System.out.println("Entrez votre prochain mouvement parmi H (haut), G (gauche), B (bas), D (droite) :");
+			System.out.println("# : mur");
+			System.out.println(". : objectif");
+			System.out.println("$ : caisse (* si placée sur un objectif)");
+			System.out.println("@ : joueur (+ si placé sur un objectif)");
+			System.out.println("\nEntrez votre prochain mouvement parmi H (haut), G (gauche), B (bas), D (droite) :");
 			String input=sc.nextLine();
 			ArrayList<Integer> nextMove = new ArrayList<>();
 			if (input.equals("H") || input.equals("h")) {
@@ -56,7 +60,7 @@ public class Main {
 				System.out.println("Les seules commandes valides sont H,G,D,B.");
 			}
 			((Player)b.player).move(b, nextMove);
-			System.out.print("\033[H\033[2J");
+			System.out.println("\033[H\033[2J");
 		}
     System.out.println(b.toString());
 		boolean win = true;
