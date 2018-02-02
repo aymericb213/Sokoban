@@ -46,7 +46,6 @@ public class Board {
   public void createGrid(ArrayList<ArrayList<String>> mapToString){
     int[] gridSize = this.getSize(mapToString);
     this.grid = new Block[gridSize[1]][gridSize[0]];
-    System.out.println("taille y : " + this.grid.length + " taille x : " + this.grid[0].length);
     for (int i=0;i<mapToString.size();i++) {
       for (int j=0;j<mapToString.get(i).size();j++) {
         if (mapToString.get(i).get(j).equals(" ")){

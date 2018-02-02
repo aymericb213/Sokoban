@@ -3,6 +3,7 @@ package sokoban;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.util.Random;
 
 public class Main {
 
@@ -12,12 +13,23 @@ public class Main {
 		System.out.print("\033[H\033[2J");
     Board b= new Board();
 		Scanner sc= new Scanner(System.in);
-    MapReader map = new MapReader("sokoban/maps/" + args[0]);
-    map.readingMap();
+		MapReader map = new MapReader("");
+		if (args.length>0) {
+			if (args[0].equals("-r")) {
+				Random r = new Random();
+				int n = r.nextInt(2)+1;//hard coding
+				map.setFile("sokoban/maps/map" + n + ".xsb");
+			} else {
+				map.setFile("sokoban/maps/" + args[0]);
+			}
+		} else {
+			map.setFile("sokoban/maps/map1.xsb");
+		}
+		map.readingMap();
     b.createGrid(map.getMap());
 		while (!b.isFinished()) {
 			System.out.println("================ SOKOBAN =================\n");
-			System.out.print("Niveau " + args[0] +"\n");
+			System.out.print("Niveau " +"\n");
 			System.out.println("\n" + b.toString());
 			System.out.println("Entrez votre prochain mouvement parmi H (haut), G (gauche), B (bas), D (droite) :");
 			String input=sc.nextLine();
