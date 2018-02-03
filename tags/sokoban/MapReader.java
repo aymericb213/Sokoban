@@ -41,6 +41,10 @@ public class MapReader {
     return mapCopy;
   }
 
+	public String getFile() {
+		return this.file;
+	}
+
 	public void setFile(String newfile) {
 		this.file=newfile;
 	}

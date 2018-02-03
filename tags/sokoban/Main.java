@@ -4,11 +4,13 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.Random;
+import java.io.File;
 
 public class Main {
 
   public static void main (String[] args) throws IOException {
 		System.out.println("\033[H\033[2J");
+		int nbMaps = new File("sokoban/maps").list().length;
 		int nbMoves = 0;
     Board b= new Board();
 		Scanner sc= new Scanner(System.in);
@@ -16,7 +18,7 @@ public class Main {
 		if (args.length>0) {
 			if (args[0].equals("-r")) {
 				Random r = new Random();
-				int n = r.nextInt(2)+1;//hard coding
+				int n = r.nextInt(nbMaps)+1;
 				map.setFile("sokoban/maps/map" + n + ".xsb");
 			} else {
 				map.setFile("sokoban/maps/" + args[0]);
@@ -28,7 +30,7 @@ public class Main {
     b.createGrid(map.getMap());
 		while (!b.isFinished()) {
 			System.out.println("================ SOKOBAN =================\n");
-			System.out.println("Niveau 1\n");//hard coding
+			System.out.println("Niveau " + map.getFile().charAt(map.getFile().length() - 5)+"\n");
 			System.out.println("\n" + b.toString());
 			System.out.println("# : mur");
 			System.out.println(". : objectif");
