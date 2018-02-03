@@ -49,8 +49,20 @@ public class Board {
     return false;
   }
 
+  public boolean allPlaced() {
+    for (Block c : this.listCrate) {
+      if (!((Crate)c).isPlaced()) {
+        return false;
+      }
+    }
+    return true;
+  }
+
   public boolean isFinished() {
-    boolean test = true;
+    boolean test = false;
+    if (this.allPlaced()) {
+      return true;
+    }
     for (Block c : this.listCrate) {
       int i = ((Crate)c).x;
       int j = ((Crate)c).y;
