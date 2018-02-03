@@ -9,6 +9,7 @@ public class Main {
 
   public static void main (String[] args) throws IOException {
 		System.out.println("\033[H\033[2J");
+		int nbMoves = 0;
     Board b= new Board();
 		Scanner sc= new Scanner(System.in);
 		MapReader map = new MapReader("");
@@ -58,6 +59,7 @@ public class Main {
 				System.out.println("Les seules commandes valides sont H,G,D,B.");
 			}
 			((Player)b.player).move(b, nextMove);
+			nbMoves+=1;
 			System.out.println("\033[H\033[2J");
 		}
     System.out.println(b.toString());
@@ -70,7 +72,7 @@ public class Main {
 			}
 		}
 		if (win){
-			System.out.println("Congratulations you win but you were lucky");
+			System.out.println("Niveau terminé en " + nbMoves + " déplacements");
 		}
   }
 }
