@@ -27,17 +27,47 @@ public class Board {
     return result;
   }
 
+  public boolean isDead(Block c, int i, int j) {
+    if (!((Crate)c).isPlaced()) {
+
+      if ((this.grid[i-1][j] instanceof Crate || this.grid[i+1][j] instanceof Crate) &&
+      (this.grid[i][j-1] instanceof Wall || this.grid[i][j+1] instanceof Wall)) {
+
+        return true;
+
+      } else if ((this.grid[i-1][j] instanceof Wall || this.grid[i+1][j] instanceof Wall) &&
+      (this.grid[i][j-1] instanceof Crate || this.grid[i][j+1] instanceof Crate)) {
+
+          return true;
+
+      } else if ((this.grid[i-1][j] instanceof Wall || this.grid[i+1][j] instanceof Wall) &&
+      (this.grid[i][j-1] instanceof Wall || this.grid[i][j+1] instanceof Wall)) {
+
+        return true;
+      }
+    }
+    return false;
+  }
+
   public boolean isFinished() {
     boolean test = true;
     for (Block c : this.listCrate) {
       int i = ((Crate)c).x;
       int j = ((Crate)c).y;
-      if ((this.grid[i-1][j] instanceof Wall || this.grid[i+1][j] instanceof Wall) &&
-      (this.grid[i][j-1] instanceof Wall || this.grid[i][j+1] instanceof Wall)) {
-        ((Crate)c).setDeadlock(true);
-        return true;
-      } else if (!((Crate)c).isPlaced()) {
-         test = false;
+
+      if (this.isDead(c,i,j)) {
+        if (this.grid[i-1][j] instanceof Crate && !this.isDead(this.grid[i-1][j],i-1,j)) {
+          test = false;
+        } else if (this.grid[i+1][j] instanceof Crate && !this.isDead(this.grid[i+1][j],i+1,j)) {
+          test = false;
+        } else if (this.grid[i][j-1] instanceof Crate && !this.isDead(this.grid[i][j-1],i,j-1)) {
+          test = false;
+        } else if (this.grid[i][j+1] instanceof Crate && !this.isDead(this.grid[i][j+1],i,j+1)) {
+          test = false;
+        } else {
+          ((Crate)c).setDeadlock(true);
+          return true;
+        }
       }
     }
     return test;
