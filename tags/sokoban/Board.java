@@ -28,23 +28,21 @@ public class Board {
   }
 
   public boolean isDead(Block c, int i, int j) {
-    if (!((Crate)c).isPlaced()) {
 
-      if ((this.grid[i-1][j] instanceof Crate || this.grid[i+1][j] instanceof Crate) &&
-      (this.grid[i][j-1] instanceof Wall || this.grid[i][j+1] instanceof Wall)) {
+    if ((this.grid[i-1][j] instanceof Crate || this.grid[i+1][j] instanceof Crate) &&
+    (this.grid[i][j-1] instanceof Wall || this.grid[i][j+1] instanceof Wall)) {
 
-        return true;
+      return true;
 
-      } else if ((this.grid[i-1][j] instanceof Wall || this.grid[i+1][j] instanceof Wall) &&
-      (this.grid[i][j-1] instanceof Crate || this.grid[i][j+1] instanceof Crate)) {
-
-          return true;
-
-      } else if ((this.grid[i-1][j] instanceof Wall || this.grid[i+1][j] instanceof Wall) &&
-      (this.grid[i][j-1] instanceof Wall || this.grid[i][j+1] instanceof Wall)) {
+    } else if ((this.grid[i-1][j] instanceof Wall || this.grid[i+1][j] instanceof Wall) &&
+    (this.grid[i][j-1] instanceof Crate || this.grid[i][j+1] instanceof Crate)) {
 
         return true;
-      }
+
+    } else if ((this.grid[i-1][j] instanceof Wall || this.grid[i+1][j] instanceof Wall) &&
+    (this.grid[i][j-1] instanceof Wall || this.grid[i][j+1] instanceof Wall)) {
+
+      return true;
     }
     return false;
   }
@@ -67,7 +65,7 @@ public class Board {
       int i = ((Crate)c).x;
       int j = ((Crate)c).y;
 
-      if (this.isDead(c,i,j)) {
+      if (this.isDead(c,i,j) && !((Crate)c).isPlaced()) {
         if (this.grid[i-1][j] instanceof Crate && !this.isDead(this.grid[i-1][j],i-1,j)) {
           test = false;
         } else if (this.grid[i+1][j] instanceof Crate && !this.isDead(this.grid[i+1][j],i+1,j)) {
