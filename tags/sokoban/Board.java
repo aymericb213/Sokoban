@@ -43,6 +43,9 @@ public class Board {
     (this.grid[i][j-1] instanceof Wall || this.grid[i][j+1] instanceof Wall)) {
 
       return true;
+    } else if ((this.grid[i-1][j] instanceof Crate || this.grid[i+1][j] instanceof Crate) &&
+    (this.grid[i][j-1] instanceof Crate || this.grid[i][j+1] instanceof Crate)) {
+      return true;
     }
     return false;
   }
