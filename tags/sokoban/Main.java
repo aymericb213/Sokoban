@@ -6,8 +6,19 @@ import java.util.Scanner;
 import java.util.Random;
 import java.io.File;
 
+/**
+	* Classe exécutable du package sokoban.
+	*/
 public class Main {
 
+/**
+	* Lit un fichier .xsb pour afficher en console un niveau de Sokoban jouable
+	* et le met à jour en fonction des entrées utilisateur.
+	* On peut exécuter la classe de trois façons différentes :
+	* - si aucun argument n'est donné, on parcourt les niveaux dans l'ordre;
+	* - si on donne en argument un nom de fichier .xsb présent dans le dossier maps, le niveau sélectionné sera affiché;
+	* - si l'argument est -r, un niveau est choisi au hasard.  
+	*/
   public static void main (String[] args) throws IOException {
 		System.out.println("\033[H\033[2J");
 		int nbMaps = new File("sokoban/maps").list().length;

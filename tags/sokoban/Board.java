@@ -2,6 +2,9 @@ package sokoban;
 
 import java.util.ArrayList;
 
+/**
+	* Classe représentant un niveau de Sokoban.
+*/
 public class Board {
 
   protected Block[][] grid;
@@ -9,11 +12,19 @@ public class Board {
   protected ArrayList<Block> listObjective;
   protected Block player;
 
+	/**
+		* Constructeur de la classe.
+		* Initialise les listes de caisses et d'objectifs.
+	*/
   public Board() {
 		this.listCrate = new ArrayList<>();
 		this.listObjective = new ArrayList<>();
   }
 
+	/**
+		* Retourne la représentation du niveau affichée en console.
+		* @return La chaîne de caractère représentant le niveau.
+	*/
   public String toString() {
     String result = "";
     for (int i=0; i < this.grid.length; i++) {
@@ -27,26 +38,28 @@ public class Board {
     return result;
   }
 
+	/**
+		* Teste si une caisse est bloquée.
+		* @return Le résultat du test.
+	*/
   public boolean isDead(Block c, int i, int j) {
-
     if ((this.grid[i-1][j] instanceof Crate || this.grid[i+1][j] instanceof Crate) &&
     (this.grid[i][j-1] instanceof Wall || this.grid[i][j+1] instanceof Wall)) {
-
       return true;
-
     } else if ((this.grid[i-1][j] instanceof Wall || this.grid[i+1][j] instanceof Wall) &&
     (this.grid[i][j-1] instanceof Crate || this.grid[i][j+1] instanceof Crate)) {
-
-        return true;
-
+      return true;
     } else if ((this.grid[i-1][j] instanceof Wall || this.grid[i+1][j] instanceof Wall) &&
     (this.grid[i][j-1] instanceof Wall || this.grid[i][j+1] instanceof Wall)) {
-
       return true;
     }
     return false;
   }
 
+	/**
+		*	Teste si toutes les caisses sont placées sur les objectifs.
+		* @return Le résultat du test.
+	*/
   public boolean allPlaced() {
     for (Block c : this.listCrate) {
       if (!((Crate)c).isPlaced()) {
@@ -56,6 +69,11 @@ public class Board {
     return true;
   }
 
+	/**
+		* Teste si la partie est terminée, c'est-à-dire si toutes les caisses sont rangées
+		* ou si une caisse est bloquée sans être sur un objectif.
+		* @return Le résultat du test.
+	*/
   public boolean isFinished() {
     boolean test = false;
     if (this.allPlaced()) {
@@ -83,6 +101,10 @@ public class Board {
     return test;
   }
 
+	/** Initialise l'attribut grid à partir de la lecture du fichier pour obtenir une grille manipulable.
+		* @param mapToString
+		* Le tableau résultant de la lecture du fichier .xsb correspondant au niveau.
+	*/
   public void createGrid(ArrayList<ArrayList<String>> mapToString){
     int[] gridSize = this.getSize(mapToString);
     this.grid = new Block[gridSize[1]][gridSize[0]];
@@ -119,6 +141,11 @@ public class Board {
     }
   }
 
+	/** Calcule les dimensions du niveau.
+		* @param mapToString
+		* Le tableau résultant de la lecture du fichier .xsb correspondant au niveau.
+		* @return Un tableau de 2 entiers de type [largeur, hauteur].
+	*/
   public int[] getSize(ArrayList<ArrayList<String>> map) {
     int[] size = new int[2];
     int maxHeight = 0;
