@@ -72,6 +72,45 @@ public class Board {
     return true;
   }
 
+  public void addListCoord(Crate c, int i, int j, ArrayList<ArrayList<Integer>> listCoord) {
+    ArrayList<Integer> listTest = new ArrayList<> ();
+    listTest.add(j);
+    listTest.add(i);
+    if (!listCoord.contains(listTest)) {
+      crateChain(c,i,j,listCoord);
+    }
+  }
+
+  public ArrayList<ArrayList<Integer>> crateChain (Crate c, int i, int j, ArrayList<ArrayList<Integer>> listCoord) {
+    ArrayList<Integer> listTemp = new ArrayList<> ();
+    listTemp.add(j);
+    listTemp.add(i);
+    listCoord.add(listTemp);
+
+    if (this.isDead(c,i,j) && !((Crate)c).isPlaced()) {
+      if (this.grid[i-1][j] instanceof Crate) {
+        addListCoord(c,i-1,j,listCoord);
+      }
+
+      if (this.grid[i+1][j] instanceof Crate) {
+        addListCoord(c,i+1,j,listCoord);
+      }
+
+      if (this.grid[i][j-1] instanceof Crate) {
+        addListCoord(c,i,j-1,listCoord);
+      }
+
+      if (this.grid[i][j+1] instanceof Crate) {
+        addListCoord(c,i,j+1,listCoord);
+      }
+    }
+    return listCoord;
+  }
+
+  public ArrayList<ArrayList<Integer>> crateChain (Crate c, int i, int j) {
+    return crateChain(c,i,j,new ArrayList<>());
+  }
+
 	/**
 		* Teste si la partie est terminée, c'est-à-dire si toutes les caisses sont rangées
 		* ou si une caisse est bloquée sans être sur un objectif.
@@ -82,26 +121,31 @@ public class Board {
     if (this.allPlaced()) {
       return true;
     }
+
     for (Block c : this.listCrate) {
       int i = ((Crate)c).x;
       int j = ((Crate)c).y;
 
-      if (this.isDead(c,i,j) && !((Crate)c).isPlaced()) {
-        if (this.grid[i-1][j] instanceof Crate && !this.isDead(this.grid[i-1][j],i-1,j)) {
-          test = false;
-        } else if (this.grid[i+1][j] instanceof Crate && !this.isDead(this.grid[i+1][j],i+1,j)) {
-          test = false;
-        } else if (this.grid[i][j-1] instanceof Crate && !this.isDead(this.grid[i][j-1],i,j-1)) {
-          test = false;
-        } else if (this.grid[i][j+1] instanceof Crate && !this.isDead(this.grid[i][j+1],i,j+1)) {
-          test = false;
-        } else {
+      ArrayList<ArrayList<Integer>> listChain = crateChain(((Crate)c),i,j);
+
+      if (listChain.size() != 1) {
+        boolean testDeadChain = true;
+        for (ArrayList<Integer> coord : listChain) {
+          if (!this.isDead(this.grid[coord.get(0)][coord.get(1)],coord.get(1),coord.get(0))) {
+            testDeadChain = false;
+          }
+        }
+        if (testDeadChain) {
           ((Crate)c).setDeadlock(true);
           return true;
         }
       }
+      if (listChain.size() == 1 && this.isDead(c,i,j)) {
+        ((Crate)c).setDeadlock(true);
+        return true;
+      }
     }
-    return test;
+    return false;
   }
 
 	/** Initialise l'attribut grid à partir de la lecture du fichier pour obtenir une grille manipulable.
