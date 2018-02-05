@@ -161,9 +161,16 @@ public class Board {
           return true;
         }
       }
-      if (listChain.size() == 1 && this.isDead(c,i,j)) {
-        ((Crate)c).setDeadlock(true);
-        return true;
+
+      if (listChain.size() == 1 && this.isDead(c,i,j) && !((Crate)c).isPlaced()) {
+        if (!(this.grid[i-1][j] instanceof Crate && !this.isDead(this.grid[i-1][j],i-1,j)) &&
+        !(this.grid[i+1][j] instanceof Crate && !this.isDead(this.grid[i+1][j],i+1,j)) &&
+        !(this.grid[i][j-1] instanceof Crate && !this.isDead(this.grid[i][j-1],i,j-1)) &&
+        !(this.grid[i][j+1] instanceof Crate && !this.isDead(this.grid[i][j+1],i,j+1))) {
+
+          ((Crate)c).setDeadlock(true);
+          return true;
+        }
       }
     }
     return false;
