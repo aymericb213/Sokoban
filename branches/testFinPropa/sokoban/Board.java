@@ -72,50 +72,37 @@ public class Board {
     return true;
   }
 
+  public void addListCoord(Crate c, int i, int j, ArrayList<ArrayList<Integer>> listCoord) {
+    ArrayList<Integer> listTest = new ArrayList<> ();
+    listTest.add(j);
+    listTest.add(i);
+    if (!listCoord.contains(listTest)) {
+      crateChain(c,i,j,listCoord);
+    }
+  }
+
   public ArrayList<ArrayList<Integer>> crateChain (Crate c, int i, int j, ArrayList<ArrayList<Integer>> listCoord) {
     ArrayList<Integer> listTemp = new ArrayList<> ();
     listTemp.add(j);
     listTemp.add(i);
     listCoord.add(listTemp);
-    ArrayList<Integer> listTest;
 
     if (this.isDead(c,i,j) && !((Crate)c).isPlaced()) {
       if (this.grid[i-1][j] instanceof Crate) {
-        listTest = new ArrayList<> ();
-        listTest.add(j);
-        listTest.add(i-1);
-        if (!listCoord.contains(listTest)) {
-          crateChain(c,i-1,j,listCoord);
-        }
+        addListCoord(c,i-1,j,listCoord);
       }
 
       if (this.grid[i+1][j] instanceof Crate) {
-        listTest = new ArrayList<> ();
-        listTest.add(j);
-        listTest.add(i+1);
-        if (!listCoord.contains(listTest)) {
-          crateChain(c,i+1,j,listCoord);
-        }
+        addListCoord(c,i+1,j,listCoord);
       }
 
       if (this.grid[i][j-1] instanceof Crate) {
-        listTest = new ArrayList<> ();
-        listTest.add(j-1);
-        listTest.add(i);
-        if (!listCoord.contains(listTest)) {
-          crateChain(c,i,j-1,listCoord);
-        }
+        addListCoord(c,i,j-1,listCoord);
       }
 
       if (this.grid[i][j+1] instanceof Crate) {
-        listTest = new ArrayList<> ();
-        listTest.add(j+1);
-        listTest.add(i);
-        if (!listCoord.contains(listTest)) {
-          crateChain(c,i,j+1,listCoord);
-        }
+        addListCoord(c,i,j+1,listCoord);
       }
-
     }
     return listCoord;
   }
