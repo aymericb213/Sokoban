@@ -85,12 +85,7 @@ public class Board {
         listTest.add(j);
         listTest.add(i-1);
         if (!listCoord.contains(listTest)) {
-          ArrayList<ArrayList<Integer>> listPropa = crateChain(c,i-1,j,listCoord);
-          for (ArrayList<Integer> coord : listPropa) {
-            if (!listCoord.contains(coord)) {
-              listCoord.add(coord);
-            }
-          }
+          crateChain(c,i-1,j,listCoord);
         }
       }
 
@@ -98,11 +93,8 @@ public class Board {
         listTest = new ArrayList<> ();
         listTest.add(j);
         listTest.add(i+1);
-        ArrayList<ArrayList<Integer>> listPropa = crateChain(c,i+1,j,listCoord);
-        for (ArrayList<Integer> coord : listPropa) {
-          if (!listCoord.contains(coord)) {
-            listCoord.add(coord);
-          }
+        if (!listCoord.contains(listTest)) {
+          crateChain(c,i+1,j,listCoord);
         }
       }
 
@@ -110,24 +102,17 @@ public class Board {
         listTest = new ArrayList<> ();
         listTest.add(j-1);
         listTest.add(i);
-        ArrayList<ArrayList<Integer>> listPropa = crateChain(c,i,j-1,listCoord);
-        for (ArrayList<Integer> coord : listPropa) {
-          if (!listCoord.contains(coord)) {
-            listCoord.add(coord);
-          }
+        if (!listCoord.contains(listTest)) {
+          crateChain(c,i,j-1,listCoord);
         }
-
       }
 
       if (this.grid[i][j+1] instanceof Crate) {
         listTest = new ArrayList<> ();
         listTest.add(j+1);
         listTest.add(i);
-        ArrayList<ArrayList<Integer>> listPropa = crateChain(c,i,j+1,listCoord);
-        for (ArrayList<Integer> coord : listPropa) {
-          if (!listCoord.contains(coord)) {
-            listCoord.add(coord);
-          }
+        if (!listCoord.contains(listTest)) {
+          crateChain(c,i,j+1,listCoord);
         }
       }
 
@@ -155,18 +140,22 @@ public class Board {
       int j = ((Crate)c).y;
 
       ArrayList<ArrayList<Integer>> listChain = crateChain(((Crate)c),i,j);
-      System.out.println(listChain);
 
       if (listChain.size() != 1) {
         boolean testDeadChain = true;
         for (ArrayList<Integer> coord : listChain) {
-          if (!this.isDead(this.grid[coord.get(0)][coord.get(1)],coord.get(0),coord.get(1))) {
+          if (!this.isDead(this.grid[coord.get(0)][coord.get(1)],coord.get(1),coord.get(0))) {
             testDeadChain = false;
           }
         }
         if (testDeadChain) {
+          ((Crate)c).setDeadlock(true);
           return true;
         }
+      }
+      if (listChain.size() == 1 && this.isDead(c,i,j)) {
+        ((Crate)c).setDeadlock(true);
+        return true;
       }
     }
     return false;
