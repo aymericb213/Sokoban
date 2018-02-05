@@ -72,7 +72,15 @@ public class Board {
     return true;
   }
 
-  public void addListCoord(Crate c, int i, int j, ArrayList<ArrayList<Integer>> listCoord) {
+  /**
+    * Ajoute la coordonnées [j,i] dans la liste listCoord
+    * @param c La caisse en [j,i]
+    * @param i La coordonnée en Y
+    * @param j La coordonnée en X
+    * @param listCoord La liste des coordonnée dont on va ajouter [j,i]
+    * @note Cette fonction sert uniquement pour <i>crateChain</i>.
+  */
+  private void addListCoord(Crate c, int i, int j, ArrayList<ArrayList<Integer>> listCoord) {
     ArrayList<Integer> listTest = new ArrayList<> ();
     listTest.add(j);
     listTest.add(i);
@@ -81,6 +89,14 @@ public class Board {
     }
   }
 
+  /**
+    * Créer une liste des coordonnées d'une chaîne de caisses qui sont les unes à côté des autres
+    * @param c La caisse étant en [j,i]
+    * @param i La coordonnée en Y de la caisse
+    * @param j La coordonnée en X de la caisse
+    * @param listCoord Liste des coordonnée des caisses
+    * @return La liste des coordonnée de la chaîne
+  */
   public ArrayList<ArrayList<Integer>> crateChain (Crate c, int i, int j, ArrayList<ArrayList<Integer>> listCoord) {
     ArrayList<Integer> listTemp = new ArrayList<> ();
     listTemp.add(j);
@@ -106,7 +122,12 @@ public class Board {
     }
     return listCoord;
   }
-
+  /**
+    * Initialise la liste de coordonnées
+    * @param c La caisse étant en [j,i]
+    * @param i La coordonnée en Y de la caisse
+    * @param j La coordonnée en X de la caisse
+  */
   public ArrayList<ArrayList<Integer>> crateChain (Crate c, int i, int j) {
     return crateChain(c,i,j,new ArrayList<>());
   }
