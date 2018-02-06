@@ -150,13 +150,13 @@ public class Board {
       ArrayList<ArrayList<Integer>> listChain = crateChain(((Crate)c),i,j);
 
       if (listChain.size() != 1) {
-        boolean testDeadChain = true;
+        int testDeadChain = 0;
         for (ArrayList<Integer> coord : listChain) {
-          if (!this.isDead(this.grid[coord.get(0)][coord.get(1)],coord.get(1),coord.get(0))) {
-            testDeadChain = false;
+          if (!this.isDead(this.grid[coord.get(1)][coord.get(0)],coord.get(1),coord.get(0))) {
+            testDeadChain += 1;
           }
         }
-        if (testDeadChain) {
+        if (testDeadChain==0 || testDeadChain == 1) {
           ((Crate)c).setDeadlock(true);
           return true;
         }
