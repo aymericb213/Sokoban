@@ -180,38 +180,41 @@ public class Board {
 		* @param mapToString
 		* Le tableau résultant de la lecture du fichier .xsb correspondant au niveau.
 	*/
-  public void createGrid(ArrayList<ArrayList<String>> mapToString){
-    int[] gridSize = this.getSize(mapToString);
-    this.grid = new Block[gridSize[1]][gridSize[0]];
+  public void createGrid(ArrayList<String> mapToString){
+		int[] gridSize = this.getSize(mapToString);
+    this.grid = new Block[gridSize[0]][gridSize[1]];
     for (int i=0;i<mapToString.size();i++) {
-      for (int j=0;j<mapToString.get(i).size();j++) {
-        if (mapToString.get(i).get(j).equals(" ")){
+			String[] s = mapToString.get(i).split("");
+			int j=0;
+      for (String ch: s) {
+        if (ch.equals(" ")){
 					Block t = new FreeTile(i,j);
           this.grid[i][j] = t;
-        }else if (mapToString.get(i).get(j).equals("#")) {
+        }else if (ch.equals("#")) {
           Block t = new Wall(i,j);
           this.grid[i][j] = t;
-        }else if (mapToString.get(i).get(j).equals("$")) {
+        }else if (ch.equals("$")) {
           Block t = new Crate(i,j,false);
 					this.listCrate.add(t);
           this.grid[i][j] = t;
-        }else if (mapToString.get(i).get(j).equals(".")) {
+        }else if (ch.equals(".")) {
           Block t = new Objective(i,j);
 					this.listObjective.add(t);
           this.grid[i][j] = t;
-        }else if (mapToString.get(i).get(j).equals("*")) {
+        }else if (ch.equals("*")) {
           Block t = new Crate(i,j,true);
 					this.listCrate.add(t);
           this.grid[i][j] = t;
-        }else if (mapToString.get(i).get(j).equals("@")) {
+        }else if (ch.equals("@")) {
           Block t = new Player(i,j,false);
 					this.player=t;
           this.grid[i][j] = t;
-        }else if (mapToString.get(i).get(j).equals("+")) {
+        }else if (ch.equals("+")) {
           Block t = new Player(i,j,true);
 					this.player=t;
           this.grid[i][j] = t;
         }
+				j++;
       }
     }
   }
@@ -221,22 +224,23 @@ public class Board {
 		* Le tableau résultant de la lecture du fichier .xsb correspondant au niveau.
 		* @return Un tableau de 2 entiers de type [largeur, hauteur].
 	*/
-  public int[] getSize(ArrayList<ArrayList<String>> map) {
-    int[] size = new int[2];
+  public int[] getSize(ArrayList<String> map) {
+		int[] size = new int[2];
     int maxHeight = 0;
     int maxWidth = 0;
-    for (ArrayList<String> line : map) {
+    for (String line : map) {
+			String[] s = line.split("");
       maxHeight += 1;
       int widthTemp = 0;
-      for (String val : line) {
+      for (String ch : s) {
         widthTemp += 1;
       }
       if (widthTemp>maxWidth) {
         maxWidth = widthTemp;
       }
     }
-    size[0] = maxWidth;
-    size[1] = maxHeight;
+    size[0] = maxHeight;
+    size[1] = maxWidth;
     return size;
   }
 }

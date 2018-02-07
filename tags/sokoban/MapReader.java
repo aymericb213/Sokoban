@@ -12,7 +12,7 @@ import java.util.ArrayList;
 public class MapReader {
 
   private String file;
-  protected ArrayList<ArrayList<String>> map;
+  protected ArrayList<String> map;
 
 	/**
 		* Constructeur de la classe.
@@ -29,16 +29,11 @@ public class MapReader {
 		* Lit le fichier .xsb trouvé avec l'attribut file et en extrait un tableau de chaînes de caractères.
 	*/
   public void readingMap() throws IOException {
-    BufferedReader map = new BufferedReader (new FileReader (this.file));
-    ArrayList<ArrayList<String>> mapToString = new ArrayList<>();
+		BufferedReader map = new BufferedReader (new FileReader (this.file));
+    ArrayList<String> mapToString = new ArrayList<>();
     String line;
     while ((line = map.readLine()) != null) {
-      ArrayList<String> lineToString = new ArrayList<>();
-      String[] line2 = line.split("");
-      for (int i = 0; i<line2.length; i++){
-        lineToString.add(line2[i]);
-      }
-      mapToString.add(lineToString);
+        mapToString.add(line);
     }
     this.map = mapToString;
   }
@@ -47,13 +42,10 @@ public class MapReader {
 		* Accesseur de l'attribut map.
 		* @return La valeur de map.
 	*/
-  public ArrayList<ArrayList<String>> getMap() {
-    ArrayList<ArrayList<String>> mapCopy = new ArrayList<> ();
+  public ArrayList<String> getMap() {
+		ArrayList<String> mapCopy = new ArrayList<> ();
     for (int i = 0; i<this.map.size(); i++) {
-      mapCopy.add(new ArrayList<String>());
-      for (int j = 0; j<this.map.get(i).size(); j++) {
-        mapCopy.get(i).add(this.map.get(i).get(j));
-      }
+      mapCopy.add(this.map.get(i));
     }
     return mapCopy;
   }
