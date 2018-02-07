@@ -52,11 +52,11 @@ public class Main {
   			System.out.println("\nEntrez votre prochain mouvement parmi H (haut), G (gauche), B (bas), D (droite) :");
   			String input=sc.nextLine();
   			ArrayList<Integer> nextMove = new ArrayList<>();
-  			if (input.equals("H") || input.equals("h")) {
+  			if (input.equals("H") || input.equals("h") || input.equals("z")) {
   				nextMove.add(-1);
   				nextMove.add(0);
   			}
-  			else if (input.equals("G") || input.equals("g")) {
+  			else if (input.equals("G") || input.equals("g") || input.equals("q")) {
   				nextMove.add(0);
   				nextMove.add(-1);
   			}
@@ -64,7 +64,7 @@ public class Main {
   				nextMove.add(0);
   				nextMove.add(1);
   			}
-  			else if (input.equals("B") || input.equals("b")) {
+  			else if (input.equals("B") || input.equals("b") || input.equals("s")) {
   				nextMove.add(1);
   				nextMove.add(0);
   			}
