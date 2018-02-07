@@ -181,6 +181,8 @@ public class Board {
 		* Le tableau résultant de la lecture du fichier .xsb correspondant au niveau.
 	*/
   public void createGrid(ArrayList<String> mapToString){
+		this.listCrate=new ArrayList<>();
+		this.listObjective=new ArrayList<>();
 		int[] gridSize = this.getSize(mapToString);
     this.grid = new Block[gridSize[0]][gridSize[1]];
     for (int i=0;i<mapToString.size();i++) {

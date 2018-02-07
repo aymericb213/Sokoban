@@ -23,6 +23,7 @@ public class Main {
 		System.out.println("\033[H\033[2J");
 		int nbMaps = new File("sokoban/maps").list().length;
 		int nbMoves = 0;
+		int nextMapNb = Integer.parseInt(args[0]);
     String gContinue = "O";
     Board b= new Board();
 		Scanner sc= new Scanner(System.in);
@@ -38,7 +39,7 @@ public class Main {
 		} else {
 			map.setFile("sokoban/maps/map1.xsb");
 		}
-    while (gContinue.equals("O")) {
+    while (gContinue.equals("O") || gContinue.equals("o")) {
       map.readingMap();
       b.createGrid(map.getMap());
   		while (!b.isFinished()) {
@@ -74,7 +75,7 @@ public class Main {
   				System.out.println("Les seules commandes valides sont H,G,D,B.");
   			}
   			((Player)b.player).move(b, nextMove);
-  			nbMoves+=1;
+  			nbMoves++;
   			System.out.println("\033[H\033[2J");
   		}
       System.out.println(b.toString());
@@ -94,13 +95,14 @@ public class Main {
         if (input2.equals("O") || input2.equals("o")) {
           if (args[0].equals("-r")) {
     				int temp = r.nextInt(nbMaps)+1;
+						map.setFile("sokoban/maps/map" + temp + ".xsb");
           } else {
-            int temp = Integer.parseInt(args[0]);
-            temp += 1;
-            if (temp > nbMaps) {
+            nextMapNb++;
+            if (nextMapNb > nbMaps) {
               System.out.println("Il n'y a plus de map disponible");
+							break;
             } else {
-              map.setFile("sokoban/maps/map" + temp + ".xsb");
+              map.setFile("sokoban/maps/map" + nextMapNb + ".xsb");
             }
           }
         }
