@@ -23,7 +23,7 @@ public class Main {
 		System.out.println("\033[H\033[2J");
 		int nbMaps = new File("sokoban/maps").list().length;
 		int nbMoves = 0;
-		int nextMapNb = Integer.parseInt(args[0]);
+		int nextMapNb = 0;
     String gContinue = "O";
     Board b= new Board();
 		Scanner sc= new Scanner(System.in);
@@ -34,6 +34,7 @@ public class Main {
 				int n = r.nextInt(nbMaps)+1;
 				map.setFile("sokoban/maps/map" + n + ".xsb");
 			} else {
+				nextMapNb = Integer.parseInt(args[0]);
 				map.setFile("sokoban/maps/map" + args[0] + ".xsb");
 			}
 		} else {
