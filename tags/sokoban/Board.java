@@ -245,4 +245,8 @@ public class Board {
     size[1] = maxWidth;
     return size;
   }
+
+	public Block getPlayer() {
+		return this.player;
+	}
 }

@@ -4,7 +4,6 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.Random;
-import java.io.File;
 
 /**
 	* Classe exécutable du package sokoban.

@@ -148,4 +148,12 @@ public class Player extends Block {
     }
     return b;
   }
+
+	public int getX() {
+		return this.x;
+	}
+
+	public int getY() {
+		return this.y;
+	}
 }
