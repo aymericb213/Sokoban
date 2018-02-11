@@ -7,10 +7,20 @@ public class Node {
 	private Node pred;
 
 	public Node(int x, int y) {
-	  this.x=x;
-	  this.y=y;
-		Node prec = null;
+		this.x=x;
+		this.y=y;
+		this.pred = null;
 	}
 
+	public int getX() {
+		return this.x;
+	}
 
+	public int getY() {
+		return this.y;
+	}
+
+	public Node getPred() {
+		return this.pred;
+	}
 }
