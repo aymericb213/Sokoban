@@ -104,19 +104,19 @@ public class Board {
     listCoord.add(listTemp);
 
     if (this.isDead(c,i,j,false) && !((Crate)c).isPlaced()) {
-      if (this.grid[i-1][j] instanceof Crate) {
+      if (this.grid[i-1][j] instanceof Crate && this.isDead(this.grid[i-1][j],i-1,j,false)) {
         addListCoord(c,i-1,j,listCoord);
       }
 
-      if (this.grid[i+1][j] instanceof Crate) {
+      if (this.grid[i+1][j] instanceof Crate && this.isDead(this.grid[i+1][j],i+1,j,false)) {
         addListCoord(c,i+1,j,listCoord);
       }
 
-      if (this.grid[i][j-1] instanceof Crate) {
+      if (this.grid[i][j-1] instanceof Crate && this.isDead(this.grid[i][j-1],i,j-1,false)) {
         addListCoord(c,i,j-1,listCoord);
       }
 
-      if (this.grid[i][j+1] instanceof Crate) {
+      if (this.grid[i][j+1] instanceof Crate && this.isDead(this.grid[i][j+1],i,j+1,false)) {
         addListCoord(c,i,j+1,listCoord);
       }
     }
@@ -132,12 +132,37 @@ public class Board {
     return crateChain(c,i,j,new ArrayList<>());
   }
 
+  public boolean testCube(ArrayList<ArrayList<Integer>> listChain, int i, int j, int decaleWidth, int decaleHeight) {
+    ArrayList<Integer> coordTemp;
+    coordTemp = new ArrayList<> ();
+    coordTemp.add(i);
+    coordTemp.add(j + decaleWidth);
+    if (listChain.contains(coordTemp)) {
+      coordTemp = new ArrayList<> ();
+      coordTemp.add(i + decaleHeight);
+      coordTemp.add(j);
+      if (listChain.contains(coordTemp)) {
+        coordTemp = new ArrayList<> ();
+        coordTemp.add(i + decaleHeight);
+        coordTemp.add(j + decaleWidth);
+        if (listChain.contains(coordTemp)) {
+          return true;
+        }
+      }
+
+    }
+    return false;
+  }
+
   public boolean haveCube (ArrayList<ArrayList<Integer>> listChain) {
     for (ArrayList<Integer> coord : listChain) {
-      if () {
-
+      int i = coord.get(0);
+      int j = coord.get(1);
+      if (testCube(listChain,i,j,-1,-1) || testCube(listChain,i,j,-1,1) || testCube(listChain,i,j,1,-1) ||testCube(listChain,i,j,1,1)) {
+        return true;
       }
     }
+    return false;
   }
 
 	/**
@@ -156,13 +181,10 @@ public class Board {
       int j = ((Crate)c).y;
 
       ArrayList<ArrayList<Integer>> listChain = crateChain(((Crate)c),i,j);
-      System.out.println(listChain);
 
-      if (listChain.size() != 1) {
-        for (ArrayList<Integer> coord : listChain) {
-
-        }
-        if (testDeadChain==0 || testDeadChain == 1) {
+      if (this.isDead(c,i,j,false)) {
+        if (this.haveCube(listChain)) {
+          System.out.println("CUBE");
           ((Crate)c).setDeadlock(true);
           return true;
         }
@@ -173,7 +195,7 @@ public class Board {
         !(this.grid[i+1][j] instanceof Crate && !this.isDead(this.grid[i+1][j],i+1,j,true)) &&
         !(this.grid[i][j-1] instanceof Crate && !this.isDead(this.grid[i][j-1],i,j-1,true)) &&
         !(this.grid[i][j+1] instanceof Crate && !this.isDead(this.grid[i][j+1],i,j+1,true))) {
-          System.out.println("da : " + listChain);
+          System.out.println("euh...");
           ((Crate)c).setDeadlock(true);
           return true;
         }
