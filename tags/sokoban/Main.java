@@ -41,10 +41,6 @@ public class Main {
     while (gContinue.equals("O") || gContinue.equals("o")) {
 			System.out.println("\033[H\033[2J");
       map.readingMap();
-      //il faudrait que ce soit mieux fait
-      Save test = new Save (map.getMap());
-      test.saveMap();
-      //jusque là
       b.createGrid(map.getMap());
   		while (!b.isFinished()) {
   			System.out.println("================ SOKOBAN =================\n");
@@ -54,9 +50,22 @@ public class Main {
   			System.out.println(". : objectif");
   			System.out.println("$ : caisse (* si placée sur un objectif)");
   			System.out.println("@ : joueur (+ si placé sur un objectif)");
-  			System.out.println("\nEntrez votre prochain mouvement parmi H (haut), G (gauche), B (bas), D (droite) :");
+  			System.out.println("\nEntrez votre prochain mouvement parmi H (haut), G (gauche), B (bas), D (droite), Save (sauvegarder) :");
   			String input=sc.nextLine();
   			ArrayList<Integer> nextMove = new ArrayList<>();
+        if (input.equals("Save") || input.equals("save")) {
+          Save save = new Save (b.createArrayList());
+          save.saveMap();
+          System.out.println("================ SOKOBAN =================\n");
+    			System.out.println("Niveau " + map.getFile().charAt(map.getFile().length() - 5)+"\n");
+    			System.out.println("\n" + b.toString());
+    			System.out.println("# : mur");
+    			System.out.println(". : objectif");
+    			System.out.println("$ : caisse (* si placée sur un objectif)");
+    			System.out.println("@ : joueur (+ si placé sur un objectif)");
+          System.out.println("\nEntrez votre prochain mouvement parmi H (haut), G (gauche), B (bas), D (droite), Save (sauvegarder) :");
+    			input=sc.nextLine();
+        }
   			if (input.equals("H") || input.equals("h") || input.equals("z")) {
   				nextMove.add(-1);
   				nextMove.add(0);
@@ -76,7 +85,7 @@ public class Main {
   			else {
   				nextMove.add(0);
   				nextMove.add(0);
-  				System.out.println("Les seules commandes valides sont H,G,D,B.");
+  				System.out.println("Les seules commandes valides sont H,G,D,B,P.");
   			}
   			((Player)b.player).move(b, nextMove);
   			nbMoves++;

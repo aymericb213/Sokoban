@@ -313,6 +313,18 @@ public class Board {
     }
   }
 
+  public ArrayList<String> createArrayList () {
+    ArrayList<String> res = new ArrayList<> ();
+    for (Block[] line : this.grid) {
+      String ch = "";
+      for (Block c : line) {
+        ch += c.toString();
+      }
+      res.add(ch);
+    }
+    return res;
+  }
+
 	/** Calcule les dimensions du niveau.
 		* @param mapToString
 		* Le tableau résultant de la lecture du fichier .xsb correspondant au niveau.
@@ -344,7 +356,7 @@ public class Board {
 		tab[1]=this.grid[0].length;
 		return tab;
 	}
-	
+
 	public Block getPlayer() {
 	return this.player;
 	}
