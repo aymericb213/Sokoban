@@ -338,6 +338,13 @@ public class Board {
     return size;
   }
 
+	public int[] getSize() {
+		int[] tab= new int[2];
+		tab[0]=this.grid.length;
+		tab[1]=this.grid[0].length;
+		return tab;
+	}
+	
 	public Block getPlayer() {
 	return this.player;
 	}
