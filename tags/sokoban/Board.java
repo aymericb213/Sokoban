@@ -244,43 +244,45 @@ public class Board {
 		* Le tableau résultant de la lecture du fichier .xsb correspondant au niveau.
 	*/
 	public void createGrid(ArrayList<String> mapToString) {
-		int[] gridSize = this.getSize(mapToString);
+    this.listCrate = new ArrayList<>();
+    this.listObjective = new ArrayList<>();
+    int[] gridSize = this.getSize(mapToString);
     this.grid = new Block[gridSize[0]][gridSize[1]];
-    for (int i=0;i<mapToString.size();i++) {
-			String[] s = mapToString.get(i).split("");
-			int j=0;
+    for (int i = 0; i < mapToString.size(); i++) {
+      String[] s = mapToString.get(i).split("");
+      int j = 0;
       for (String ch: s) {
-        if (ch.equals(" ")){
-					Block t = new FreeTile(i,j);
+        if (ch.equals(" ")) {
+          Block t = new FreeTile(i,j);
           this.grid[i][j] = t;
-        }else if (ch.equals("#")) {
+        } else if (ch.equals("#")) {
           Block t = new Wall(i,j);
           this.grid[i][j] = t;
-        }else if (ch.equals("$")) {
+        } else if (ch.equals("$")) {
           Block t = new Crate(i,j,false);
-					this.listCrate.add(t);
+          this.listCrate.add(t);
           this.grid[i][j] = t;
-        }else if (ch.equals(".")) {
+        } else if (ch.equals(".")) {
           Block t = new Objective(i,j);
-					this.listObjective.add(t);
+          this.listObjective.add(t);
           this.grid[i][j] = t;
-        }else if (ch.equals("*")) {
+        } else if (ch.equals("*")) {
           Block t = new Crate(i,j,true);
-					this.listCrate.add(t);
+          this.listCrate.add(t);
           this.grid[i][j] = t;
-        }else if (ch.equals("@")) {
+        } else if (ch.equals("@")) {
           Block t = new Player(i,j,false);
-					this.player=t;
+          this.player = t;
           this.grid[i][j] = t;
-        }else if (ch.equals("+")) {
+        } else if (ch.equals("+")) {
           Block t = new Player(i,j,true);
-					this.player=t;
+          this.player = t;
           this.grid[i][j] = t;
         }
-				j++;
-    	}
-  	}
-	}
+        j++;
+      }
+    }
+  }
 
 	/** Calcule les dimensions du niveau.
 		* @param mapToString
