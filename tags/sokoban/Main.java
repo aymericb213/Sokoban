@@ -19,7 +19,6 @@ public class Main {
 	* - si l'argument est -r, un niveau est choisi au hasard.
 	*/
   public static void main (String[] args) throws IOException {
-		System.out.println("\033[H\033[2J");
 		int nbMaps = new File("sokoban/maps").list().length;
 		int nbMoves = 0;
 		int nextMapNb = 0;
@@ -40,6 +39,7 @@ public class Main {
 			map.setFile("sokoban/maps/map1.xsb");
 		}
     while (gContinue.equals("O") || gContinue.equals("o")) {
+			System.out.println("\033[H\033[2J");
       map.readingMap();
       b.createGrid(map.getMap());
   		while (!b.isFinished()) {
@@ -83,6 +83,7 @@ public class Main {
   		for(Block c : b.listCrate) {
   			if (((Crate)c).deadLock){
   				System.out.println("Game Over (plus de mouvement possible)");
+					String input2 = sc.nextLine();
   				win=false;
   				break;
   			}
@@ -109,6 +110,5 @@ public class Main {
         gContinue = input2;
   		}
     }
-    }
-
+  }
 }
