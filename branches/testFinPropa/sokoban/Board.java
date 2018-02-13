@@ -83,7 +83,6 @@ public class Board {
     * @param j La coordonnée en X
     * @param listCoord La liste des coordonnée dont on va ajouter [j,i]
     * @param deadMode mode de propagation voir <i>crateChain</i>
-    * @note Cette fonction sert uniquement pour <i>crateChain</i>.
   */
   private void addListCoord(Crate c, int i, int j, ArrayList<ArrayList<Integer>> listCoord, boolean deadMode) {
     ArrayList<Integer> listTest = new ArrayList<> ();
@@ -200,6 +199,31 @@ public class Board {
     return false;
   }
 
+  /**
+    * test si 2 caisses sont côte à côte le long d'un mur
+    * @param coord coordonnées d'une caisse blockée
+    * @return true si on a 2 caisses sont blockées contre un mur exemple : <p>$$<br>##</p>
+  */
+  public boolean haveDeadWall (ArrayList<Integer> coord) {
+    int i = coord.get(1);
+    int j = coord.get(0);
+
+    if (this.grid[i-1][j] instanceof Crate && this.isDead(this.grid[i-1][j],i-1,j,true)) {
+      if ((this.grid[i-1][j-1] instanceof Wall && this.grid[i][j-1] instanceof Wall) ||
+      (this.grid[i-1][j+1] instanceof Wall && this.grid[i][j+1] instanceof Wall)) {
+        return true;
+      }
+    }
+
+    if (this.grid[i][j-1] instanceof Crate && this.isDead(this.grid[i][j-1],i,j-1,true)) {
+      if ((this.grid[i+1][j-1] instanceof Wall && this.grid[i+1][j] instanceof Wall) ||
+      (this.grid[i-1][j-1] instanceof Wall && this.grid[i-1][j] instanceof Wall)) {
+        return true;
+      }
+    }
+    return false;
+  }
+
 	/**
 		* Teste si la partie est terminée, c'est-à-dire si toutes les caisses sont rangées
 		* ou si une caisse est bloquée sans être sur un objectif.
@@ -227,6 +251,10 @@ public class Board {
           for (ArrayList<Integer> coord : listChain) {
             if (!this.isDead(c,coord.get(1),coord.get(0),true)) {
               test = false;
+            }
+            if (this.haveDeadWall(coord)) {
+              ((Crate)c).setDeadlock(true);
+              return true;
             }
           }
           if (test) {
