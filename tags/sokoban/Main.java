@@ -41,6 +41,10 @@ public class Main {
     while (gContinue.equals("O") || gContinue.equals("o")) {
 			System.out.println("\033[H\033[2J");
       map.readingMap();
+      //il faudrait que ce soit mieux fait
+      Save test = new Save (map.getMap());
+      test.saveMap();
+      //jusque là
       b.createGrid(map.getMap());
   		while (!b.isFinished()) {
   			System.out.println("================ SOKOBAN =================\n");
@@ -82,7 +86,7 @@ public class Main {
   		boolean win = true;
   		for(Block c : b.listCrate) {
   			if (((Crate)c).deadLock){
-  				System.out.println("Game Over (plus de mouvement possible)");
+  				System.out.println("Game Over (plus de mouvement possible) appuyez sur 'entrer' pour recommencer");
 					String input2 = sc.nextLine();
 					if (input2.equals("")) {
   				win=false;
