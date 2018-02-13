@@ -31,7 +31,10 @@ public class Main {
 			if (args[0].equals("-r")) {
 				int n = r.nextInt(nbMaps)+1;
 				map.setFile("sokoban/maps/map" + n + ".xsb");
-			} else {
+			} else if (args[0].equals("-l")) {
+        map.setFile("sokoban/maps/save.xsb");
+      }
+      else {
 				nextMapNb = Integer.parseInt(args[0]);
 				map.setFile("sokoban/maps/map" + args[0] + ".xsb");
 			}
