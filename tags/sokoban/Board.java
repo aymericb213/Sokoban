@@ -40,9 +40,13 @@ public class Board {
 
 	/**
 		* Teste si une caisse est bloquée.
+    * @param c la caisse en [j,i]
+    * @param i La coordonnée en Y
+    * @param j La coordonnée en X
+    * @param wallOnly à true il regarde si la caisse est bloquée qu'avec au moins 1 mur, et false avec au moins 0 mur
 		* @return Le résultat du test.
 	*/
-  public boolean isDead(Block c, int i, int j) {
+  public boolean isDead(Block c, int i, int j, boolean wallOnly) {
     if ((this.grid[i-1][j] instanceof Crate || this.grid[i+1][j] instanceof Crate) &&
     (this.grid[i][j-1] instanceof Wall || this.grid[i][j+1] instanceof Wall)) {
       return true;
@@ -52,7 +56,7 @@ public class Board {
     } else if ((this.grid[i-1][j] instanceof Wall || this.grid[i+1][j] instanceof Wall) &&
     (this.grid[i][j-1] instanceof Wall || this.grid[i][j+1] instanceof Wall)) {
       return true;
-    } else if ((this.grid[i-1][j] instanceof Crate || this.grid[i+1][j] instanceof Crate) &&
+    } else if (!wallOnly && (this.grid[i-1][j] instanceof Crate || this.grid[i+1][j] instanceof Crate) &&
     (this.grid[i][j-1] instanceof Crate || this.grid[i][j+1] instanceof Crate)) {
       return true;
     }
@@ -78,14 +82,15 @@ public class Board {
     * @param i La coordonnée en Y
     * @param j La coordonnée en X
     * @param listCoord La liste des coordonnée dont on va ajouter [j,i]
+    * @param deadMode mode de propagation voir <i>crateChain</i>
     * @note Cette fonction sert uniquement pour <i>crateChain</i>.
   */
-  private void addListCoord(Crate c, int i, int j, ArrayList<ArrayList<Integer>> listCoord) {
+  private void addListCoord(Crate c, int i, int j, ArrayList<ArrayList<Integer>> listCoord, boolean deadMode) {
     ArrayList<Integer> listTest = new ArrayList<> ();
     listTest.add(j);
     listTest.add(i);
     if (!listCoord.contains(listTest)) {
-      crateChain(c,i,j,listCoord);
+      crateChain(c,i,j,listCoord,deadMode);
     }
   }
 
@@ -95,41 +100,104 @@ public class Board {
     * @param i La coordonnée en Y de la caisse
     * @param j La coordonnée en X de la caisse
     * @param listCoord Liste des coordonnée des caisses
+    * @param deadMode mode de propagation selon des caisses bloquée à true et false selon n'importe quelle caisses
     * @return La liste des coordonnée de la chaîne
   */
-  public ArrayList<ArrayList<Integer>> crateChain (Crate c, int i, int j, ArrayList<ArrayList<Integer>> listCoord) {
+  public ArrayList<ArrayList<Integer>> crateChain (Crate c, int i, int j, ArrayList<ArrayList<Integer>> listCoord, boolean deadMode) {
     ArrayList<Integer> listTemp = new ArrayList<> ();
     listTemp.add(j);
     listTemp.add(i);
     listCoord.add(listTemp);
 
-    if (this.isDead(c,i,j) && !((Crate)c).isPlaced()) {
+    if (this.isDead(c,i,j,false) && !((Crate)c).isPlaced()) {
       if (this.grid[i-1][j] instanceof Crate) {
-        addListCoord(c,i-1,j,listCoord);
+        if (deadMode) {
+          if (this.isDead(this.grid[i-1][j],i-1,j,false)) {
+            addListCoord(c,i-1,j,listCoord,deadMode);
+          }
+        } else {
+          addListCoord(c,i-1,j,listCoord,deadMode);
+        }
       }
 
       if (this.grid[i+1][j] instanceof Crate) {
-        addListCoord(c,i+1,j,listCoord);
+        if (deadMode) {
+          if (this.isDead(this.grid[i+1][j],i+1,j,false)) {
+            addListCoord(c,i+1,j,listCoord,deadMode);
+          }
+        } else {
+            addListCoord(c,i+1,j,listCoord,deadMode);
+        }
       }
 
       if (this.grid[i][j-1] instanceof Crate) {
-        addListCoord(c,i,j-1,listCoord);
+        if (deadMode) {
+          if (this.isDead(this.grid[i][j-1],i,j-1,false)) {
+            addListCoord(c,i,j-1,listCoord,deadMode);
+          }
+        } else {
+          addListCoord(c,i,j-1,listCoord,deadMode);
+        }
       }
 
       if (this.grid[i][j+1] instanceof Crate) {
-        addListCoord(c,i,j+1,listCoord);
+        if (deadMode) {
+          if (this.isDead(this.grid[i][j+1],i,j+1,false)) {
+            addListCoord(c,i,j+1,listCoord,deadMode);
+          }
+        } else {
+          addListCoord(c,i,j+1,listCoord,deadMode);
+        }
       }
     }
     return listCoord;
   }
+
   /**
-    * Initialise la liste de coordonnées
-    * @param c La caisse étant en [j,i]
+    * Regarde si dans une liste de coordonnées de caisses, [j,i] est une partie d'un carrée
+    * @param listChain liste des coordonnées d'une chaine à tester
     * @param i La coordonnée en Y de la caisse
     * @param j La coordonnée en X de la caisse
+    * @param decaleWidth décalage en Y pour avoir le coin
+    * @param decaleHeight décalage en X pour avoir le coin
+    * @return true si la caisse en [j,i] fait partie d'un cube
   */
-  public ArrayList<ArrayList<Integer>> crateChain (Crate c, int i, int j) {
-    return crateChain(c,i,j,new ArrayList<>());
+  public boolean testCube(ArrayList<ArrayList<Integer>> listChain, int i, int j, int decaleWidth, int decaleHeight) {
+    ArrayList<Integer> coordTemp;
+    coordTemp = new ArrayList<> ();
+    coordTemp.add(i);
+    coordTemp.add(j + decaleWidth);
+    if (listChain.contains(coordTemp)) {
+      coordTemp = new ArrayList<> ();
+      coordTemp.add(i + decaleHeight);
+      coordTemp.add(j);
+      if (listChain.contains(coordTemp)) {
+        coordTemp = new ArrayList<> ();
+        coordTemp.add(i + decaleHeight);
+        coordTemp.add(j + decaleWidth);
+        if (listChain.contains(coordTemp)) {
+          return true;
+        }
+      }
+
+    }
+    return false;
+  }
+
+  /**
+    * test si dans une liste de coordonnées de caisses il y a un carrée de caisses
+    * @param listChain liste des coordonnées de la chaine
+    * @return true si un carrée est présent
+  */
+  public boolean haveSquare (ArrayList<ArrayList<Integer>> listChain) {
+    for (ArrayList<Integer> coord : listChain) {
+      int i = coord.get(0);
+      int j = coord.get(1);
+      if (testCube(listChain,i,j,-1,-1) || testCube(listChain,i,j,-1,1) || testCube(listChain,i,j,1,-1) ||testCube(listChain,i,j,1,1)) {
+        return true;
+      }
+    }
+    return false;
   }
 
 	/**
@@ -138,7 +206,7 @@ public class Board {
 		* @return Le résultat du test.
 	*/
   public boolean isFinished() {
-    boolean test = false;
+    boolean test = true;
     if (this.allPlaced()) {
       return true;
     }
@@ -147,29 +215,24 @@ public class Board {
       int i = ((Crate)c).x;
       int j = ((Crate)c).y;
 
-      ArrayList<ArrayList<Integer>> listChain = crateChain(((Crate)c),i,j);
+      ArrayList<ArrayList<Integer>> listChain = crateChain(((Crate)c),i,j,new ArrayList<> (), true);
 
-      if (listChain.size() != 1) {
-        boolean testDeadChain = true;
-        for (ArrayList<Integer> coord : listChain) {
-          if (!this.isDead(this.grid[coord.get(0)][coord.get(1)],coord.get(1),coord.get(0))) {
-            testDeadChain = false;
+      if (this.isDead(c,i,j,false) && !((Crate)c).isPlaced()) {
+        if (this.haveSquare(listChain)) {
+          ((Crate)c).setDeadlock(true);
+          return true;
+        } else {
+          listChain = crateChain(((Crate)c),i,j,new ArrayList<> (), false);
+          test = true;
+          for (ArrayList<Integer> coord : listChain) {
+            if (!this.isDead(c,coord.get(1),coord.get(0),true)) {
+              test = false;
+            }
           }
-        }
-        if (testDeadChain) {
-          ((Crate)c).setDeadlock(true);
-          return true;
-        }
-      }
-
-      if (listChain.size() == 1 && this.isDead(c,i,j) && !((Crate)c).isPlaced()) {
-        if (!(this.grid[i-1][j] instanceof Crate && !this.isDead(this.grid[i-1][j],i-1,j)) &&
-        !(this.grid[i+1][j] instanceof Crate && !this.isDead(this.grid[i+1][j],i+1,j)) &&
-        !(this.grid[i][j-1] instanceof Crate && !this.isDead(this.grid[i][j-1],i,j-1)) &&
-        !(this.grid[i][j+1] instanceof Crate && !this.isDead(this.grid[i][j+1],i,j+1))) {
-
-          ((Crate)c).setDeadlock(true);
-          return true;
+          if (test) {
+            ((Crate)c).setDeadlock(true);
+            return true;
+          }
         }
       }
     }
@@ -180,43 +243,38 @@ public class Board {
 		* @param mapToString
 		* Le tableau résultant de la lecture du fichier .xsb correspondant au niveau.
 	*/
-  public void createGrid(ArrayList<String> mapToString){
-		this.listCrate=new ArrayList<>();
-		this.listObjective=new ArrayList<>();
-		int[] gridSize = this.getSize(mapToString);
-    this.grid = new Block[gridSize[0]][gridSize[1]];
+  public void createGrid(ArrayList<ArrayList<String>> mapToString){
+    int[] gridSize = this.getSize(mapToString);
+    this.grid = new Block[gridSize[1]][gridSize[0]];
     for (int i=0;i<mapToString.size();i++) {
-			String[] s = mapToString.get(i).split("");
-			int j=0;
-      for (String ch: s) {
-        if (ch.equals(" ")){
+      for (int j=0;j<mapToString.get(i).size();j++) {
+        if (mapToString.get(i).get(j).equals(" ")){
 					Block t = new FreeTile(i,j);
           this.grid[i][j] = t;
-        }else if (ch.equals("#")) {
+        }else if (mapToString.get(i).get(j).equals("#")) {
           Block t = new Wall(i,j);
           this.grid[i][j] = t;
-        }else if (ch.equals("$")) {
+        }else if (mapToString.get(i).get(j).equals("$")) {
           Block t = new Crate(i,j,false);
 					this.listCrate.add(t);
           this.grid[i][j] = t;
-        }else if (ch.equals(".")) {
+        }else if (mapToString.get(i).get(j).equals(".")) {
           Block t = new Objective(i,j);
 					this.listObjective.add(t);
           this.grid[i][j] = t;
-        }else if (ch.equals("*")) {
+        }else if (mapToString.get(i).get(j).equals("*")) {
           Block t = new Crate(i,j,true);
 					this.listCrate.add(t);
           this.grid[i][j] = t;
-        }else if (ch.equals("@")) {
+        }else if (mapToString.get(i).get(j).equals("@")) {
           Block t = new Player(i,j,false);
 					this.player=t;
           this.grid[i][j] = t;
-        }else if (ch.equals("+")) {
+        }else if (mapToString.get(i).get(j).equals("+")) {
           Block t = new Player(i,j,true);
 					this.player=t;
           this.grid[i][j] = t;
         }
-				j++;
       }
     }
   }
@@ -226,27 +284,22 @@ public class Board {
 		* Le tableau résultant de la lecture du fichier .xsb correspondant au niveau.
 		* @return Un tableau de 2 entiers de type [largeur, hauteur].
 	*/
-  public int[] getSize(ArrayList<String> map) {
-		int[] size = new int[2];
+  public int[] getSize(ArrayList<ArrayList<String>> map) {
+    int[] size = new int[2];
     int maxHeight = 0;
     int maxWidth = 0;
-    for (String line : map) {
-			String[] s = line.split("");
+    for (ArrayList<String> line : map) {
       maxHeight += 1;
       int widthTemp = 0;
-      for (String ch : s) {
+      for (String val : line) {
         widthTemp += 1;
       }
       if (widthTemp>maxWidth) {
         maxWidth = widthTemp;
       }
     }
-    size[0] = maxHeight;
-    size[1] = maxWidth;
+    size[0] = maxWidth;
+    size[1] = maxHeight;
     return size;
   }
-
-	public Block getPlayer() {
-		return this.player;
-	}
 }
