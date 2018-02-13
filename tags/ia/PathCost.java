@@ -2,42 +2,63 @@ package ia;
 
 import java.util.HashMap;
 import java.lang.Math;
+import sokoban.*;
 
 public class PathCost {
 
-	private HashMap<Node,Integer> exploredMap;
-	private HashMap<Node,Integer> heuristicMap;
+	private HashMap<Node,Double> exploredMap;
+	private HashMap<Node,Double> fullPathMap;
 
 	public PathCost() {
-	  this.exploredMap = new HashMap<Node,Integer>();
-	  this.heuristicMap = new HashMap<Node,Integer>();
+	  this.exploredMap = new HashMap<Node,Double>();
+	  this.fullPathMap = new HashMap<Node,Double>();
 	}
 
-	public int currentDist(Node start, Node n) {
+	public double currentDist(Node start, Node n) {
 		if (n==start) {
-			return 0;
+			return 0.;
 		} else {
-			return 1 + currentDist(start, n.getPred());
+			return 1. + currentDist(start, n.getPred());
 		}
 	}
 
-	public int manhattan(Node n, Node goal) {
+	public double manhattan(Node n, Node goal) {
 		return Math.abs(goal.getX() - n.getX()) + Math.abs(goal.getY() - n.getY());
 	}
 
-	public HashMap<Node,Integer> getExplMap() {
+	public HashMap<Node,Double> initMap(int[] size) {
+		int nbKeys=size[0]*size[1];
+		double inf=Double.POSITIVE_INFINITY;
+		HashMap<Node,Double> map=new HashMap<>(nbKeys);
+		for (int i=0; i<size[0]; i++) {
+			for (int j=0; j<size[1]; j++) {
+				map.put(new Node(j,i), inf);
+			}
+		}
+		return map;
+	}
+
+	public HashMap<Node,Double> getExplMap() {
 		return this.exploredMap;
 	}
 
-	public void setExplValue(Node key, int newval) {
+	public void putExplValue(Node key, double newval) {
 		this.exploredMap.put(key,newval);
 	}
 
-	public HashMap<Node,Integer> getHeurMap() {
-		return this.heuristicMap;
+	public void setExplValue(HashMap<Node,Double> m) {
+		this.exploredMap=new HashMap<Node,Double>(m);
 	}
 
-	public void setHeurValue(Node key, int newval) {
-		this.heuristicMap.put(key,newval);
+	public HashMap<Node,Double> getFullMap() {
+		return this.fullPathMap;
+	}
+
+	public void putFullValue(Node key, double newval) {
+		this.fullPathMap.put(key,newval);
+	}
+
+	public void setFullValue(HashMap<Node,Double> m) {
+		this.fullPathMap=new HashMap<Node,Double>(m);
 	}
 }

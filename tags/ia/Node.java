@@ -12,6 +12,12 @@ public class Node {
 		this.pred = null;
 	}
 
+	public Node() {
+		this.x=-1;
+		this.y=-1;
+		this.pred = null;
+	}
+
 	public int getX() {
 		return this.x;
 	}

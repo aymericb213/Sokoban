@@ -2,6 +2,7 @@ package ia;
 
 import java.io.*;
 import java.util.ArrayList;
+import java.util.HashMap;
 import sokoban.*;
 
 public class Main {
@@ -14,6 +15,5 @@ public class Main {
 		Astar algo=new Astar();
 		Player p = (Player)b.getPlayer();
 		Node start = new Node(p.getX(), p.getY());
-
   	}
 }
