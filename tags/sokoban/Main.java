@@ -84,8 +84,10 @@ public class Main {
   			if (((Crate)c).deadLock){
   				System.out.println("Game Over (plus de mouvement possible)");
 					String input2 = sc.nextLine();
+					if (input2.equals("")) {
   				win=false;
   				break;
+					}
   			}
   		}
   		if (win){
