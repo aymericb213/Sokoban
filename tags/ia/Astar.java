@@ -26,9 +26,9 @@ public class Astar {
 	public String PathSearch(Node start, Node goal) {
 		PathCost evals= new PathCost();
 		this.waitingList.add(this.start);
-		evals.setExplValue(evals.initMap(this.level.getSize()));
-		evals.setFullValue(evals.initMap(this.level.getSize()));
-		evals.getFullMap().put(this.start, evals.manhattan(this.start,this.goal));
+		evals.setExplMap(evals.initMap(this.level.getSize()));
+		evals.setFullMap(evals.initMap(this.level.getSize()));
+		evals.putFullValue(this.start, evals.manhattan(this.start,this.goal));
 		while (!(this.waitingList.isEmpty())) {
 			Node current= minimumCost(evals.getFullMap());
 			if (current==this.goal) {
@@ -36,6 +36,22 @@ public class Astar {
 			}
 			this.waitingList.remove(current);
 			this.exploredList.add(current);
+			for (Node n : neighbours(current)) {
+				if (this.exploredList.contains(n)) {
+					continue;
+				}
+				if (!(this.waitingList.contains(n))) {
+					this.waitingList.add(n);
+				}
+				double testG = evals.currentDist(this.start,n) + 1.0;
+				if (testG>=evals.getExplMap().get(n)) {
+					continue;
+				} else {
+					n.setPred(current);
+					evals.putExplValue(n, testG);
+					evals.putFullValue(n, evals.getExplMap().get(n)+evals.manhattan(n,this.goal));
+				}
+			}
 		}
 		return "";
 	}
@@ -53,15 +69,11 @@ public class Astar {
 	}
 
 	public Node[] neighbours(Node n) {
-		Node north = new Node(n.getX()-1,n.getY());
-		Node south = new Node(n.getX()+1,n.getY());
-		Node east = new Node(n.getX(),n.getY()+1);
-		Node west = new Node(n.getX(),n.getY()-1);
 		Node[] neighboursList= new Node[4];
-		neighboursList[0]=north;
-		neighboursList[0]=east;
-		neighboursList[0]=south;
-		neighboursList[0]=west;
+		neighboursList[0]=new Node(n.getX()-1,n.getY());//up
+		neighboursList[1]=new Node(n.getX(),n.getY()+1);//right
+		neighboursList[2]=new Node(n.getX()+1,n.getY());//down
+		neighboursList[3]=new Node(n.getX(),n.getY()-1);//left
 		return neighboursList;
 	}
 

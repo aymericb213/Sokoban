@@ -46,7 +46,7 @@ public class PathCost {
 		this.exploredMap.put(key,newval);
 	}
 
-	public void setExplValue(HashMap<Node,Double> m) {
+	public void setExplMap(HashMap<Node,Double> m) {
 		this.exploredMap=new HashMap<Node,Double>(m);
 	}
 
@@ -58,7 +58,7 @@ public class PathCost {
 		this.fullPathMap.put(key,newval);
 	}
 
-	public void setFullValue(HashMap<Node,Double> m) {
+	public void setFullMap(HashMap<Node,Double> m) {
 		this.fullPathMap=new HashMap<Node,Double>(m);
 	}
 }

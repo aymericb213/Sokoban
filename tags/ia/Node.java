@@ -29,4 +29,8 @@ public class Node {
 	public Node getPred() {
 		return this.pred;
 	}
+
+	public void setPred(Node newPred) {
+		this.pred=newPred;
+	}
 }
