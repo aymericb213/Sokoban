@@ -357,6 +357,10 @@ public class Board {
 		return tab;
 	}
 
+  public ArrayList<Block> getObjective(){
+    return this.listObjective;
+  }
+
 	public Block getPlayer() {
 	return this.player;
 	}

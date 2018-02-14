@@ -15,9 +15,11 @@ public class PathCost {
 	}
 
 	public double currentDist(Node start, Node n) {
-		if (n==start) {
+		/* j'ai rajouté || n==null */
+		if (n==start || n==null) {
 			return 0.;
 		} else {
+			System.out.println("start : "+start+" getpred : "+n);
 			return 1. + currentDist(start, n.getPred());
 		}
 	}

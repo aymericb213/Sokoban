@@ -33,4 +33,8 @@ public class Node {
 	public void setPred(Node newPred) {
 		this.pred=newPred;
 	}
+
+	public String toString(){
+		return "Noeud x : "+this.x+" y : "+this.y;
+	}
 }

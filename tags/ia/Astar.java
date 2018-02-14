@@ -23,16 +23,22 @@ public class Astar {
 		this.level=new Board();
 	}
 
-	public String PathSearch(Node start, Node goal) {
+	public Node PathSearch() {
 		PathCost evals= new PathCost();
 		this.waitingList.add(this.start);
 		evals.setExplMap(evals.initMap(this.level.getSize()));
 		evals.setFullMap(evals.initMap(this.level.getSize()));
 		evals.putFullValue(this.start, evals.manhattan(this.start,this.goal));
 		while (!(this.waitingList.isEmpty())) {
+
+			System.out.println("nouveau tour");
+
 			Node current= minimumCost(evals.getFullMap());
 			if (current==this.goal) {
-				return "yay";
+
+				System.out.println("current==goal");
+
+				return this.goal;
 			}
 			this.waitingList.remove(current);
 			this.exploredList.add(current);
@@ -43,7 +49,23 @@ public class Astar {
 				if (!(this.waitingList.contains(n))) {
 					this.waitingList.add(n);
 				}
-				double testG = evals.currentDist(this.start,n) + 1.0;
+
+
+				/* gscore de current + currentDist(current,neighbours) ???? */
+
+				/* this.start se transforme en current ??? */
+
+				/* 1.0 = current,neighbours ??? dans ce cas currentDist(this.start,n) = gscore[current] ??? */
+				/* j'ai changé this.start en current */
+				double testG = evals.currentDist(current,n) + 1.0;
+				System.out.println(evals.getExplMap().get(n));
+
+				/* evals.getExplMap().get(n) retourne null peut etre a cause du fait que exploredMap soit un hashmap */
+				/* ça retourne null car la clef n n'est pas trouvé */
+				/* on peut pas donné un objet en tant que clef apparamant */
+
+				/* solution : peut etre rajouter une clef aux noeuds */
+
 				if (testG>=evals.getExplMap().get(n)) {
 					continue;
 				} else {
@@ -53,7 +75,7 @@ public class Astar {
 				}
 			}
 		}
-		return "";
+		return null;
 	}
 
 	public Node minimumCost(HashMap<Node,Double> m) {
@@ -83,6 +105,14 @@ public class Astar {
 
 	public Node getGoal() {
 		return this.goal;
+	}
+
+	public void setStart(Node start) {
+		this.start=start;
+	}
+
+	public void setGoal(Node goal){
+		this.goal=goal;
 	}
 
 	public Board getLevel() {

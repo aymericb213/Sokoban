@@ -24,4 +24,13 @@ public class Objective extends Block {
   public String toString() {
     return ".";
   }
+
+  public int getX() {
+		return this.x;
+	}
+
+	public int getY() {
+		return this.y;
+	}
+
 }
