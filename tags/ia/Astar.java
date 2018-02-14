@@ -64,7 +64,9 @@ public class Astar {
 				/* ça retourne null car la clef n n'est pas trouvé */
 				/* on peut pas donné un objet en tant que clef apparamant */
 
-				/* solution : peut etre rajouter une clef aux noeuds */
+				/* solution : peut etre rajouter une clef aux noeuds
+											ou utiliser les positions concatenée comme clef du dico exploredMap
+				*/
 
 				if (testG>=evals.getExplMap().get(n)) {
 					continue;
