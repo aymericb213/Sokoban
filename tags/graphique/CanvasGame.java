@@ -2,14 +2,17 @@
 package graphique;
 
 import java.awt.*;
+import javax.swing.*;
 import sokoban.*;
 
 public class CanvasGame extends Canvas {
 
   private Board b;
+  private Image crate;
 
   public CanvasGame (Board b) {
     this.b = b;
+    this.crate = new ImageIcon("caisse.png").getImage();
     setBackground(Color.white);
   }
 
@@ -23,19 +26,23 @@ public class CanvasGame extends Canvas {
         if (!grid[j][i].toString().equals(" ")) {
           if (grid[j][i].toString().equals("#")) {
             g.setColor(Color.black);
+            g.fillRect(taille*i,taille*j,taille,taille);
           } else if (grid[j][i].toString().equals("$")) {
-            g.setColor(Color.green);
+            g.drawImage(this.crate,taille*i,taille*j,null);
           } else if (grid[j][i].toString().equals(".")) {
             g.setColor(Color.yellow);
+            g.fillRect(taille*i,taille*j,taille,taille);
           } else if (grid[j][i].toString().equals("@")) {
             g.setColor(Color.red);
+            g.fillRect(taille*i,taille*j,taille,taille);
           } else if (grid[j][i].toString().equals("*")) {
             g.setColor(Color.blue);
+            g.fillRect(taille*i,taille*j,taille,taille);
           } else if (grid[j][i].toString().equals("+")) {
             g.setColor(Color.orange);
+            g.fillRect(taille*i,taille*j,taille,taille);
           }
 
-          g.fillRect(taille*i,taille*j,taille,taille);
 
         }
       }
