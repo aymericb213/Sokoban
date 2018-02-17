@@ -26,14 +26,6 @@ public class Main {
 		algo.setStart(start);
 		algo.setGoal(goal);
 
-		Node path = algo.PathSearch();
-		
-		System.out.println("path "+path);
-		while(path!=null){
-			System.out.println(path);
-			path=path.getPred();
+		Node path = algo.pathSearch();
 		}
-
-
-  }
 }

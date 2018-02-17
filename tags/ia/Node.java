@@ -6,16 +6,16 @@ public class Node {
 	private int y;
 	private Node pred;
 
-	public Node(int x, int y) {
-		this.x=x;
-		this.y=y;
-		this.pred = null;
-	}
-
 	public Node() {
 		this.x=-1;
 		this.y=-1;
 		this.pred = null;
+	}
+	
+	public Node(int x, int y) {
+		this();
+		this.x=x;
+		this.y=y;
 	}
 
 	public int getX() {
@@ -35,6 +35,6 @@ public class Node {
 	}
 
 	public String toString(){
-		return "Noeud x : "+this.x+" y : "+this.y;
+		return "("+this.x+","+this.y+","+this.pred+")";
 	}
 }

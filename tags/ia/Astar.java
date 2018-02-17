@@ -1,6 +1,5 @@
 package ia;
 
-import java.util.Map;
 import java.util.HashMap;
 import java.util.ArrayList;
 import sokoban.*;
@@ -23,7 +22,7 @@ public class Astar {
 		this.level=new Board();
 	}
 
-	public Node PathSearch() {
+	public Node pathSearch() {//passer en String une fois A* fonctionnel
 		PathCost evals= new PathCost();
 		this.waitingList.add(this.start);
 		evals.setExplMap(evals.initMap(this.level.getSize()));
@@ -38,7 +37,7 @@ public class Astar {
 
 				System.out.println("current==goal");
 
-				return this.goal;
+				return buildFullPath();
 			}
 			this.waitingList.remove(current);
 			this.exploredList.add(current);
@@ -50,16 +49,9 @@ public class Astar {
 					this.waitingList.add(n);
 				}
 
-
-				/* gscore de current + currentDist(current,neighbours) ???? */
-
-				/* this.start se transforme en current ??? */
-
-				/* 1.0 = current,neighbours ??? dans ce cas currentDist(this.start,n) = gscore[current] ??? */
-				/* j'ai changé this.start en current */
-				double testG = evals.currentDist(current,n) + 1.0;
-				System.out.println(evals.getExplMap().get(n));
-
+				double testG = evals.currentDist(this.start,current) + 1.0;//distance au départ du noeud courant + distance du voisin au noeud courant (toujours 1)
+				System.out.println(n.toString() + " = " + evals.getExplMap().get(n));
+				System.out.println(evals.getExplMap().toString());
 				/* evals.getExplMap().get(n) retourne null peut etre a cause du fait que exploredMap soit un hashmap */
 				/* ça retourne null car la clef n n'est pas trouvé */
 				/* on peut pas donné un objet en tant que clef apparamant */
@@ -67,7 +59,6 @@ public class Astar {
 				/* solution : peut etre rajouter une clef aux noeuds
 											ou utiliser les positions concatenée comme clef du dico exploredMap
 				*/
-
 				if (testG>=evals.getExplMap().get(n)) {
 					continue;
 				} else {
@@ -80,16 +71,16 @@ public class Astar {
 		return null;
 	}
 
-	public Node minimumCost(HashMap<Node,Double> m) {
+	public Node minimumCost(HashMap<Node,Double> fullPathMap) {
 		double min=Double.POSITIVE_INFINITY;
-		Node n=new Node();
-		for (Map.Entry<Node,Double> x : m.entrySet()) {
-			if (x.getValue()<min) {
-				min=x.getValue();
-				n=x.getKey();
+		Node minNode=new Node();
+		for (Node n : this.waitingList) {
+			if (fullPathMap.get(n) < min) {
+				min=fullPathMap.get(n);
+				minNode=n;
 			}
 		}
-		return n;
+		return minNode;
 	}
 
 	public Node[] neighbours(Node n) {
@@ -101,6 +92,15 @@ public class Astar {
 		return neighboursList;
 	}
 
+	public Node buildFullPath() {//passer en String une fois A* fonctionnel
+		Node n=this.goal;
+		while (n!=this.start) {
+			System.out.println(n.toString());
+			n=n.getPred();
+		}
+		return n;
+	}
+
 	public Node getStart() {
 		return this.start;
 	}
@@ -109,16 +109,16 @@ public class Astar {
 		return this.goal;
 	}
 
+	public Board getLevel() {
+		return this.level;
+	}
+
 	public void setStart(Node start) {
 		this.start=start;
 	}
 
 	public void setGoal(Node goal){
 		this.goal=goal;
-	}
-
-	public Board getLevel() {
-		return this.level;
 	}
 
 	public void setLevel(Board newBoard) {
