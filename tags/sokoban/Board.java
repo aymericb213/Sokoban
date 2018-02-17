@@ -240,14 +240,13 @@ public class Board {
       int i = ((Crate)c).x;
       int j = ((Crate)c).y;
 
-      ArrayList<ArrayList<Integer>> listChain = crateChain(((Crate)c),i,j,new ArrayList<> (), true);
+      ArrayList<ArrayList<Integer>> listChain = crateChain(((Crate)c),i,j,new ArrayList<> (), false);
 
       if (this.isDead(c,i,j,false) && !((Crate)c).isPlaced()) {
         if (this.haveSquare(listChain)) {
           ((Crate)c).setDeadlock(true);
           return true;
         } else {
-          listChain = crateChain(((Crate)c),i,j,new ArrayList<> (), false);
           test = true;
           for (ArrayList<Integer> coord : listChain) {
             if (!this.isDead(c,coord.get(1),coord.get(0),true)) {
