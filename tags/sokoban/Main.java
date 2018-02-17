@@ -55,7 +55,7 @@ public class Main {
   			System.out.println(". : objectif");
   			System.out.println("$ : caisse (* si placée sur un objectif)");
   			System.out.println("@ : joueur (+ si placé sur un objectif)");
-  			System.out.println("\nz,q,s,d : déplacer joueur       Save : sauvegarder       e : quitter");
+  			System.out.println("\nz,q,s,d : déplacer joueur             Save : sauvegarder             e : quitter");
   			String input=sc.nextLine();
   			ArrayList<Integer> nextMove = new ArrayList<>();
 				if (input.equals("E") || input.equals("e")) {
@@ -64,15 +64,9 @@ public class Main {
         if (input.equals("Save") || input.equals("save")) {
           Save save = new Save (b.createArrayList());
           save.saveMap();
-          System.out.println("================ SOKOBAN =================\n");
-    			System.out.println("Niveau " + map.getFile().substring(lenPrint - 5, lenPrint - 4)+"\n");
-    			System.out.println("\n" + b.toString());
-    			System.out.println("# : mur");
-    			System.out.println(". : objectif");
-    			System.out.println("$ : caisse (* si placée sur un objectif)");
-    			System.out.println("@ : joueur (+ si placé sur un objectif)");
-          System.out.println("\nz,q,s,d : déplacer joueur       Save : sauvegarder       e : quitter");
-    			input=sc.nextLine();
+					System.out.println("\033[H\033[2J");
+					System.out.println("Fichier sauvegardé");
+          continue;
         }
   			if (input.equals("Z") || input.equals("z")) {
   				nextMove.add(-1);
