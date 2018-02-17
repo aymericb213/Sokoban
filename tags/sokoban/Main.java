@@ -4,6 +4,7 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.Random;
+import graphique.*;
 
 /**
 	* Classe exécutable du package sokoban.
@@ -47,6 +48,7 @@ public class Main {
 			System.out.println("\033[H\033[2J");
       map.readingMap();
       b.createGrid(map.getMap());
+      new Interface(b);
   		while (!b.isFinished()) {
   			System.out.println("================ SOKOBAN =================\n");
   			System.out.println("Niveau " + map.getFile().substring(lenPrint - 5, lenPrint - 4)+"\n");
