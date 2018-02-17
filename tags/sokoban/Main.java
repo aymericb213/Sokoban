@@ -41,39 +41,44 @@ public class Main {
 		} else {
 			map.setFile("sokoban/maps/map1.xsb");
 		}
+		end :
     while (gContinue.equals("O") || gContinue.equals("o")) {
+			int lenPrint = map.getFile().length();
 			System.out.println("\033[H\033[2J");
       map.readingMap();
       b.createGrid(map.getMap());
   		while (!b.isFinished()) {
   			System.out.println("================ SOKOBAN =================\n");
-  			System.out.println("Niveau " + map.getFile().charAt(map.getFile().length() - 5)+"\n");
+  			System.out.println("Niveau " + map.getFile().substring(lenPrint - 5, lenPrint - 4)+"\n");
   			System.out.println("\n" + b.toString());
   			System.out.println("# : mur");
   			System.out.println(". : objectif");
   			System.out.println("$ : caisse (* si placée sur un objectif)");
   			System.out.println("@ : joueur (+ si placé sur un objectif)");
-  			System.out.println("\nEntrez votre prochain mouvement parmi H (haut), G (gauche), B (bas), D (droite), Save (sauvegarder) :");
+  			System.out.println("\nz,q,s,d : déplacer joueur       Save : sauvegarder       e : quitter");
   			String input=sc.nextLine();
   			ArrayList<Integer> nextMove = new ArrayList<>();
+				if (input.equals("E") || input.equals("e")) {
+					break end;
+				}
         if (input.equals("Save") || input.equals("save")) {
           Save save = new Save (b.createArrayList());
           save.saveMap();
           System.out.println("================ SOKOBAN =================\n");
-    			System.out.println("Niveau " + map.getFile().charAt(map.getFile().length() - 5)+"\n");
+    			System.out.println("Niveau " + map.getFile().substring(lenPrint - 5, lenPrint - 4)+"\n");
     			System.out.println("\n" + b.toString());
     			System.out.println("# : mur");
     			System.out.println(". : objectif");
     			System.out.println("$ : caisse (* si placée sur un objectif)");
     			System.out.println("@ : joueur (+ si placé sur un objectif)");
-          System.out.println("\nEntrez votre prochain mouvement parmi H (haut), G (gauche), B (bas), D (droite), Save (sauvegarder) :");
+          System.out.println("\nz,q,s,d : déplacer joueur       Save : sauvegarder       e : quitter");
     			input=sc.nextLine();
         }
-  			if (input.equals("H") || input.equals("h") || input.equals("z")) {
+  			if (input.equals("Z") || input.equals("z")) {
   				nextMove.add(-1);
   				nextMove.add(0);
   			}
-  			else if (input.equals("G") || input.equals("g") || input.equals("q")) {
+  			else if (input.equals("Q") || input.equals("q")) {
   				nextMove.add(0);
   				nextMove.add(-1);
   			}
@@ -81,14 +86,14 @@ public class Main {
   				nextMove.add(0);
   				nextMove.add(1);
   			}
-  			else if (input.equals("B") || input.equals("b") || input.equals("s")) {
+  			else if (input.equals("S") || input.equals("s")) {
   				nextMove.add(1);
   				nextMove.add(0);
   			}
   			else {
   				nextMove.add(0);
   				nextMove.add(0);
-  				System.out.println("Les seules commandes valides sont H,G,D,B,P.");
+  				System.out.println("Entrez une commande valide.");
   			}
   			((Player)b.player).move(b, nextMove);
   			nbMoves++;
@@ -98,11 +103,14 @@ public class Main {
   		boolean win = true;
   		for(Block c : b.listCrate) {
   			if (((Crate)c).deadLock){
-  				System.out.println("Game Over (plus de mouvement possible) appuyez sur 'entrer' pour recommencer");
+  				System.out.println("Game Over (plus de mouvement possible) appuyez sur 'entrer' pour recommencer ou e pour quitter");
 					String input2 = sc.nextLine();
 					if (input2.equals("")) {
   				win=false;
   				break;
+					}
+					if (input2.equals("E") || input2.equals("e")) {
+						break end;
 					}
   			}
   		}
