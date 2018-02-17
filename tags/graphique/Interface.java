@@ -5,14 +5,18 @@ import javax.swing.*;
 import javax.swing.event.*;
 import java.awt.*;
 import java.awt.event.*;
+import sokoban.*;
 
 public class Interface extends JFrame {
 
-  public Interface() {
+  private Board b;
+
+  public Interface(Board b) {
+    this.b = b;
+    setSize(800,400);
     Container cont = this.getContentPane();
 
     JPanel zoneControl = new JPanel();
-    JPanel zoneGame = new JPanel();
     JButton bPlay = new JButton("Play");
     JButton bChangeMap = new JButton("Change Map");
     JButton bQuit = new JButton("Quit");
@@ -23,10 +27,9 @@ public class Interface extends JFrame {
     zoneControl.add(bPlay);
     zoneControl.add(bChangeMap);
     zoneControl.add(bQuit);
-    cont.add(zoneGame);
+    add(new CanvasGame(this.b));
     cont.add(zoneControl);
 
-    this.pack();
     this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     this.setVisible(true);
 
