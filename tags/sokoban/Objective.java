@@ -25,12 +25,20 @@ public class Objective extends Block {
     return ".";
   }
 
-  public int getX() {
-		return this.x;
-	}
+	/**
+		* Accesseur de l'ordonnée de l'objectif.
+		* @return La valeur de x.
+		*/
+		public int getX() {
+			return this.x;
+		}
 
-	public int getY() {
-		return this.y;
-	}
+	/**
+		* Accesseur de l'abscisse de l'objectif.
+		* @return La valeur de y.
+		*/
+		public int getY() {
+			return this.y;
+		}
 
 }

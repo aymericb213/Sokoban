@@ -149,10 +149,18 @@ public class Player extends Block {
     return b;
   }
 
+/**
+	* Accesseur de l'ordonnée du joueur.
+	* @return La valeur de x.
+	*/
 	public int getX() {
 		return this.x;
 	}
 
+/**
+	* Accesseur de l'abscisse du joueur.
+	* @return La valeur de y.
+	*/
 	public int getY() {
 		return this.y;
 	}
