@@ -401,7 +401,7 @@ public class Board {
 		* Accesseur de la liste d'objectifs.
 		* @return La valeur de l'attribut listObjective.
 	*/
-  public ArrayList<Block> getObjective(){
+  public ArrayList<Block> getObjectives(){
     return this.listObjective;
   }
 
