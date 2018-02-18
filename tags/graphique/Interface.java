@@ -14,7 +14,7 @@ public class Interface extends JFrame {
   public Interface(Board b) {
     this.b = b;
     int[] size = b.getSize();
-    setSize(2*30*size[1] + 15,30*size[0] + 33);
+    setSize(2*40*size[1] + 15,40*size[0] + 33);
     Container cont = this.getContentPane();
 
     JPanel zoneControl = new JPanel();
