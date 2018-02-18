@@ -44,10 +44,14 @@ public class Board {
 
 	/**
 		* Teste si une caisse est bloquée.
-    * @param c la caisse en [j,i]
-    * @param i La coordonnée en Y
-    * @param j La coordonnée en X
-    * @param wallOnly à true il regarde si la caisse est bloquée qu'avec au moins 1 mur, et false avec au moins 0 mur
+		* @param c
+		* La caisse en [j,i].
+		* @param i
+		* La coordonnée en Y.
+		* @param j
+		* La coordonnée en X.
+		* @param wallOnly
+		* à true il regarde si la caisse est bloquée qu'avec au moins 1 mur, et false avec au moins 0 mur
 		* @return Le résultat du test.
 	*/
   public boolean isDead(Block c, int i, int j, boolean wallOnly) {
@@ -82,11 +86,16 @@ public class Board {
 
   /**
     * Ajoute la coordonnées [j,i] dans la liste listCoord
-    * @param c La caisse en [j,i]
-    * @param i La coordonnée en Y
-    * @param j La coordonnée en X
-    * @param listCoord La liste des coordonnée dont on va ajouter [j,i]
-    * @param deadMode mode de propagation voir <i>crateChain</i>
+    * @param c
+		* La caisse en [j,i]
+    * @param i
+		* La coordonnée en Y
+    * @param j
+		* La coordonnée en X
+    * @param listCoord
+		* La liste des coordonnée dont on va ajouter [j,i]
+    * @param deadMode
+		* mode de propagation voir <i>crateChain</i>
     * @note Cette fonction sert uniquement pour <i>crateChain</i>.
   */
   private void addListCoord(Crate c, int i, int j, ArrayList<ArrayList<Integer>> listCoord, boolean deadMode) {
@@ -98,13 +107,18 @@ public class Board {
     }
   }
 
-  /**
-    * Créer une liste des coordonnées d'une chaîne de caisses qui sont les unes à côté des autres
-    * @param c La caisse étant en [j,i]
-    * @param i La coordonnée en Y de la caisse
-    * @param j La coordonnée en X de la caisse
-    * @param listCoord Liste des coordonnée des caisses
-    * @param deadMode mode de propagation selon des caisses bloquée à true et false selon n'importe quelle caisses
+	/**
+    * Crée une liste des coordonnées d'une chaîne de caisses placées les unes à côté des autres.
+    * @param c
+		* La caisse étant en [j,i].
+    * @param i
+		* La coordonnée en Y de la caisse.
+    * @param j
+		* La coordonnée en X de la caisse.
+    * @param listCoord
+		* Liste des coordonnée des caisses.
+    * @param deadMode
+		* Mode de propagation selon des caisses bloquée à true et false selon n'importe quelle caisses
     * @return La liste des coordonnée de la chaîne
   */
   public ArrayList<ArrayList<Integer>> crateChain (Crate c, int i, int j, ArrayList<ArrayList<Integer>> listCoord, boolean deadMode) {
@@ -157,14 +171,19 @@ public class Board {
     return listCoord;
   }
 
-  /**
-    * Regarde si dans une liste de coordonnées de caisses, [j,i] est une partie d'un carrée
-    * @param listChain liste des coordonnées d'une chaine à tester
-    * @param i La coordonnée en Y de la caisse
-    * @param j La coordonnée en X de la caisse
-    * @param decaleWidth décalage en Y pour avoir le coin
-    * @param decaleHeight décalage en X pour avoir le coin
-    * @return true si la caisse en [j,i] fait partie d'un cube
+	/**
+    * Teste si dans une liste de coordonnées de caisses, [j,i] est une partie d'un carré.
+    * @param listChain
+		* Liste des coordonnées des caisses d'une chaine à tester.
+    * @param i
+		* La coordonnée en Y de la caisse.
+    * @param j
+		* La coordonnée en X de la caisse.
+    * @param decaleWidth
+		* décalage en Y pour avoir le coin.
+    * @param decaleHeight
+		* décalage en X pour avoir le coin.
+    * @return Le résultat du test.
   */
   public boolean testCube(ArrayList<ArrayList<Integer>> listChain, int i, int j, int decaleWidth, int decaleHeight) {
     ArrayList<Integer> coordTemp;
@@ -188,12 +207,13 @@ public class Board {
     return false;
   }
 
-  /**
-    * test si dans une liste de coordonnées de caisses il y a un carrée de caisses
-    * @param listChain liste des coordonnées de la chaine
-    * @return true si un carrée est présent
+	/**
+    * Teste si un carré est formé par des caisses de la liste.
+    * @param listChain
+		* Liste des coordonnées des caisses de la chaine.
+    * @return Le résultat du test.
   */
-  public boolean haveSquare (ArrayList<ArrayList<Integer>> listChain) {
+  public boolean hasSquare (ArrayList<ArrayList<Integer>> listChain) {
     for (ArrayList<Integer> coord : listChain) {
       int i = coord.get(0);
       int j = coord.get(1);
@@ -204,12 +224,14 @@ public class Board {
     return false;
   }
 
-    /**
-      * test si 2 caisses sont côte à côte le long d'un mur
-      * @param coord coordonnées d'une caisse blockée
-      * @return true si on a 2 caisses sont blockées contre un mur exemple : <p>$$<br>##</p>
-    */
-    public boolean haveDeadWall (ArrayList<Integer> coord) {
+	/**
+		* Teste si une caisse est bloquée par une autre le long d'un mur.
+		* Exemple : <p>$$<br>##</p>
+		* @param coord
+		* Coordonnées de la caisse à tester.
+		* @return Le résultat du test
+	*/
+  public boolean hasDeadWall (ArrayList<Integer> coord) {
       int i = coord.get(1);
       int j = coord.get(0);
 
@@ -230,8 +252,8 @@ public class Board {
     }
 
 	/**
-		* Teste si la partie est terminée, c'est-à-dire si toutes les caisses sont rangées
-		* ou si une caisse est bloquée sans être sur un objectif.
+		* Détermine la fin de partie, c'est-à-dire si l'état du plateau ne permet aucun mouvement ultérieur,
+		* ou si toutes les caisses sont rangées.
 		* @return Le résultat du test.
 	*/
   public boolean isFinished() {
@@ -247,7 +269,7 @@ public class Board {
       ArrayList<ArrayList<Integer>> listChain = crateChain(((Crate)c),i,j,new ArrayList<> (), false);
 
       if (this.isDead(c,i,j,false) && !((Crate)c).isPlaced()) {
-        if (this.haveSquare(listChain)) {
+        if (this.hasSquare(listChain)) {
           ((Crate)c).setDeadlock(true);
           return true;
         } else {
@@ -256,7 +278,7 @@ public class Board {
             if (!this.isDead(c,coord.get(1),coord.get(0),true)) {
               test = false;
             }
-            if (this.haveDeadWall(coord)) {
+            if (this.hasDeadWall(coord)) {
               ((Crate)c).setDeadlock(true);
               return true;
             }
@@ -328,7 +350,9 @@ public class Board {
     return res;
   }
 
-	/** Calcule les dimensions du niveau.
+	/**
+		* Calcule les dimensions du niveau à partir de l'ArrayList obtenue en lisant un fichier .xsb.
+		* Nécessaire à l'initialisation de l'attribut grid.
 		* @param mapToString
 		* Le tableau résultant de la lecture du fichier .xsb correspondant au niveau.
 		* @return Un tableau de 2 entiers de type [largeur, hauteur].
@@ -353,6 +377,11 @@ public class Board {
     return size;
   }
 
+	/**
+		* Retourne les dimensions de grid.
+		* Méthode sans argument pour faciliter l'utilisation dans le package ia.
+		* @return Un tableau contenant la largeur et la hauteur de grid.
+	*/
 	public int[] getSize() {
 		int[] tab= new int[2];
 		tab[0]=this.grid.length;
@@ -360,10 +389,26 @@ public class Board {
 		return tab;
 	}
 
+	/**
+		* Accesseur de la liste de caisses.
+		* @return La valeur de l'attribut listCrate.
+	*/
+  public ArrayList<Block> getCrates() {
+    return this.listCrate;
+  }
+
+	/**
+		* Accesseur de la liste d'objectifs.
+		* @return La valeur de l'attribut listObjective.
+	*/
   public ArrayList<Block> getObjective(){
     return this.listObjective;
   }
 
+	/**
+		* Accesseur des coordonnées du joueur.
+		* @return La valeur de l'attribut listObjective.
+	*/
 	public Block getPlayer() {
 	return this.player;
 	}
