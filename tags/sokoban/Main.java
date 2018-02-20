@@ -59,7 +59,7 @@ public class Main {
   			System.out.println(". : objectif");
   			System.out.println("$ : caisse (* si placée sur un objectif)");
   			System.out.println("@ : joueur (+ si placé sur un objectif)");
-  			System.out.println("\nz,q,s,d : déplacer joueur    Save : sauvegarder    l : charger    e : quitter");
+  			System.out.println("\nz,q,s,d : déplacer joueur    Save : sauvegarder    l : charger    a : annuler    e : quitter");
   			String input=sc.nextLine();
   			ArrayList<Integer> nextMove = new ArrayList<>();
 				if (input.equals("E") || input.equals("e")) {
@@ -73,11 +73,16 @@ public class Main {
           break;
         }
         if (input.equals("Save") || input.equals("save")) {
-          Save save = new Save (b.createArrayList());
+          Save save = new Save (b.createArrayList(),"save");
           save.saveMap();
 					System.out.println("\033[H\033[2J");
 					System.out.println("Fichier sauvegardé");
           continue;
+        }
+        if (input.equals("A") || input.equals("a")) {
+          map.setFile("sokoban/maps/cancel.xsb");
+          map.readingMap();
+          b.createGrid(map.getMap());
         }
   			if (input.equals("Z") || input.equals("z")) {
   				nextMove.add(-1);
@@ -100,6 +105,8 @@ public class Main {
   				nextMove.add(0);
   				System.out.println("Entrez une commande valide.");
   			}
+        Save cancel = new Save (b.createArrayList(),"cancel");
+        cancel.saveMap();
   			((Player)b.player).move(b, nextMove);
   			nbMoves++;
   			System.out.println("\033[H\033[2J");
@@ -135,7 +142,7 @@ public class Main {
 						map.setFile("sokoban/maps/map" + temp + ".xsb");
           } else {
             nextMapNb++;
-            if (nextMapNb+1 > nbMaps) {
+            if (nextMapNb+2 > nbMaps) {
               System.out.println("Il n'y a plus de map disponible");
 							break end;
             } else {

@@ -1,9 +1,8 @@
 
 à faire :
-	annuler un coup
-	charger une map en cours de jeu (comme pour sauvegarde)
     IA algo A*
     faire l'interface graphique en SWAG
+	gérer si il y a pas de fichier save.xsb quand on veut le charger
 
 tester :
     déplacements / fin de partie / collision

@@ -8,11 +8,12 @@ public class Save {
 
   private ArrayList<String> map = new ArrayList<>();
   private String path;
+  private String name;
 
 
-  public Save(ArrayList<String> mapToSave) {
+  public Save(ArrayList<String> mapToSave, String name) {
     this.map = mapToSave;
-    this.path = "sokoban/maps/save.xsb";
+    this.path = "sokoban/maps/"+name+".xsb";
   }
 
   public void saveMap () throws IOException {
