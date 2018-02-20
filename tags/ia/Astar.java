@@ -63,8 +63,8 @@ public class Astar {
 				}
 
 				double testG = evals.currentDist(this.start,current) + 1.0;//distance au départ du noeud courant + distance du voisin au noeud courant (toujours 1)
-				//System.out.println(n + " = " + evals.getExplMap().get(n));
-				//System.out.println(evals.getExplMap());
+				System.out.println(n + " = " + evals.getExplMap().get(n));
+				System.out.println(evals.getExplMap());
 				if (testG>=evals.getExplMap().get(n)) {
 					continue;
 				} else {
@@ -73,7 +73,6 @@ public class Astar {
 					evals.putFullValue(n, evals.getExplMap().get(n)+evals.manhattan(n,this.goal));
 				}
 			}
-			System.out.println(this.exploredList);
 		}
 		return null;
 	}

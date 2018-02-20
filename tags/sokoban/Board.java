@@ -38,10 +38,6 @@ public class Board {
     return result;
   }
 
-  public Block[][] getGrid () {
-    return this.grid;
-  }
-
 	/**
 		* Teste si une caisse est bloquée.
 		* @param c
@@ -415,4 +411,7 @@ public class Board {
 	return this.player;
 	}
 
+	public Block[][] getGrid() {
+    return this.grid;
+  }
 }
