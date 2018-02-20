@@ -16,25 +16,28 @@ public class Save {
     this.path = "sokoban/maps/"+name+".xsb";
   }
 
-  public void saveMap () throws IOException {
+  public void saveMap () {
+    try {
+      File file = new File(this.path);
 
-    File file = new File(this.path);
+      if (file.exists()){
+        file.delete();
+      }
+      FileWriter fw = new FileWriter(this.path,true);
 
-    if (file.exists()){
-      file.delete();
+      BufferedWriter output = new BufferedWriter(fw);
+      String temp = "";
+      for (String line: this.map) {
+        temp += line + "\n";
+      }
+      output.write(temp);
+
+      output.flush();
+
+      output.close();
+    } catch(IOException e) {
+      e.printStackTrace();
     }
-    FileWriter fw = new FileWriter(this.path,true);
-
-    BufferedWriter output = new BufferedWriter(fw);
-    String temp = "";
-    for (String line: this.map) {
-      temp += line + "\n";
-    }
-    output.write(temp);
-
-    output.flush();
-
-    output.close();
   }
 
 }

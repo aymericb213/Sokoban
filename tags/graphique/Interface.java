@@ -7,6 +7,7 @@ import java.awt.*;
 import java.awt.Image.*;
 import java.awt.event.*;
 import sokoban.*;
+import java.io.*;
 
 public class Interface extends JFrame {
 
@@ -19,6 +20,13 @@ public class Interface extends JFrame {
     JPanel zoneControl = new JPanel();
     JButton bReset = new JButton("Restart");
     JButton bSave = new JButton("Save");
+    bSave.addActionListener(new ActionListener () {
+      public void actionPerformed(ActionEvent e) {
+        Save save = new Save(b.createArrayList(),"save");
+        save.saveMap();
+      }
+    });
+
     JButton bLoad = new JButton("Load");
     JButton bCancel = new JButton("Cancel");
     JButton bQuit = new JButton("Quit");
