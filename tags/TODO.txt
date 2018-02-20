@@ -1,6 +1,8 @@
 
 à faire :
-    IA algo A*
+    améliorer A* :
+    	- faire déplacer les caisses à l'IA
+    	- coordoonner chemins joueur-caisse et caisse-objectif
     faire l'interface graphique en SWAG
 	gérer si il y a pas de fichier save.xsb quand on veut le charger
 

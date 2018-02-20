@@ -11,6 +11,7 @@ public class Astar {
 
 	private ArrayList<Node> exploredList;
 	private ArrayList<Node> waitingList;
+	private ArrayList<Node> neighboursList;
 	private Node start;
 	private Node goal;
 	private String path;
@@ -32,26 +33,27 @@ public class Astar {
 	* Algorithme A*.
 	* @return
 */
-	public Node pathSearch() {//passer en String une fois A* fonctionnel
+	public ArrayList<Node> pathSearch() {//passer en String une fois A* fonctionnel
 		PathCost evals= new PathCost();
 		this.waitingList.add(this.start);
 		evals.setExplMap(evals.initMap(this.level.getSize()));
 		evals.setFullMap(evals.initMap(this.level.getSize()));
 		evals.putFullValue(this.start, evals.manhattan(this.start,this.goal));
+		int cpt=0;
 		while (!(this.waitingList.isEmpty())) {
-
-			System.out.println("nouveau tour");
+			cpt++;
+			System.out.println("Tour " + cpt);
 			Node current= minimumCost(evals.getFullMap());
 			System.out.println(current);
 			System.out.println(this.goal);
 			if (current.equals(this.goal)) {
-
 				System.out.println("current==goal");
 				this.goal=current;
 				return buildFullPath();
 			}
 			this.waitingList.remove(current);
 			this.exploredList.add(current);
+			System.out.println("Voisins de " + current + " : " + neighbours(current).toString());
 			for (Node n : neighbours(current)) {
 				if (this.exploredList.contains(n)) {
 					continue;
@@ -61,8 +63,8 @@ public class Astar {
 				}
 
 				double testG = evals.currentDist(this.start,current) + 1.0;//distance au départ du noeud courant + distance du voisin au noeud courant (toujours 1)
-				System.out.println(n + " = " + evals.getExplMap().get(n));
-				System.out.println(evals.getExplMap());
+				//System.out.println(n + " = " + evals.getExplMap().get(n));
+				//System.out.println(evals.getExplMap());
 				if (testG>=evals.getExplMap().get(n)) {
 					continue;
 				} else {
@@ -71,6 +73,7 @@ public class Astar {
 					evals.putFullValue(n, evals.getExplMap().get(n)+evals.manhattan(n,this.goal));
 				}
 			}
+			System.out.println(this.exploredList);
 		}
 		return null;
 	}
@@ -100,12 +103,18 @@ public class Astar {
 	* Le noeud dont on veut connaître les voisins.
 	* @return Le tableau des noeuds voisins.
 */
-	public Node[] neighbours(Node n) {
-		Node[] neighboursList= new Node[4];
-		neighboursList[0]=new Node(n.getX()-1,n.getY());//up
-		neighboursList[1]=new Node(n.getX(),n.getY()+1);//right
-		neighboursList[2]=new Node(n.getX()+1,n.getY());//down
-		neighboursList[3]=new Node(n.getX(),n.getY()-1);//left
+	public ArrayList<Node> neighbours(Node n) {
+		ArrayList<Node> tempList= new ArrayList<Node>();
+		ArrayList<Node> neighboursList= new ArrayList<Node>();
+		tempList.add(new Node(n.getX()-1,n.getY()));//up
+		tempList.add(new Node(n.getX(),n.getY()+1));//right
+		tempList.add(new Node(n.getX()+1,n.getY()));//down
+		tempList.add(new Node(n.getX(),n.getY()-1));//left
+		for (Node m : tempList) {
+			if (!(this.level.getGrid()[m.getX()][m.getY()] instanceof Wall) && !( this.level.getGrid()[m.getX()][m.getY()] instanceof Crate)) {
+				neighboursList.add(m);
+			}
+		}
 		return neighboursList;
 	}
 
@@ -113,14 +122,16 @@ public class Astar {
 	* Reconstruit le chemin optimal du noeud de départ au noeud d'arrivée d'A*.
 	* @return
 */
-	public Node buildFullPath() {//passer en String une fois A* fonctionnel
+	public ArrayList<Node> buildFullPath() {//passer en String une fois A* fonctionnel
 		Node n=this.goal;
+		ArrayList<Node> fullPath = new ArrayList<Node>();
+		System.out.println(n.toString());
 		while (n!=this.start) {
-			System.out.println(n.toString());
+			fullPath.add(0,n);
 			n=n.getPred();
 		}
-		System.out.println(n.toString());
-		return n;
+		fullPath.add(0,this.start);
+		return fullPath;
 	}
 
 /**
