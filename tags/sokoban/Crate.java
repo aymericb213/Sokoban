@@ -6,7 +6,7 @@ package sokoban;
 public class Crate extends Block {
 
   protected boolean deadLock;
-  private boolean placed;
+  protected boolean placed;
 
 	/**
 		* Constructeur de la classe.

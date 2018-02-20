@@ -343,7 +343,9 @@ public class Board {
     for (Block[] line : this.grid) {
       String ch = "";
       for (Block c : line) {
-        ch += c.toString();
+        if (c != null) {
+          ch += c.toString();
+        }
       }
       res.add(ch);
     }

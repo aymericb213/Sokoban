@@ -23,6 +23,7 @@ public class Main {
 		int nbMaps = new File("sokoban/maps").list().length;
 		int nbMoves = 0;
 		int nextMapNb = 0;
+    int state = 1;
     String gContinue = "O";
     Board b= new Board();
 		Scanner sc= new Scanner(System.in);
@@ -48,8 +49,9 @@ public class Main {
 			System.out.println("\033[H\033[2J");
       map.readingMap();
       b.createGrid(map.getMap());
-      new Interface(b);
+      //new Interface(b);
   		while (!b.isFinished()) {
+        state = 1;
   			System.out.println("================ SOKOBAN =================\n");
   			System.out.println("Niveau " + map.getFile().substring(lenPrint - 5, lenPrint - 4)+"\n");
   			System.out.println("\n" + b.toString());
@@ -57,12 +59,19 @@ public class Main {
   			System.out.println(". : objectif");
   			System.out.println("$ : caisse (* si placée sur un objectif)");
   			System.out.println("@ : joueur (+ si placé sur un objectif)");
-  			System.out.println("\nz,q,s,d : déplacer joueur             Save : sauvegarder             e : quitter");
+  			System.out.println("\nz,q,s,d : déplacer joueur    Save : sauvegarder    l : charger    e : quitter");
   			String input=sc.nextLine();
   			ArrayList<Integer> nextMove = new ArrayList<>();
 				if (input.equals("E") || input.equals("e")) {
 					break end;
 				}
+        if (input.equals("L") || input.equals("l")) {
+          map.setFile("sokoban/maps/save.xsb");
+          map.readingMap();
+          b.createGrid(map.getMap());
+
+          break;
+        }
         if (input.equals("Save") || input.equals("save")) {
           Save save = new Save (b.createArrayList());
           save.saveMap();
@@ -96,34 +105,39 @@ public class Main {
   			System.out.println("\033[H\033[2J");
   		}
       System.out.println(b.toString());
-  		boolean win = true;
+
   		for(Block c : b.listCrate) {
   			if (((Crate)c).deadLock){
   				System.out.println("Game Over (plus de mouvement possible) appuyez sur 'entrer' pour recommencer ou e pour quitter");
 					String input2 = sc.nextLine();
 					if (input2.equals("")) {
-  				win=false;
+  				state = 0;
   				break;
 					}
 					if (input2.equals("E") || input2.equals("e")) {
 						break end;
 					}
   			}
+        if (!((Crate)c).placed) {
+          System.out.println("ok");
+          state = 2;
+        }
   		}
-  		if (win){
+      System.out.println(state);
+  		if (state == 1){
   			System.out.println("Niveau terminé en " + nbMoves + " déplacements");
         nbMoves = 0;
         System.out.println("Lancer le prochain niveau ? (O/N)");
         String input2 = sc.nextLine();
         if (input2.equals("O") || input2.equals("o")) {
-          if (args[0].equals("-r")) {
+          if (args.length > 0 && args[0].equals("-r")) {
     				int temp = r.nextInt(nbMaps)+1;
 						map.setFile("sokoban/maps/map" + temp + ".xsb");
           } else {
             nextMapNb++;
-            if (nextMapNb > nbMaps) {
+            if (nextMapNb+1 > nbMaps) {
               System.out.println("Il n'y a plus de map disponible");
-							break;
+							break end;
             } else {
               map.setFile("sokoban/maps/map" + nextMapNb + ".xsb");
             }
