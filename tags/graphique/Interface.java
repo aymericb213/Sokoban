@@ -4,6 +4,7 @@ package graphique;
 import javax.swing.*;
 import javax.swing.event.*;
 import java.awt.*;
+import java.awt.Image.*;
 import java.awt.event.*;
 import sokoban.*;
 
@@ -15,24 +16,33 @@ public class Interface extends JFrame {
     this.b = b;
     Container cont = this.getContentPane();
 
-    GridBagLayout gridbag = new GridBagLayout();
-    GridBagConstraints c = new GridBagConstraints();
-    setLayout(gridbag);
-
     JPanel zoneControl = new JPanel();
-    JButton bPlay = new JButton("Play");
-    bPlay.setPreferredSize(new Dimension(10, 100));
-    JButton bChangeMap = new JButton("Change Map");
+    JButton bReset = new JButton("Restart");
+    JButton bSave = new JButton("Save");
+    JButton bLoad = new JButton("Load");
+    JButton bCancel = new JButton("Cancel");
     JButton bQuit = new JButton("Quit");
+    bQuit.addActionListener(new ActionListener () {
+        public void actionPerformed(ActionEvent e){
+            Interface.this.dispose();
+        }
+    });
 
-    this.setLayout(new GridLayout(1,2));
-    zoneControl.setLayout(new GridLayout(3,1));
+    this.setLayout(new GridBagLayout());
+    GridBagConstraints gc = new GridBagConstraints();
 
-    zoneControl.setSize(50,100);
-    zoneControl.add(bPlay);
-    zoneControl.add(bChangeMap);
+    zoneControl.setLayout(new GridLayout(5,1,10,10));
+
+    zoneControl.add(bReset);
+    zoneControl.add(bSave);
+    zoneControl.add(bLoad);
+    zoneControl.add(bCancel);
     zoneControl.add(bQuit);
+
+    gc.gridx = 0;
+		gc.gridy = 0;
     cont.add(new CanvasGame(this.b));
+    gc.gridx = 1;
     cont.add(zoneControl);
     pack();
 
