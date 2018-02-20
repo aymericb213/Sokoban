@@ -32,6 +32,26 @@ public class Node {
 		this.y=y;
 	}
 
+	@Override
+	public int hashCode() {
+		int code=9;
+		code+=37*code+this.x;
+		code+=37*code+this.y;
+		return code;
+	}
+
+	@Override
+	public boolean equals(Object o) {
+		if (o==this) {
+			return true;
+		}
+		if (!(o instanceof Node)) {
+			return false;
+		}
+		Node n = (Node)o;
+		return this.x==n.x && this.y==n.y;
+	}
+
 /**
 	* Accesseur de l'ordonnée du noeud.
 	* @return La valeur de x.

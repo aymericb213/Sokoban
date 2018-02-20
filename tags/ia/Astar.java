@@ -41,12 +41,13 @@ public class Astar {
 		while (!(this.waitingList.isEmpty())) {
 
 			System.out.println("nouveau tour");
-
 			Node current= minimumCost(evals.getFullMap());
-			if (current==this.goal) {
+			System.out.println(current);
+			System.out.println(this.goal);
+			if (current.equals(this.goal)) {
 
 				System.out.println("current==goal");
-
+				this.goal=current;
 				return buildFullPath();
 			}
 			this.waitingList.remove(current);
@@ -62,20 +63,6 @@ public class Astar {
 				double testG = evals.currentDist(this.start,current) + 1.0;//distance au départ du noeud courant + distance du voisin au noeud courant (toujours 1)
 				System.out.println(n + " = " + evals.getExplMap().get(n));
 				System.out.println(evals.getExplMap());
-				/* evals.getExplMap().get(n) retourne null peut etre a cause du fait que exploredMap soit un hashmap */
-				/* ça retourne null car la clef n n'est pas trouvé */
-				/* on peut pas donné un objet en tant que clef apparamant */
-
-				/* solution : peut etre rajouter une clef aux noeuds
-											ou utiliser les positions concatenée comme clef du dico exploredMap*/
-
-				/* Le vrai problème est que les adresses mémoire diffèrent : l'instance en HashMap est créée par initMap() et les
-				noeuds parcourus par A* sont des instances différentes de celle-ci.
-
-				/* Solution : override equals() pour Node pour que l'égalité ne corresponde plus à une identité d'adresse.
-				Ainsi, quand le get va regarder dans la HashMap, il utilisera notre façon de comparer pour trouver la clé.
-				Cela soulève une autre question : prend-on en compte l'attribut pred en plus de x et y pour la comparaison ?*/
-
 				if (testG>=evals.getExplMap().get(n)) {
 					continue;
 				} else {
@@ -132,6 +119,7 @@ public class Astar {
 			System.out.println(n.toString());
 			n=n.getPred();
 		}
+		System.out.println(n.toString());
 		return n;
 	}
 
