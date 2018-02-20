@@ -22,6 +22,8 @@ public class CanvasGame extends Canvas {
     this.freeTile = Toolkit.getDefaultToolkit().getImage("graphique/images/sol2.png");
     this.player = Toolkit.getDefaultToolkit().getImage("graphique/images/personnage.png");
     this.star = Toolkit.getDefaultToolkit().getImage("graphique/images/star.png");
+    int[] size = b.getSize();
+    setSize(40*size[1],40*size[0]);
     setBackground(Color.white);
   }
 
@@ -36,21 +38,28 @@ public class CanvasGame extends Canvas {
         if (grid[j][i] != null) {
           if (grid[j][i].toString().equals("#")) {
             g.drawImage(this.wall,taille*i,taille*j,taille,taille,this);
+
           } else if (grid[j][i].toString().equals("$")) {
             g.drawImage(this.crate,taille*i,taille*j,taille,taille,this);
+
           } else if (grid[j][i].toString().equals(" ")) {
             g.drawImage(this.freeTile,taille*i,taille*j,taille,taille,this);
+
           } else if (grid[j][i].toString().equals("@")) {
             g.drawImage(this.freeTile,taille*i,taille*j,taille,taille,this);
             g.drawImage(this.player,taille*i,taille*j,taille,taille,this);
+
           } else if (grid[j][i].toString().equals("*")) {
             g.drawImage(this.crate,taille*i,taille*j,taille,taille,this);
             g.drawImage(this.star,taille*i+tailleStar/2,taille*j+tailleStar/2,tailleStar,tailleStar,this);
+
           } else if (grid[j][i].toString().equals("+")) {
             g.drawImage(this.player,taille*i,taille*j,taille,taille,this);
+
           } else if (grid[j][i].toString().equals(".")) {
             g.drawImage(this.freeTile,taille*i,taille*j,taille,taille,this);
             g.drawImage(this.star,taille*i+tailleStar/2,taille*j+tailleStar/2,tailleStar,tailleStar,this);
+
           }
         } else {
           g.drawImage(this.freeTile,taille*i,taille*j,taille,taille,this);
