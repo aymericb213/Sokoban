@@ -15,6 +15,7 @@ public class Interface extends JFrame {
 
   public Interface(Board b) {
     this.b = b;
+    this.setLocationRelativeTo(null);
     Container cont = this.getContentPane();
 
     JPanel zoneControl = new JPanel();
@@ -53,12 +54,12 @@ public class Interface extends JFrame {
     gc.gridx = 1;
     cont.add(zoneControl);
     pack();
-
+    /*
     this.addKeyListener(new KeyListener () {
       public void keyTyped(KeyEvent e) {
         System.out.println(">" + e.getKeyChar());
       }
-    });
+    });*/
 
     this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     this.setVisible(true);
