@@ -59,6 +59,22 @@ public class Crate extends Block {
 	}
 
 	/**
+		* Accesseur de l'ordonnée de la caisse.
+		* @return La valeur de x.
+		*/
+		public int getX() {
+			return this.x;
+		}
+
+	/**
+		* Accesseur de l'abscisse de la caisse.
+		* @return La valeur de y.
+		*/
+		public int getY() {
+			return this.y;
+		}
+
+	/**
 		* Retourne la représentation de la caisse.
 		* @return Un caractère représentant la caisse et son état (placée sur un objectif ou non).
 	*/

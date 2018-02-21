@@ -15,14 +15,13 @@ public class Main {
 		* à l'aide d'un algorithme de recherche de chemin.
 	*/
 	public static void main(String[] args) throws IOException, InterruptedException {
-		MapReader map = new MapReader("ia/testmaps/playermove.xsb");
+		MapReader map = new MapReader("ia/testmaps/cratemove.xsb");
 		map.readingMap();
 		Board b= new Board();
 		b.createGrid(map.getMap());
 		System.out.println(b);
 
 		Astar algo=new Astar();
-
 		Player p = (Player)b.getPlayer();
 		Node start = new Node(p.getX(), p.getY());
 
@@ -30,26 +29,23 @@ public class Main {
 		Node goal = new Node(o.getX(), o.getY());
 
 		algo.setLevel(b);
+		ArrayList<Node[]> test=algo.createPairs();
+		System.out.println(test);
 		algo.setStart(start);
 		algo.setGoal(goal);
-
-		ArrayList<Node> path = algo.pathSearch();
-		if (path==null) {
-			System.out.println("Aucun chemin possible vers " + goal);
-		} else {
-		System.out.println(path);
+		algo.pathSearch();
 		int iter=0;
-		for (int i=1; i<path.size(); i++) {
+		for (int i=1; i<algo.getPath().size(); i++) {
 			iter++;
-			Thread.sleep(500);
+			Thread.sleep(250);
 			ArrayList<Integer> nextMove = new ArrayList<>();
-			nextMove.add(path.get(i).getX()-p.getX());
-			nextMove.add(path.get(i).getY()-p.getY());
+			nextMove.add(algo.getPath().get(i).getX()-p.getX());
+			nextMove.add(algo.getPath().get(i).getY()-p.getY());
 			p.move(b,nextMove);
 			System.out.println("\033[H\033[2J");
 			System.out.println(b);
 			System.out.println("itération " + iter);
 		}
-		}
+		System.out.println(algo);
 	}
 }

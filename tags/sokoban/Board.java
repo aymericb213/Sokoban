@@ -382,8 +382,8 @@ public class Board {
 	*/
 	public int[] getSize() {
 		int[] tab= new int[2];
-		tab[0]=this.grid.length;
-		tab[1]=this.grid[0].length;
+		tab[0]=this.grid[0].length;
+		tab[1]=this.grid.length;
 		return tab;
 	}
 

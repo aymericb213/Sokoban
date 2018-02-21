@@ -14,8 +14,8 @@ public class Astar {
 	private ArrayList<Node> neighboursList;
 	private Node start;
 	private Node goal;
-	private String path;
 	private Board level;
+	private ArrayList<Node> path;
 
 /**
 	* Constructeur de la classe.
@@ -23,7 +23,7 @@ public class Astar {
 	public Astar() {
 		this.exploredList = new ArrayList<Node>();
 		this.waitingList = new ArrayList<Node>();
-		this.path="";
+		this.path=new ArrayList<Node>();
 		this.start=new Node(0,0);
 		this.goal=new Node(0,0);
 		this.level=new Board();
@@ -31,10 +31,10 @@ public class Astar {
 
 /**
 	* Algorithme A*.
-	* @return
 */
-	public ArrayList<Node> pathSearch() {//passer en String une fois A* fonctionnel
+	public void pathSearch() {
 		PathCost evals= new PathCost();
+		boolean pathFound=false;
 		this.waitingList.add(this.start);
 		evals.setExplMap(evals.initMap(this.level.getSize()));
 		evals.setFullMap(evals.initMap(this.level.getSize()));
@@ -49,7 +49,9 @@ public class Astar {
 			if (current.equals(this.goal)) {
 				System.out.println("current==goal");
 				this.goal=current;
-				return buildFullPath();
+				pathFound=true;
+				buildFullPath();
+				break;
 			}
 			this.waitingList.remove(current);
 			this.exploredList.add(current);
@@ -74,7 +76,9 @@ public class Astar {
 				}
 			}
 		}
-		return null;
+		if (!(pathFound)) {
+		System.out.println("Aucun chemin possible vers " + this.goal);
+		}
 	}
 
 /**
@@ -119,18 +123,37 @@ public class Astar {
 
 /**
 	* Reconstruit le chemin optimal du noeud de départ au noeud d'arrivée d'A*.
-	* @return
 */
-	public ArrayList<Node> buildFullPath() {//passer en String une fois A* fonctionnel
+	public void buildFullPath() {
 		Node n=this.goal;
-		ArrayList<Node> fullPath = new ArrayList<Node>();
 		System.out.println(n.toString());
 		while (n!=this.start) {
-			fullPath.add(0,n);
+			path.add(0,n);
 			n=n.getPred();
 		}
-		fullPath.add(0,this.start);
-		return fullPath;
+		path.add(0,this.start);
+	}
+
+	public ArrayList<Node[]> createPairs() {
+		ArrayList<Node[]> pairsList= new ArrayList<>();
+		for (Block c : this.level.getCrates()) {
+			int min=10000;
+			Node minObj=this.goal;
+			for (Block o : this.level.getObjectives()) {
+				this.start=new Node(((Crate)c).getX(),((Crate)c).getY());
+				this.goal=new Node(((Objective)o).getX(),((Objective)o).getY());
+				pathSearch();
+				if (this.path.size()<min) {
+					min=this.path.size();
+					minObj=this.goal;
+				}
+			}
+			Node[] pair= new Node[2];
+			pair[0]=this.start;
+			pair[1]=minObj;
+			pairsList.add(pair);
+		}
+		return pairsList;
 	}
 
 /**
@@ -155,6 +178,10 @@ public class Astar {
 */
 	public Board getLevel() {
 		return this.level;
+	}
+
+	public ArrayList<Node> getPath() {
+		return this.path;
 	}
 
 /**
@@ -182,5 +209,28 @@ public class Astar {
 */
 	public void setLevel(Board newBoard) {
 		this.level=newBoard;
+	}
+
+	public String toString() {
+		String res="";
+		for (int i=0; i+1<this.path.size(); i++) {
+			String ch="";
+			int diffX=this.path.get(i+1).getX()-this.path.get(i).getX();
+			int diffY=this.path.get(i+1).getY()-this.path.get(i).getY();
+			if (diffX==-1) {
+				ch="u";
+			} else if (diffX==1) {
+				ch="d";
+			} else if (diffY==-1) {
+				ch="l";
+			} else if (diffY==1) {
+				ch="r";
+			}
+			if (this.level.getGrid()[this.path.get(i+1).getX()][this.path.get(i+1).getY()] instanceof Crate) {
+				ch.toUpperCase();
+			}
+			res+=ch;
+		}
+		return res;
 	}
 }

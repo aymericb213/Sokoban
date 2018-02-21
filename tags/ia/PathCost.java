@@ -29,7 +29,6 @@ public class PathCost {
 	* @return La distance au départ.
 */
 	public double currentDist(Node start, Node n) {
-		/* j'ai rajouté || n==null */
 		if (n==start || n==null) {
 			return 0.;
 		} else {

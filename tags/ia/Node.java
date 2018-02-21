@@ -32,6 +32,11 @@ public class Node {
 		this.y=y;
 	}
 
+	/**
+		* Surcharge de hashCode().
+		* Nécessaire au bon fonctionnement de la surcharge d'equals.
+		* @return Le hashcode de l'objet.
+	*/
 	@Override
 	public int hashCode() {
 		int code=9;
@@ -40,6 +45,13 @@ public class Node {
 		return code;
 	}
 
+	/**
+		* Surcharge de equals.
+		* Prend en compte l'égalité de coordonnées.
+		* @param o
+		* L'objet à comparer au noeud.
+		* @return Le résultat du test d'égalité.
+	*/
 	@Override
 	public boolean equals(Object o) {
 		if (o==this) {
