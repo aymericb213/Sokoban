@@ -13,7 +13,7 @@ public class Save {
 
   public Save(ArrayList<String> mapToSave, String name) {
     this.map = mapToSave;
-    this.path = "sokoban/maps/"+name+".xsb";
+    this.path = "maps/"+name+".xsb";
   }
 
   public void saveMap () {

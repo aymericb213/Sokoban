@@ -39,7 +39,7 @@ public class Board {
   }
 
 	/**
-		* Teste si une caisse est bloquée.
+		* Teste si une caisse est bloquée, c'est-à-dire qu'elle ne peut pas être déplacée directement..
 		* @param c
 		* La caisse en [j,i].
 		* @param i

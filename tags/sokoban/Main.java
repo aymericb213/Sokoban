@@ -19,7 +19,7 @@ public class Main {
 	* - si l'argument est -r, un niveau est choisi au hasard.
 	*/
   public static void main (String[] args) throws IOException {
-		int nbMaps = new File("sokoban/maps").list().length;
+		int nbMaps = new File("maps").list().length;
 		int nbMoves = 0;
 		int nextMapNb = 0;
     int state = 1;
@@ -31,16 +31,16 @@ public class Main {
 		if (args.length>0) {
 			if (args[0].equals("-r")) {
 				int n = r.nextInt(nbMaps)+1;
-				map.setFile("sokoban/maps/map" + n + ".xsb");
+				map.setFile("maps/map" + n + ".xsb");
 			} else if (args[0].equals("-l")) {
-        map.setFile("sokoban/maps/save.xsb");
+        map.setFile("maps/save.xsb");
       }
       else {
 				nextMapNb = Integer.parseInt(args[0]);
-				map.setFile("sokoban/maps/map" + args[0] + ".xsb");
+				map.setFile("maps/map" + args[0] + ".xsb");
 			}
 		} else {
-			map.setFile("sokoban/maps/map1.xsb");
+			map.setFile("maps/map1.xsb");
 		}
 		end :
     while (gContinue.equals("O") || gContinue.equals("o")) {
@@ -64,7 +64,7 @@ public class Main {
 					break end;
 				}
         if (input.equals("L") || input.equals("l")) {
-          map.setFile("sokoban/maps/save.xsb");
+          map.setFile("maps/save.xsb");
           map.readingMap();
           b.createGrid(map.getMap());
 
@@ -78,7 +78,7 @@ public class Main {
           continue;
         }
         if (input.equals("A") || input.equals("a")) {
-          map.setFile("sokoban/maps/cancel.xsb");
+          map.setFile("maps/cancel.xsb");
           map.readingMap();
           b.createGrid(map.getMap());
         }
@@ -137,14 +137,14 @@ public class Main {
         if (input2.equals("O") || input2.equals("o")) {
           if (args.length > 0 && args[0].equals("-r")) {
     				int temp = r.nextInt(nbMaps)+1;
-						map.setFile("sokoban/maps/map" + temp + ".xsb");
+						map.setFile("maps/map" + temp + ".xsb");
           } else {
             nextMapNb++;
             if (nextMapNb+2 > nbMaps) {
               System.out.println("Il n'y a plus de map disponible");
 							break end;
             } else {
-              map.setFile("sokoban/maps/map" + nextMapNb + ".xsb");
+              map.setFile("maps/map" + nextMapNb + ".xsb");
             }
           }
         }
