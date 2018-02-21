@@ -54,6 +54,12 @@ public class Interface extends JFrame {
     cont.add(zoneControl);
     pack();
 
+    this.addKeyListener(new KeyListener () {
+      public void keyTyped(KeyEvent e) {
+        System.out.println(">" + e.getKeyChar());
+      }
+    });
+
     this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     this.setVisible(true);
 
