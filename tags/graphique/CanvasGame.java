@@ -19,7 +19,7 @@ public class CanvasGame extends Canvas {
     this.b = b;
     this.crate = Toolkit.getDefaultToolkit().getImage("graphique/images/caisse.png");
     this.wall = Toolkit.getDefaultToolkit().getImage("graphique/images/mur.jpg");
-    this.freeTile = Toolkit.getDefaultToolkit().getImage("graphique/images/sol2.png");
+    this.freeTile = Toolkit.getDefaultToolkit().getImage("graphique/images/sol.png");
     this.player = Toolkit.getDefaultToolkit().getImage("graphique/images/perso.png");
     this.star = Toolkit.getDefaultToolkit().getImage("graphique/images/star.png");
     int[] size = b.getSize();

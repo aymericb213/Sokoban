@@ -18,6 +18,7 @@ public class Interface extends JFrame {
     this.b = b;
     this.setLocationRelativeTo(null);
     this.setResizable(false);
+    this.setTitle("Sokoban");
 
     JPanel zoneControl = new JPanel();
     JButton bReset = new JButton("Restart");
