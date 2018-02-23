@@ -6,6 +6,7 @@ import javax.swing.event.*;
 import java.awt.*;
 import java.awt.Image.*;
 import java.awt.event.*;
+import java.awt.event.KeyEvent;
 import sokoban.*;
 import java.io.*;
 
@@ -16,11 +17,12 @@ public class Interface extends JFrame {
   public Interface(Board b) {
     this.b = b;
     this.setLocationRelativeTo(null);
-    Container cont = this.getContentPane();
+    this.setResizable(false);
 
     JPanel zoneControl = new JPanel();
     JButton bReset = new JButton("Restart");
     JButton bSave = new JButton("Save");
+
     bSave.addActionListener(new ActionListener () {
       public void actionPerformed(ActionEvent e) {
         Save save = new Save(b.createArrayList(),"save");
@@ -50,16 +52,24 @@ public class Interface extends JFrame {
 
     gc.gridx = 0;
 		gc.gridy = 0;
-    cont.add(new CanvasGame(this.b));
+    CanvasGame can = new CanvasGame(this.b);
+    can.setFocusable(false);
+    add(can);
     gc.gridx = 1;
-    cont.add(zoneControl);
+    add(zoneControl);
+    KeyAction key =  new KeyAction ();
+    this.setFocusable(true);
+
+    addKeyListener(key);
+    bReset.addKeyListener(key);
+    bSave.addKeyListener(key);
+    bLoad.addKeyListener(key);
+    bCancel.addKeyListener(key);
+    bQuit.addKeyListener(key);
+
+
     pack();
-    /*
-    this.addKeyListener(new KeyListener () {
-      public void keyTyped(KeyEvent e) {
-        System.out.println(">" + e.getKeyChar());
-      }
-    });*/
+
 
     this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     this.setVisible(true);
