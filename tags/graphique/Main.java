@@ -9,7 +9,7 @@ public class Main {
 
       Board b = new Board();
       MapReader map = new MapReader("");
-      map.setFile("maps/map1.xsb");
+      map.setFile("maps/map8.xsb");
       map.readingMap();
       b.createGrid(map.getMap());
       Interface fen = new Interface(b);

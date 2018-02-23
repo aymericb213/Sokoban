@@ -57,7 +57,7 @@ public class Interface extends JFrame {
     add(can);
     gc.gridx = 1;
     add(zoneControl);
-    KeyAction key =  new KeyAction ();
+    KeyAction key =  new KeyAction (this.b,can);
     this.setFocusable(true);
 
     addKeyListener(key);

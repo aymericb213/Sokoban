@@ -20,11 +20,19 @@ public class CanvasGame extends Canvas {
     this.crate = Toolkit.getDefaultToolkit().getImage("graphique/images/caisse.png");
     this.wall = Toolkit.getDefaultToolkit().getImage("graphique/images/mur.jpg");
     this.freeTile = Toolkit.getDefaultToolkit().getImage("graphique/images/sol2.png");
-    this.player = Toolkit.getDefaultToolkit().getImage("graphique/images/personnage.png");
+    this.player = Toolkit.getDefaultToolkit().getImage("graphique/images/perso.png");
     this.star = Toolkit.getDefaultToolkit().getImage("graphique/images/star.png");
     int[] size = b.getSize();
     setSize(40*size[0],40*size[1]);
     setBackground(Color.white);
+  }
+
+  public void setPlayer (String image) {
+    this.player = Toolkit.getDefaultToolkit().getImage(image);
+  }
+
+  public void update() {
+    repaint();
   }
 
   @Override
@@ -54,6 +62,7 @@ public class CanvasGame extends Canvas {
             g.drawImage(this.star,taille*j+tailleStar/2,taille*i+tailleStar/2,tailleStar,tailleStar,this);
 
           } else if (grid[i][j].toString().equals("+")) {
+            g.drawImage(this.freeTile,taille*j,taille*i,taille,taille,this);
             g.drawImage(this.player,taille*j,taille*i,taille,taille,this);
 
           } else if (grid[i][j].toString().equals(".")) {

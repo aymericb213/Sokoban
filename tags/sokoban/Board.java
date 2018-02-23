@@ -21,6 +21,73 @@ public class Board {
 		this.listObjective = new ArrayList<>();
   }
 
+  /**
+  * Accesseur de la liste de caisses.
+  * @return La valeur de l'attribut listCrate.
+  */
+  public ArrayList<Block> getCrates() {
+    return this.listCrate;
+  }
+
+  /**
+  * Accesseur de la liste d'objectifs.
+  * @return La valeur de l'attribut listObjective.
+  */
+  public ArrayList<Block> getObjectives(){
+    return this.listObjective;
+  }
+
+  /**
+  * Accesseur des coordonnées du joueur.
+  * @return La valeur de l'attribut listObjective.
+  */
+  public Block getPlayer() {
+    return this.player;
+  }
+
+  public Block[][] getGrid() {
+    return this.grid;
+  }
+
+  /**
+  * Calcule les dimensions du niveau à partir de l'ArrayList obtenue en lisant un fichier .xsb.
+  * Nécessaire à l'initialisation de l'attribut grid.
+  * @param mapToString
+  * Le tableau résultant de la lecture du fichier .xsb correspondant au niveau.
+  * @return Un tableau de 2 entiers de type [largeur, hauteur].
+  */
+  public int[] getSize(ArrayList<String> map) {
+    int[] size = new int[2];
+    int maxHeight = 0;
+    int maxWidth = 0;
+    for (String line : map) {
+      String[] s = line.split("");
+      maxHeight += 1;
+      int widthTemp = 0;
+      for (String ch : s) {
+        widthTemp += 1;
+      }
+      if (widthTemp>maxWidth) {
+        maxWidth = widthTemp;
+      }
+    }
+    size[0] = maxHeight;
+    size[1] = maxWidth;
+    return size;
+  }
+
+  /**
+  * Retourne les dimensions de grid.
+  * Méthode sans argument pour faciliter l'utilisation dans le package ia.
+  * @return Un tableau contenant la largeur et la hauteur de grid.
+  */
+  public int[] getSize() {
+    int[] tab= new int[2];
+    tab[0]=this.grid[0].length;
+    tab[1]=this.grid.length;
+    return tab;
+  }
+
 	/**
 		* Retourne la représentation du niveau affichée en console.
 		* @return La chaîne de caractère représentant le niveau.
@@ -220,6 +287,7 @@ public class Board {
     return false;
   }
 
+
 	/**
 		* Teste si une caisse est bloquée par une autre le long d'un mur.
 		* Exemple : <p>$$<br>##</p>
@@ -348,70 +416,4 @@ public class Board {
     return res;
   }
 
-	/**
-		* Calcule les dimensions du niveau à partir de l'ArrayList obtenue en lisant un fichier .xsb.
-		* Nécessaire à l'initialisation de l'attribut grid.
-		* @param mapToString
-		* Le tableau résultant de la lecture du fichier .xsb correspondant au niveau.
-		* @return Un tableau de 2 entiers de type [largeur, hauteur].
-	*/
-	public int[] getSize(ArrayList<String> map) {
-		int[] size = new int[2];
-    int maxHeight = 0;
-    int maxWidth = 0;
-    for (String line : map) {
-			String[] s = line.split("");
-      maxHeight += 1;
-      int widthTemp = 0;
-      for (String ch : s) {
-        widthTemp += 1;
-      }
-      if (widthTemp>maxWidth) {
-        maxWidth = widthTemp;
-      }
-    }
-    size[0] = maxHeight;
-    size[1] = maxWidth;
-    return size;
-  }
-
-	/**
-		* Retourne les dimensions de grid.
-		* Méthode sans argument pour faciliter l'utilisation dans le package ia.
-		* @return Un tableau contenant la largeur et la hauteur de grid.
-	*/
-	public int[] getSize() {
-		int[] tab= new int[2];
-		tab[0]=this.grid[0].length;
-		tab[1]=this.grid.length;
-		return tab;
-	}
-
-	/**
-		* Accesseur de la liste de caisses.
-		* @return La valeur de l'attribut listCrate.
-	*/
-  public ArrayList<Block> getCrates() {
-    return this.listCrate;
-  }
-
-	/**
-		* Accesseur de la liste d'objectifs.
-		* @return La valeur de l'attribut listObjective.
-	*/
-  public ArrayList<Block> getObjectives(){
-    return this.listObjective;
-  }
-
-	/**
-		* Accesseur des coordonnées du joueur.
-		* @return La valeur de l'attribut listObjective.
-	*/
-	public Block getPlayer() {
-	return this.player;
-	}
-
-	public Block[][] getGrid() {
-    return this.grid;
-  }
 }
