@@ -13,10 +13,12 @@ public class KeyAction extends KeyAdapter {
 
   private Board b;
   private CanvasGame can;
+  private boolean isDab;
 
   public KeyAction (Board b,CanvasGame can) {
     this.b = b;
     this.can = can;
+    this.isDab = false;
   }
 
   @Override
@@ -42,8 +44,9 @@ public class KeyAction extends KeyAdapter {
     } else if (e.getKeyCode() == KeyEvent.VK_DOWN) {
       nextMove.add(1);
       nextMove.add(0);
-    } else if (e.getKeyCode() == KeyEvent.VK_SPACE) {
+    } else if (!this.isDab && e.getKeyCode() == KeyEvent.VK_D) {
       this.can.setPlayer("graphique/images/persoDab.png");
+      this.isDab = true;
       this.can.update();
     }
 
@@ -55,9 +58,10 @@ public class KeyAction extends KeyAdapter {
 
   @Override
   public void keyReleased(KeyEvent e) {
-    if (e.getKeyCode() == KeyEvent.VK_SPACE) {
+    if (e.getKeyCode() == KeyEvent.VK_D) {
       this.can.setPlayer("graphique/images/perso.png");
       this.can.update();
+      this.isDab = false;
     }
   }
 
