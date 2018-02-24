@@ -31,7 +31,7 @@ public class Interface extends JFrame {
       public void actionPerformed(ActionEvent e) {
         Interface.this.b.createGrid(Interface.this.map.getMap());
         Interface.this.b.setPartyFinished(false);
-        Interface.this.can.setPlayer("graphique/images/perso.png"); 
+        Interface.this.can.setPlayer("graphique/images/perso.png");
         Interface.this.can.update();
       }
     });
@@ -49,9 +49,10 @@ public class Interface extends JFrame {
 
     bLoad.addActionListener(new ActionListener () {
       public void actionPerformed(ActionEvent e) {
-        Interface.this.map.setFile("maps/save.xsb");
-        Interface.this.map.readingMap();
-        Interface.this.b.createGrid(Interface.this.map.getMap());
+        MapReader mapLoad = new MapReader("");
+        mapLoad.setFile("maps/save.xsb");
+        mapLoad.readingMap();
+        Interface.this.b.createGrid(mapLoad.getMap());
         Interface.this.can.update();
       }
     });
