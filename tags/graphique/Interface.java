@@ -30,6 +30,8 @@ public class Interface extends JFrame {
     bReset.addActionListener(new ActionListener () {
       public void actionPerformed(ActionEvent e) {
         Interface.this.b.createGrid(Interface.this.map.getMap());
+        Interface.this.b.setPartyFinished(false);
+        Interface.this.can.setPlayer("graphique/images/perso.png"); 
         Interface.this.can.update();
       }
     });

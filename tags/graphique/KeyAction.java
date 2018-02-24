@@ -21,6 +21,12 @@ public class KeyAction extends KeyAdapter {
     this.isDab = false;
   }
 
+  public void movePlayer (ArrayList<Integer> nextMove) {
+    Player player = ((Player)b.getPlayer());
+    player.move(b,nextMove);
+    this.can.update();
+  }
+
   @Override
   public void keyTyped(KeyEvent e) {
 
@@ -29,32 +35,38 @@ public class KeyAction extends KeyAdapter {
   @Override
   public void keyPressed(KeyEvent e) {
 
-    ArrayList<Integer> nextMove = new ArrayList<>();
-    Player player = ((Player)b.getPlayer());
+    if (!this.b.getPartyFinished()) {
+      ArrayList<Integer> nextMove = new ArrayList<>();
 
-    if (e.getKeyCode() == KeyEvent.VK_LEFT) {
-      nextMove.add(0);
-      nextMove.add(-1);
-    } else if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
-      nextMove.add(0);
-      nextMove.add(1);
-    } else if (e.getKeyCode() == KeyEvent.VK_UP) {
-      nextMove.add(-1);
-      nextMove.add(0);
-    } else if (e.getKeyCode() == KeyEvent.VK_DOWN) {
-      nextMove.add(1);
-      nextMove.add(0);
-    } else if (!this.isDab && e.getKeyCode() == KeyEvent.VK_D) {
-      this.can.setPlayer("graphique/images/persoDab.png");
-      this.isDab = true;
-      this.can.update();
-    }
+      if (e.getKeyCode() == KeyEvent.VK_LEFT) {
+        nextMove.add(0);
+        nextMove.add(-1);
+      } else if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
+        nextMove.add(0);
+        nextMove.add(1);
+      } else if (e.getKeyCode() == KeyEvent.VK_UP) {
+        nextMove.add(-1);
+        nextMove.add(0);
+      } else if (e.getKeyCode() == KeyEvent.VK_DOWN) {
+        nextMove.add(1);
+        nextMove.add(0);
+      } else if (!this.isDab && e.getKeyCode() == KeyEvent.VK_D) {
+        this.can.setPlayer("graphique/images/persoDab.png");
+        this.isDab = true;
+        this.can.update();
+      }
 
-    if (!nextMove.isEmpty()) {
-      player.move(b,nextMove);
-      Save cancel = new Save (this.b.createArrayList(),"cancel");
-      cancel.saveMap();
-      this.can.update();
+      if (!nextMove.isEmpty()) {
+        this.movePlayer(nextMove);
+        Save cancel = new Save (this.b.createArrayList(),"cancel");
+        cancel.saveMap();
+        if (this.b.isFinished()) {
+          this.b.setPartyFinished(true);
+          if (this.b.allPlaced()) {
+            this.can.setPlayer("graphique/images/persoDab.png");
+          }
+        }
+      }
     }
   }
 

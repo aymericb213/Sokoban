@@ -11,6 +11,7 @@ public class Board {
   protected ArrayList<Block> listCrate;
   protected ArrayList<Block> listObjective;
   protected Block player;
+  private boolean partyFinished;
 
 	/**
 		* Constructeur de la classe.
@@ -19,6 +20,7 @@ public class Board {
   public Board() {
 		this.listCrate = new ArrayList<>();
 		this.listObjective = new ArrayList<>();
+    this.partyFinished = false;
   }
 
   /**
@@ -86,6 +88,20 @@ public class Board {
     tab[0]=this.grid[0].length;
     tab[1]=this.grid.length;
     return tab;
+  }
+
+  /**
+    * Geter de la variable qui indique que la partie est finie.
+    */
+  public boolean getPartyFinished () {
+    return this.partyFinished;
+  }
+
+  /**
+    * Modifie la variable qui indique si la partie est finie.
+    */
+  public void setPartyFinished (boolean bool) {
+    this.partyFinished = bool;
   }
 
 	/**
