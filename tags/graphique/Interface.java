@@ -13,15 +13,27 @@ import java.io.*;
 public class Interface extends JFrame {
 
   private Board b;
+  private MapReader map;
+  private CanvasGame can;
 
-  public Interface(Board b) {
+  public Interface(Board b, MapReader map) {
     this.b = b;
+    this.map = map;
     this.setLocationRelativeTo(null);
     this.setResizable(false);
     this.setTitle("Sokoban");
 
     JPanel zoneControl = new JPanel();
+
     JButton bReset = new JButton("Restart");
+
+    bReset.addActionListener(new ActionListener () {
+      public void actionPerformed(ActionEvent e) {
+        Interface.this.b.createGrid(Interface.this.map.getMap());
+        Interface.this.can.update();
+      }
+    });
+
     JButton bSave = new JButton("Save");
 
     bSave.addActionListener(new ActionListener () {
@@ -32,7 +44,28 @@ public class Interface extends JFrame {
     });
 
     JButton bLoad = new JButton("Load");
+
+    bLoad.addActionListener(new ActionListener () {
+      public void actionPerformed(ActionEvent e) {
+        Interface.this.map.setFile("maps/save.xsb");
+        Interface.this.map.readingMap();
+        Interface.this.b.createGrid(Interface.this.map.getMap());
+        Interface.this.can.update();
+      }
+    });
+
+
     JButton bCancel = new JButton("Cancel");
+
+    bCancel.addActionListener(new ActionListener () {
+        public void actionPerformed(ActionEvent e){
+          Interface.this.map.setFile("maps/cancel.xsb");
+          Interface.this.map.readingMap();
+          Interface.this.b.createGrid(Interface.this.map.getMap());
+          Interface.this.can.update();
+        }
+    });
+
     JButton bQuit = new JButton("Quit");
     bQuit.addActionListener(new ActionListener () {
         public void actionPerformed(ActionEvent e){
@@ -53,12 +86,12 @@ public class Interface extends JFrame {
 
     gc.gridx = 0;
 		gc.gridy = 0;
-    CanvasGame can = new CanvasGame(this.b);
-    can.setFocusable(false);
+    this.can = new CanvasGame(this.b);
+    this.can.setFocusable(false);
     add(can);
     gc.gridx = 1;
     add(zoneControl);
-    KeyAction key =  new KeyAction (this.b,can);
+    KeyAction key =  new KeyAction (this.b, this.can);
     this.setFocusable(true);
 
     addKeyListener(key);

@@ -28,14 +28,18 @@ public class MapReader {
 	/**
 		* Lit le fichier .xsb trouvé avec l'attribut file et en extrait un tableau de chaînes de caractères.
 	*/
-  public void readingMap() throws IOException {
-		BufferedReader map = new BufferedReader (new FileReader (this.file));
-    ArrayList<String> mapToString = new ArrayList<>();
-    String line;
-    while ((line = map.readLine()) != null) {
+  public void readingMap() {
+    try {
+      BufferedReader map = new BufferedReader (new FileReader (this.file));
+      ArrayList<String> mapToString = new ArrayList<>();
+      String line;
+      while ((line = map.readLine()) != null) {
         mapToString.add(line);
+      }
+      this.map = mapToString;
+    } catch (IOException e) {
+      e.printStackTrace();
     }
-    this.map = mapToString;
   }
 
 	/**

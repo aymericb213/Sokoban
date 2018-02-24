@@ -15,7 +15,7 @@ public class KeyAction extends KeyAdapter {
   private CanvasGame can;
   private boolean isDab;
 
-  public KeyAction (Board b,CanvasGame can) {
+  public KeyAction (Board b, CanvasGame can) {
     this.b = b;
     this.can = can;
     this.isDab = false;
@@ -52,6 +52,8 @@ public class KeyAction extends KeyAdapter {
 
     if (!nextMove.isEmpty()) {
       player.move(b,nextMove);
+      Save cancel = new Save (this.b.createArrayList(),"cancel");
+      cancel.saveMap();
       this.can.update();
     }
   }
