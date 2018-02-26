@@ -67,6 +67,8 @@ public class KeyAction extends KeyAdapter {
           this.b.setPartyFinished(true);
           if (this.b.allPlaced()) {
             this.can.setPlayer("graphique/images/persoDab.png");
+          } else {
+            this.can.setPlayer("graphique/images/persoPerdu.png");
           }
         }
       }
@@ -75,7 +77,7 @@ public class KeyAction extends KeyAdapter {
 
   @Override
   public void keyReleased(KeyEvent e) {
-    if (e.getKeyCode() == KeyEvent.VK_D) {
+    if (!this.b.getPartyFinished() && e.getKeyCode() == KeyEvent.VK_D) {
       this.can.setPlayer("graphique/images/perso.png");
       this.can.update();
       this.isDab = false;
