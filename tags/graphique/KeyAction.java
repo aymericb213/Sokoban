@@ -78,8 +78,9 @@ public class KeyAction extends KeyAdapter {
   @Override
   public void keyReleased(KeyEvent e) {
     if (!this.b.getPartyFinished() && e.getKeyCode() == KeyEvent.VK_D) {
+      Player player = ((Player)b.getPlayer());
       this.can.setPlayer("graphique/images/perso.png");
-      this.can.update();
+      this.can.update(player.getY()*this.can.sizeTile,player.getX()*this.can.sizeTile,this.can.sizeTile,this.can.sizeTile);
       this.isDab = false;
     }
   }
