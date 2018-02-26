@@ -9,6 +9,7 @@ import java.awt.event.*;
 import java.awt.event.KeyEvent;
 import sokoban.*;
 import java.io.*;
+import java.util.concurrent.TimeUnit;
 
 public class Interface extends JFrame {
 
@@ -41,6 +42,16 @@ public class Interface extends JFrame {
       public void actionPerformed(ActionEvent e) {
         Save save = new Save(b.createArrayList(),"save");
         save.saveMap();
+        JOptionPane popupSave = new JOptionPane();
+        Timer timer = new Timer(1000,new ActionListener () {
+          public void actionPerformed(ActionEvent e) {
+            popupSave.getRootFrame().dispose();
+          }
+        });
+        timer.start();
+        popupSave.showMessageDialog(null, "Game saved", "Save", JOptionPane.INFORMATION_MESSAGE);
+        timer.stop();
+
       }
     });
 
@@ -53,6 +64,15 @@ public class Interface extends JFrame {
         mapLoad.readingMap();
         Interface.this.b.createGrid(mapLoad.getMap());
         Interface.this.can.update();
+        JOptionPane popupLoad = new JOptionPane();
+        Timer timer = new Timer(1000,new ActionListener () {
+          public void actionPerformed(ActionEvent e) {
+            popupLoad.getRootFrame().dispose();
+          }
+        });
+        timer.start();
+        popupLoad.showMessageDialog(null, "Game loaded", "Load", JOptionPane.INFORMATION_MESSAGE);
+        timer.stop();
       }
     });
 
