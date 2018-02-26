@@ -19,7 +19,6 @@ public class Interface extends JFrame {
   public Interface(Board b, MapReader map) {
     this.b = b;
     this.map = map;
-    this.setLocationRelativeTo(null);
     this.setResizable(false);
     this.setTitle("Sokoban");
 

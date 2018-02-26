@@ -9,6 +9,7 @@ import sokoban.*;
 public class CanvasGame extends Canvas {
 
   private Board b;
+  protected int sizeTile;
   private Image crate;
   private Image wall;
   private Image freeTile;
@@ -22,8 +23,9 @@ public class CanvasGame extends Canvas {
     this.freeTile = Toolkit.getDefaultToolkit().getImage("graphique/images/sol.png");
     this.player = Toolkit.getDefaultToolkit().getImage("graphique/images/perso.png");
     this.star = Toolkit.getDefaultToolkit().getImage("graphique/images/star.png");
-    int[] size = b.getSize();
-    setSize(40*size[0],40*size[1]);
+    this.sizeTile = 40;
+    int[] sizeGrid = b.getSize();
+    setSize(sizeTile*sizeGrid[0],sizeTile*sizeGrid[1]);
     setBackground(Color.white);
   }
 
@@ -35,43 +37,46 @@ public class CanvasGame extends Canvas {
     repaint();
   }
 
+  public void update (int x, int y, int width, int height) {
+    repaint(x,y,width,height);
+  }
+
   @Override
   public void paint(Graphics g) {
     Block[][] grid = b.getGrid();
     int[] size = b.getSize();
-    int taille = 40;
-    int tailleStar = taille/2;
+    int tailleStar = this.sizeTile/2;
     for (int i = 0; i<size[1] ; i++) {
       for (int j = 0; j<size[0]; j++) {
         if (grid[i][j] != null) {
           if (grid[i][j].toString().equals("#")) {
-            g.drawImage(this.wall,taille*j,taille*i,taille,taille,this);
+            g.drawImage(this.wall,this.sizeTile*j,this.sizeTile*i,this.sizeTile,this.sizeTile,this);
 
           } else if (grid[i][j].toString().equals("$")) {
-            g.drawImage(this.crate,taille*j,taille*i,taille,taille,this);
+            g.drawImage(this.crate,this.sizeTile*j,this.sizeTile*i,this.sizeTile,this.sizeTile,this);
 
           } else if (grid[i][j].toString().equals(" ")) {
-            g.drawImage(this.freeTile,taille*j,taille*i,taille,taille,this);
+            g.drawImage(this.freeTile,this.sizeTile*j,this.sizeTile*i,this.sizeTile,this.sizeTile,this);
 
           } else if (grid[i][j].toString().equals("@")) {
-            g.drawImage(this.freeTile,taille*j,taille*i,taille,taille,this);
-            g.drawImage(this.player,taille*j,taille*i,taille,taille,this);
+            g.drawImage(this.freeTile,this.sizeTile*j,this.sizeTile*i,this.sizeTile,this.sizeTile,this);
+            g.drawImage(this.player,this.sizeTile*j,this.sizeTile*i,this.sizeTile,this.sizeTile,this);
 
           } else if (grid[i][j].toString().equals("*")) {
-            g.drawImage(this.crate,taille*j,taille*i,taille,taille,this);
-            g.drawImage(this.star,taille*j+tailleStar/2,taille*i+tailleStar/2,tailleStar,tailleStar,this);
+            g.drawImage(this.crate,this.sizeTile*j,this.sizeTile*i,this.sizeTile,this.sizeTile,this);
+            g.drawImage(this.star,this.sizeTile*j+tailleStar/2,this.sizeTile*i+tailleStar/2,tailleStar,tailleStar,this);
 
           } else if (grid[i][j].toString().equals("+")) {
-            g.drawImage(this.freeTile,taille*j,taille*i,taille,taille,this);
-            g.drawImage(this.player,taille*j,taille*i,taille,taille,this);
+            g.drawImage(this.freeTile,this.sizeTile*j,this.sizeTile*i,this.sizeTile,this.sizeTile,this);
+            g.drawImage(this.player,this.sizeTile*j,this.sizeTile*i,this.sizeTile,this.sizeTile,this);
 
           } else if (grid[i][j].toString().equals(".")) {
-            g.drawImage(this.freeTile,taille*j,taille*i,taille,taille,this);
-            g.drawImage(this.star,taille*j+tailleStar/2,taille*i+tailleStar/2,tailleStar,tailleStar,this);
+            g.drawImage(this.freeTile,this.sizeTile*j,this.sizeTile*i,this.sizeTile,this.sizeTile,this);
+            g.drawImage(this.star,this.sizeTile*j+tailleStar/2,this.sizeTile*i+tailleStar/2,tailleStar,tailleStar,this);
 
           }
         } else {
-          g.drawImage(this.freeTile,taille*j,taille*i,taille,taille,this);
+          g.drawImage(this.freeTile,this.sizeTile*j,this.sizeTile*i,this.sizeTile,this.sizeTile,this);
         }
       }
     }

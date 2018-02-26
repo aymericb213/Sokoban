@@ -23,6 +23,22 @@ public class Player extends Block {
     this.onObjective=onObjective;
   }
 
+  /**
+  	* Accesseur de l'ordonnée du joueur.
+  	* @return La valeur de x.
+  	*/
+  	public int getX() {
+  		return this.x;
+  	}
+
+  /**
+  	* Accesseur de l'abscisse du joueur.
+  	* @return La valeur de y.
+  	*/
+  	public int getY() {
+  		return this.y;
+  	}
+
 	/**
 		* Accesseur permettant de tester si le joueur se trouve sur un objectif.
 		* @return La valeur de l'attribut onObjective.
@@ -149,19 +165,4 @@ public class Player extends Block {
     return b;
   }
 
-/**
-	* Accesseur de l'ordonnée du joueur.
-	* @return La valeur de x.
-	*/
-	public int getX() {
-		return this.x;
-	}
-
-/**
-	* Accesseur de l'abscisse du joueur.
-	* @return La valeur de y.
-	*/
-	public int getY() {
-		return this.y;
-	}
 }

@@ -24,7 +24,9 @@ public class KeyAction extends KeyAdapter {
   public void movePlayer (ArrayList<Integer> nextMove) {
     Player player = ((Player)b.getPlayer());
     player.move(b,nextMove);
-    this.can.update();
+    int minW = Math.min(player.getY()-nextMove.get(1),player.getY()+nextMove.get(1));
+    int minH = Math.min(player.getX()-nextMove.get(0),player.getX()+nextMove.get(0));
+    this.can.update(minW*this.can.sizeTile, minH*this.can.sizeTile, this.can.sizeTile + Math.abs(nextMove.get(1))*this.can.sizeTile*2, this.can.sizeTile + Math.abs(nextMove.get(0))*this.can.sizeTile*2);
   }
 
   @Override
@@ -37,6 +39,7 @@ public class KeyAction extends KeyAdapter {
 
     if (!this.b.getPartyFinished()) {
       ArrayList<Integer> nextMove = new ArrayList<>();
+      Player player = ((Player)b.getPlayer());
 
       if (e.getKeyCode() == KeyEvent.VK_LEFT) {
         nextMove.add(0);
@@ -53,7 +56,7 @@ public class KeyAction extends KeyAdapter {
       } else if (!this.isDab && e.getKeyCode() == KeyEvent.VK_D) {
         this.can.setPlayer("graphique/images/persoDab.png");
         this.isDab = true;
-        this.can.update();
+        this.can.update(player.getY()*this.can.sizeTile,player.getX()*this.can.sizeTile,this.can.sizeTile,this.can.sizeTile);
       }
 
       if (!nextMove.isEmpty()) {
