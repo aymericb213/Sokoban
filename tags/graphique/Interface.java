@@ -126,7 +126,7 @@ public class Interface extends JFrame {
 
     pack();
 
-
+    this.setLocationRelativeTo(null);
     this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     this.setVisible(true);
 

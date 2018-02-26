@@ -355,7 +355,7 @@ public class Board {
         } else {
           test = true;
           for (ArrayList<Integer> coord : listChain) {
-            if (!this.isDead(c,coord.get(1),coord.get(0),true)) {
+            if (!this.isDead(c,coord.get(1),coord.get(0),false)) {
               test = false;
             }
             if (this.hasDeadWall(coord)) {
