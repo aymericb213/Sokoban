@@ -41,19 +41,19 @@ public class KeyAction extends KeyAdapter {
       ArrayList<Integer> nextMove = new ArrayList<>();
       Player player = ((Player)b.getPlayer());
 
-      if (e.getKeyCode() == KeyEvent.VK_LEFT) {
+      if (e.getKeyCode() == KeyEvent.VK_LEFT || e.getKeyCode() == KeyEvent.VK_Q) {
         nextMove.add(0);
         nextMove.add(-1);
-      } else if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
+      } else if (e.getKeyCode() == KeyEvent.VK_RIGHT || e.getKeyCode() == KeyEvent.VK_D) {
         nextMove.add(0);
         nextMove.add(1);
-      } else if (e.getKeyCode() == KeyEvent.VK_UP) {
+      } else if (e.getKeyCode() == KeyEvent.VK_UP || e.getKeyCode() == KeyEvent.VK_Z) {
         nextMove.add(-1);
         nextMove.add(0);
-      } else if (e.getKeyCode() == KeyEvent.VK_DOWN) {
+      } else if (e.getKeyCode() == KeyEvent.VK_DOWN || e.getKeyCode() == KeyEvent.VK_S) {
         nextMove.add(1);
         nextMove.add(0);
-      } else if (!this.isDab && e.getKeyCode() == KeyEvent.VK_D) {
+      } else if (!this.isDab && e.getKeyCode() == KeyEvent.VK_B) {
         this.can.setPlayer("graphique/images/persoDab.png");
         this.isDab = true;
         this.can.update(player.getY()*this.can.sizeTile,player.getX()*this.can.sizeTile,this.can.sizeTile,this.can.sizeTile);
@@ -77,7 +77,7 @@ public class KeyAction extends KeyAdapter {
 
   @Override
   public void keyReleased(KeyEvent e) {
-    if (!this.b.getPartyFinished() && e.getKeyCode() == KeyEvent.VK_D) {
+    if (!this.b.getPartyFinished() && e.getKeyCode() == KeyEvent.VK_B) {
       Player player = ((Player)b.getPlayer());
       this.can.setPlayer("graphique/images/perso.png");
       this.can.update(player.getY()*this.can.sizeTile,player.getX()*this.can.sizeTile,this.can.sizeTile,this.can.sizeTile);
