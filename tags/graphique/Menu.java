@@ -13,14 +13,14 @@ import javax.imageio.ImageIO;
 public class Menu extends JFrame {
 
   public Menu () {
-    this.setSize(500,500);
+    this.setSize(620,610);
     //this.setResizable(false);
     this.setTitle("Main menu");
 
     JPanel contenent = new JPanel();
 
     JPanel title = new JPanel();
-    JLabel image = new JLabel(new ImageIcon("graphique/images/test.png"));
+    JLabel image = new JLabel(new ImageIcon("graphique/images/titre.png"));
     title.add(image);
 
     JButton bPlay = new JButton("Play");
@@ -49,19 +49,21 @@ public class Menu extends JFrame {
       }
     });
 
-    JLabel backgroundButton = new JLabel(new ImageIcon("graphique/images/caisse.png"));
+    JLabel backgroundButton = new JLabel(new ImageIcon("graphique/images/caisseMenu.png"));
 
-    JPanel panel = new JPanel();
-    backgroundButton.add(panel);
-    backgroundButton.setLayout(new FlowLayout());
+    JPanel menu = new JPanel();
+    backgroundButton.setLayout(new FlowLayout(FlowLayout.CENTER,0,90));
+    backgroundButton.add(menu);
 
-    panel.add(bPlay);
-    panel.add(bMap);
-    panel.add(bIa);
-    panel.add(bRand);
-    panel.add(bQuit);
 
-    panel.setLayout(new GridLayout(5,1,20,20));
+    menu.add(bPlay);
+    menu.add(bMap);
+    menu.add(bIa);
+    menu.add(bRand);
+    menu.add(bQuit);
+
+    menu.setOpaque(false);
+    menu.setLayout(new GridLayout(5,1,20,20));
 
 
     contenent.setLayout(new BorderLayout());
