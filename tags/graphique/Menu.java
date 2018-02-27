@@ -7,13 +7,21 @@ import java.awt.*;
 import java.awt.Image.*;
 import java.awt.event.*;
 import sokoban.*;
+import java.io.*;
+import javax.imageio.ImageIO;
 
 public class Menu extends JFrame {
 
   public Menu () {
-    this.setSize(300,500);
-    this.setResizable(false);
+    this.setSize(500,500);
+    //this.setResizable(false);
     this.setTitle("Main menu");
+
+    JPanel contenent = new JPanel();
+
+    JPanel title = new JPanel();
+    JLabel image = new JLabel(new ImageIcon("graphique/images/test.png"));
+    title.add(image);
 
     JButton bPlay = new JButton("Play");
     bPlay.addActionListener(new ActionListener () {
@@ -41,17 +49,29 @@ public class Menu extends JFrame {
       }
     });
 
-    JPanel pane = new JPanel();
+    JLabel backgroundButton = new JLabel(new ImageIcon("graphique/images/caisse.png"));
 
-    pane.add(bPlay);
-    pane.add(bMap);
-    pane.add(bIa);
-    pane.add(bRand);
-    pane.add(bQuit);
+    JPanel panel = new JPanel();
+    backgroundButton.add(panel);
+    backgroundButton.setLayout(new FlowLayout());
 
-    pane.setLayout(new GridLayout(5,1,20,20));
+    panel.add(bPlay);
+    panel.add(bMap);
+    panel.add(bIa);
+    panel.add(bRand);
+    panel.add(bQuit);
 
-    this.add(pane);
+    panel.setLayout(new GridLayout(5,1,20,20));
+
+
+    contenent.setLayout(new BorderLayout());
+
+    contenent.add(title,BorderLayout.NORTH);
+
+
+
+    contenent.add(backgroundButton,BorderLayout.SOUTH);
+    this.add(contenent);
 
     this.setLocationRelativeTo(null);
     this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
