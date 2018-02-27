@@ -269,15 +269,15 @@ public class Board {
     coordTemp = new ArrayList<> ();
     coordTemp.add(i);
     coordTemp.add(j + decaleWidth);
-    if (listChain.contains(coordTemp)) {
+    if (listChain.contains(coordTemp) || this.grid[coordTemp.get(1)][coordTemp.get(0)] instanceof Wall) {
       coordTemp = new ArrayList<> ();
       coordTemp.add(i + decaleHeight);
       coordTemp.add(j);
-      if (listChain.contains(coordTemp)) {
+      if (listChain.contains(coordTemp) || this.grid[coordTemp.get(1)][coordTemp.get(0)] instanceof Wall) {
         coordTemp = new ArrayList<> ();
         coordTemp.add(i + decaleHeight);
         coordTemp.add(j + decaleWidth);
-        if (listChain.contains(coordTemp)) {
+        if (listChain.contains(coordTemp) || this.grid[coordTemp.get(1)][coordTemp.get(0)] instanceof Wall) {
           return true;
         }
       }

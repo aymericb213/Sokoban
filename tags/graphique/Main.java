@@ -6,13 +6,7 @@ import java.io.*;
 public class Main {
 
     public static void main(String[] args) throws IOException {
-
-      Board b = new Board();
-      MapReader map = new MapReader("");
-      map.setFile("maps/map2.xsb");
-      map.readingMap();
-      b.createGrid(map.getMap());
-      Interface fen = new Interface(b,map);
+      new Menu();
     }
 
 }

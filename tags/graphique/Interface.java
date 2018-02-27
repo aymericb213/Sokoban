@@ -88,10 +88,11 @@ public class Interface extends JFrame {
         }
     });
 
-    JButton bQuit = new JButton("Quit");
+    JButton bQuit = new JButton("Back to menu");
     bQuit.addActionListener(new ActionListener () {
         public void actionPerformed(ActionEvent e){
             Interface.this.dispose();
+            new Menu();
         }
     });
 
