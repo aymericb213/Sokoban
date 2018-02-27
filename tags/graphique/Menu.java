@@ -17,6 +17,7 @@ public class Menu extends JFrame {
     //this.setResizable(false);
     this.setTitle("Main menu");
 
+
     JPanel contenent = new JPanel();
 
     JPanel title = new JPanel();
@@ -67,11 +68,18 @@ public class Menu extends JFrame {
 
 
     contenent.setLayout(new BorderLayout());
+    contenent.setOpaque(false);
 
+    title.setOpaque(false);
     contenent.add(title,BorderLayout.NORTH);
 
     contenent.add(backgroundButton,BorderLayout.SOUTH);
-    this.add(contenent);
+
+    JLabel background = new JLabel(new ImageIcon("graphique/images/fondMenu.png"));
+    background.setLayout(new FlowLayout());
+    background.add(contenent);
+
+    this.add(background);
 
     this.setLocationRelativeTo(null);
     this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
