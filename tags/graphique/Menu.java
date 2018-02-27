@@ -13,7 +13,7 @@ import javax.imageio.ImageIO;
 public class Menu extends JFrame {
 
   public Menu () {
-    this.setSize(620,610);
+    this.setSize(720,620);
     //this.setResizable(false);
     this.setTitle("Main menu");
 
@@ -69,8 +69,6 @@ public class Menu extends JFrame {
     contenent.setLayout(new BorderLayout());
 
     contenent.add(title,BorderLayout.NORTH);
-
-
 
     contenent.add(backgroundButton,BorderLayout.SOUTH);
     this.add(contenent);
