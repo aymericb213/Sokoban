@@ -25,8 +25,10 @@ public class Interface extends JFrame {
 
     JPanel zoneControl = new JPanel();
 
-    JButton bReset = new JButton("Restart");
+    int fontSize = 12;
 
+    JButton bReset = new JButton("Restart");
+    bReset.setFont(new Font("Monospace", Font.BOLD, fontSize));
     bReset.addActionListener(new ActionListener () {
       public void actionPerformed(ActionEvent e) {
         Interface.this.b.createGrid(Interface.this.map.getMap());
@@ -37,7 +39,7 @@ public class Interface extends JFrame {
     });
 
     JButton bSave = new JButton("Save");
-
+    bSave.setFont(new Font("Monospace", Font.BOLD, fontSize));
     bSave.addActionListener(new ActionListener () {
       public void actionPerformed(ActionEvent e) {
         Save save = new Save(b.createArrayList(),"save");
@@ -56,7 +58,7 @@ public class Interface extends JFrame {
     });
 
     JButton bLoad = new JButton("Load");
-
+    bLoad.setFont(new Font("Monospace", Font.BOLD, fontSize));
     bLoad.addActionListener(new ActionListener () {
       public void actionPerformed(ActionEvent e) {
         MapReader mapLoad = new MapReader("");
@@ -78,7 +80,7 @@ public class Interface extends JFrame {
 
 
     JButton bCancel = new JButton("Cancel");
-
+    bCancel.setFont(new Font("Monospace", Font.BOLD, fontSize));
     bCancel.addActionListener(new ActionListener () {
         public void actionPerformed(ActionEvent e){
           Interface.this.map.setFile("maps/cancel.xsb");
@@ -89,6 +91,7 @@ public class Interface extends JFrame {
     });
 
     JButton bQuit = new JButton("Back to menu");
+    bQuit.setFont(new Font("Monospace", Font.BOLD, fontSize));
     bQuit.addActionListener(new ActionListener () {
         public void actionPerformed(ActionEvent e){
             Interface.this.dispose();

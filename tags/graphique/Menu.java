@@ -14,7 +14,7 @@ public class Menu extends JFrame {
 
   public Menu () {
     this.setSize(720,620);
-    //this.setResizable(false);
+    this.setResizable(false);
     this.setTitle("Main menu");
 
 
@@ -24,7 +24,11 @@ public class Menu extends JFrame {
     JLabel image = new JLabel(new ImageIcon("graphique/images/titre.png"));
     title.add(image);
 
+    int fontSize = 20;
+
     JButton bPlay = new JButton("Play");
+    bPlay.setFont(new Font("Monospace", Font.BOLD, fontSize));
+    bPlay.setFocusable(false);
     bPlay.addActionListener(new ActionListener () {
       public void actionPerformed(ActionEvent e){
           Board b = new Board();
@@ -38,12 +42,20 @@ public class Menu extends JFrame {
     });
 
     JButton bMap = new JButton("Select map");
+    bMap.setFont(new Font("Monospace", Font.BOLD, fontSize));
+    bMap.setFocusable(false);
 
     JButton bIa = new JButton("IA battle");
+    bIa.setFont(new Font("Monospace", Font.BOLD, fontSize));
+    bIa.setFocusable(false);
 
     JButton bRand = new JButton("Map random");
+    bRand.setFont(new Font("Monospace", Font.BOLD, fontSize));
+    bRand.setFocusable(false);
 
     JButton bQuit = new JButton("Quit");
+    bQuit.setFont(new Font("Monospace", Font.BOLD, fontSize));
+    bQuit.setFocusable(false);
     bQuit.addActionListener(new ActionListener () {
       public void actionPerformed(ActionEvent e){
           Menu.this.dispose();
@@ -64,7 +76,7 @@ public class Menu extends JFrame {
     menu.add(bQuit);
 
     menu.setOpaque(false);
-    menu.setLayout(new GridLayout(5,1,20,20));
+    menu.setLayout(new GridLayout(5,1,10,10));
 
 
     contenent.setLayout(new BorderLayout());
