@@ -44,6 +44,12 @@ public class Menu extends JFrame {
     JButton bMap = new JButton("Select map");
     bMap.setFont(new Font("Monospace", Font.BOLD, fontSize));
     bMap.setFocusable(false);
+    bMap.addActionListener(new ActionListener () {
+      public void actionPerformed(ActionEvent e){
+          Menu.this.dispose();
+          new SelectMap ();
+      }
+    });
 
     JButton bIa = new JButton("IA battle");
     bIa.setFont(new Font("Monospace", Font.BOLD, fontSize));

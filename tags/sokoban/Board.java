@@ -296,7 +296,7 @@ public class Board {
     for (ArrayList<Integer> coord : listChain) {
       int i = coord.get(0);
       int j = coord.get(1);
-      if (testCube(listChain,i,j,-1,-1) || testCube(listChain,i,j,-1,1) || testCube(listChain,i,j,1,-1) ||testCube(listChain,i,j,1,1)) {
+      if (!((Crate)this.grid[j][i]).isPlaced() && (testCube(listChain,i,j,-1,-1) || testCube(listChain,i,j,-1,1) || testCube(listChain,i,j,1,-1) ||testCube(listChain,i,j,1,1))) {
         return true;
       }
     }
