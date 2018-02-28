@@ -13,58 +13,101 @@ import javax.imageio.ImageIO;
 public class SelectMap extends JFrame {
 
   private JList list;
+  private CanvasGame can;
 
   public SelectMap () {
 
-      this.setSize(720,620);
-      this.setResizable(false);
-      this.setTitle("Select map");
+    int sizeTile = 20;
 
-      JPanel zoneButton = new JPanel ();
+    this.setSize(700,350);
+    this.setResizable(false);
+    this.setTitle("Select map");
 
-      JButton bPlay = new JButton("Play");
-      bPlay.addActionListener(new ActionListener () {
-        public void actionPerformed(ActionEvent e){
-          int indice = SelectMap.this.list.getSelectedIndex();
-          if (indice != -1) {
-            Board b = new Board();
-            MapReader map = new MapReader("");
-            map.setFile("maps/map" + (indice + 1) + ".xsb");
-            map.readingMap();
-            b.createGrid(map.getMap());
-            SelectMap.this.dispose();
-            new Interface(b,map);
-          }
+    JPanel zoneButton = new JPanel ();
+
+    JButton bPlay = new JButton("Play");
+    bPlay.addActionListener(new ActionListener () {
+      public void actionPerformed(ActionEvent e){
+        int indice = SelectMap.this.list.getSelectedIndex();
+        if (!SelectMap.this.list.isSelectionEmpty()) {
+          Board b = new Board();
+          MapReader map = new MapReader("");
+          map.setFile("maps/map" + (indice + 1) + ".xsb");
+          map.readingMap();
+          b.createGrid(map.getMap());
+          SelectMap.this.dispose();
+          new Interface(b,map,false,true,false);
         }
-      });
-
-      JButton bBack = new JButton("Back to menu");
-      bBack.addActionListener(new ActionListener () {
-        public void actionPerformed(ActionEvent e){
-            SelectMap.this.dispose();
-            new Menu();
-        }
-      });
-
-      zoneButton.add(bPlay);
-      zoneButton.add(bBack);
-      zoneButton.setLayout(new GridLayout(2,1));
-
-      Vector vect = new Vector();
-      int nbMaps = new File("maps").list().length;
-      for (int i = 1; i<(nbMaps-1); i++) {
-        vect.add("Map " + i);
       }
-      this.list = new JList(vect);
+    });
 
-      this.add(zoneButton);
-      this.add (list);
+    JButton bBack = new JButton("Back to menu");
+    bBack.addActionListener(new ActionListener () {
+      public void actionPerformed(ActionEvent e){
+          SelectMap.this.dispose();
+          new Menu();
+      }
+    });
 
-      this.setLayout(new GridLayout(1,2));
+    zoneButton.add(bPlay);
+    zoneButton.add(bBack);
+    zoneButton.setLayout(new GridLayout(2,1));
 
-      this.setLocationRelativeTo(null);
-      this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-      this.setVisible(true);
+    Vector vect = new Vector();
+    int nbMaps = new File("maps").list().length - 2;
+    for (int i = 1; i<(nbMaps+1); i++) {
+      vect.add("Map " + i);
+    }
+    this.list = new JList(vect);
+    this.list.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+    this.list.setSelectedIndex(0);
+
+    JScrollPane scrollPane = new JScrollPane();
+    scrollPane.setViewportView(list);
+
+    this.list.addListSelectionListener(new ListSelectionListener () {
+      public void valueChanged(ListSelectionEvent e) {
+        int indice = SelectMap.this.list.getSelectedIndex();
+        Board b = new Board();
+        MapReader map = new MapReader("");
+        map.setFile("maps/map" + (indice + 1) + ".xsb");
+        map.readingMap();
+        b.createGrid(map.getMap());
+        SelectMap.this.can.setBoard(b);
+        SelectMap.this.can.update();
+      }
+    });
+
+    Board b = new Board();
+    MapReader map = new MapReader("");
+    map.setFile("maps/map1.xsb");
+    map.readingMap();
+    b.createGrid(map.getMap());
+
+    this.can = new CanvasGame(b,sizeTile);
+
+    JPanel contenent = new JPanel();
+
+    contenent.setLayout(new GridBagLayout());
+    GridBagConstraints gc = new GridBagConstraints();
+    gc.fill = GridBagConstraints.HORIZONTAL;
+
+    gc.gridx = 0;
+    gc.gridy = 0;
+    gc.weightx = 0.2;
+    contenent.add(zoneButton,gc);
+    gc.gridx = 1;
+    gc.weightx = 2;
+    contenent.add(scrollPane,gc);
+    gc.gridx = 2;
+    gc.weightx = 4;
+    contenent.add(this.can,gc);
+
+    this.add(contenent);
+
+    this.setLocationRelativeTo(null);
+    this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+    this.setVisible(true);
 
   }
 

@@ -9,6 +9,7 @@ import java.awt.event.*;
 import java.awt.event.KeyEvent;
 import sokoban.*;
 import java.io.*;
+import java.util.Random;
 import java.util.concurrent.TimeUnit;
 
 public class Interface extends JFrame {
@@ -16,10 +17,17 @@ public class Interface extends JFrame {
   private Board b;
   private MapReader map;
   private CanvasGame can;
+  private boolean modeIad;
+  private boolean modeSelect;
+  private boolean random;
+  private static int nbMapPlay = 1;
 
-  public Interface(Board b, MapReader map) {
+  public Interface(Board b, MapReader map, boolean modeIad, boolean modeSelect, boolean random) {
     this.b = b;
     this.map = map;
+    this.modeIad = modeIad;
+    this.modeSelect = modeSelect;
+    this.random = random;
     this.setResizable(false);
     this.setTitle("Sokoban");
 
@@ -94,29 +102,93 @@ public class Interface extends JFrame {
     bQuit.setFont(new Font("Monospace", Font.BOLD, fontSize));
     bQuit.addActionListener(new ActionListener () {
         public void actionPerformed(ActionEvent e){
-            Interface.this.dispose();
-            new Menu();
+          Interface.this.nbMapPlay = 1;
+          Interface.this.dispose();
+          new Menu();
         }
     });
 
     this.setLayout(new GridBagLayout());
     GridBagConstraints gc = new GridBagConstraints();
 
-    zoneControl.setLayout(new GridLayout(5,1,10,10));
+    zoneControl.setLayout(new GridLayout(6,1,10,10));
 
     zoneControl.add(bReset);
+
+    if (!this.modeIad && !this.modeSelect && !this.random) {
+      this.nbMapPlay ++;
+      JButton bNext = new JButton("Next level");
+      bNext.addActionListener(new ActionListener () {
+        public void actionPerformed(ActionEvent e) {
+          int nbMaps = new File("maps").list().length - 2;
+          if (nbMapPlay<=nbMaps) {
+            Board b = new Board();
+            MapReader map = new MapReader("");
+            map.setFile("maps/map" + Interface.this.nbMapPlay + ".xsb");
+            map.readingMap();
+            b.createGrid(map.getMap());
+            Interface.this.dispose();
+            new Interface(b,map,false,false,false);
+          } else {
+            JOptionPane popupLoad = new JOptionPane();
+            Timer timer = new Timer(3000,new ActionListener () {
+              public void actionPerformed(ActionEvent e) {
+                popupLoad.getRootFrame().dispose();
+                Interface.this.nbMapPlay = 1;
+                Interface.this.dispose();
+                new Menu();
+              }
+            });
+            timer.start();
+            popupLoad.showMessageDialog(null, "All map are played, back to menu.", "End", JOptionPane.INFORMATION_MESSAGE);
+            timer.stop();
+          }
+        }
+      });
+      zoneControl.add(bNext);
+    } else {
+      this.nbMapPlay = 1;
+    }
+
     zoneControl.add(bSave);
     zoneControl.add(bLoad);
     zoneControl.add(bCancel);
+
+    if (this.modeSelect) {
+
+      JButton bSelect = new JButton("Select map");
+      bSelect.addActionListener(new ActionListener () {
+        public void actionPerformed(ActionEvent e) {
+            Interface.this.dispose();
+            new SelectMap();
+        }
+      });
+      zoneControl.add(bSelect);
+    } else if (this.random) {
+
+      JButton bRand = new JButton("Other map");
+      bRand.addActionListener(new ActionListener () {
+        public void actionPerformed(ActionEvent e){
+          int nbMaps = new File("maps").list().length - 2;
+          Random r = new Random();
+          int n = r.nextInt(nbMaps) + 1;
+          Board b = new Board();
+          MapReader map = new MapReader("");
+          map.setFile("maps/map" + n + ".xsb");
+          map.readingMap();
+          b.createGrid(map.getMap());
+          Interface.this.dispose();
+          new Interface(b,map,false,false,true);
+        }
+      });
+      zoneControl.add(bRand);
+    }
+
     zoneControl.add(bQuit);
 
     gc.gridx = 0;
 		gc.gridy = 0;
-    this.can = new CanvasGame(this.b);
-    this.can.setFocusable(false);
-    add(can);
-    gc.gridx = 1;
-    add(zoneControl);
+    this.can = new CanvasGame(this.b, 40);
     KeyAction key =  new KeyAction (this.b, this.can);
     this.setFocusable(true);
 
@@ -126,6 +198,11 @@ public class Interface extends JFrame {
     bLoad.addKeyListener(key);
     bCancel.addKeyListener(key);
     bQuit.addKeyListener(key);
+
+    this.can.setFocusable(false);
+    add(can);
+    gc.gridx = 1;
+    add(zoneControl);
 
 
     pack();

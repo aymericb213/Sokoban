@@ -8,6 +8,7 @@ import java.awt.Image.*;
 import java.awt.event.*;
 import sokoban.*;
 import java.io.*;
+import java.util.Random;
 import javax.imageio.ImageIO;
 
 public class Menu extends JFrame {
@@ -37,7 +38,7 @@ public class Menu extends JFrame {
           map.readingMap();
           b.createGrid(map.getMap());
           Menu.this.dispose();
-          new Interface(b,map);
+          new Interface(b,map,false,false,false);
       }
     });
 
@@ -54,10 +55,35 @@ public class Menu extends JFrame {
     JButton bIa = new JButton("IA battle");
     bIa.setFont(new Font("Monospace", Font.BOLD, fontSize));
     bIa.setFocusable(false);
+    bIa.addActionListener(new ActionListener () {
+      public void actionPerformed(ActionEvent e){
+          Board b = new Board();
+          MapReader map = new MapReader("");
+          map.setFile("maps/map1.xsb");
+          map.readingMap();
+          b.createGrid(map.getMap());
+          Menu.this.dispose();
+          new Interface(b,map,true,false,false);
+      }
+    });
 
     JButton bRand = new JButton("Map random");
     bRand.setFont(new Font("Monospace", Font.BOLD, fontSize));
     bRand.setFocusable(false);
+    bRand.addActionListener(new ActionListener () {
+      public void actionPerformed(ActionEvent e){
+        int nbMaps = new File("maps").list().length - 2;
+        Random r = new Random();
+        int n = r.nextInt(nbMaps) + 1;
+        Board b = new Board();
+        MapReader map = new MapReader("");
+        map.setFile("maps/map" + n + ".xsb");
+        map.readingMap();
+        b.createGrid(map.getMap());
+        Menu.this.dispose();
+        new Interface(b,map,false,false,true);
+      }
+    });
 
     JButton bQuit = new JButton("Quit");
     bQuit.setFont(new Font("Monospace", Font.BOLD, fontSize));
