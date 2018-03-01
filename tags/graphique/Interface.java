@@ -164,7 +164,7 @@ public class Interface extends JFrame {
         }
       });
       zoneControl.add(bSelect);
-    } else if (this.random) {
+    } else if (this.random ||this.modeIad) {
 
       JButton bRand = new JButton("Other map");
       bRand.addActionListener(new ActionListener () {
@@ -178,7 +178,11 @@ public class Interface extends JFrame {
           map.readingMap();
           b.createGrid(map.getMap());
           Interface.this.dispose();
-          new Interface(b,map,false,false,true);
+          if (Interface.this.random) {
+            new Interface(b,map,false,false,true);
+          } else {
+            new Interface(b,map,true,false,false);
+          }
         }
       });
       zoneControl.add(bRand);
@@ -188,7 +192,11 @@ public class Interface extends JFrame {
 
     gc.gridx = 0;
 		gc.gridy = 0;
-    this.can = new CanvasGame(this.b, 40);
+    if (this.modeIad) {
+      this.can = new CanvasGame(this.b, 30);
+    } else {
+      this.can = new CanvasGame(this.b, 40);
+    }
     KeyAction key =  new KeyAction (this.b, this.can);
     this.setFocusable(true);
 
@@ -200,9 +208,17 @@ public class Interface extends JFrame {
     bQuit.addKeyListener(key);
 
     this.can.setFocusable(false);
-    add(can);
+    add(can,gc);
     gc.gridx = 1;
-    add(zoneControl);
+    add(zoneControl,gc);
+
+    if (this.modeIad) {
+      Board bIa = new Board();
+      bIa.createGrid(map.getMap());
+      CanvasGame canIa = new CanvasGame(bIa,30);
+      gc.gridx = 2;
+      add(canIa,gc);
+    }
 
 
     pack();

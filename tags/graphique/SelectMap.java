@@ -26,6 +26,7 @@ public class SelectMap extends JFrame {
     JPanel zoneButton = new JPanel ();
 
     JButton bPlay = new JButton("Play");
+    bPlay.setFont(new Font("Monospace", Font.BOLD, 12));
     bPlay.addActionListener(new ActionListener () {
       public void actionPerformed(ActionEvent e){
         int indice = SelectMap.this.list.getSelectedIndex();
@@ -42,6 +43,7 @@ public class SelectMap extends JFrame {
     });
 
     JButton bBack = new JButton("Back to menu");
+    bBack.setFont(new Font("Monospace", Font.BOLD, 12));
     bBack.addActionListener(new ActionListener () {
       public void actionPerformed(ActionEvent e){
           SelectMap.this.dispose();
