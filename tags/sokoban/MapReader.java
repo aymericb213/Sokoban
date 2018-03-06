@@ -13,6 +13,7 @@ public class MapReader {
 
   private String file;
   protected ArrayList<String> map;
+  protected ArrayList<String> cancel;
 
 	/**
 		* Constructeur de la classe.
@@ -23,6 +24,7 @@ public class MapReader {
   public MapReader(String file) {
     this.file = file;
     this.map = new ArrayList<> ();
+    this.cancel = new ArrayList<> ();
   }
 
 	/**
@@ -42,6 +44,24 @@ public class MapReader {
     }
   }
 
+  /**
+		* Lit le fichier .xsb trouvé avec l'attribut file et en extrait un tableau de chaînes de caractères.
+	*/
+  public void readingCancel() {
+    try {
+      BufferedReader cancel = new BufferedReader (new FileReader (this.file));
+      ArrayList<String> mapToString = new ArrayList<>();
+      String line;
+      while ((line = cancel.readLine()) != null) {
+        mapToString.add(line);
+      }
+      this.cancel = mapToString;
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
+  }
+
+
 	/**
 		* Accesseur de l'attribut map.
 		* @return La valeur de map.
@@ -50,6 +70,18 @@ public class MapReader {
 		ArrayList<String> mapCopy = new ArrayList<> ();
     for (int i = 0; i<this.map.size(); i++) {
       mapCopy.add(this.map.get(i));
+    }
+    return mapCopy;
+  }
+
+  /**
+    * Accesseur de l'attribut cancel.
+    * @return La valeur de cancel.
+  */
+  public ArrayList<String> getCancel() {
+		ArrayList<String> mapCopy = new ArrayList<> ();
+    for (int i = 0; i<this.cancel.size(); i++) {
+      mapCopy.add(this.cancel.get(i));
     }
     return mapCopy;
   }
