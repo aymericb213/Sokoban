@@ -20,6 +20,7 @@ public class Main {
 		Board b= new Board();
 		b.createGrid(map.getMap());
 		System.out.println(b);
+		String totalPath="";
 
 		Astar algo=new Astar();
 		Player p = (Player)b.getPlayer();
@@ -29,11 +30,10 @@ public class Main {
 		Node goal = new Node(o.getX(), o.getY());
 
 		algo.setLevel(b);
-		ArrayList<Node[]> test=algo.createPairs();
-		System.out.println(test);
 		algo.setStart(start);
 		algo.setGoal(goal);
 		algo.pathSearch();
+		totalPath+=algo.getPath();
 		int iter=0;
 		for (int i=1; i<algo.getPath().size(); i++) {
 			iter++;

@@ -34,7 +34,6 @@ public class Astar {
 */
 	public void pathSearch() {
 		PathCost evals= new PathCost();
-		boolean pathFound=false;
 		this.waitingList.add(this.start);
 		evals.setExplMap(evals.initMap(this.level.getSize()));
 		evals.setFullMap(evals.initMap(this.level.getSize()));
@@ -49,7 +48,6 @@ public class Astar {
 			if (current.equals(this.goal)) {
 				System.out.println("current==goal");
 				this.goal=current;
-				pathFound=true;
 				buildFullPath();
 				break;
 			}
@@ -76,46 +74,8 @@ public class Astar {
 				}
 			}
 		}
-		if (!(pathFound)) {
 		System.out.println("Aucun chemin possible vers " + this.goal);
-		}
 	}
-
-	/**
-	public void globalPath(){
-		int vecteur_move=0;
-		ArrayList<Node> global_path = new ArrayList<Node>();
-		ArrayList<Node> pathc=new ArrayList<Node>();
-		for (Node x : pairsList){
-			this.pathSearch("crate");
-			this.buildFullPath();
-			pathc=this.path;
-			for (int i ; i==0 ; i++){
-				//position_caisse étant la position de la caisse a partir de la paire
-				Node vecteur_move= new Node(pathc.get(i).getX()-position_caissegetX(),pathc.get(i).getY()-position_caisse.getY());
-				this.goal=new Node(position_caisse.getX()+vecteur_move.getX(),);
-				this.start=position_joueur;
-				this.pathcearch();
-				ArrayList<Node> pathj = new ArrayList<Node>();
-				this.buildFullPath();
-				//pathj étant le chemin du joueur
-				pathj=this.pathj;
-				if (pathj==null){
-					ArrayList<Node> position_interdite = new ArrayList<Node>();
-					boolean path_valide = false;
-					while (path_valide!=true){
-						posi=testVecteurMove(this.path);
-						if (posi!=[]){
-							position_interdite+=posi;
-						} else {
-							path_valide=true;
-						}
-					}
-				}
-				global_path+=pathj;
-			}
-		}
-	}**/
 
 /**
 	* Détermine le noeud de coût total minimal dans la liste d'attente de A*.
@@ -168,28 +128,6 @@ public class Astar {
 			n=n.getPred();
 		}
 		path.add(0,this.start);
-	}
-
-	public ArrayList<Node[]> createPairs() {
-		ArrayList<Node[]> pairsList= new ArrayList<>();
-		for (Block c : this.level.getCrates()) {
-			int min=10000;
-			Node minObj=this.goal;
-			for (Block o : this.level.getObjectives()) {
-				this.start=new Node(((Crate)c).getX(),((Crate)c).getY());
-				this.goal=new Node(((Objective)o).getX(),((Objective)o).getY());
-				pathSearch();
-				if (this.path.size()<min) {
-					min=this.path.size();
-					minObj=this.goal;
-				}
-			}
-			Node[] pair= new Node[2];
-			pair[0]=this.start;
-			pair[1]=minObj;
-			pairsList.add(pair);
-		}
-		return pairsList;
 	}
 
 /**
