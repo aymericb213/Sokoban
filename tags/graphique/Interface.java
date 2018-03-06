@@ -67,7 +67,7 @@ public class Interface extends JFrame {
     bLoad.addActionListener(new ActionListener () {
       public void actionPerformed(ActionEvent e) {
         MapReader mapLoad = new MapReader("");
-        mapLoad.setFile("maps/save.xsb");
+        mapLoad.setFile("save/save.xsb");
         mapLoad.readingMap();
         Interface.this.b.createGrid(mapLoad.getMap());
         Interface.this.can.update();
@@ -87,9 +87,11 @@ public class Interface extends JFrame {
     JButton bCancel = new JButton("Cancel");
     bCancel.addActionListener(new ActionListener () {
         public void actionPerformed(ActionEvent e){
-          Interface.this.map.setFile("maps/cancel.xsb");
-          Interface.this.map.readingMap();
-          Interface.this.b.createGrid(Interface.this.map.getMap());
+          Interface.this.map.setFile("save/cancel.xsb");
+          Interface.this.map.readingCancel();
+          Interface.this.b.createGrid(Interface.this.map.getCancel());
+          Interface.this.b.setPartyFinished(false);
+          Interface.this.can.setPlayer("graphique/images/perso.png");
           Interface.this.can.update();
         }
     });
@@ -115,7 +117,7 @@ public class Interface extends JFrame {
       JButton bNext = new JButton("Next level");
       bNext.addActionListener(new ActionListener () {
         public void actionPerformed(ActionEvent e) {
-          int nbMaps = new File("maps").list().length - 2;
+          int nbMaps = new File("maps").list().length;
           if (nbMapPlay<=nbMaps) {
             Board b = new Board();
             MapReader map = new MapReader("");
@@ -164,7 +166,7 @@ public class Interface extends JFrame {
       JButton bRand = new JButton("Other map");
       bRand.addActionListener(new ActionListener () {
         public void actionPerformed(ActionEvent e){
-          int nbMaps = new File("maps").list().length - 2;
+          int nbMaps = new File("maps").list().length;
           Random r = new Random();
           int n = r.nextInt(nbMaps) + 1;
           Board b = new Board();

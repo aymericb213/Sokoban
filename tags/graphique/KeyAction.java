@@ -14,11 +14,13 @@ public class KeyAction extends KeyAdapter {
   private Board b;
   private CanvasGame can;
   private boolean isDab;
+  private boolean playerMove;
 
   public KeyAction (Board b, CanvasGame can) {
     this.b = b;
     this.can = can;
     this.isDab = false;
+    this.playerMove = false;
   }
 
   public void movePlayer (ArrayList<Integer> nextMove) {
@@ -26,7 +28,9 @@ public class KeyAction extends KeyAdapter {
     player.move(b,nextMove);
     int minW = Math.min(player.getY()-nextMove.get(1),player.getY()+nextMove.get(1));
     int minH = Math.min(player.getX()-nextMove.get(0),player.getX()+nextMove.get(0));
-    this.can.update(minW*this.can.sizeTile, minH*this.can.sizeTile, this.can.sizeTile + Math.abs(nextMove.get(1))*this.can.sizeTile*2, this.can.sizeTile + Math.abs(nextMove.get(0))*this.can.sizeTile*2);
+    this.can.update(minW*this.can.sizeTile, minH*this.can.sizeTile,
+                    this.can.sizeTile + Math.abs(nextMove.get(1))*this.can.sizeTile*2,
+                    this.can.sizeTile + Math.abs(nextMove.get(0))*this.can.sizeTile*2);
   }
 
   @Override
@@ -40,6 +44,8 @@ public class KeyAction extends KeyAdapter {
     if (!this.b.getPartyFinished()) {
       ArrayList<Integer> nextMove = new ArrayList<>();
       Player player = ((Player)b.getPlayer());
+      int x = player.getX();
+      int y = player.getY();
 
       if (e.getKeyCode() == KeyEvent.VK_LEFT || e.getKeyCode() == KeyEvent.VK_Q) {
         nextMove.add(0);
@@ -60,9 +66,9 @@ public class KeyAction extends KeyAdapter {
       }
 
       if (!nextMove.isEmpty()) {
-        this.movePlayer(nextMove);
         Save cancel = new Save (this.b.createArrayList(),"cancel");
         cancel.saveMap();
+        this.movePlayer(nextMove);
         if (this.b.isFinished()) {
           this.b.setPartyFinished(true);
           if (this.b.allPlaced()) {

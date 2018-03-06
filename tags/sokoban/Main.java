@@ -33,7 +33,7 @@ public class Main {
 				int n = r.nextInt(nbMaps)+1;
 				map.setFile("maps/map" + n + ".xsb");
 			} else if (args[0].equals("-l")) {
-        map.setFile("maps/save.xsb");
+        map.setFile("save/save.xsb");
       }
       else {
 				nextMapNb = Integer.parseInt(args[0]);
@@ -78,7 +78,7 @@ public class Main {
           continue;
         }
         if (input.equals("A") || input.equals("a")) {
-          map.setFile("maps/cancel.xsb");
+          map.setFile("save/cancel.xsb");
           map.readingMap();
           b.createGrid(map.getMap());
         }
