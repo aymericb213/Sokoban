@@ -33,13 +33,12 @@ public class Interface extends JFrame {
 
     JPanel zoneControl = new JPanel();
 
-    int fontSize = 12;
-
     JButton bReset = new JButton("Restart");
     bReset.addActionListener(new ActionListener () {
       public void actionPerformed(ActionEvent e) {
+        Interface.this.map.readingMap();
         Interface.this.b.createGrid(Interface.this.map.getMap());
-        Interface.this.b.setPartyFinished(false);
+        Interface.this.b.setOver(false);
         Interface.this.can.setPlayer("graphique/images/perso.png");
         Interface.this.can.update();
       }
@@ -90,7 +89,7 @@ public class Interface extends JFrame {
           Interface.this.map.setFile("save/cancel.xsb");
           Interface.this.map.readingCancel();
           Interface.this.b.createGrid(Interface.this.map.getCancel());
-          Interface.this.b.setPartyFinished(false);
+          Interface.this.b.setOver(false);
           Interface.this.can.setPlayer("graphique/images/perso.png");
           Interface.this.can.update();
         }

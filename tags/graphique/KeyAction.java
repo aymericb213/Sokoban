@@ -41,7 +41,7 @@ public class KeyAction extends KeyAdapter {
   @Override
   public void keyPressed(KeyEvent e) {
 
-    if (!this.b.getPartyFinished()) {
+    if (!this.b.getOver()) {
       ArrayList<Integer> nextMove = new ArrayList<>();
       Player player = ((Player)b.getPlayer());
       int x = player.getX();
@@ -70,7 +70,7 @@ public class KeyAction extends KeyAdapter {
         cancel.saveMap();
         this.movePlayer(nextMove);
         if (this.b.isFinished()) {
-          this.b.setPartyFinished(true);
+          this.b.setOver(true);
           if (this.b.allPlaced()) {
             this.can.setPlayer("graphique/images/persoDab.png");
           } else {
@@ -83,7 +83,7 @@ public class KeyAction extends KeyAdapter {
 
   @Override
   public void keyReleased(KeyEvent e) {
-    if (!this.b.getPartyFinished() && e.getKeyCode() == KeyEvent.VK_B) {
+    if (!this.b.getOver() && e.getKeyCode() == KeyEvent.VK_B) {
       Player player = ((Player)b.getPlayer());
       this.can.setPlayer("graphique/images/perso.png");
       this.can.update(player.getY()*this.can.sizeTile,player.getX()*this.can.sizeTile,this.can.sizeTile,this.can.sizeTile);
