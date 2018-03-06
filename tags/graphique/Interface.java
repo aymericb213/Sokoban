@@ -52,11 +52,11 @@ public class Interface extends JFrame {
         JOptionPane popupSave = new JOptionPane();
         Timer timer = new Timer(1000,new ActionListener () {
           public void actionPerformed(ActionEvent e) {
-            popupSave.getRootFrame().dispose();
+            JOptionPane.getRootFrame().dispose();
           }
         });
         timer.start();
-        popupSave.showMessageDialog(null, "Game saved", "Save", JOptionPane.INFORMATION_MESSAGE);
+        JOptionPane.showMessageDialog(null, "Game saved", "Save", JOptionPane.INFORMATION_MESSAGE);
         timer.stop();
 
       }
@@ -73,11 +73,11 @@ public class Interface extends JFrame {
         JOptionPane popupLoad = new JOptionPane();
         Timer timer = new Timer(1000,new ActionListener () {
           public void actionPerformed(ActionEvent e) {
-            popupLoad.getRootFrame().dispose();
+            JOptionPane.getRootFrame().dispose();
           }
         });
         timer.start();
-        popupLoad.showMessageDialog(null, "Game loaded", "Load", JOptionPane.INFORMATION_MESSAGE);
+        JOptionPane.showMessageDialog(null, "Game loaded", "Load", JOptionPane.INFORMATION_MESSAGE);
         timer.stop();
       }
     });
@@ -98,7 +98,7 @@ public class Interface extends JFrame {
     JButton bQuit = new JButton("Back to menu");
     bQuit.addActionListener(new ActionListener () {
         public void actionPerformed(ActionEvent e){
-          Interface.this.nbMapPlay = 1;
+          Interface.nbMapPlay = 1;
           Interface.this.dispose();
           new Menu();
         }
@@ -112,7 +112,7 @@ public class Interface extends JFrame {
     zoneControl.add(bReset);
 
     if (!this.modeIad && !this.modeSelect && !this.random) {
-      this.nbMapPlay ++;
+      nbMapPlay ++;
       JButton bNext = new JButton("Next level");
       bNext.addActionListener(new ActionListener () {
         public void actionPerformed(ActionEvent e) {
@@ -120,7 +120,7 @@ public class Interface extends JFrame {
           if (nbMapPlay<=nbMaps) {
             Board b = new Board();
             MapReader map = new MapReader("");
-            map.setFile("maps/map" + Interface.this.nbMapPlay + ".xsb");
+            map.setFile("maps/map" + Interface.nbMapPlay + ".xsb");
             map.readingMap();
             b.createGrid(map.getMap());
             Interface.this.dispose();
@@ -129,21 +129,21 @@ public class Interface extends JFrame {
             JOptionPane popupLoad = new JOptionPane();
             Timer timer = new Timer(3000,new ActionListener () {
               public void actionPerformed(ActionEvent e) {
-                popupLoad.getRootFrame().dispose();
-                Interface.this.nbMapPlay = 1;
+                JOptionPane.getRootFrame().dispose();
+                Interface.nbMapPlay = 1;
                 Interface.this.dispose();
                 new Menu();
               }
             });
             timer.start();
-            popupLoad.showMessageDialog(null, "All map are played, back to menu.", "End", JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(null, "All map are played, back to menu.", "End", JOptionPane.INFORMATION_MESSAGE);
             timer.stop();
           }
         }
       });
       zoneControl.add(bNext);
     } else {
-      this.nbMapPlay = 1;
+      nbMapPlay = 1;
     }
 
     zoneControl.add(bSave);

@@ -12,7 +12,7 @@ import javax.imageio.ImageIO;
 
 public class SelectMap extends JFrame {
 
-  private JList list;
+  private JList<String> list;
   private CanvasGame can;
 
   public SelectMap () {
@@ -53,12 +53,12 @@ public class SelectMap extends JFrame {
     zoneButton.add(bBack);
     zoneButton.setLayout(new GridLayout(2,1));
 
-    Vector vect = new Vector();
+    Vector<String> vect = new Vector<>();
     int nbMaps = new File("maps").list().length;
     for (int i = 1; i<(nbMaps+1); i++) {
       vect.add("Map " + i);
     }
-    this.list = new JList(vect);
+    this.list = new JList<>(vect);
     this.list.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
     this.list.setSelectedIndex(0);
 
