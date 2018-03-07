@@ -32,7 +32,6 @@ public class PathCost {
 		if (n==start || n==null) {
 			return 0.;
 		} else {
-			System.out.println("start : "+ start +" getpred : " + n);
 			return 1. + currentDist(start, n.getPred());
 		}
 	}

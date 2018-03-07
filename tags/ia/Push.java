@@ -2,21 +2,34 @@ package ia;
 
 public class Push {
 
+	public enum Direction {
+		UP (-1,0),
+		LEFT (0,-1),
+		DOWN (1,0),
+		RIGHT (0,1);
+
+		private final int x;
+		private final int y;
+
+		Direction(int x, int y) {
+			this.x=x;
+			this.y=y;
+		}
+	}
+
 	private int x;
 	private int y;
-	private String direction;
+	private Direction dir;
 
 	public Push() {
 		this.x=-1;
 		this.y=-1;
-		this.direction = "";
+		this.dir=dir.UP;
 	}
 
-	public Push(int x, int y, String direction) {
-		this();
+	public Push(int x, int y) {
 		this.x=x;
 		this.y=y;
-		this.direction=direction;
 	}
 
 /**
@@ -39,8 +52,8 @@ public class Push {
 	* Accesseur de la direction.
 	* @return La direction vers laquelle se produit la poussée.
 	*/
-	public String getDir() {
-		return this.direction;
+	public Direction getDir() {
+		return this.dir;
 	}
 
 /**
@@ -48,8 +61,16 @@ public class Push {
 	* @param newDir
 	* La nouvelle direction.
 	*/
-	public void setDir(String newDir) {
-		this.direction=newDir;
+	public void setDir(int x, int y) {
+		if(x==-1 && y==0) {
+			this.dir=dir.UP;
+		} else if (x==0 && y==-1) {
+			this.dir=dir.LEFT;
+		} else if (x==1 && y==0) {
+			this.dir=dir.DOWN;
+		} else {
+			this.dir=dir.RIGHT;
+		}
 	}
 
 /**
@@ -57,6 +78,6 @@ public class Push {
 	* @return Une chaîne de caractères comportant les informations sur le coup..
 	*/
 	public String toString(){
-		return "("+this.x+","+this.y+","+this.direction+")";
+		return "("+this.x+","+this.y+","+this.dir+")";
 	}
 }

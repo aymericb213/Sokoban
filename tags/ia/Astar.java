@@ -33,6 +33,8 @@ public class Astar {
 	* Algorithme A*.
 */
 	public void pathSearch() {
+		this.path=new ArrayList<Node>();
+		this.path.add(new Node());
 		PathCost evals= new PathCost();
 		this.waitingList.add(this.start);
 		evals.setExplMap(evals.initMap(this.level.getSize()));
@@ -41,19 +43,14 @@ public class Astar {
 		int cpt=0;
 		while (!(this.waitingList.isEmpty())) {
 			cpt++;
-			System.out.println("Tour " + cpt);
 			Node current= minimumCost(evals.getFullMap());
-			System.out.println(current);
-			System.out.println(this.goal);
 			if (current.equals(this.goal)) {
-				System.out.println("current==goal");
 				this.goal=current;
 				buildFullPath();
 				break;
 			}
 			this.waitingList.remove(current);
 			this.exploredList.add(current);
-			System.out.println("Voisins de " + current + " : " + neighbours(current).toString());
 			for (Node n : neighbours(current)) {
 				if (this.exploredList.contains(n)) {
 					continue;
@@ -61,10 +58,7 @@ public class Astar {
 				if (!(this.waitingList.contains(n))) {
 					this.waitingList.add(n);
 				}
-
 				double testG = evals.currentDist(this.start,current) + 1.0;//distance au départ du noeud courant + distance du voisin au noeud courant (toujours 1)
-				System.out.println(n + " = " + evals.getExplMap().get(n));
-				System.out.println(evals.getExplMap());
 				if (testG>=evals.getExplMap().get(n)) {
 					continue;
 				} else {
@@ -74,7 +68,7 @@ public class Astar {
 				}
 			}
 		}
-		System.out.println("Aucun chemin possible vers " + this.goal);
+	//	System.out.println("Aucun chemin possible vers " + this.goal);
 	}
 
 /**
@@ -122,12 +116,11 @@ public class Astar {
 */
 	public void buildFullPath() {
 		Node n=this.goal;
-		System.out.println(n.toString());
 		while (n!=this.start) {
-			path.add(0,n);
+			this.path.add(0,n);
 			n=n.getPred();
 		}
-		path.add(0,this.start);
+		this.path.add(0,this.start);
 	}
 
 /**
