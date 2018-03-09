@@ -156,7 +156,7 @@ public class Interface extends JFrame {
       bSelect.addActionListener(new ActionListener () {
         public void actionPerformed(ActionEvent e) {
             Interface.this.dispose();
-            new SelectMap();
+            new SelectMap(Interface.this.modeIad);
         }
       });
       zoneControl.add(bSelect);

@@ -14,8 +14,11 @@ public class SelectMap extends JFrame {
 
   private JList<String> list;
   private CanvasGame can;
+  private boolean modeIad;
 
-  public SelectMap () {
+  public SelectMap (boolean modeIad) {
+
+    this.modeIad = modeIad;
 
     int sizeTile = 20;
 
@@ -36,7 +39,7 @@ public class SelectMap extends JFrame {
           map.readingMap();
           b.createGrid(map.getMap());
           SelectMap.this.dispose();
-          new Interface(b,map,false,true,false);
+          new Interface(b,map,SelectMap.this.modeIad,true,false);
         }
       }
     });

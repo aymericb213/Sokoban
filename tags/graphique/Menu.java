@@ -48,7 +48,7 @@ public class Menu extends JFrame {
     bMap.addActionListener(new ActionListener () {
       public void actionPerformed(ActionEvent e){
           Menu.this.dispose();
-          new SelectMap ();
+          new SelectMap (false);
       }
     });
 
@@ -57,16 +57,8 @@ public class Menu extends JFrame {
     bIa.setFocusable(false);
     bIa.addActionListener(new ActionListener () {
       public void actionPerformed(ActionEvent e){
-        int nbMaps = new File("maps").list().length - 2;
-        Random r = new Random();
-        int n = r.nextInt(nbMaps) + 1;
-        Board b = new Board();
-        MapReader map = new MapReader("");
-        map.setFile("maps/map" + n + ".xsb");
-        map.readingMap();
-        b.createGrid(map.getMap());
         Menu.this.dispose();
-        new Interface(b,map,true,false,false);
+        new SelectMap (true);
       }
     });
 
@@ -100,7 +92,7 @@ public class Menu extends JFrame {
     JLabel backgroundButton = new JLabel(new ImageIcon("graphique/images/caisseMenu.png"));
 
     JPanel menu = new JPanel();
-    backgroundButton.setLayout(new FlowLayout(FlowLayout.CENTER,0,90));
+    backgroundButton.setLayout(new FlowLayout(FlowLayout.CENTER,0,95));
     backgroundButton.add(menu);
 
 
