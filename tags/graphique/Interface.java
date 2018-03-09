@@ -47,7 +47,7 @@ public class Interface extends JFrame {
     JButton bSave = new JButton("Save");
     bSave.addActionListener(new ActionListener () {
       public void actionPerformed(ActionEvent e) {
-        Save save = new Save(b.createArrayList(),"save");
+        Save save = new Save(b.createArrayList(),Interface.this.map.getName());
         save.saveMap();
         JOptionPane popupSave = new JOptionPane();
         Timer timer = new Timer(1000,new ActionListener () {
@@ -68,8 +68,12 @@ public class Interface extends JFrame {
         MapReader mapLoad = new MapReader("");
         mapLoad.setFile("save/save.xsb");
         mapLoad.readingMap();
-        Interface.this.b.createGrid(mapLoad.getMap());
+        Interface.this.b.createGrid(mapLoad.getSaveMap());
         Interface.this.can.update();
+        mapLoad.readingSaveMap();
+        Interface.this.map = mapLoad;
+        Interface.this.dispose();
+        new Interface(Interface.this.b, Interface.this.map, Interface.this.modeIad, Interface.this.modeSelect, Interface.this.random);
         JOptionPane popupLoad = new JOptionPane();
         Timer timer = new Timer(1000,new ActionListener () {
           public void actionPerformed(ActionEvent e) {

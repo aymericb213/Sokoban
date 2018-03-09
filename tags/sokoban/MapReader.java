@@ -62,6 +62,46 @@ public class MapReader {
   }
 
 
+  public void readingSaveMap() {
+    try {
+      BufferedReader map = new BufferedReader (new FileReader (this.file));
+      ArrayList<String> mapToString = new ArrayList<>();
+      String line = map.readLine();
+      this.file = "maps/" + line + ".xsb";
+      while ((line = map.readLine()) != null) {
+        mapToString.add(line);
+      }
+      System.out.println("" + mapToString);
+      this.map = mapToString;
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
+  }
+
+
+  /**
+    * recupere le nom de la map dans file
+  */
+  public String getName() {
+    String name = "";
+    boolean point = false;
+    int i = this.file.length() - 1;
+    char ch = this.file.charAt(i);
+
+    while (ch != '/') {
+      if (point) {
+        name = ch + name;
+      }
+      if (ch == '.') {
+        point = true;
+      }
+      i -= 1;
+      ch = this.file.charAt(i);
+    }
+    return name;
+  }
+
+
 	/**
 		* Accesseur de l'attribut map.
 		* @return La valeur de map.
@@ -69,6 +109,18 @@ public class MapReader {
   public ArrayList<String> getMap() {
 		ArrayList<String> mapCopy = new ArrayList<> ();
     for (int i = 0; i<this.map.size(); i++) {
+      mapCopy.add(this.map.get(i));
+    }
+    return mapCopy;
+  }
+
+  /**
+		* Accesseur de l'attribut map pour charger une sauvegarde.
+		* @return La valeur de map.
+	*/
+  public ArrayList<String> getSaveMap() {
+    ArrayList<String> mapCopy = new ArrayList<> ();
+    for (int i = 1; i<this.map.size(); i++) {
       mapCopy.add(this.map.get(i));
     }
     return mapCopy;

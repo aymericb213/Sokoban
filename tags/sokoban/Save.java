@@ -13,7 +13,8 @@ public class Save {
 
   public Save(ArrayList<String> mapToSave, String name) {
     this.map = mapToSave;
-    this.path = "save/"+name+".xsb";
+    this.path = "save/save.xsb";
+    this.name = name;
   }
 
   public void saveMap () {
@@ -27,6 +28,8 @@ public class Save {
 
       BufferedWriter output = new BufferedWriter(fw);
       String temp = "";
+      boolean firstLine = true;
+      temp += this.name + "\n";
       for (String line: this.map) {
         temp += line + "\n";
       }
