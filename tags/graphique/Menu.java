@@ -13,10 +13,15 @@ import javax.imageio.ImageIO;
 
 public class Menu extends JFrame {
 
-  public Menu () {
+  private String playerName;
+
+  public Menu (String playerName) {
+
+    this.playerName = playerName;
+
     this.setSize(720,620);
     this.setResizable(false);
-    this.setTitle("Main menu");
+    this.setTitle("Main menu (" + this.playerName + ")");
 
 
     JPanel contenent = new JPanel();
@@ -31,6 +36,7 @@ public class Menu extends JFrame {
     bPlay.setFont(new Font("Arial", Font.BOLD, fontSize));
     bPlay.setFocusable(false);
     bPlay.addActionListener(new ActionListener () {
+      @Override
       public void actionPerformed(ActionEvent e){
           Board b = new Board();
           MapReader map = new MapReader("");
@@ -38,7 +44,7 @@ public class Menu extends JFrame {
           map.readingMap();
           b.createGrid(map.getMap());
           Menu.this.dispose();
-          new Interface(b,map,false,false,false);
+          new Interface(b,map,Menu.this.playerName,false,false,false);
       }
     });
 
@@ -46,9 +52,10 @@ public class Menu extends JFrame {
     bMap.setFont(new Font("Arial", Font.BOLD, fontSize));
     bMap.setFocusable(false);
     bMap.addActionListener(new ActionListener () {
+      @Override
       public void actionPerformed(ActionEvent e){
           Menu.this.dispose();
-          new SelectMap (false);
+          new SelectMap (false,Menu.this.playerName);
       }
     });
 
@@ -56,9 +63,10 @@ public class Menu extends JFrame {
     bIa.setFont(new Font("Arial", Font.BOLD, fontSize));
     bIa.setFocusable(false);
     bIa.addActionListener(new ActionListener () {
+      @Override
       public void actionPerformed(ActionEvent e){
         Menu.this.dispose();
-        new SelectMap (true);
+        new SelectMap (true, Menu.this.playerName);
       }
     });
 
@@ -66,6 +74,7 @@ public class Menu extends JFrame {
     bRand.setFont(new Font("Arial", Font.BOLD, fontSize));
     bRand.setFocusable(false);
     bRand.addActionListener(new ActionListener () {
+      @Override
       public void actionPerformed(ActionEvent e){
         int nbMaps = new File("maps").list().length - 2;
         Random r = new Random();
@@ -76,7 +85,7 @@ public class Menu extends JFrame {
         map.readingMap();
         b.createGrid(map.getMap());
         Menu.this.dispose();
-        new Interface(b,map,false,false,true);
+        new Interface(b,map,Menu.this.playerName,false,false,true);
       }
     });
 
@@ -84,6 +93,7 @@ public class Menu extends JFrame {
     bQuit.setFont(new Font("Arial", Font.BOLD, fontSize));
     bQuit.setFocusable(false);
     bQuit.addActionListener(new ActionListener () {
+      @Override
       public void actionPerformed(ActionEvent e){
           Menu.this.dispose();
       }

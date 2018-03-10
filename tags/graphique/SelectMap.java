@@ -13,12 +13,14 @@ import javax.imageio.ImageIO;
 public class SelectMap extends JFrame {
 
   private JList<String> list;
+  private String playerName;
   private CanvasGame can;
   private boolean modeIad;
 
-  public SelectMap (boolean modeIad) {
+  public SelectMap (boolean modeIad, String playerName) {
 
     this.modeIad = modeIad;
+    this.playerName = playerName;
 
     int sizeTile = 20;
 
@@ -30,6 +32,7 @@ public class SelectMap extends JFrame {
 
     JButton bPlay = new JButton("Play");
     bPlay.addActionListener(new ActionListener () {
+      @Override
       public void actionPerformed(ActionEvent e){
         int indice = SelectMap.this.list.getSelectedIndex();
         if (!SelectMap.this.list.isSelectionEmpty()) {
@@ -39,16 +42,17 @@ public class SelectMap extends JFrame {
           map.readingMap();
           b.createGrid(map.getMap());
           SelectMap.this.dispose();
-          new Interface(b,map,SelectMap.this.modeIad,true,false);
+          new Interface(b,map,SelectMap.this.playerName,SelectMap.this.modeIad,true,false);
         }
       }
     });
 
     JButton bBack = new JButton("Back to menu");
     bBack.addActionListener(new ActionListener () {
+      @Override
       public void actionPerformed(ActionEvent e){
           SelectMap.this.dispose();
-          new Menu();
+          new Menu(SelectMap.this.playerName);
       }
     });
 
@@ -69,6 +73,7 @@ public class SelectMap extends JFrame {
     scrollPane.setViewportView(list);
 
     this.list.addListSelectionListener(new ListSelectionListener () {
+      @Override
       public void valueChanged(ListSelectionEvent e) {
         int indice = SelectMap.this.list.getSelectedIndex();
         Board b = new Board();

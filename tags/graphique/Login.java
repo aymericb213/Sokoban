@@ -11,6 +11,9 @@ import java.io.*;
 
 public class Login extends JFrame {
 
+  private JList<String> list;
+  private JTextField textRegister;
+
   public Login () {
 
     this.setTitle("Login");
@@ -21,22 +24,37 @@ public class Login extends JFrame {
     Vector<String> vect = new Vector<>();
     String[] players = new File("save/players").list();
     for (String s : players){
-      vect.add(s);
+      vect.add(s.split("\\.")[0]);
     }
-    JList<String> list = new JList<>(vect);
-    list.setPreferredSize(new Dimension(150,200));
-    list.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-    list.setSelectedIndex(0);
+    this.list = new JList<>(vect);
+    this.list.setPreferredSize(new Dimension(150,200));
+    this.list.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+    this.list.setSelectedIndex(0);
 
     JScrollPane scrollPane = new JScrollPane();
-    scrollPane.setViewportView(list);
+    scrollPane.setViewportView(this.list);
 
     JButton bLogin = new JButton("Login");
+    bLogin.addActionListener(new ActionListener(){
+      @Override
+      public void actionPerformed(ActionEvent e) {
+        Login.this.dispose();
+        new Menu(Login.this.list.getSelectedValue());
+      }
+    });
     JButton bRegister = new JButton("Register");
+    bRegister.addActionListener(new ActionListener(){
+      @Override
+      public void actionPerformed(ActionEvent e) {
+        String newPlayer = Login.this.textRegister.getText();
+        Login.this.dispose();
+        new Menu(newPlayer);
+      }
+    });
 
-    JTextField textRegister = new JTextField();
-    textRegister.setHorizontalAlignment(JTextField.CENTER);
-    textRegister.setPreferredSize(new Dimension(150,25));
+    this.textRegister = new JTextField();
+    this.textRegister.setHorizontalAlignment(JTextField.CENTER);
+    this.textRegister.setPreferredSize(new Dimension(150,25));
 
     zoneLogin.setLayout(new GridBagLayout());
     GridBagConstraints gcg = new GridBagConstraints();
@@ -52,7 +70,7 @@ public class Login extends JFrame {
 
     gcd.gridx = 0;
     gcd.gridy = 0;
-    zoneRegister.add(textRegister,gcd);
+    zoneRegister.add(this.textRegister,gcd);
     gcd.gridy = 1;
     zoneRegister.add(bRegister,gcd);
 
