@@ -53,9 +53,13 @@ public class Login extends JFrame {
         if (askDel == JOptionPane.YES_OPTION) {
           PlayerSave delPlayer = new PlayerSave(name);
           delPlayer.deletePlayer();
+          Login.this.dispose();
+          new Login();
         }
       }
     });
+
+    JLabel lab = new JLabel("Enter your name :");
 
     JButton bRegister = new JButton("Register");
     bRegister.addActionListener(new ActionListener(){
@@ -87,7 +91,7 @@ public class Login extends JFrame {
     zoneLogin.add(scrollPane,gcg);
     gcg.gridy = 1;
     zoneLogin.add(bLogin,gcg);
-    gcg.gridx = 1;
+    gcg.gridy = 2;
     zoneLogin.add(bDelete,gcg);
 
     zoneRegister.setLayout(new GridBagLayout());
@@ -95,8 +99,10 @@ public class Login extends JFrame {
 
     gcd.gridx = 0;
     gcd.gridy = 0;
-    zoneRegister.add(this.textRegister,gcd);
+    zoneRegister.add(lab,gcd);
     gcd.gridy = 1;
+    zoneRegister.add(this.textRegister,gcd);
+    gcd.gridy = 2;
     zoneRegister.add(bRegister,gcd);
 
     this.setLayout(new GridLayout(1,2));
