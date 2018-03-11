@@ -39,4 +39,11 @@ public class PlayerSave {
     }
   }
 
+  public void deletePlayer() {
+      File file = new File(this.path);
+      if (file.exists()){
+        file.delete();
+      }
+  }
+
 }

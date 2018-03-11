@@ -187,6 +187,7 @@ public class Interface extends JFrame {
           Random r = new Random();
           int n = r.nextInt(nbMaps) + 1;
           Board b = new Board(n);
+          b.setPlayerName(Interface.this.playerName);
           MapReader map = new MapReader("");
           map.setFile("maps/map" + n + ".xsb");
           map.readingMap();
@@ -209,7 +210,7 @@ public class Interface extends JFrame {
     } else {
       this.can = new CanvasGame(this.b, 40);
     }
-    
+
     KeyAction key =  new KeyAction (this.b, this.can);
     this.setFocusable(true);
 

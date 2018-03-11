@@ -43,6 +43,20 @@ public class Login extends JFrame {
         new Menu(Login.this.list.getSelectedValue());
       }
     });
+
+    JButton bDelete = new JButton("Delete");
+    bDelete.addActionListener(new ActionListener(){
+      @Override
+      public void actionPerformed(ActionEvent e) {
+        String name = Login.this.list.getSelectedValue();
+        int askDel = JOptionPane.showConfirmDialog (null, "Do you want to delete " + name + " ?","Delete",JOptionPane.YES_NO_OPTION);
+        if (askDel == JOptionPane.YES_OPTION) {
+          PlayerSave delPlayer = new PlayerSave(name);
+          delPlayer.deletePlayer();
+        }
+      }
+    });
+
     JButton bRegister = new JButton("Register");
     bRegister.addActionListener(new ActionListener(){
       @Override
@@ -73,6 +87,8 @@ public class Login extends JFrame {
     zoneLogin.add(scrollPane,gcg);
     gcg.gridy = 1;
     zoneLogin.add(bLogin,gcg);
+    gcg.gridx = 1;
+    zoneLogin.add(bDelete,gcg);
 
     zoneRegister.setLayout(new GridBagLayout());
     GridBagConstraints gcd = new GridBagConstraints();
