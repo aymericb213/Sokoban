@@ -19,10 +19,11 @@ public class Menu extends JFrame {
 
     this.playerName = playerName;
 
-    this.setSize(720,620);
     this.setResizable(false);
     this.setTitle("Main menu (" + this.playerName + ")");
 
+    JPanel allContenent = new JPanel();
+    allContenent.setPreferredSize(new Dimension(700,600));
 
     JPanel contenent = new JPanel();
 
@@ -133,7 +134,10 @@ public class Menu extends JFrame {
     background.setLayout(new FlowLayout());
     background.add(contenent);
 
-    this.add(background);
+    allContenent.add(background);
+    this.add(allContenent);
+    this.setLayout(new FlowLayout(FlowLayout.CENTER,0,-5));
+    pack();
 
     this.setLocationRelativeTo(null);
     this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
