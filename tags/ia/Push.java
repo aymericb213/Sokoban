@@ -1,5 +1,7 @@
 package ia;
 
+import java.util.ArrayList;
+
 public class Push {
 
 	public enum Direction {
@@ -14,6 +16,13 @@ public class Push {
 		Direction(int x, int y) {
 			this.x=x;
 			this.y=y;
+		}
+
+		public ArrayList<Integer> getCoords() {
+			ArrayList<Integer> l = new ArrayList<Integer>();
+			l.add(this.x);
+			l.add(this.y);
+			return l;
 		}
 	}
 

@@ -33,9 +33,8 @@ public class Astar {
 	* Algorithme A*.
 */
 	public void pathSearch() {
-		this.path=new ArrayList<Node>();
-		this.path.add(new Node());
 		PathCost evals= new PathCost();
+		boolean pathFound=false;
 		this.waitingList.add(this.start);
 		evals.setExplMap(evals.initMap(this.level.getSize()));
 		evals.setFullMap(evals.initMap(this.level.getSize()));
@@ -46,8 +45,9 @@ public class Astar {
 			Node current= minimumCost(evals.getFullMap());
 			if (current.equals(this.goal)) {
 				this.goal=current;
+				System.out.println("Chemin vers " + this.goal + " trouvé");
+				pathFound=true;
 				buildFullPath();
-				break;
 			}
 			this.waitingList.remove(current);
 			this.exploredList.add(current);
@@ -68,7 +68,9 @@ public class Astar {
 				}
 			}
 		}
-	//	System.out.println("Aucun chemin possible vers " + this.goal);
+		if(!(pathFound)) {
+		System.out.println("Aucun chemin possible vers " + this.goal);
+		}
 	}
 
 /**
