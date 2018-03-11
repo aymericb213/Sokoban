@@ -17,14 +17,16 @@ public class Interface extends JFrame {
   private Board b;
   private MapReader map;
   private CanvasGame can;
+  private String playerName;
   private boolean modeIad;
   private boolean modeSelect;
   private boolean random;
   private static int nbMapPlay = 1;
 
-  public Interface(Board b, MapReader map, boolean modeIad, boolean modeSelect, boolean random) {
+  public Interface(Board b, MapReader map, String playerName, boolean modeIad, boolean modeSelect, boolean random) {
     this.b = b;
     this.map = map;
+    this.playerName = playerName;
     this.modeIad = modeIad;
     this.modeSelect = modeSelect;
     this.random = random;
@@ -35,6 +37,7 @@ public class Interface extends JFrame {
 
     JButton bReset = new JButton("Restart");
     bReset.addActionListener(new ActionListener () {
+      @Override
       public void actionPerformed(ActionEvent e) {
         Interface.this.map.readingMap();
         Interface.this.b.createGrid(Interface.this.map.getMap());
@@ -46,8 +49,9 @@ public class Interface extends JFrame {
 
     JButton bSave = new JButton("Save");
     bSave.addActionListener(new ActionListener () {
+      @Override
       public void actionPerformed(ActionEvent e) {
-        Save save = new Save(b.createArrayList(),"save");
+        Save save = new Save(b.createArrayList(),Interface.this.map.getName());
         save.saveMap();
         JOptionPane popupSave = new JOptionPane();
         Timer timer = new Timer(1000,new ActionListener () {
@@ -64,12 +68,17 @@ public class Interface extends JFrame {
 
     JButton bLoad = new JButton("Load");
     bLoad.addActionListener(new ActionListener () {
+      @Override
       public void actionPerformed(ActionEvent e) {
         MapReader mapLoad = new MapReader("");
         mapLoad.setFile("save/save.xsb");
         mapLoad.readingMap();
-        Interface.this.b.createGrid(mapLoad.getMap());
+        Interface.this.b.createGrid(mapLoad.getSaveMap());
         Interface.this.can.update();
+        mapLoad.readingSaveMap();
+        Interface.this.map = mapLoad;
+        Interface.this.dispose();
+        new Interface(Interface.this.b, Interface.this.map, Interface.this.playerName, Interface.this.modeIad, Interface.this.modeSelect, Interface.this.random);
         JOptionPane popupLoad = new JOptionPane();
         Timer timer = new Timer(1000,new ActionListener () {
           public void actionPerformed(ActionEvent e) {
@@ -85,6 +94,7 @@ public class Interface extends JFrame {
 
     JButton bCancel = new JButton("Cancel");
     bCancel.addActionListener(new ActionListener () {
+        @Override
         public void actionPerformed(ActionEvent e){
           Interface.this.map.setFile("save/cancel.xsb");
           Interface.this.map.readingCancel();
@@ -97,10 +107,11 @@ public class Interface extends JFrame {
 
     JButton bQuit = new JButton("Back to menu");
     bQuit.addActionListener(new ActionListener () {
+        @Override
         public void actionPerformed(ActionEvent e){
           Interface.nbMapPlay = 1;
           Interface.this.dispose();
-          new Menu();
+          new Menu(Interface.this.playerName);
         }
     });
 
@@ -115,6 +126,7 @@ public class Interface extends JFrame {
       nbMapPlay ++;
       JButton bNext = new JButton("Next level");
       bNext.addActionListener(new ActionListener () {
+        @Override
         public void actionPerformed(ActionEvent e) {
           int nbMaps = new File("maps").list().length;
           if (nbMapPlay<=nbMaps) {
@@ -124,15 +136,16 @@ public class Interface extends JFrame {
             map.readingMap();
             b.createGrid(map.getMap());
             Interface.this.dispose();
-            new Interface(b,map,false,false,false);
+            new Interface(b,map,Interface.this.playerName,false,false,false);
           } else {
             JOptionPane popupLoad = new JOptionPane();
             Timer timer = new Timer(3000,new ActionListener () {
+              @Override
               public void actionPerformed(ActionEvent e) {
                 JOptionPane.getRootFrame().dispose();
                 Interface.nbMapPlay = 1;
                 Interface.this.dispose();
-                new Menu();
+                new Menu(Interface.this.playerName);
               }
             });
             timer.start();
@@ -154,9 +167,10 @@ public class Interface extends JFrame {
 
       JButton bSelect = new JButton("Select map");
       bSelect.addActionListener(new ActionListener () {
+        @Override
         public void actionPerformed(ActionEvent e) {
             Interface.this.dispose();
-            new SelectMap();
+            new SelectMap(Interface.this.modeIad, Interface.this.playerName);
         }
       });
       zoneControl.add(bSelect);
@@ -164,6 +178,7 @@ public class Interface extends JFrame {
 
       JButton bRand = new JButton("Other map");
       bRand.addActionListener(new ActionListener () {
+        @Override
         public void actionPerformed(ActionEvent e){
           int nbMaps = new File("maps").list().length;
           Random r = new Random();
@@ -175,9 +190,9 @@ public class Interface extends JFrame {
           b.createGrid(map.getMap());
           Interface.this.dispose();
           if (Interface.this.random) {
-            new Interface(b,map,false,false,true);
+            new Interface(b,map,Interface.this.playerName,false,false,true);
           } else {
-            new Interface(b,map,true,false,false);
+            new Interface(b,map,Interface.this.playerName,true,false,false);
           }
         }
       });
