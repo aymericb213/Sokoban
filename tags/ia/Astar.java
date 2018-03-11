@@ -11,7 +11,6 @@ public class Astar {
 
 	private ArrayList<Node> exploredList;
 	private ArrayList<Node> waitingList;
-	private ArrayList<Node> neighboursList;
 	private Node start;
 	private Node goal;
 	private Board level;
