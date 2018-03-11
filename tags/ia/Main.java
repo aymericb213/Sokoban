@@ -23,6 +23,11 @@ public class Main {
 		test.accessiblePushes();
 		test.computeValue();
 		System.out.println(test);
+		test =test.push(test.getPushes().get(0));
+		System.out.println(b);
+		test.accessiblePushes();
+		test.computeValue();
+		System.out.println(test);
 		String totalPath="";
 /*
 		Astar algo=new Astar();

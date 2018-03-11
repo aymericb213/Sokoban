@@ -65,13 +65,13 @@ public class State {
 		to_push_position.setStart(start);
 		to_push_position.setGoal(push_position);
 		to_push_position.pathSearch();
-		for (int i=1; i<to_push_position.getPath().size(); i++) {
+		for (int i=1; i<to_push_position.getPath().size(); i++) {//déplacement à la position de poussée
 			ArrayList<Integer> nextMove = new ArrayList<>();
 			nextMove.add(to_push_position.getPath().get(i).getX()-p.getX());
 			nextMove.add(to_push_position.getPath().get(i).getY()-p.getY());
 			p.move(this.level,nextMove);
 			}
-		p.move(this.level,move.getDir().getCoords());
+		p.move(this.level,move.getDir().getCoords());//poussée de la caisse
 		State succ_state = new State(this.level);
 		return succ_state;
 	}
@@ -103,6 +103,6 @@ public class State {
 	 for (Push m : this.lPush) {
 		 chPushes+="(" + m.toString() + ") ; ";
 	 }
-	 return "Position du joueur : (" + p.getX() + "," + p.getY() + ")\nPosition des caisses : " + chCrates + "\nListe des coups : " + chPushes + "\nEtat final : " + this.level.getOver() + "\nValeur : " + this.getValue();
+	 return "Position du joueur : (" + p.getX() + "," + p.getY() + ")\nPosition des caisses : " + chCrates + "\nListe des coups : " + chPushes + "\nEtat final : " + this.level.getOver() + "\nValeur : " + this.value;
  }
 }
