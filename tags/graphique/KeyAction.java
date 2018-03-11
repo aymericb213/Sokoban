@@ -13,6 +13,7 @@ public class KeyAction extends KeyAdapter {
 
   private Board b;
   private CanvasGame can;
+  private int level;
   private boolean isDab;
   private boolean playerMove;
 
@@ -73,6 +74,16 @@ public class KeyAction extends KeyAdapter {
           this.b.setOver(true);
           if (this.b.allPlaced()) {
             this.can.setPlayer("graphique/images/persoDab.png");
+            System.out.println("oitn " + this.b.getPlayerName());
+            PlayerReader read = new PlayerReader(this.b.getPlayerName());
+            int niveauPlayer = read.getLevel();
+            System.out.println(this.b.getPlayerName());
+            System.out.println("e " + this.b.getLevel() + " niv " + niveauPlayer);
+            if (this.b.getLevel() == niveauPlayer) {
+              System.out.println("b " + this.b.getLevel() + " niv " + niveauPlayer);
+              PlayerSave pSave = new PlayerSave(this.b.getPlayerName(), niveauPlayer + 1);
+              pSave.savePlayer();
+            }
           } else {
             this.can.setPlayer("graphique/images/persoPerdu.png");
           }

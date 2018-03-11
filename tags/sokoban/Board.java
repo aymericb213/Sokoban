@@ -12,6 +12,8 @@ public class Board {
   protected ArrayList<Block> listObjective;
   protected Block player;
   private boolean over;
+  private String playerName;
+  private int level = 1;
 
 	/**
 		* Constructeur de la classe.
@@ -21,6 +23,13 @@ public class Board {
 		this.listCrate = new ArrayList<>();
 		this.listObjective = new ArrayList<>();
     this.over = false;
+  }
+
+  public Board(int level) {
+		this.listCrate = new ArrayList<>();
+		this.listObjective = new ArrayList<>();
+    this.over = false;
+    this.level = level;
   }
 
   /**
@@ -98,10 +107,38 @@ public class Board {
   }
 
   /**
+    * Geter de la variable du nom du joueur.
+    */
+  public String getPlayerName() {
+    return this.playerName;
+  }
+
+  /**
+    * Geter de la variable du niveau jouer.
+    */
+  public int getLevel() {
+    return this.level;
+  }
+
+  /**
+    * Modifie la variable qui indique si la partie est finie.
+    */
+  public void setLevel(int newLevel) {
+    this.level = newLevel;
+  }
+
+  /**
     * Modifie la variable qui indique si la partie est finie.
     */
   public void setOver (boolean bool) {
     this.over = bool;
+  }
+
+  /**
+    * Modifie la variable du nom du joueur.
+    */
+  public void setPlayerName(String newName) {
+    this.playerName = newName;
   }
 
 	/**

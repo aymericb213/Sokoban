@@ -25,6 +25,7 @@ public class Interface extends JFrame {
 
   public Interface(Board b, MapReader map, String playerName, boolean modeIad, boolean modeSelect, boolean random) {
     this.b = b;
+    nbMapPlay = b.getLevel();
     this.map = map;
     this.playerName = playerName;
     this.modeIad = modeIad;
@@ -130,7 +131,8 @@ public class Interface extends JFrame {
         public void actionPerformed(ActionEvent e) {
           int nbMaps = new File("maps").list().length;
           if (nbMapPlay<=nbMaps) {
-            Board b = new Board();
+            Board b = new Board(Interface.nbMapPlay);
+            b.setPlayerName(Interface.this.playerName);
             MapReader map = new MapReader("");
             map.setFile("maps/map" + Interface.nbMapPlay + ".xsb");
             map.readingMap();
@@ -180,10 +182,11 @@ public class Interface extends JFrame {
       bRand.addActionListener(new ActionListener () {
         @Override
         public void actionPerformed(ActionEvent e){
-          int nbMaps = new File("maps").list().length;
+          PlayerReader player = new PlayerReader(Interface.this.playerName);
+          int nbMaps = player.getLevel();
           Random r = new Random();
           int n = r.nextInt(nbMaps) + 1;
-          Board b = new Board();
+          Board b = new Board(n);
           MapReader map = new MapReader("");
           map.setFile("maps/map" + n + ".xsb");
           map.readingMap();
@@ -191,8 +194,6 @@ public class Interface extends JFrame {
           Interface.this.dispose();
           if (Interface.this.random) {
             new Interface(b,map,Interface.this.playerName,false,false,true);
-          } else {
-            new Interface(b,map,Interface.this.playerName,true,false,false);
           }
         }
       });
@@ -208,6 +209,7 @@ public class Interface extends JFrame {
     } else {
       this.can = new CanvasGame(this.b, 40);
     }
+    
     KeyAction key =  new KeyAction (this.b, this.can);
     this.setFocusable(true);
 
@@ -224,7 +226,7 @@ public class Interface extends JFrame {
     add(zoneControl,gc);
 
     if (this.modeIad) {
-      Board bIa = new Board();
+      Board bIa = new Board(nbMapPlay);
       bIa.createGrid(map.getMap());
       CanvasGame canIa = new CanvasGame(bIa,30);
       gc.gridx = 2;

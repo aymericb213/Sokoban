@@ -38,9 +38,12 @@ public class Menu extends JFrame {
     bPlay.addActionListener(new ActionListener () {
       @Override
       public void actionPerformed(ActionEvent e){
-          Board b = new Board();
+          PlayerReader player = new PlayerReader(Menu.this.playerName);
+          int niveau = player.getLevel();
+          Board b = new Board(niveau);
+          b.setPlayerName(Menu.this.playerName);
           MapReader map = new MapReader("");
-          map.setFile("maps/map1.xsb");
+          map.setFile("maps/map" + niveau + ".xsb");
           map.readingMap();
           b.createGrid(map.getMap());
           Menu.this.dispose();
@@ -76,10 +79,12 @@ public class Menu extends JFrame {
     bRand.addActionListener(new ActionListener () {
       @Override
       public void actionPerformed(ActionEvent e){
-        int nbMaps = new File("maps").list().length - 2;
+        PlayerReader player = new PlayerReader(Menu.this.playerName);
+        int nbMaps = player.getLevel();
         Random r = new Random();
         int n = r.nextInt(nbMaps) + 1;
-        Board b = new Board();
+        Board b = new Board(n);
+        b.setPlayerName(Menu.this.playerName);
         MapReader map = new MapReader("");
         map.setFile("maps/map" + n + ".xsb");
         map.readingMap();

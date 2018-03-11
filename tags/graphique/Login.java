@@ -12,6 +12,7 @@ import java.io.*;
 public class Login extends JFrame {
 
   private JList<String> list;
+  private Vector<String> vect;
   private JTextField textRegister;
 
   public Login () {
@@ -21,7 +22,7 @@ public class Login extends JFrame {
     JPanel zoneLogin = new JPanel();
     JPanel zoneRegister = new JPanel();
 
-    Vector<String> vect = new Vector<>();
+    this.vect = new Vector<>();
     String[] players = new File("save/players").list();
     for (String s : players){
       vect.add(s.split("\\.")[0]);
@@ -47,8 +48,16 @@ public class Login extends JFrame {
       @Override
       public void actionPerformed(ActionEvent e) {
         String newPlayer = Login.this.textRegister.getText();
-        Login.this.dispose();
-        new Menu(newPlayer);
+        if (newPlayer.length() == 0 || newPlayer.length() >= 15) {
+          JOptionPane.showMessageDialog(null, "The length of your name must be between 1 and 15 characters.", "Error", JOptionPane.INFORMATION_MESSAGE);
+        } else if (Login.this.vect.contains(newPlayer)) {
+          JOptionPane.showMessageDialog(null, "This name is already choisen.", "Error", JOptionPane.INFORMATION_MESSAGE);
+        } else {
+          PlayerSave newPlayerSave = new PlayerSave(newPlayer);
+          newPlayerSave.savePlayer();
+          Login.this.dispose();
+          new Menu(newPlayer);
+        }
       }
     });
 

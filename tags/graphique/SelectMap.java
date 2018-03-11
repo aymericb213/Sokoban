@@ -36,7 +36,8 @@ public class SelectMap extends JFrame {
       public void actionPerformed(ActionEvent e){
         int indice = SelectMap.this.list.getSelectedIndex();
         if (!SelectMap.this.list.isSelectionEmpty()) {
-          Board b = new Board();
+          Board b = new Board(indice + 1);
+          b.setPlayerName(SelectMap.this.playerName);
           MapReader map = new MapReader("");
           map.setFile("maps/map" + (indice + 1) + ".xsb");
           map.readingMap();
@@ -61,7 +62,8 @@ public class SelectMap extends JFrame {
     zoneButton.setLayout(new GridLayout(2,1));
 
     Vector<String> vect = new Vector<>();
-    int nbMaps = new File("maps").list().length;
+    PlayerReader player = new PlayerReader(this.playerName);
+    int nbMaps = player.getLevel();
     for (int i = 1; i<(nbMaps+1); i++) {
       vect.add("Map " + i);
     }
@@ -76,7 +78,8 @@ public class SelectMap extends JFrame {
       @Override
       public void valueChanged(ListSelectionEvent e) {
         int indice = SelectMap.this.list.getSelectedIndex();
-        Board b = new Board();
+        Board b = new Board(indice + 1);
+        b.setPlayerName(SelectMap.this.playerName);
         MapReader map = new MapReader("");
         map.setFile("maps/map" + (indice + 1) + ".xsb");
         map.readingMap();
@@ -86,7 +89,7 @@ public class SelectMap extends JFrame {
       }
     });
 
-    Board b = new Board();
+    Board b = new Board(1);
     MapReader map = new MapReader("");
     map.setFile("maps/map1.xsb");
     map.readingMap();
