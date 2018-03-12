@@ -17,6 +17,12 @@ public class Save {
     this.name = name;
   }
 
+  public Save(ArrayList<String> mapToSave, String file, String name) {
+    this.map = mapToSave;
+    this.path = "save/" + file + ".xsb";
+    this.name = name;
+  }
+
   public void saveMap () {
     try {
       File file = new File(this.path);
@@ -24,15 +30,15 @@ public class Save {
       if (file.exists()){
         file.delete();
       }
-      FileWriter fw = new FileWriter(this.path,true);
+      FileWriter fw = new FileWriter(this.path,false);
 
       BufferedWriter output = new BufferedWriter(fw);
       String temp = "";
-      boolean firstLine = true;
       temp += this.name + "\n";
-      for (String line: this.map) {
+      for (String line : this.map) {
         temp += line + "\n";
       }
+      
       output.write(temp);
 
       output.flush();

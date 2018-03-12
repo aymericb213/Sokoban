@@ -52,7 +52,7 @@ public class Interface extends JFrame {
     bSave.addActionListener(new ActionListener () {
       @Override
       public void actionPerformed(ActionEvent e) {
-        Save save = new Save(b.createArrayList(),Interface.this.map.getName());
+        Save save = new Save(b.createArrayList(),Interface.this.playerName, "map" + Interface.this.b.getLevel());
         save.saveMap();
         JOptionPane popupSave = new JOptionPane();
         Timer timer = new Timer(1000,new ActionListener () {
@@ -71,24 +71,35 @@ public class Interface extends JFrame {
     bLoad.addActionListener(new ActionListener () {
       @Override
       public void actionPerformed(ActionEvent e) {
-        MapReader mapLoad = new MapReader("");
-        mapLoad.setFile("save/save.xsb");
-        mapLoad.readingMap();
-        Interface.this.b.createGrid(mapLoad.getSaveMap());
-        Interface.this.can.update();
-        mapLoad.readingSaveMap();
-        Interface.this.map = mapLoad;
-        Interface.this.dispose();
-        new Interface(Interface.this.b, Interface.this.map, Interface.this.playerName, Interface.this.modeIad, Interface.this.modeSelect, Interface.this.random);
-        JOptionPane popupLoad = new JOptionPane();
-        Timer timer = new Timer(1000,new ActionListener () {
-          public void actionPerformed(ActionEvent e) {
-            JOptionPane.getRootFrame().dispose();
-          }
-        });
-        timer.start();
-        JOptionPane.showMessageDialog(null, "Game loaded", "Load", JOptionPane.INFORMATION_MESSAGE);
-        timer.stop();
+        try {
+          MapReader mapLoad = new MapReader("");
+          mapLoad.setFile("save/" + Interface.this.playerName + ".xsb");
+          mapLoad.readingMap();
+          Interface.this.b.createGrid(mapLoad.getSaveMap());
+          Interface.this.can.update();
+          mapLoad.readingSaveMap();
+          Interface.this.map = mapLoad;
+          Interface.this.b.setOver(false);
+          Interface.this.dispose();
+          new Interface(Interface.this.b, Interface.this.map, Interface.this.playerName, Interface.this.modeIad, Interface.this.modeSelect, Interface.this.random);
+          Timer timer = new Timer(1000,new ActionListener () {
+            public void actionPerformed(ActionEvent e) {
+              JOptionPane.getRootFrame().dispose();
+            }
+          });
+          timer.start();
+          JOptionPane.showMessageDialog(null, "Game loaded", "Load", JOptionPane.INFORMATION_MESSAGE);
+          timer.stop();
+        } catch (Exception except) {
+          Timer timer = new Timer(1000,new ActionListener () {
+            public void actionPerformed(ActionEvent event) {
+              JOptionPane.getRootFrame().dispose();
+            }
+          });
+          timer.start();
+          JOptionPane.showMessageDialog(null, "No save found.", "Load", JOptionPane.INFORMATION_MESSAGE);
+          timer.stop();
+        }
       }
     });
 
@@ -97,12 +108,16 @@ public class Interface extends JFrame {
     bCancel.addActionListener(new ActionListener () {
         @Override
         public void actionPerformed(ActionEvent e){
-          Interface.this.map.setFile("save/cancel.xsb");
-          Interface.this.map.readingCancel();
-          Interface.this.b.createGrid(Interface.this.map.getCancel());
-          Interface.this.b.setOver(false);
-          Interface.this.can.setPlayer("graphique/images/perso.png");
-          Interface.this.can.update();
+          MapReader cancelMap = new MapReader("save/cancel_" + Interface.this.playerName + ".xsb");
+          String cMap = cancelMap.getCancelMapName();
+          if (cMap.equals("map" + Interface.this.b.getLevel())) {
+            Interface.this.map.setFile("save/cancel_" + Interface.this.playerName + ".xsb");
+            Interface.this.map.readingCancel();
+            Interface.this.b.createGrid(Interface.this.map.getCancel());
+            Interface.this.b.setOver(false);
+            Interface.this.can.setPlayer("graphique/images/perso.png");
+            Interface.this.can.update();
+          }
         }
     });
 
@@ -151,7 +166,7 @@ public class Interface extends JFrame {
               }
             });
             timer.start();
-            JOptionPane.showMessageDialog(null, "All map are played, back to menu.", "End", JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(null, "All maps are played, back to menu.", "End", JOptionPane.INFORMATION_MESSAGE);
             timer.stop();
           }
         }

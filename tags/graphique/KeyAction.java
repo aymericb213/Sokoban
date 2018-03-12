@@ -68,7 +68,7 @@ public class KeyAction extends KeyAdapter {
       }
 
       if (!nextMove.isEmpty()) {
-        Save cancel = new Save (this.b.createArrayList(),"cancel");
+        Save cancel = new Save (this.b.createArrayList(),"cancel_" + this.b.getPlayerName(),"map" + this.b.getLevel());
         cancel.saveMap();
         this.movePlayer(nextMove);
         if (this.b.isFinished()) {

@@ -45,6 +45,20 @@ public class MapReader {
   }
 
   /**
+		* Lit le fichier .xsb trouvé avec l'attribut file et en extrait la map d'origine.
+	*/
+  public String getCancelMapName() {
+    String line = "";
+    try {
+      BufferedReader cancel = new BufferedReader (new FileReader (this.file));
+      line = cancel.readLine();
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
+    return line;
+  }
+
+  /**
 		* Lit le fichier .xsb trouvé avec l'attribut file et en extrait un tableau de chaînes de caractères.
 	*/
   public void readingCancel() {
@@ -52,6 +66,7 @@ public class MapReader {
       BufferedReader cancel = new BufferedReader (new FileReader (this.file));
       ArrayList<String> mapToString = new ArrayList<>();
       String line;
+      String firstLine = cancel.readLine();
       while ((line = cancel.readLine()) != null) {
         mapToString.add(line);
       }
@@ -71,7 +86,6 @@ public class MapReader {
       while ((line = map.readLine()) != null) {
         mapToString.add(line);
       }
-      System.out.println("" + mapToString);
       this.map = mapToString;
     } catch (IOException e) {
       e.printStackTrace();
