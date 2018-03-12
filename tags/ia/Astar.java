@@ -44,7 +44,7 @@ public class Astar {
 			Node current= minimumCost(evals.getFullMap());
 			if (current.equals(this.goal)) {
 				this.goal=current;
-				System.out.println("Chemin vers " + this.goal + " trouvé");
+				//System.out.println("Chemin vers " + this.goal + " trouvé");
 				pathFound=true;
 				buildFullPath();
 			}
@@ -68,7 +68,7 @@ public class Astar {
 			}
 		}
 		if(!(pathFound)) {
-		System.out.println("Aucun chemin possible vers " + this.goal);
+		//System.out.println("Aucun chemin possible vers " + this.goal);
 		}
 	}
 

@@ -80,6 +80,10 @@ public class State {
 		return this.level.isFinished();
 	}
 
+	public boolean allPlaced(){
+		return this.level.allPlaced();
+	}
+
 /**
 	* Mutateur du niveau.
 	* @param newBoard
@@ -94,10 +98,12 @@ public class State {
   }
 
  public ArrayList<Push> getPushes() {
+	 this.accessiblePushes();
 	 return this.lPush;
  }
 
  public double getValue() {
+	 this.computeValue();
 	 return this.value;
  }
 

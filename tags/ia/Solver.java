@@ -5,9 +5,8 @@ import java.util.ArrayList;
 
 public class Solver {
 
-	public State state;
-	public Push bestPush;
-	public ArrayList<Node> coup;
+	private State state;
+	private Push bestPush;
 
 	public Solver() {
 		this.state=null;
@@ -19,12 +18,29 @@ public class Solver {
 		this.state=state;
 	}
 
-	public void minmin(){
-
+	public double minmin(State s, int depth){
+		if (depth==0 || s.isFinished()){
+			return s.getValue();
+		}
+		double m = Double.POSITIVE_INFINITY;
+    for (Push coup : s.getPushes()) {
+				System.out.println(s.getLevel());
+        double val=minmin(s.push(coup), depth-1);
+        if (val < m) {
+            m = val;
+						this.bestPush=coup;
+					}
+		}
+		System.out.println("Coup : " + this.bestPush);
+		return m;
 	}
 
-	public ArrayList<Node> getCoup(){
-		return this.coup;
+	public State getState() {
+		return this.state;
+	}
+
+	public Push getBestPush(){
+		return this.bestPush;
 	}
 
 	public String toString() {

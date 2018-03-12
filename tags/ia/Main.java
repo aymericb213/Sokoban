@@ -14,16 +14,16 @@ public class Main {
 		* Résout un niveau de Sokoban à l'aide d'un algorithme de recherche de chemin.
 	*/
 	public static void main(String[] args) throws IOException, InterruptedException {
-		MapReader map = new MapReader("maps/map2.xsb");
+		MapReader map = new MapReader("maps/map1.xsb");
 		map.readingMap();
 		Board b= new Board();
 		b.createGrid(map.getMap());
-		System.out.println(b);
+		// System.out.println(b);
 
-		State test=new State(b);
-		test.accessiblePushes();
-		test.computeValue();
-		System.out.println(test);
+		// State test=new State(b);
+		// test.accessiblePushes();
+		// test.computeValue();
+		// System.out.println(test);
 		// test =test.push(test.getPushes().get(0));
 		// System.out.println(b);
 		// test.accessiblePushes();
@@ -34,20 +34,21 @@ public class Main {
 
 		ArrayList<State> list_state = new ArrayList<>();
 		State present_state=new State(b);
-		Solver ia=new Solver();
-		ia.state=test;
-		ia.bestPush=new Push(4,8);
-		ia.bestPush.setDir(0,-1);
-		ia.coup=new ArrayList<Node>();
-		ia.coup.add(new Node(ia.bestPush.getX(), ia.bestPush.getY()));
-		System.out.println(ia);
-	/*	while (!(present_state.isFinished())){
-			ia.minmin();
-			present_state=present_state.push(ia.getCoup());
+		Solver ia=new Solver(present_state);
 
+		while (!(present_state.isFinished())){
+			double v = ia.minmin(present_state,3);
+			System.out.println(v);
+			present_state=present_state.push(ia.getBestPush());
+			System.out.println(present_state.getLevel());
+			if( present_state.getValue()==0 ) {
+				System.out.println("résolu");
+			} else if (present_state.getValue()==Double.POSITIVE_INFINITY){
+				System.out.println("deadlock");
+			}
 			list_state.add(present_state);
 		}
-*/
+
 /*
 		Astar algo=new Astar();
 		Player p = (Player)b.getPlayer();
