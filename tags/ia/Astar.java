@@ -194,9 +194,6 @@ public class Astar {
 			} else if (diffY==1) {
 				ch="r";
 			}
-			if (this.level.getGrid()[this.path.get(i+1).getX()][this.path.get(i+1).getY()] instanceof Crate) {
-				ch.toUpperCase();
-			}
 			res+=ch;
 		}
 		return res;

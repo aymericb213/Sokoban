@@ -89,6 +89,10 @@ public class State {
 		this.level=newBoard;
 	}
 
+	public Board getLevel() {
+ 	 return this.level;
+  }
+
  public ArrayList<Push> getPushes() {
 	 return this.lPush;
  }

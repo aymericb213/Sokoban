@@ -24,25 +24,30 @@ public class Main {
 		test.accessiblePushes();
 		test.computeValue();
 		System.out.println(test);
-		test =test.push(test.getPushes().get(0));
-		System.out.println(b);
-		test.accessiblePushes();
-		test.computeValue();
-		System.out.println(test);
-		String totalPath="";
+		// test =test.push(test.getPushes().get(0));
+		// System.out.println(b);
+		// test.accessiblePushes();
+		// test.computeValue();
+		// System.out.println(test);
+		// String totalPath="";
 
-		/*
+
 		ArrayList<State> list_state = new ArrayList<>();
 		State present_state=new State(b);
 		Solver ia=new Solver();
-
-		while (!(present_state.isFinished())){
+		ia.state=test;
+		ia.bestPush=new Push(4,8);
+		ia.bestPush.setDir(0,-1);
+		ia.coup=new ArrayList<Node>();
+		ia.coup.add(new Node(ia.bestPush.getX(), ia.bestPush.getY()));
+		System.out.println(ia);
+	/*	while (!(present_state.isFinished())){
 			ia.minmin();
 			present_state=present_state.push(ia.getCoup());
 
 			list_state.add(present_state);
 		}
-	
+*/
 /*
 		Astar algo=new Astar();
 		Player p = (Player)b.getPlayer();
