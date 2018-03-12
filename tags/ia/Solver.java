@@ -24,6 +24,7 @@ public class Solver {
 		}
 		double m = Double.POSITIVE_INFINITY;
     for (Push coup : s.getPushes()) {
+				System.out.println("profondeur : " +depth+", coup : " + coup);
 				System.out.println(s.getLevel());
         double val=minmin(s.push(coup), depth-1);
         if (val < m) {

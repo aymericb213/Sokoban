@@ -31,15 +31,20 @@ public class Main {
 		// System.out.println(test);
 		// String totalPath="";
 
+		Board b2= new Board();
+		b2.createGrid(map.getMap());
 
 		ArrayList<State> list_state = new ArrayList<>();
 		State present_state=new State(b);
-		Solver ia=new Solver(present_state);
 
 		while (!(present_state.isFinished())){
-			double v = ia.minmin(present_state,3);
+			State eval=new State(b2);
+			Solver ia=new Solver(eval);
+			double v = ia.minmin(eval,3);
 			System.out.println(v);
+			System.out.println("Coup retenu : "+ia.getBestPush());
 			present_state=present_state.push(ia.getBestPush());
+
 			System.out.println(present_state.getLevel());
 			if( present_state.getValue()==0 ) {
 				System.out.println("résolu");
