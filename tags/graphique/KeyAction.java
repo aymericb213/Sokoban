@@ -8,6 +8,7 @@ import java.awt.event.*;
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 import sokoban.*;
+import java.io.*;
 
 public class KeyAction extends KeyAdapter {
 
@@ -76,7 +77,8 @@ public class KeyAction extends KeyAdapter {
             this.can.setPlayer("graphique/images/persoDab.png");
             PlayerReader read = new PlayerReader(this.b.getPlayerName());
             int niveauPlayer = read.getLevel();
-            if (this.b.getLevel() == niveauPlayer) {
+            int nbMaps = new File("maps").list().length;
+            if (this.b.getLevel() == niveauPlayer && this.b.getLevel() < nbMaps) {
               PlayerSave pSave = new PlayerSave(this.b.getPlayerName(), niveauPlayer + 1);
               pSave.savePlayer();
             }
