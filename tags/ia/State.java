@@ -76,6 +76,10 @@ public class State {
 		return succ_state;
 	}
 
+	public boolean isFinished(){
+		return this.level.isFinished();
+	}
+
 /**
 	* Mutateur du niveau.
 	* @param newBoard

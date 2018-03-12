@@ -7,6 +7,7 @@ public class Solver {
 
 	private State state;
 	private Push bestPush;
+	private ArrayList<Node> coup;
 
 	public Solver() {
 		this.state=null;
@@ -16,5 +17,13 @@ public class Solver {
 	public Solver(State state) {
 		this();
 		this.state=state;
+	}
+
+	public void minmin(){
+		
+	}
+
+	public ArrayList<Node> getCoup(){
+		return this.coup;
 	}
 }

@@ -19,6 +19,7 @@ public class Main {
 		Board b= new Board();
 		b.createGrid(map.getMap());
 		System.out.println(b);
+
 		State test=new State(b);
 		test.accessiblePushes();
 		test.computeValue();
@@ -29,6 +30,19 @@ public class Main {
 		test.computeValue();
 		System.out.println(test);
 		String totalPath="";
+
+		/*
+		ArrayList<State> list_state = new ArrayList<>();
+		State present_state=new State(b);
+		Solver ia=new Solver();
+
+		while (!(present_state.isFinished())){
+			ia.minmin();
+			present_state=present_state.push(ia.getCoup());
+
+			list_state.add(present_state);
+		}
+	
 /*
 		Astar algo=new Astar();
 		Player p = (Player)b.getPlayer();
