@@ -114,6 +114,7 @@ public class Interface extends JFrame {
         public void actionPerformed(ActionEvent e){
           String[] savesPlayers = new File("save/").list();
           ArrayList<String> listSavesPlayers = new ArrayList<>(Arrays.asList(savesPlayers));
+          boolean popup = false;
           if (listSavesPlayers.contains("cancel_" + Interface.this.playerName + ".xsb")) {
             MapReader cancelMap = new MapReader("save/cancel_" + Interface.this.playerName + ".xsb");
             String cMap = cancelMap.getCancelMapName();
@@ -124,8 +125,13 @@ public class Interface extends JFrame {
               Interface.this.b.setOver(false);
               Interface.this.can.setPlayer("graphique/images/perso.png");
               Interface.this.can.update();
+            } else {
+              popup = true;
             }
           } else {
+            popup = true;
+          }
+          if (popup) {
             Timer timer = new Timer(1000,new ActionListener () {
               public void actionPerformed(ActionEvent event) {
                 JOptionPane.getRootFrame().dispose();
