@@ -9,7 +9,6 @@ import java.util.Random;
 	* Classe exécutable du package sokoban.
 	*/
 public class Main {
-
 /**
 	* Lit un fichier .xsb pour afficher en console un niveau de Sokoban jouable
 	* et le met à jour en fonction des entrées utilisateur.
@@ -18,30 +17,69 @@ public class Main {
 	* - si on donne en argument un numéro de map présente dans le dossier maps, le niveau sélectionné sera affiché;
 	* - si l'argument est -r, un niveau est choisi au hasard.
 	*/
-  public static void main (String[] args) throws IOException {
-		int nbMaps = new File("maps").list().length;
+  public static void main (String[] args) {
+    FileManagement manageMap = new FileManagement();
+    String playerName = "";
+    Scanner sc= new Scanner(System.in);
+    String[] players = new File("save/players").list();
+    System.out.println("Select a player: ");
+    for (int i = 0; i<players.length; i++) {
+      System.out.println((i+1)+" : "+players[i].split("\\.")[0]);
+    }
+    String selectPlayer = sc.nextLine();
+    int inputPlayer = Integer.parseInt(selectPlayer);
+    while (!((0 < inputPlayer) && (inputPlayer < (players.length+1)))) {
+      System.out.println("Mauvaise saisie");
+      selectPlayer = sc.nextLine();
+      inputPlayer = Integer.parseInt(selectPlayer);
+    }
+    playerName = players[inputPlayer-1];
+    playerName = playerName.split("\\.")[0];
+    System.out.println("Selected player: "+playerName);
 		int nbMoves = 0;
+    int levelCourant = 0;
+    int nbMapsInDossier = 0;
+    File repertoire = new File("maps/");
+    File[] f = repertoire.listFiles();
+    nbMapsInDossier = f.length;
 		int nextMapNb = 0;
     int state = 1;
     String gContinue = "O";
-    Board b= new Board();
-		Scanner sc= new Scanner(System.in);
 		MapReader map = new MapReader("");
     Random r = new Random();
+    Board b= new Board();
+    PlayerReader playerLevel = new PlayerReader(playerName);
+    int nbMaps = playerLevel.getLevel();
 		if (args.length>0) {
 			if (args[0].equals("-r")) {
-				int n = r.nextInt(nbMaps)+1;
+        r = new Random();
+        int n = r.nextInt(nbMaps) + 1;
+        b.setLevel(n);
 				map.setFile("maps/map" + n + ".xsb");
 			} else if (args[0].equals("-l")) {
-        map.setFile("save/save.xsb");
+        b.setLevel(playerLevel.getLevel());
+        map.setFile("save/"+playerName+".xsb");
+        b.createGrid(map.getSaveMap());
+        map.readingSaveMap();
+
       }
       else {
-				nextMapNb = Integer.parseInt(args[0]);
-				map.setFile("maps/map" + args[0] + ".xsb");
+        if (Integer.parseInt(args[0]) > nbMaps) {
+          nextMapNb = nbMaps;
+          b.setLevel(nbMaps);
+          map.setFile("maps/map" + nbMaps + ".xsb");
+        } else {
+          nextMapNb = Integer.parseInt(args[0]);
+          b.setLevel(Integer.parseInt(args[0]));
+          map.setFile("maps/map" + args[0] + ".xsb");
+        }
 			}
 		} else {
-			map.setFile("maps/map1.xsb");
+      nextMapNb = nbMaps;
+      b.setLevel(nbMaps);
+			map.setFile("maps/map"+nbMaps+".xsb");
 		}
+
 		end :
     while (gContinue.equals("O") || gContinue.equals("o")) {
 			int lenPrint = map.getFile().length();
@@ -64,23 +102,15 @@ public class Main {
 					break end;
 				}
         if (input.equals("L") || input.equals("l")) {
-          map.setFile("maps/save.xsb");
-          map.readingMap();
-          b.createGrid(map.getMap());
-
+          b.createGrid(manageMap.loadMap(playerName, map).getMap());
           break;
         }
         if (input.equals("Save") || input.equals("save")) {
-          Save save = new Save (b.createArrayList(),"save");
-          save.saveMap();
-					System.out.println("\033[H\033[2J");
-					System.out.println("Fichier sauvegardé");
+          manageMap.setSave(b, playerName, playerLevel);
           continue;
         }
         if (input.equals("A") || input.equals("a")) {
-          map.setFile("save/cancel.xsb");
-          map.readingMap();
-          b.createGrid(map.getMap());
+          b.createGrid(manageMap.loadCancel(playerName, map).getMap());
         }
   			if (input.equals("Z") || input.equals("z")) {
   				nextMove.add(-1);
@@ -103,8 +133,7 @@ public class Main {
   				nextMove.add(0);
   				System.out.println("Entrez une commande valide.");
   			}
-        Save cancel = new Save (b.createArrayList(),"cancel");
-        cancel.saveMap();
+        manageMap.setCancel(b, playerName, map, playerLevel);
   			((Player)b.player).move(b, nextMove);
   			nbMoves++;
   			System.out.println("\033[H\033[2J");
@@ -124,12 +153,18 @@ public class Main {
 					}
   			}
         if (!((Crate)c).placed) {
-          System.out.println("ok");
           state = 2;
         }
   		}
       System.out.println(state);
   		if (state == 1){
+        if (playerLevel.getLevel() == b.getLevel()) {
+          int nivPlayer = playerLevel.getLevel();
+          if (nivPlayer == b.getLevel()) {
+            PlayerSave playerSave = new PlayerSave(playerName,nivPlayer+1);
+            playerSave.savePlayer();
+          }
+        }
   			System.out.println("Niveau terminé en " + nbMoves + " déplacements");
         nbMoves = 0;
         System.out.println("Lancer le prochain niveau ? (O/N)");
@@ -140,7 +175,7 @@ public class Main {
 						map.setFile("maps/map" + temp + ".xsb");
           } else {
             nextMapNb++;
-            if (nextMapNb+2 > nbMaps) {
+            if (nextMapNb+2 > nbMapsInDossier) {
               System.out.println("Il n'y a plus de map disponible");
 							break end;
             } else {
