@@ -14,7 +14,7 @@ public class Main {
 		* Résout un niveau de Sokoban à l'aide d'un algorithme de recherche de chemin.
 	*/
 	public static void main(String[] args) throws IOException, InterruptedException {
-		MapReader map = new MapReader("maps/map1.xsb");
+		MapReader map = new MapReader("maps/map3.xsb");
 		map.readingMap();
 		Board b= new Board();
 		b.createGrid(map.getMap());
@@ -31,20 +31,23 @@ public class Main {
 		// System.out.println(test);
 		// String totalPath="";
 
-		Board b2= new Board();
-		b2.createGrid(map.getMap());
+		Board search_board= new Board();
+		search_board.createGrid(map.getMap());
 
 		ArrayList<State> list_state = new ArrayList<>();
 		State present_state=new State(b);
 
 		while (!(present_state.isFinished())){
-			State eval=new State(b2);
+			State eval=new State(search_board);
+			System.out.println(search_board);
 			Solver ia=new Solver(eval);
-			double v = ia.minmin(eval,3);
-			System.out.println(v);
+			double best_state_value = ia.minmin(eval,3);
+			System.out.println(best_state_value);
 			System.out.println("Coup retenu : "+ia.getBestPush());
 			present_state=present_state.push(ia.getBestPush());
-
+			ArrayList<String> gameboard_save=present_state.getLevel().createArrayList();
+			search_board.createGrid(gameboard_save);
+			System.out.println(search_board);
 			System.out.println(present_state.getLevel());
 			if( present_state.getValue()==0 ) {
 				System.out.println("résolu");
