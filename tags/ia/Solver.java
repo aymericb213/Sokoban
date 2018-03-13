@@ -5,17 +5,19 @@ import java.util.ArrayList;
 
 public class Solver {
 
-	private State state;
-	private Push bestPush;
+	public State current_state;
+	private State previous_state;
+	private Push best_push;
 
 	public Solver() {
-		this.state=null;
-		this.bestPush=null;
+		this.current_state=null;
+		this.previous_state=null;
+		this.best_push=null;
 	}
 
 	public Solver(State state) {
 		this();
-		this.state=state;
+		this.current_state=state;
 	}
 
 	public double minmin(State s, int depth){
@@ -27,35 +29,47 @@ public class Solver {
 				System.out.println("profondeur : " +depth+", coup : " + coup);
 				System.out.println(s.getLevel());
         double val=minmin(s.push(coup), depth-1);
-        if (val < m) {
+        if (val < m && !(s.getLevel().equals(this.previous_state.getLevel()))) {
             m = val;
-						this.bestPush=coup;
+						this.best_push=coup;
 					}
 		}
-		System.out.println("Coup : " + this.bestPush);
+		System.out.println("Coup : " + this.best_push);
 		return m;
 	}
 
-	public State getState() {
-		return this.state;
+	public State getPreviousState() {
+		return this.previous_state;
+	}
+
+	public void setPreviousState(State state) {
+		this.previous_state=state;
+	}
+
+	public State getCurrentState() {
+		return this.current_state;
+	}
+
+	public void setCurrentState(State state) {
+		this.current_state=state;
 	}
 
 	public Push getBestPush(){
-		return this.bestPush;
+		return this.best_push;
 	}
 
 	public String toString() {
 		String res="";
-		Player p = (Player)this.state.getLevel().getPlayer();
+		Player p = (Player)this.current_state.getLevel().getPlayer();
 		Node start = new Node(p.getX(), p.getY());
 		Astar dep = new Astar();
-		Node goal= new Node(this.bestPush.getX(), this.bestPush.getY());
-		dep.setLevel(this.state.getLevel());
+		Node goal= new Node(this.best_push.getX(), this.best_push.getY());
+		dep.setLevel(this.current_state.getLevel());
 		dep.setStart(start);
 		dep.setGoal(goal);
 		dep.pathSearch();
 		res+=dep.toString();
-		switch (this.bestPush.getDir()) {
+		switch (this.best_push.getDir()) {
 			case UP:
 				res+="U";
 				break;

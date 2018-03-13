@@ -14,7 +14,7 @@ public class Main {
 		* Résout un niveau de Sokoban à l'aide d'un algorithme de recherche de chemin.
 	*/
 	public static void main(String[] args) throws IOException, InterruptedException {
-		MapReader map = new MapReader("maps/map3.xsb");
+		MapReader map = new MapReader("ia/testmaps/cratemove.xsb");
 		map.readingMap();
 		Board b= new Board();
 		b.createGrid(map.getMap());
@@ -29,34 +29,35 @@ public class Main {
 		// test.accessiblePushes();
 		// test.computeValue();
 		// System.out.println(test);
-		// String totalPath="";
+		String total_path="";
 
 		Board search_board= new Board();
 		search_board.createGrid(map.getMap());
 
 		ArrayList<State> list_state = new ArrayList<>();
 		State present_state=new State(b);
+		Solver ia=new Solver();
 
 		while (!(present_state.isFinished())){
 			State eval=new State(search_board);
-			System.out.println(search_board);
-			Solver ia=new Solver(eval);
+			ia.setCurrentState(eval);
+			ia.setPreviousState(eval);
 			double best_state_value = ia.minmin(eval,3);
-			System.out.println(best_state_value);
 			System.out.println("Coup retenu : "+ia.getBestPush());
+			total_path+=ia.toString();
 			present_state=present_state.push(ia.getBestPush());
+			ia.setPreviousState(present_state);
+			System.out.println("Etat précédent : " + ia.getPreviousState().getLevel());
 			ArrayList<String> gameboard_save=present_state.getLevel().createArrayList();
 			search_board.createGrid(gameboard_save);
-			System.out.println(search_board);
-			System.out.println(present_state.getLevel());
 			if( present_state.getValue()==0 ) {
 				System.out.println("résolu");
+				System.out.println(total_path);
 			} else if (present_state.getValue()==Double.POSITIVE_INFINITY){
 				System.out.println("deadlock");
 			}
 			list_state.add(present_state);
 		}
-
 /*
 		Astar algo=new Astar();
 		Player p = (Player)b.getPlayer();
@@ -69,7 +70,7 @@ public class Main {
 		algo.setStart(start);
 		algo.setGoal(goal);
 		algo.pathSearch();
-		totalPath+=algo.getPath();
+		total_path+=algo.getPath();
 		int iter=0;
 		for (int i=1; i<algo.getPath().size(); i++) {
 			iter++;
