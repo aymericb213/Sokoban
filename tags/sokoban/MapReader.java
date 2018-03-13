@@ -168,4 +168,5 @@ public class MapReader {
 	public void setFile(String newfile) {
 		this.file=newfile;
 	}
+
 }
