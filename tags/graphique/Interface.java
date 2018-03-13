@@ -132,7 +132,7 @@ public class Interface extends JFrame {
               }
             });
             timer.start();
-            JOptionPane.showMessageDialog(null, "No back exist.", "Cancel", JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Can't cancel move.", "Cancel", JOptionPane.INFORMATION_MESSAGE);
             timer.stop();
           }
         }
