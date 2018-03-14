@@ -36,18 +36,21 @@ public class Main {
 
 		ArrayList<State> list_state = new ArrayList<>();
 		State present_state=new State(b);
+
 		Solver ia=new Solver();
 
 		while (!(present_state.isFinished())){
 			State eval=new State(search_board);
 			ia.setCurrentState(eval);
 			ia.setPreviousState(eval);
+			System.out.println("Bonjour");
 			double best_state_value = ia.minmin(eval,3);
-			System.out.println("Coup retenu : "+ia.getBestPush());
-			total_path+=ia.toString();
+			//total_path+=ia.toString();
+			System.out.println(ia.getBestPush());
 			present_state=present_state.push(ia.getBestPush());
+			System.out.println(present_state.getLevel());
+			System.out.println(best_state_value);
 			ia.setPreviousState(present_state);
-			System.out.println("Etat précédent : " + ia.getPreviousState().getLevel());
 			ArrayList<String> gameboard_save=present_state.getLevel().createArrayList();
 			search_board.createGrid(gameboard_save);
 			if( present_state.getValue()==0 ) {

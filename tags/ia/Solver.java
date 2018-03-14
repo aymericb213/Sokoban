@@ -8,11 +8,13 @@ public class Solver {
 	public State current_state;
 	private State previous_state;
 	private Push best_push;
+	private int d;
 
 	public Solver() {
 		this.current_state=null;
 		this.previous_state=null;
 		this.best_push=null;
+		this.d=3;
 	}
 
 	public Solver(State state) {
@@ -21,20 +23,28 @@ public class Solver {
 	}
 
 	public double minmin(State s, int depth){
-		if (depth==0 || s.isFinished()){
-			return s.getValue();
+		if (deth!=this.d && s.getLevel().equals(this.previous_state.getLevel())){
+			System.out.println("pareil");
+			return Double.POSITIVE_INFINITY;
+		}
+
+		if ((depth==0 || s.isFinished())){
+			System.out.println("Debut");
+			double value = s.getValue();
+			System.out.println("Fin");
+			System.out.println(value);
+
+			return value;
 		}
 		double m = Double.POSITIVE_INFINITY;
     for (Push coup : s.getPushes()) {
-				System.out.println("profondeur : " +depth+", coup : " + coup);
-				System.out.println(s.getLevel());
         double val=minmin(s.push(coup), depth-1);
-        if (val < m && !(s.getLevel().equals(this.previous_state.getLevel()))) {
+        if (val < m) {
+					//System.out.println(!(s.getLevel().equals(this.previous_state.getLevel())));
             m = val;
 						this.best_push=coup;
 					}
 		}
-		System.out.println("Coup : " + this.best_push);
 		return m;
 	}
 

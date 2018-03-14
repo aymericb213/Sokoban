@@ -39,6 +39,7 @@ public class State {
 	}
 
 	public void computeValue() {
+		this.value=0;
 		if (this.level.isFinished() && !(this.level.allPlaced())) {
 				this.value=Double.POSITIVE_INFINITY;
 		} else {
@@ -54,6 +55,7 @@ public class State {
 				this.value+=minDist;
 			}
 		}
+		System.out.println("compute value : "+this.value);
 	}
 
 	public State push(Push move) {
@@ -65,6 +67,7 @@ public class State {
 		to_push_position.setStart(start);
 		to_push_position.setGoal(push_position);
 		to_push_position.pathSearch();
+		System.out.println(to_push_position);
 		for (int i=1; i<to_push_position.getPath().size(); i++) {//déplacement à la position de poussée
 			ArrayList<Integer> nextMove = new ArrayList<>();
 			nextMove.add(to_push_position.getPath().get(i).getX()-p.getX());
