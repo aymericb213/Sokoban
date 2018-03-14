@@ -38,8 +38,8 @@ public class Main {
 		State present_state=new State(b);
 
 		Solver ia=new Solver();
-
-		while (!(present_state.isFinished())){
+/*
+		while (!(present_state.isFinished())){*/
 			State eval=new State(search_board);
 			ia.setCurrentState(eval);
 			ia.setPreviousState(eval);
@@ -59,7 +59,7 @@ public class Main {
 			} else if (present_state.getValue()==Double.POSITIVE_INFINITY){
 				System.out.println("deadlock");
 			}
-			list_state.add(present_state);
+			list_state.add(present_state);/*
 		}
 /*
 		Astar algo=new Astar();

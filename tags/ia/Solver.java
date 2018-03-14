@@ -22,29 +22,39 @@ public class Solver {
 		this.current_state=state;
 	}
 
-	public double minmin(State s, int depth){
-		if (deth!=this.d && s.getLevel().equals(this.previous_state.getLevel())){
+	public double minmin(State s, int depth){/*
+		System.out.println("Etat de recherche \n"+s);
+		System.out.println("x : "+((Objective)s.getLevel().getObjectives().get(0)).getX()+"; y : "+((Objective)s.getLevel().getObjectives().get(0)).getY());
+		System.out.println(s.getLevel());
+		/*
+		if (depth!=this.d && s.getLevel().equals(this.previous_state.getLevel())){
 			System.out.println("pareil");
 			return Double.POSITIVE_INFINITY;
 		}
-
+		*/
 		if ((depth==0 || s.isFinished())){
-			System.out.println("Debut");
-			double value = s.getValue();
-			System.out.println("Fin");
-			System.out.println(value);
-
+			double value = s.getValue();/*
+			System.out.println("==================================");
+			System.out.println("valeur de la feuille : "+value);
+			System.out.println("==================================");
+			*/
 			return value;
 		}
+
 		double m = Double.POSITIVE_INFINITY;
     for (Push coup : s.getPushes()) {
+				System.out.println(" ");
+
+				System.out.println(" ");
         double val=minmin(s.push(coup), depth-1);
+				System.out.println("profondeur : "+depth+"; recherche pour le coup : "+coup+"; value : "+val+"; \n liste des coups : "+s.getPushes());
         if (val < m) {
 					//System.out.println(!(s.getLevel().equals(this.previous_state.getLevel())));
             m = val;
 						this.best_push=coup;
 					}
 		}
+
 		return m;
 	}
 
