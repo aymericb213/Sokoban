@@ -7,10 +7,14 @@ import java.io.*;
 public class PlayerSave {
 
   private String path;
+  private String pathSave;
+  private String pathCancel;
   private int level;
 
   public PlayerSave (String name, int level) {
     this.path = "save/players/" + name + ".txt";
+    this.pathSave = "save/" + name + ".xsb";
+    this.pathCancel = "save/cancel_" + name + ".xsb";
     this.level = level;
   }
 
@@ -39,11 +43,19 @@ public class PlayerSave {
     }
   }
 
+  public void deleteFile(File file) {
+    if (file.exists()){
+      file.delete();
+    }
+  }
+
   public void deletePlayer() {
       File file = new File(this.path);
-      if (file.exists()){
-        file.delete();
-      }
+      File fileSave = new File(this.pathSave);
+      File fileCancel = new File(this.pathCancel);
+      deleteFile(file);
+      deleteFile(fileSave);
+      deleteFile(fileCancel);
   }
 
 }
