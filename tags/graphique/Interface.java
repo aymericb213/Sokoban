@@ -38,6 +38,9 @@ public class Interface extends JFrame {
 
     JPanel zoneControl = new JPanel();
 
+    JLabel numberMap = new JLabel("Map " + nbMapPlay);
+    numberMap.setHorizontalAlignment(SwingConstants.CENTER);
+
     JButton bReset = new JButton("Restart");
     bReset.addActionListener(new ActionListener () {
       @Override
@@ -160,8 +163,9 @@ public class Interface extends JFrame {
     this.setLayout(new GridBagLayout());
     GridBagConstraints gc = new GridBagConstraints();
 
-    zoneControl.setLayout(new GridLayout(6,1,10,10));
+    zoneControl.setLayout(new GridLayout(7,1,10,10));
 
+    zoneControl.add(numberMap);
     zoneControl.add(bReset);
 
     if (!this.modeIad && !this.modeSelect && !this.random) {
@@ -171,16 +175,9 @@ public class Interface extends JFrame {
         @Override
         public void actionPerformed(ActionEvent e) {
           int nbMaps = new File("maps").list().length;
-          if (nbMapPlay<=nbMaps) {
-            Board b = new Board(Interface.nbMapPlay);
-            b.setPlayerName(Interface.this.playerName);
-            MapReader map = new MapReader("");
-            map.setFile("maps/map" + Interface.nbMapPlay + ".xsb");
-            map.readingMap();
-            b.createGrid(map.getMap());
-            Interface.this.dispose();
-            new Interface(b,map,Interface.this.playerName,false,false,false);
-          } else {
+          PlayerReader player = new PlayerReader(Interface.this.playerName);
+          int levelPlayerMax = player.getLevel();
+          if (nbMapPlay - 1 == nbMaps) {
             JOptionPane popupLoad = new JOptionPane();
             Timer timer = new Timer(3000,new ActionListener () {
               @Override
@@ -194,6 +191,28 @@ public class Interface extends JFrame {
             timer.start();
             JOptionPane.showMessageDialog(null, "All maps are played, back to menu.", "End", JOptionPane.INFORMATION_MESSAGE);
             timer.stop();
+
+          } else if (nbMapPlay - 1 == levelPlayerMax) {
+            JOptionPane popupLoad = new JOptionPane();
+            Timer timer = new Timer(2000,new ActionListener () {
+              @Override
+              public void actionPerformed(ActionEvent e) {
+                JOptionPane.getRootFrame().dispose();
+              }
+            });
+            timer.start();
+            JOptionPane.showMessageDialog(null, "The next map isn't unlocked.", "Error", JOptionPane.INFORMATION_MESSAGE);
+            timer.stop();
+
+          } else {
+            Board b = new Board(Interface.nbMapPlay);
+            b.setPlayerName(Interface.this.playerName);
+            MapReader map = new MapReader("");
+            map.setFile("maps/map" + Interface.nbMapPlay + ".xsb");
+            map.readingMap();
+            b.createGrid(map.getMap());
+            Interface.this.dispose();
+            new Interface(b,map,Interface.this.playerName,false,false,false);
           }
         }
       });

@@ -58,12 +58,17 @@ public class SelectMap extends JFrame {
 
     zoneButton.add(bPlay);
     zoneButton.add(bBack);
-    zoneButton.setLayout(new GridLayout(2,1));
+    zoneButton.setLayout(new GridLayout(2,1,10,10));
+
+    int nbMapsTotal = new File("maps").list().length;
+    PlayerReader player = new PlayerReader(this.playerName);
+    int levelPlayerMax = player.getLevel();
+
+    JLabel numberMapUnlocked = new JLabel("Map Unlocked " + levelPlayerMax + "/" + nbMapsTotal);
+    numberMapUnlocked.setHorizontalAlignment(SwingConstants.CENTER);
 
     Vector<String> vect = new Vector<>();
-    PlayerReader player = new PlayerReader(this.playerName);
-    int nbMaps = player.getLevel();
-    for (int i = 1; i<(nbMaps+1); i++) {
+    for (int i = 1; i<(levelPlayerMax+1); i++) {
       vect.add("Map " + i);
     }
     this.list = new JList<>(vect);
@@ -87,6 +92,11 @@ public class SelectMap extends JFrame {
       }
     });
 
+    JPanel listAndNbMapUnlocked = new JPanel();
+    listAndNbMapUnlocked.setLayout(new GridLayout(2,1));
+    listAndNbMapUnlocked.add(numberMapUnlocked);
+    listAndNbMapUnlocked.add(scrollPane);
+
     Board b = new Board(1);
     MapReader map = new MapReader("maps/map1.xsb", "save/cancel_" + SelectMap.this.playerName + ".xsb");
     map.readingMap();
@@ -106,7 +116,7 @@ public class SelectMap extends JFrame {
     contenent.add(zoneButton,gc);
     gc.gridx = 1;
     gc.weightx = 2;
-    contenent.add(scrollPane,gc);
+    contenent.add(listAndNbMapUnlocked,gc);
     gc.gridx = 2;
     gc.weightx = 4;
     contenent.add(this.can,gc);
