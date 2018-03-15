@@ -12,6 +12,7 @@ import java.util.ArrayList;
 public class MapReader {
 
   private String file;
+  private String fileCancel;
   protected ArrayList<String> map;
   protected ArrayList<String> cancel;
 
@@ -21,10 +22,15 @@ public class MapReader {
 		* @param file
 		* Chemin d'un fichier .xsb.
 	*/
-  public MapReader(String file) {
+  public MapReader(String file, String fileCancel) {
     this.file = file;
+    this.fileCancel = fileCancel;
     this.map = new ArrayList<> ();
     this.cancel = new ArrayList<> ();
+  }
+
+  public MapReader(String file) {
+    this(file,"");
   }
 
 	/**
@@ -63,7 +69,7 @@ public class MapReader {
 	*/
   public void readingCancel() {
     try {
-      BufferedReader cancel = new BufferedReader (new FileReader (this.file));
+      BufferedReader cancel = new BufferedReader (new FileReader (this.fileCancel));
       ArrayList<String> mapToString = new ArrayList<>();
       String line;
       String firstLine = cancel.readLine();
@@ -165,8 +171,17 @@ public class MapReader {
 		* @param newfile
 		* Le nouveau chemin de fichier.
 	*/
-	public void setFile(String newfile) {
-		this.file=newfile;
+	public void setFile(String newFile) {
+		this.file = newFile;
 	}
+
+  /**
+		* Mutateur de l'attribut map.
+		* @param newFileCancel
+		* Le nouveau chemin de fichier cancel.
+	*/
+  public void setFileCancel(String newFileCancel) {
+    this.fileCancel = newFileCancel;
+  }
 
 }

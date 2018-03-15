@@ -18,6 +18,7 @@ public class Login extends JFrame {
   public Login () {
 
     this.setTitle("Login");
+    this.setResizable(false);
 
     JPanel zoneLogin = new JPanel();
     JPanel zoneRegister = new JPanel();

@@ -38,8 +38,7 @@ public class SelectMap extends JFrame {
         if (!SelectMap.this.list.isSelectionEmpty()) {
           Board b = new Board(indice + 1);
           b.setPlayerName(SelectMap.this.playerName);
-          MapReader map = new MapReader("");
-          map.setFile("maps/map" + (indice + 1) + ".xsb");
+          MapReader map = new MapReader("maps/map" + (indice + 1) + ".xsb", "save/cancel_" + SelectMap.this.playerName + ".xsb");
           map.readingMap();
           b.createGrid(map.getMap());
           SelectMap.this.dispose();
@@ -80,8 +79,7 @@ public class SelectMap extends JFrame {
         int indice = SelectMap.this.list.getSelectedIndex();
         Board b = new Board(indice + 1);
         b.setPlayerName(SelectMap.this.playerName);
-        MapReader map = new MapReader("");
-        map.setFile("maps/map" + (indice + 1) + ".xsb");
+        MapReader map = new MapReader("maps/map" + (indice + 1) + ".xsb", "save/cancel_" + SelectMap.this.playerName + ".xsb");
         map.readingMap();
         b.createGrid(map.getMap());
         SelectMap.this.can.setBoard(b);
@@ -90,8 +88,7 @@ public class SelectMap extends JFrame {
     });
 
     Board b = new Board(1);
-    MapReader map = new MapReader("");
-    map.setFile("maps/map1.xsb");
+    MapReader map = new MapReader("maps/map1.xsb", "save/cancel_" + SelectMap.this.playerName + ".xsb");
     map.readingMap();
     b.createGrid(map.getMap());
 

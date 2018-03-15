@@ -119,11 +119,14 @@ public class Interface extends JFrame {
             MapReader cancelMap = new MapReader("save/cancel_" + Interface.this.playerName + ".xsb");
             String cMap = cancelMap.getCancelMapName();
             if (cMap.equals("map" + Interface.this.b.getLevel())) {
-              Interface.this.map.setFile("save/cancel_" + Interface.this.playerName + ".xsb");
               Interface.this.map.readingCancel();
               Interface.this.b.createGrid(Interface.this.map.getCancel());
-              Interface.this.b.setOver(false);
-              Interface.this.can.setPlayer("graphique/images/perso.png");
+              if (!Interface.this.b.isFinished()) {
+                Interface.this.b.setOver(false);
+                Interface.this.can.setPlayer("graphique/images/perso.png");
+              } else {
+                Interface.this.can.setPlayer("graphique/images/persoPerdu.png");
+              }
               Interface.this.can.update();
             } else {
               popup = true;
