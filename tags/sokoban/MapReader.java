@@ -166,6 +166,14 @@ public class MapReader {
 		return this.file;
 	}
 
+  /**
+		* Accesseur de l'attribut fileCancel.
+		* @return La valeur de fileCancel.
+	*/
+  public String getFileCancel() {
+    return this.fileCancel;
+  }
+
 	/**
 		* Mutateur de l'attribut map.
 		* @param newfile

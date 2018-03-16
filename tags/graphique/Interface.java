@@ -79,8 +79,7 @@ public class Interface extends JFrame {
         String[] savesPlayers = new File("save/").list();
         ArrayList<String> listSavesPlayers = new ArrayList<>(Arrays.asList(savesPlayers));
         if (listSavesPlayers.contains(Interface.this.playerName + ".xsb")) {
-          MapReader mapLoad = new MapReader("");
-          mapLoad.setFile("save/" + Interface.this.playerName + ".xsb");
+          MapReader mapLoad = new MapReader("save/" + Interface.this.playerName + ".xsb", Interface.this.map.getFileCancel());
           mapLoad.readingMap();
           Interface.this.b.createGrid(mapLoad.getSaveMap());
           Interface.this.can.update();
