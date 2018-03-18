@@ -44,7 +44,13 @@ public class Solver {
 		ArrayList<Push> l=s.getPushes();
 		debug.info("Liste des coups : " + l);
     for (Push coup : l) {
-        double val=minmin(s.push(coup), depth-1);
+
+				ArrayList<String> gameboard_save=s.getLevel().createArrayList();
+				Board b= new Board();
+				b.createGrid(gameboard_save);
+				State s1=new State(b);
+
+        double val=minmin(s1.push(coup), depth-1);
 				debug.info("profondeur : " + depth + "; recherche pour le coup : " + coup + "; value : " + val);
         if (val < m) {
 					debug.fine("Mise à jour coup optimal");
