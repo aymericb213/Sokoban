@@ -4,6 +4,7 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 import sokoban.*;
+import java.util.logging.*;
 
 /**
 	* Classe exécutable du package sokoban.
@@ -14,6 +15,8 @@ public class Main {
 		* Résout un niveau de Sokoban à l'aide d'un algorithme de recherche de chemin.
 	*/
 	public static void main(String[] args) throws IOException, InterruptedException {
+		FileHandler debug_output = new FileHandler("debug%g.log");
+		debug_output.setFormatter(new SimpleFormatter());
 		MapReader map = new MapReader("ia/testmaps/cratemove.xsb");
 		map.readingMap();
 		Board b= new Board();
@@ -38,28 +41,29 @@ public class Main {
 		State present_state=new State(b);
 
 		Solver ia=new Solver();
-/*
-		while (!(present_state.isFinished())){*/
+		ia.debug.addHandler(debug_output);
+		ia.setPreviousState(new State(b));
+
+		while (!(present_state.isFinished())){
+			ia.debug.info("itération while");
 			State eval=new State(search_board);
 			ia.setCurrentState(eval);
-			ia.setPreviousState(eval);
-			System.out.println("Bonjour");
 			double best_state_value = ia.minmin(eval,3);
 			//total_path+=ia.toString();
-			System.out.println(ia.getBestPush());
 			present_state=present_state.push(ia.getBestPush());
-			System.out.println(present_state.getLevel());
-			System.out.println(best_state_value);
+			ia.debug.info("\n"+present_state.getLevel().toString());
+			ia.debug.info("Valeur du board de jeu : " + best_state_value);
 			ia.setPreviousState(present_state);
 			ArrayList<String> gameboard_save=present_state.getLevel().createArrayList();
 			search_board.createGrid(gameboard_save);
-			if( present_state.getValue()==0 ) {
-				System.out.println("résolu");
-				System.out.println(total_path);
-			} else if (present_state.getValue()==Double.POSITIVE_INFINITY){
-				System.out.println("deadlock");
-			}
-			list_state.add(present_state);/*
+			list_state.add(present_state);
+		}
+		ia.debug.finer("Fin while");
+
+		if( present_state.getValue()==0 ) {
+			ia.debug.finest("résolu");
+		} else if (present_state.getValue()==Double.POSITIVE_INFINITY){
+			ia.debug.severe("deadlock");
 		}
 /*
 		Astar algo=new Astar();

@@ -55,7 +55,6 @@ public class State {
 				this.value+=minDist;
 			}
 		}
-		System.out.println("compute value : "+this.value);
 	}
 
 	public State push(Push move) {
@@ -120,6 +119,6 @@ public class State {
 	 for (Push m : this.lPush) {
 		 chPushes+="(" + m.toString() + ") ; ";
 	 }
-	 return "Position du joueur : (" + p.getX() + "," + p.getY() + ")\nPosition des caisses : " + chCrates + "\nListe des coups : " + chPushes + "\nEtat final : " + this.level.getOver() + "\nValeur : " + this.value;
+	 return "Position du joueur : (" + p.getX() + "," + p.getY() + ")\nPosition des caisses : " + chCrates + "\nListe des coups : " + chPushes + "\nEtat final : " + this.level.getOver() + "\nValeur : " + this.getValue();
  }
 }
