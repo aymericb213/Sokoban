@@ -24,8 +24,7 @@ public class SelectMap extends JFrame {
 
     int sizeTile = 20;
 
-    this.setSize(700,350);
-    this.setResizable(false);
+    this.setResizable(true);
     this.setTitle("Select map");
 
     JPanel zoneButton = new JPanel ();
@@ -73,6 +72,8 @@ public class SelectMap extends JFrame {
     }
     this.list = new JList<>(vect);
     this.list.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+    DefaultListCellRenderer centrer = (DefaultListCellRenderer)this.list.getCellRenderer();
+    centrer.setHorizontalAlignment(SwingConstants.CENTER);
     this.list.setSelectedIndex(0);
 
     JScrollPane scrollPane = new JScrollPane();
@@ -93,16 +94,27 @@ public class SelectMap extends JFrame {
     });
 
     JPanel listAndNbMapUnlocked = new JPanel();
-    listAndNbMapUnlocked.setLayout(new GridLayout(2,1));
-    listAndNbMapUnlocked.add(numberMapUnlocked);
-    listAndNbMapUnlocked.add(scrollPane);
+    listAndNbMapUnlocked.setLayout(new GridBagLayout());
+    GridBagConstraints cList = new GridBagConstraints();
+    cList.gridx = 0;
+    cList.gridy = 0;
+    listAndNbMapUnlocked.add(numberMapUnlocked,cList);
+    cList.gridy = 1;
+    scrollPane.setPreferredSize(new Dimension(100,300));
+    listAndNbMapUnlocked.add(scrollPane,cList);
 
     Board b = new Board(1);
     MapReader map = new MapReader("maps/map1.xsb", "save/cancel_" + SelectMap.this.playerName + ".xsb");
     map.readingMap();
     b.createGrid(map.getMap());
 
+    JPanel zoneCanvas = new JPanel();
+    zoneCanvas.setLayout(new BorderLayout());
+    zoneCanvas.setPreferredSize(new Dimension(400,320));
+
     this.can = new CanvasGame(b,sizeTile);
+    this.can.setBackground(Color.RED);
+    zoneCanvas.add(this.can,BorderLayout.CENTER);
 
     JPanel contenent = new JPanel();
 
@@ -112,16 +124,15 @@ public class SelectMap extends JFrame {
 
     gc.gridx = 0;
     gc.gridy = 0;
-    gc.weightx = 0.2;
     contenent.add(zoneButton,gc);
     gc.gridx = 1;
-    gc.weightx = 2;
     contenent.add(listAndNbMapUnlocked,gc);
     gc.gridx = 2;
-    gc.weightx = 4;
-    contenent.add(this.can,gc);
+    gc.anchor = GridBagConstraints.CENTER;
+    contenent.add(zoneCanvas,gc);
 
     this.add(contenent);
+    pack();
 
     this.setLocationRelativeTo(null);
     this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

@@ -51,6 +51,7 @@ public class CanvasGame extends Canvas {
     Block[][] grid = b.getGrid();
     int[] size = b.getSize();
     int tailleStar = this.sizeTile/2;
+    this.setSize(this.sizeTile*size[0],this.sizeTile*size[1]);
     for (int i = 0; i<size[1] ; i++) {
       for (int j = 0; j<size[0]; j++) {
         if (grid[i][j] != null) {
