@@ -26,23 +26,23 @@ public class Solver {
 	}
 
 	public double minmin(State s, int depth){
-		debug.entering("Solver","minmin", new Object[]{s,depth});
-		debug.info("\n"+s.getLevel().toString());
+		//debug.entering("Solver","minmin", new Object[]{s,depth});
+		//debug.info("\n"+s.getLevel().toString());
 
-		if (depth!=this.d && s.getLevel().equals(this.previous_state.getLevel())){
-			debug.warning("Mouvement inutile");
+		if (depth!=this.d && s.getLevel().toString().equals(this.previous_state.getLevel().toString())){
+			//debug.warning("Mouvement inutile");
 			return Double.POSITIVE_INFINITY;
 		}
 
 		if (depth==0 || s.isFinished()){
 			double value = s.getValue();
-			debug.info("Feuille atteinte ; valeur : " + value);
+			//debug.info("Feuille atteinte ; valeur : " + value);
 			return value;
 		}
 
 		double m = Double.POSITIVE_INFINITY;
 		ArrayList<Push> l=s.getPushes();
-		debug.info("Liste des coups : " + l);
+		//debug.info("Liste des coups : " + l);
     for (Push coup : l) {
 
 				ArrayList<String> gameboard_save=s.getLevel().createArrayList();
@@ -51,14 +51,14 @@ public class Solver {
 				State s1=new State(b);
 
         double val=minmin(s1.push(coup), depth-1);
-				debug.info("profondeur : " + depth + "; recherche pour le coup : " + coup + "; value : " + val);
-        if (val < m) {
-					debug.fine("Mise à jour coup optimal");
+				//debug.info("profondeur : " + depth + "; recherche pour le coup : " + coup + "; value : " + val);
+        if (val <= m) {
+					//debug.fine("Mise à jour coup optimal");
           m = val;
 					this.best_push=coup;
 					}
 		}
-		debug.exiting("Solver","minmin", this.best_push);
+		//debug.exiting("Solver","minmin", this.best_push);
 		return m;
 	}
 

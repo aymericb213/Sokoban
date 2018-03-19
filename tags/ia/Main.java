@@ -17,7 +17,7 @@ public class Main {
 	public static void main(String[] args) throws IOException, InterruptedException {
 		FileHandler debug_output = new FileHandler("debug%g.log");
 		debug_output.setFormatter(new SimpleFormatter());
-		MapReader map = new MapReader("ia/testmaps/cratemove.xsb");
+		MapReader map = new MapReader("maps/map2.xsb");
 		map.readingMap();
 		Board b= new Board();
 		b.createGrid(map.getMap());
@@ -43,7 +43,7 @@ public class Main {
 		Solver ia=new Solver();
 		ia.debug.addHandler(debug_output);
 		ia.setPreviousState(new State(b));
-
+		int i = 0;
 		while (!(present_state.isFinished())){
 			ia.debug.info("itération while");
 			State eval=new State(search_board);
@@ -52,12 +52,16 @@ public class Main {
 			//total_path+=ia.toString();
 			present_state=present_state.push(ia.getBestPush());
 			ia.debug.info("\n"+present_state.getLevel().toString());
-			ia.debug.info("Valeur du board de jeu : " + best_state_value);
+			ia.debug.info("=======================================");
+			ia.debug.info("Valeur du board de jeu : " + best_state_value + "; coup : "+ia.getBestPush());
+			ia.debug.info("=======================================");
 			ia.setPreviousState(present_state);
 			ArrayList<String> gameboard_save=present_state.getLevel().createArrayList();
 			search_board.createGrid(gameboard_save);
 			list_state.add(present_state);
+			
 		}
+		ia.debug.info("cour numéro : "+i);
 		ia.debug.finer("Fin while");
 
 		if( present_state.getValue()==0 ) {
