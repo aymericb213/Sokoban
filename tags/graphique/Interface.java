@@ -167,9 +167,11 @@ public class Interface extends JFrame {
     zoneControl.add(numberMap);
     zoneControl.add(bReset);
 
+
     if (!this.modeIad && !this.modeSelect && !this.random) {
       nbMapPlay ++;
       JButton bNext = new JButton("Next level");
+      bNext.setFocusable(false);
       bNext.addActionListener(new ActionListener () {
         @Override
         public void actionPerformed(ActionEvent e) {
@@ -270,6 +272,7 @@ public class Interface extends JFrame {
       this.can = new CanvasGame(this.b, 40);
     }
 
+
     KeyAction key =  new KeyAction (this.b, this.can);
     this.setFocusable(true);
 
@@ -289,6 +292,7 @@ public class Interface extends JFrame {
       Board bIa = new Board(nbMapPlay);
       bIa.createGrid(map.getMap());
       CanvasGame canIa = new CanvasGame(bIa,30);
+      canIa.setFocusable(false);
       gc.gridx = 2;
       add(canIa,gc);
     }

@@ -22,6 +22,10 @@ public class PlayerSave {
     this(name,1);
   }
 
+  public String getPathCancel() {
+    return this.pathCancel;
+  }
+
   public void savePlayer() {
     try {
       File file = new File(this.path);
