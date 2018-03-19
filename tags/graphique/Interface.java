@@ -42,6 +42,7 @@ public class Interface extends JFrame {
     numberMap.setHorizontalAlignment(SwingConstants.CENTER);
 
     JButton bReset = new JButton("Restart");
+    bReset.setRequestFocusEnabled(false);
     bReset.addActionListener(new ActionListener () {
       @Override
       public void actionPerformed(ActionEvent e) {
@@ -54,6 +55,7 @@ public class Interface extends JFrame {
     });
 
     JButton bSave = new JButton("Save");
+    bSave.setRequestFocusEnabled(false);
     bSave.addActionListener(new ActionListener () {
       @Override
       public void actionPerformed(ActionEvent e) {
@@ -73,6 +75,7 @@ public class Interface extends JFrame {
     });
 
     JButton bLoad = new JButton("Load");
+    bLoad.setRequestFocusEnabled(false);
     bLoad.addActionListener(new ActionListener () {
       @Override
       public void actionPerformed(ActionEvent e) {
@@ -111,6 +114,7 @@ public class Interface extends JFrame {
 
 
     JButton bCancel = new JButton("Cancel");
+    bCancel.setRequestFocusEnabled(false);
     bCancel.addActionListener(new ActionListener () {
         @Override
         public void actionPerformed(ActionEvent e){
@@ -150,6 +154,7 @@ public class Interface extends JFrame {
     });
 
     JButton bQuit = new JButton("Back to menu");
+    bQuit.setRequestFocusEnabled(false);
     bQuit.addActionListener(new ActionListener () {
         @Override
         public void actionPerformed(ActionEvent e){
@@ -171,6 +176,7 @@ public class Interface extends JFrame {
     if (!this.modeIad && !this.modeSelect && !this.random) {
       nbMapPlay ++;
       JButton bNext = new JButton("Next level");
+      bNext.setRequestFocusEnabled(false);
       bNext.setFocusable(false);
       bNext.addActionListener(new ActionListener () {
         @Override
@@ -229,6 +235,7 @@ public class Interface extends JFrame {
     if (this.modeSelect) {
 
       JButton bSelect = new JButton("Select map");
+      bSelect.setRequestFocusEnabled(false);
       bSelect.addActionListener(new ActionListener () {
         @Override
         public void actionPerformed(ActionEvent e) {
@@ -240,6 +247,7 @@ public class Interface extends JFrame {
     } else if (this.random ||this.modeIad) {
 
       JButton bRand = new JButton("Other map");
+      bRand.setRequestFocusEnabled(false);
       bRand.addActionListener(new ActionListener () {
         @Override
         public void actionPerformed(ActionEvent e){
@@ -277,13 +285,7 @@ public class Interface extends JFrame {
     this.setFocusable(true);
 
     addKeyListener(key);
-    bReset.addKeyListener(key);
-    bSave.addKeyListener(key);
-    bLoad.addKeyListener(key);
-    bCancel.addKeyListener(key);
-    bQuit.addKeyListener(key);
 
-    this.can.setFocusable(false);
     add(can,gc);
     gc.gridx = 1;
     add(zoneControl,gc);
