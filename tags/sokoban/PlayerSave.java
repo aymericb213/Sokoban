@@ -3,7 +3,9 @@ package sokoban;
 import java.util.ArrayList;
 import java.io.*;
 
-
+/**
+  * Classe permettant de sauvegarder un joueur
+  */
 public class PlayerSave {
 
   private String path;
@@ -11,6 +13,12 @@ public class PlayerSave {
   private String pathCancel;
   private int level;
 
+  /**
+    * Constructeur de la classe.
+    * Initialise les chemins des fichiers correspondant au joueur
+    * @param name nom du joueur
+    * @param level dernier niveau que le joueur à débloqué
+    */
   public PlayerSave (String name, int level) {
     this.path = "save/players/" + name + ".txt";
     this.pathSave = "save/" + name + ".xsb";
@@ -18,14 +26,26 @@ public class PlayerSave {
     this.level = level;
   }
 
+  /**
+    * Constructeur de la classe.
+    * Initialise les chemins des fichiers correspondant au joueur
+    * @param name nom du joueur
+    */
   public PlayerSave (String name) {
     this(name,1);
   }
 
+  /**
+    * Getter du chemin de retour au dernier coup
+    * @return le chemin du fichier de retour
+    */
   public String getPathCancel() {
     return this.pathCancel;
   }
 
+  /**
+    * Sauvegarde le joueur au fichier this.path
+    */
   public void savePlayer() {
     try {
       File file = new File(this.path);
@@ -47,12 +67,20 @@ public class PlayerSave {
     }
   }
 
+  /**
+    * Supprime le fichier donné si il existe
+    * @param file fichier à supprimer
+    */
   public void deleteFile(File file) {
     if (file.exists()){
       file.delete();
     }
   }
 
+  /**
+    * Supprime le fichier du joueur, la sauvegarde et le retour si
+    * ils existent.
+    */
   public void deletePlayer() {
       File file = new File(this.path);
       File fileSave = new File(this.pathSave);

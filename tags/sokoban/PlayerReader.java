@@ -13,6 +13,10 @@ public class PlayerReader {
   private String file;
   private int level;
 
+  /**
+    * Constructeur de la Classe
+    * @param name nom du joueur
+    */
   public PlayerReader(String name) {
     this.file = "save/players/" + name + ".txt";
     this.level = this.readLevel(this.file);
@@ -35,10 +39,20 @@ public class PlayerReader {
 		this.file=newfile;
 	}
 
+  /**
+		* Accesseur de l'attribut level.
+		* @return Le dernier niveau débloqué par le joueur.
+	*/
   public int getLevel() {
     return this.level;
   }
 
+  /**
+    * Lit le fichier du chemin du parametre file et retourne le
+    * niveau de la premiere ligne
+    * @param file le chemin du fichier
+    * @return le numero du niveau du joueur 
+    */
   public int readLevel(String file) {
     try {
       BufferedReader read = new BufferedReader(new FileReader(file));

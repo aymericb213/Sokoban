@@ -19,7 +19,8 @@ public class MapReader {
 	/**
 		* Constructeur de la classe.
 		* Initialise le tableau destiné à contenir les chaînes de caractères lues.
-		* @param file
+		* @param file nom de la map d'origine
+    * @param fileCancel nom de la map du dernier coup
 		* Chemin d'un fichier .xsb.
 	*/
   public MapReader(String file, String fileCancel) {
@@ -29,6 +30,12 @@ public class MapReader {
     this.cancel = new ArrayList<> ();
   }
 
+  /**
+		* Constructeur de la classe.
+		* Initialise le tableau destiné à contenir les chaînes de caractères lues.
+		* @param file nom de la map d'origine
+		* Chemin d'un fichier .xsb.
+	*/
   public MapReader(String file) {
     this(file,"");
   }
@@ -52,6 +59,7 @@ public class MapReader {
 
   /**
 		* Lit le fichier .xsb trouvé avec l'attribut file et en extrait la map d'origine.
+    * @return le nom de la map d'origine
 	*/
   public String getCancelMapName() {
     String line = "";
@@ -82,7 +90,10 @@ public class MapReader {
     }
   }
 
-
+  /**
+    * lit le fichier de l'attribut file et en extrait un tableau de chaine de caractères
+    * dans l'attribut map
+    */
   public void readingSaveMap() {
     try {
       BufferedReader map = new BufferedReader (new FileReader (this.file));
@@ -101,6 +112,7 @@ public class MapReader {
 
   /**
     * recupere le nom de la map dans file
+    * @return le nom de la map dans le path
   */
   public String getName() {
     String name = "";
