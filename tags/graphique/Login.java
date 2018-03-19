@@ -9,6 +9,9 @@ import java.util.*;
 import sokoban.*;
 import java.io.*;
 
+/**
+  * Fenetre de choix de joueur
+  */
 public class Login extends JFrame {
 
   private JList<String> list;

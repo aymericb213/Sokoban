@@ -10,6 +10,9 @@ import sokoban.*;
 import java.io.*;
 import javax.imageio.ImageIO;
 
+/**
+  * Fenetre du mode de selection de niveau
+  */
 public class SelectMap extends JFrame {
 
   private JList<String> list;

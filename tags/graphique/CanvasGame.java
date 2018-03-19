@@ -6,6 +6,9 @@ import java.awt.Image.*;
 import javax.swing.*;
 import sokoban.*;
 
+/**
+  * Canvas avec la représentation des maps
+  */
 public class CanvasGame extends Canvas {
 
   private Board b;
@@ -28,24 +31,45 @@ public class CanvasGame extends Canvas {
     setSize(sizeTile*sizeGrid[0],sizeTile*sizeGrid[1]);
   }
 
+  /**
+    * Modifie l'image du personnage
+    * @param image chemin de la nouvelle image
+    */
   public void setPlayer (String image) {
     this.player = Toolkit.getDefaultToolkit().getImage(image);
   }
 
+  /**
+    * Ajoute un nouveau board au canvas et le redimensionne
+    * @param newBoard nouveau board à assigner
+    */
   public void setBoard(Board newBoard) {
     this.b = newBoard;
     int[] sizeGrid = b.getSize();
     this.setSize(sizeTile*sizeGrid[0],sizeTile*sizeGrid[1]);
   }
 
+  /**
+    * Actualise le canvas entier
+    */
   public void update() {
     repaint();
   }
 
+  /**
+    * Actualise une partie du canvas
+    * @param x coordonnée en X du point de la selection
+    * @param y coordonnée en Y du point de la selection
+    * @param width taille horizontal du rectangle de selection
+    * @param height taille vertical du rectangle de selection
+    */
   public void update (int x, int y, int width, int height) {
     repaint(x,y,width,height);
   }
 
+  /**
+    * Dessine la grille du board
+    */
   @Override
   public void paint(Graphics g) {
     Block[][] grid = b.getGrid();

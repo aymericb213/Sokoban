@@ -11,6 +11,9 @@ import java.io.*;
 import java.util.Random;
 import javax.imageio.ImageIO;
 
+/**
+  * Fenetre du menu principal
+  */
 public class Menu extends JFrame {
 
   private String playerName;

@@ -14,6 +14,9 @@ import java.util.concurrent.TimeUnit;
 import java.util.ArrayList;
 import java.util.Arrays;
 
+/**
+  * Fenetre de jeu pour tous les modes
+  */
 public class Interface extends JFrame {
 
   private Board b;

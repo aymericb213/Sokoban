@@ -10,6 +10,9 @@ import java.util.ArrayList;
 import sokoban.*;
 import java.io.*;
 
+/**
+  * Evenements
+  */
 public class KeyAction extends KeyAdapter {
 
   private Board b;
@@ -18,6 +21,11 @@ public class KeyAction extends KeyAdapter {
   private boolean isDab;
   private boolean playerMove;
 
+  /**
+    * Constructeur de la classe
+    * @param b board que doit gérer les events
+    * @param can canvas à modifier
+    */
   public KeyAction (Board b, CanvasGame can) {
     this.b = b;
     this.can = can;
@@ -25,6 +33,10 @@ public class KeyAction extends KeyAdapter {
     this.playerMove = false;
   }
 
+  /**
+    * Actualise la zone utile à actualiser du canvas
+    * @param nextMove meme argument que Player.move
+    */
   public void movePlayer (ArrayList<Integer> nextMove) {
     Player player = ((Player)b.getPlayer());
     player.move(b,nextMove);
@@ -40,6 +52,9 @@ public class KeyAction extends KeyAdapter {
 
   }
 
+  /**
+    * gestion du déplacement du joueur et dab
+    */
   @Override
   public void keyPressed(KeyEvent e) {
 
@@ -90,6 +105,9 @@ public class KeyAction extends KeyAdapter {
     }
   }
 
+  /**
+    * retirer le dab quand le joueur relache la touche B
+    */
   @Override
   public void keyReleased(KeyEvent e) {
     if (!this.b.getOver() && e.getKeyCode() == KeyEvent.VK_B) {
