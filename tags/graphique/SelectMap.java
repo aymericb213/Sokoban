@@ -116,7 +116,6 @@ public class SelectMap extends JFrame {
     zoneCanvas.setPreferredSize(new Dimension(400,320));
 
     this.can = new CanvasGame(b,sizeTile);
-    this.can.setBackground(Color.RED);
     zoneCanvas.add(this.can,BorderLayout.CENTER);
 
     JPanel contenent = new JPanel();

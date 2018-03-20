@@ -282,6 +282,7 @@ public class Interface extends JFrame {
     } else {
       this.can = new CanvasGame(this.b, 40);
     }
+    this.can.setFocusable(false);
 
 
     KeyAction key =  new KeyAction (this.b, this.can);
