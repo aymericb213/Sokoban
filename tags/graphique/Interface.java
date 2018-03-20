@@ -125,7 +125,7 @@ public class Interface extends JFrame {
           ArrayList<String> listSavesPlayers = new ArrayList<>(Arrays.asList(savesPlayers));
           boolean popup = false;
           if (listSavesPlayers.contains("cancel_" + Interface.this.playerName + ".xsb")) {
-            MapReader cancelMap = new MapReader("save/cancel_" + Interface.this.playerName + ".xsb");
+            MapReader cancelMap = new MapReader(Interface.this.map.getFile(),"save/cancel_" + Interface.this.playerName + ".xsb");
             String cMap = cancelMap.getCancelMapName();
             if (cMap.equals("map" + Interface.this.b.getLevel())) {
               Interface.this.map.readingCancel();
@@ -289,6 +289,12 @@ public class Interface extends JFrame {
     this.setFocusable(true);
 
     addKeyListener(key);
+    this.can.addKeyListener(key);
+    bReset.addKeyListener(key);
+    bSave.addKeyListener(key);
+    bLoad.addKeyListener(key);
+    bCancel.addKeyListener(key);
+    bQuit.addKeyListener(key);
 
     add(can,gc);
     gc.gridx = 1;
