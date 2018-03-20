@@ -170,21 +170,25 @@ public class Board {
 		* à true il regarde si la caisse est bloquée qu'avec au moins 1 mur, et false avec au moins 0 mur
 		* @return Le résultat du test.
 	*/
-  public boolean isDead(Block c, int i, int j, boolean wallOnly) {
-    if ((this.grid[i-1][j] instanceof Crate || this.grid[i+1][j] instanceof Crate) &&
+  public boolean isDead(Block c, int i, int j, boolean wallOnly, boolean justWall) {
+    if (!justWall && (this.grid[i-1][j] instanceof Crate || this.grid[i+1][j] instanceof Crate) &&
     (this.grid[i][j-1] instanceof Wall || this.grid[i][j+1] instanceof Wall)) {
       return true;
-    } else if ((this.grid[i-1][j] instanceof Wall || this.grid[i+1][j] instanceof Wall) &&
+    } else if (!justWall && (this.grid[i-1][j] instanceof Wall || this.grid[i+1][j] instanceof Wall) &&
     (this.grid[i][j-1] instanceof Crate || this.grid[i][j+1] instanceof Crate)) {
       return true;
     } else if ((this.grid[i-1][j] instanceof Wall || this.grid[i+1][j] instanceof Wall) &&
     (this.grid[i][j-1] instanceof Wall || this.grid[i][j+1] instanceof Wall)) {
       return true;
-    } else if (!wallOnly && (this.grid[i-1][j] instanceof Crate || this.grid[i+1][j] instanceof Crate) &&
+    } else if (!wallOnly && !justWall && (this.grid[i-1][j] instanceof Crate || this.grid[i+1][j] instanceof Crate) &&
     (this.grid[i][j-1] instanceof Crate || this.grid[i][j+1] instanceof Crate)) {
       return true;
     }
     return false;
+  }
+
+  public boolean isDead(Block c, int i, int j, boolean wallOnly) {
+    return this.isDead(c,i,j,wallOnly,false);
   }
 
 	/**
@@ -382,7 +386,7 @@ public class Board {
     for (Block c : this.listCrate) {
       int i = ((Crate)c).x;
       int j = ((Crate)c).y;
-
+      
       ArrayList<ArrayList<Integer>> listChain = crateChain(((Crate)c),i,j,new ArrayList<> (), false);
 
       if (this.isDead(c,i,j,false) && !((Crate)c).isPlaced()) {
@@ -403,6 +407,11 @@ public class Board {
           if (test) {
             ((Crate)c).setDeadlock(true);
             return true;
+          } else {
+            if (this.isDead(c,i,j,true,true)) {
+              ((Crate)c).setDeadlock(true);
+              return true;
+            }
           }
         }
       }
