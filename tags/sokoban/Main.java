@@ -95,7 +95,7 @@ public class Main {
   			System.out.println(". : objectif");
   			System.out.println("$ : caisse (* si placée sur un objectif)");
   			System.out.println("@ : joueur (+ si placé sur un objectif)");
-  			System.out.println("\nz,q,s,d : déplacer joueur    Save : sauvegarder    l : charger    a : annuler    e : quitter");
+  			System.out.println("\nz,q,s,d : déplacer joueur    Save : sauvegarder    l : charger    a : annuler    r : restart    e : quitter");
   			String input=sc.nextLine();
   			ArrayList<Integer> nextMove = new ArrayList<>();
 				if (input.equals("E") || input.equals("e")) {
@@ -107,10 +107,16 @@ public class Main {
         }
         if (input.equals("Save") || input.equals("save")) {
           manageMap.setSave(b, playerName, playerLevel);
+          System.out.println("\033[H\033[2J");
+          System.out.println("Fichier sauvegardé");
           continue;
         }
         if (input.equals("A") || input.equals("a")) {
-          b.createGrid(manageMap.loadCancel(playerName, map).getMap());
+          b.createGrid(manageMap.loadCancel(playerName, map).getCancel());
+        }
+        if (input.equals("R") || input.equals("r")) {
+          map.readingMap();
+          b.createGrid(map.getMap());
         }
   			if (input.equals("Z") || input.equals("z")) {
   				nextMove.add(-1);
