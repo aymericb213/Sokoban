@@ -1,4 +1,4 @@
-package sokoban;
+package graphique;
 
 public class ThreadIa extends Thread {
 
