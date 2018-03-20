@@ -17,6 +17,7 @@ public class SelectMap extends JFrame {
 
   private JList<String> list;
   private String playerName;
+  private JPanel zoneCanvas;
   private CanvasGame can;
   private boolean modeIad;
 
@@ -93,6 +94,7 @@ public class SelectMap extends JFrame {
         b.createGrid(map.getMap());
         SelectMap.this.can.setBoard(b);
         SelectMap.this.can.update();
+        SelectMap.this.zoneCanvas.updateUI();
       }
     });
 
@@ -111,8 +113,8 @@ public class SelectMap extends JFrame {
     map.readingMap();
     b.createGrid(map.getMap());
 
-    JPanel zoneCanvas = new JPanel();
-    zoneCanvas.setLayout(new FlowLayout(FlowLayout.LEFT,0,50));
+    this.zoneCanvas = new JPanel();
+    zoneCanvas.setLayout(new FlowLayout(FlowLayout.CENTER,0,50));
     zoneCanvas.setPreferredSize(new Dimension(400,320));
 
     this.can = new CanvasGame(b,sizeTile);
