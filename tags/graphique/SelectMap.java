@@ -112,11 +112,11 @@ public class SelectMap extends JFrame {
     b.createGrid(map.getMap());
 
     JPanel zoneCanvas = new JPanel();
-    zoneCanvas.setLayout(new BorderLayout());
+    zoneCanvas.setLayout(new FlowLayout(FlowLayout.LEFT,0,50));
     zoneCanvas.setPreferredSize(new Dimension(400,320));
 
     this.can = new CanvasGame(b,sizeTile);
-    zoneCanvas.add(this.can,BorderLayout.CENTER);
+    zoneCanvas.add(this.can);
 
     JPanel contenent = new JPanel();
 

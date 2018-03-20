@@ -28,7 +28,6 @@ public class CanvasGame extends Canvas {
     this.player = Toolkit.getDefaultToolkit().getImage("graphique/images/perso.png");
     this.star = Toolkit.getDefaultToolkit().getImage("graphique/images/star.png");
     this.sizeTile = sizeTile;
-    this.backgroundCanvas = Toolkit.getDefaultToolkit().getImage("graphique/images/fondMenu.png");
     int[] sizeGrid = b.getSize();
     setSize(sizeTile*sizeGrid[0],sizeTile*sizeGrid[1]);
   }
@@ -79,7 +78,6 @@ public class CanvasGame extends Canvas {
     int tailleStar = this.sizeTile/2;
     this.setSize(this.sizeTile*size[0],this.sizeTile*size[1]);
     
-    g.drawImage(this.backgroundCanvas, 0, 0, this);
     for (int i = 0; i<size[1] ; i++) {
       for (int j = 0; j<size[0]; j++) {
         if (grid[i][j] != null) {
