@@ -17,7 +17,7 @@ public class Main {
 	public static void main(String[] args) throws IOException, InterruptedException {
 		FileHandler debug_output = new FileHandler("debug%g.log");
 		debug_output.setFormatter(new SimpleFormatter());
-		MapReader map = new MapReader("maps/map2.xsb");
+		MapReader map = new MapReader("ia/testmaps/multicrates.xsb");
 		map.readingMap();
 		Board b= new Board();
 		b.createGrid(map.getMap());
@@ -44,11 +44,15 @@ public class Main {
 		ia.debug.addHandler(debug_output);
 		ia.setPreviousState(new State(b));
 		int i = 0;
+
+		int depth=8;
+		ia.setDepth(depth);
+
 		while (!(present_state.isFinished())){
 			ia.debug.info("itération while");
 			State eval=new State(search_board);
 			ia.setCurrentState(eval);
-			double best_state_value = ia.minmin(eval,3);
+			double best_state_value = ia.minmin(eval,depth);
 			//total_path+=ia.toString();
 			present_state=present_state.push(ia.getBestPush());
 			ia.debug.info("\n"+present_state.getLevel().toString());

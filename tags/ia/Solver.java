@@ -82,6 +82,11 @@ public class Solver {
 		return this.best_push;
 	}
 
+	public void setDepth(int d){
+		this.d=d;
+		System.out.println(this.d+"");
+	}
+
 	public String toString() {
 		String res="";
 		Player p = (Player)this.current_state.getLevel().getPlayer();
