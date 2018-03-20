@@ -38,9 +38,7 @@ public class Astar {
 		evals.setExplMap(evals.initMap(this.level.getSize()));
 		evals.setFullMap(evals.initMap(this.level.getSize()));
 		evals.putFullValue(this.start, evals.manhattan(this.start,this.goal));
-		int cpt=0;
 		while (!(this.waitingList.isEmpty())) {
-			cpt++;
 			Node current= minimumCost(evals.getFullMap());
 			if (current.equals(this.goal)) {
 				this.goal=current;

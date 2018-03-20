@@ -17,7 +17,7 @@ public class Main {
 	public static void main(String[] args) throws IOException, InterruptedException {
 		FileHandler debug_output = new FileHandler("debug%g.log");
 		debug_output.setFormatter(new SimpleFormatter());
-		MapReader map = new MapReader("ia/testmaps/multicrates.xsb");
+		MapReader map = new MapReader("ia/testmaps/cratemove.xsb");
 		map.readingMap();
 		Board b= new Board();
 		b.createGrid(map.getMap());
@@ -40,39 +40,36 @@ public class Main {
 		ArrayList<State> list_state = new ArrayList<>();
 		State present_state=new State(b);
 
-		Solver ia=new Solver();
+		Solver ia=new Solver(present_state);
+
 		ia.debug.addHandler(debug_output);
-		ia.setPreviousState(new State(b));
-		int i = 0;
-
-		int depth=8;
-		ia.setDepth(depth);
-
-		while (!(present_state.isFinished())){
-			ia.debug.info("itération while");
-			State eval=new State(search_board);
-			ia.setCurrentState(eval);
-			double best_state_value = ia.minmin(eval,depth);
-			//total_path+=ia.toString();
-			present_state=present_state.push(ia.getBestPush());
-			ia.debug.info("\n"+present_state.getLevel().toString());
-			ia.debug.info("=======================================");
-			ia.debug.info("Valeur du board de jeu : " + best_state_value + "; coup : "+ia.getBestPush());
-			ia.debug.info("=======================================");
-			ia.setPreviousState(present_state);
-			ArrayList<String> gameboard_save=present_state.getLevel().createArrayList();
-			search_board.createGrid(gameboard_save);
-			list_state.add(present_state);
-			
-		}
-		ia.debug.info("cour numéro : "+i);
-		ia.debug.finer("Fin while");
-
-		if( present_state.getValue()==0 ) {
-			ia.debug.finest("résolu");
-		} else if (present_state.getValue()==Double.POSITIVE_INFINITY){
-			ia.debug.severe("deadlock");
-		}
+		System.out.println(ia.bruteForce());
+		// int depth=3;
+		//
+		// while (!(present_state.isFinished())){
+		// 	ia.debug.info("itération while");
+		// 	State eval=new State(search_board);
+		// 	ia.setCurrentState(eval);
+		// //	double best_state_value = ia.minmin(eval,depth);
+		// 	total_path+=ia.toString();
+		// 	present_state=present_state.push(ia.getBestPush());
+		// 	ia.debug.info("\n" + present_state.getLevel().toString());
+		// 	ia.debug.info("=======================================");
+		// 	ia.debug.info("Valeur du board de jeu : " + best_state_value + "; coup : "+ia.getBestPush());
+		// 	ia.debug.info("=======================================");
+		// 	ArrayList<String> gameboard_save=present_state.getLevel().createArrayList();
+		// 	search_board.createGrid(gameboard_save);
+		// 	list_state.add(present_state);
+		//
+		// }
+		// ia.debug.finer("Fin while");
+		//
+		// if( present_state.getValue()==0 ) {
+		// 	ia.debug.finest("résolu");
+		// 	System.out.println(total_path);
+		// } else if (present_state.getValue()==Double.POSITIVE_INFINITY){
+		// 	ia.debug.severe("deadlock");
+		// }
 /*
 		Astar algo=new Astar();
 		Player p = (Player)b.getPlayer();

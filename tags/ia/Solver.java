@@ -2,22 +2,27 @@ package ia;
 
 import sokoban.*;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.logging.*;
 
 public class Solver {
 
-	public State current_state;
-	private State previous_state;
+	private State current_state;
 	private Push best_push;
-	private int d;
+	private HashMap<String,Board> explored_states;
+	private ArrayList<State> explored_list;
+	private ArrayList<State> waiting_list;
+	private ArrayList<Push> movelist;
 	public static final Logger debug = Logger.getLogger("debug IA");
 
 	public Solver() {
 		debug.setLevel(Level.ALL);
 		this.current_state=null;
-		this.previous_state=null;
 		this.best_push=null;
-		this.d=3;
+		this.explored_list = new ArrayList<State>();
+		this.waiting_list = new ArrayList<State>();
+		this.movelist=new ArrayList<Push>();
+		this.explored_states=new HashMap<String,Board>();
 	}
 
 	public Solver(State state) {
@@ -25,24 +30,51 @@ public class Solver {
 		this.current_state=state;
 	}
 
-	public double minmin(State s, int depth){
-		//debug.entering("Solver","minmin", new Object[]{s,depth});
-		//debug.info("\n"+s.getLevel().toString());
+	public boolean bruteForce() {
+		this.waiting_list.add(this.current_state);
+		while (!(this.waiting_list.isEmpty())) {
+			State current= this.waiting_list.get(0);
+			if (current.allPlaced()) {
+				return true;
+			}
+			this.waiting_list.remove(current);
+			this.explored_list.add(current);
+			for (Push p : current.getPushes()) {
+				if (this.explored_list.contains(current.push(p))) {
+					continue;
+				}
+				if (!(this.waiting_list.contains(current.push(p)))) {
+					this.waiting_list.add(current.push(p));
+				}
+			}
+		}
+		return false;
+	}
 
-		if (depth!=this.d && s.getLevel().toString().equals(this.previous_state.getLevel().toString())){
-			//debug.warning("Mouvement inutile");
+	public double minmin(State s, int depth){
+		String board_to_string = s.getLevel().toString();
+		debug.entering("Solver","minmin", new Object[]{s,depth});
+		debug.info("\n"+ board_to_string);
+
+		if (this.explored_states.get(board_to_string)!=null){
+			debug.warning("Mouvement inutile");
 			return Double.POSITIVE_INFINITY;
+		} else {
+			this.explored_states.put(board_to_string,s.getLevel());
 		}
 
 		if (depth==0 || s.isFinished()){
 			double value = s.getValue();
-			//debug.info("Feuille atteinte ; valeur : " + value);
+			if (value==0) {
+
+			}
+			debug.info("Feuille atteinte ; valeur : " + value);
 			return value;
 		}
 
 		double m = Double.POSITIVE_INFINITY;
 		ArrayList<Push> l=s.getPushes();
-		//debug.info("Liste des coups : " + l);
+		debug.info("Liste des coups : " + l);
     for (Push coup : l) {
 
 				ArrayList<String> gameboard_save=s.getLevel().createArrayList();
@@ -51,23 +83,15 @@ public class Solver {
 				State s1=new State(b);
 
         double val=minmin(s1.push(coup), depth-1);
-				//debug.info("profondeur : " + depth + "; recherche pour le coup : " + coup + "; value : " + val);
+				debug.info("profondeur : " + depth + "; recherche pour le coup : " + coup + "; value : " + val);
         if (val <= m) {
-					//debug.fine("Mise à jour coup optimal");
+					debug.fine("Mise à jour coup optimal");
           m = val;
 					this.best_push=coup;
 					}
 		}
-		//debug.exiting("Solver","minmin", this.best_push);
+		debug.exiting("Solver","minmin", this.best_push);
 		return m;
-	}
-
-	public State getPreviousState() {
-		return this.previous_state;
-	}
-
-	public void setPreviousState(State state) {
-		this.previous_state=state;
 	}
 
 	public State getCurrentState() {
@@ -80,11 +104,6 @@ public class Solver {
 
 	public Push getBestPush(){
 		return this.best_push;
-	}
-
-	public void setDepth(int d){
-		this.d=d;
-		System.out.println(this.d+"");
 	}
 
 	public String toString() {
