@@ -289,12 +289,6 @@ public class Interface extends JFrame {
     this.setFocusable(true);
 
     addKeyListener(key);
-    this.can.addKeyListener(key);
-    bReset.addKeyListener(key);
-    bSave.addKeyListener(key);
-    bLoad.addKeyListener(key);
-    bCancel.addKeyListener(key);
-    bQuit.addKeyListener(key);
 
     add(can,gc);
     gc.gridx = 1;
