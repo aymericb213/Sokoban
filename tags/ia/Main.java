@@ -17,7 +17,7 @@ public class Main {
 	public static void main(String[] args) throws IOException, InterruptedException {
 		FileHandler debug_output = new FileHandler("debug%g.log");
 		debug_output.setFormatter(new SimpleFormatter());
-		MapReader map = new MapReader("ia/testmaps/cratemove.xsb");
+		MapReader map = new MapReader("ia/testmaps/multicrates.xsb");
 		map.readingMap();
 		Board b= new Board();
 		b.createGrid(map.getMap());
@@ -43,7 +43,7 @@ public class Main {
 		Solver ia=new Solver(present_state);
 
 		ia.debug.addHandler(debug_output);
-		System.out.println(ia.bruteForce());
+		ia.solve();
 		// int depth=3;
 		//
 		// while (!(present_state.isFinished())){

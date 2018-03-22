@@ -4,6 +4,7 @@ import sokoban.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.logging.*;
+import java.util.Random;
 
 public class Solver {
 
@@ -28,6 +29,27 @@ public class Solver {
 	public Solver(State state) {
 		this();
 		this.current_state=state;
+	}
+
+	public void solve() {
+		Board debut = this.current_state.getLevel();
+		ArrayList<String> gameboard_save=debut.createArrayList();
+		Board b= new Board();
+		b.createGrid(gameboard_save);
+		Random r = new Random();
+		while (!(this.current_state.allPlaced())) {
+			ArrayList<Push> l =this.current_state.getPushes();
+			System.out.println(this.current_state.getLevel());
+			Push c = l.get(r.nextInt(l.size()));
+			State newstate= this.current_state.push(c);
+			if (newstate.isFinished() && !(newstate.allPlaced())) {
+				this.current_state=new State(b);
+			} else {
+				this.current_state=newstate;
+			}
+		}
+		System.out.println(this.current_state.getLevel());
+		System.out.println("résolu");
 	}
 
 	public boolean bruteForce() {
