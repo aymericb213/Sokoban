@@ -12,7 +12,7 @@ public abstract class Block {
 		* Constructeur de la classe.
 		* @param x
 		* Ordonnée de la case.
-		* @param second
+		* @param y
 		* Abscisse de la case.
 	*/
   public Block(int x, int y) {

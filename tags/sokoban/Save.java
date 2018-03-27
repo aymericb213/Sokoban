@@ -17,7 +17,7 @@ public class Save {
   /**
     * Constructeur de la classe.
     * Initialise le chemin de la sauvegarde selon le argument file.
-    * @param mapToString la grille à sauvegarder
+    * @param mapToSave la grille à sauvegarder
     * @param name nom de la map d'origine
     */
   public Save(ArrayList<String> mapToSave, String name) {
@@ -29,7 +29,7 @@ public class Save {
   /**
     * Constructeur de la classe.
     * Initialise le chemin de la sauvegarde selon le argument file.
-    * @param mapToString la grille à sauvegarder
+    * @param mapToSave la grille à sauvegarder
     * @param file nom du joueur qui sauvegarde (playerName)
     * @param name nom de la map d'origine
     */

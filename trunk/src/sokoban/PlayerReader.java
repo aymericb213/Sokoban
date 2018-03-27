@@ -18,7 +18,7 @@ public class PlayerReader {
     * @param name nom du joueur
     */
   public PlayerReader(String name) {
-    this.file = "../ressources/save/players/" + name + ".txt";
+    this.file = "save/players/" + name + ".txt";
     this.level = this.readLevel(this.file);
   }
 
@@ -51,7 +51,7 @@ public class PlayerReader {
     * Lit le fichier du chemin du parametre file et retourne le
     * niveau de la premiere ligne
     * @param file le chemin du fichier
-    * @return le numero du niveau du joueur
+    * @return le numero du niveau du joueur 
     */
   public int readLevel(String file) {
     try {

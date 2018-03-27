@@ -9,7 +9,7 @@ public class FreeTile extends Block {
 		* Constructeur de la classe.
 		* @param x
 		* Ordonnée de la case.
-		* @param second
+		* @param y
 		* Abscisse de la case.
 	*/
   public FreeTile(int x, int y) {

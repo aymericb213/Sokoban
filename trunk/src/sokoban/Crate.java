@@ -13,7 +13,7 @@ public class Crate extends Block {
 		* Initialise deadLock. Au début d'un niveau, toutes les caisses sont déplaçables, deadLock est donc initialisé à False.
 		* @param x
 		* Ordonnée de la case.
-		* @param second
+		* @param y
 		* Abscisse de la case.
 		* @param placed
 		* Booléen indiquant si la caisse se trouve sur un objectif.

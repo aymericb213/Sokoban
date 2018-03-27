@@ -16,6 +16,7 @@ public class Main {
 	* - si aucun argument n'est donné, on parcourt les niveaux dans l'ordre;
 	* - si on donne en argument un numéro de map présente dans le dossier maps, le niveau sélectionné sera affiché;
 	* - si l'argument est -r, un niveau est choisi au hasard.
+  * @param args liste des arguments.
 	*/
   public static void main (String[] args) {
     FileManagement manageMap = new FileManagement();

@@ -9,7 +9,7 @@ public class Wall extends Block {
 		* Constructeur de la classe.
 		* @param x
 		* Ordonnée de la case.
-		* @param second
+		* @param y
 		* Abscisse de la case.
 	*/
   public Wall(int x, int y) {

@@ -9,7 +9,7 @@ public class Objective extends Block {
 		* Constructeur de la classe.
 		* @param x
 		* Ordonnée de la case.
-		* @param second
+		* @param y
 		* Abscisse de la case.
 	*/
   public Objective(int x, int y) {

@@ -13,7 +13,7 @@ public class Player extends Block {
 		* Constructeur de la classe.
 		* @param x
 		* Ordonnée de la case.
-		* @param second
+		* @param y
 		* Abscisse de la case.
 		* @param onObjective
 		* Booléen indiquant si le joueur se trouve sur un objectif.

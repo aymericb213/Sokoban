@@ -64,7 +64,7 @@ public class MapReader {
   public String getCancelMapName() {
     String line = "";
     try {
-      BufferedReader cancel = new BufferedReader (new FileReader (this.file));
+      BufferedReader cancel = new BufferedReader (new FileReader (this.fileCancel));
       line = cancel.readLine();
     } catch (IOException e) {
       e.printStackTrace();
@@ -188,7 +188,7 @@ public class MapReader {
 
 	/**
 		* Mutateur de l'attribut map.
-		* @param newfile
+		* @param newFile
 		* Le nouveau chemin de fichier.
 	*/
 	public void setFile(String newFile) {

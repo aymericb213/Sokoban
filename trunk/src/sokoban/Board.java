@@ -63,7 +63,7 @@ public class Board {
   /**
   * Calcule les dimensions du niveau à partir de l'ArrayList obtenue en lisant un fichier .xsb.
   * Nécessaire à l'initialisation de l'attribut grid.
-  * @param mapToString
+  * @param map
   * Le tableau résultant de la lecture du fichier .xsb correspondant au niveau.
   * @return Un tableau de 2 entiers de type [largeur, hauteur].
   */
@@ -101,6 +101,7 @@ public class Board {
 
   /**
     * Geter de la variable qui indique que la partie est finie.
+    * @return la variable over.
     */
   public boolean getOver() {
     return this.over;
@@ -108,6 +109,7 @@ public class Board {
 
   /**
     * Geter de la variable du nom du joueur.
+    * @return la variable playerName.
     */
   public String getPlayerName() {
     return this.playerName;
@@ -115,6 +117,7 @@ public class Board {
 
   /**
     * Geter de la variable du niveau jouer.
+    * @return la variable level.
     */
   public int getLevel() {
     return this.level;
@@ -122,6 +125,7 @@ public class Board {
 
   /**
     * Modifie la variable qui indique si la partie est finie.
+    * @param newLevel nouveau niveau souhaité.
     */
   public void setLevel(int newLevel) {
     this.level = newLevel;
@@ -129,6 +133,7 @@ public class Board {
 
   /**
     * Modifie la variable qui indique si la partie est finie.
+    * @param bool nouveau booléen souhaité.
     */
   public void setOver (boolean bool) {
     this.over = bool;
@@ -136,6 +141,7 @@ public class Board {
 
   /**
     * Modifie la variable du nom du joueur.
+    * @param newName nouveau nom voulu.
     */
   public void setPlayerName(String newName) {
     this.playerName = newName;
@@ -167,7 +173,8 @@ public class Board {
 		* @param j
 		* La coordonnée en X.
 		* @param wallOnly
-		* à true il regarde si la caisse est bloquée qu'avec au moins 1 mur, et false avec au moins 0 mur
+		* à true il regarde si la caisse est bloquée qu'avec au moins 1 mur, et false avec au moins 0 mur.
+    * @param justWall à true si il regarde si une caisse est bloquée uniquement avec des murs.
 		* @return Le résultat du test.
 	*/
   public boolean isDead(Block c, int i, int j, boolean wallOnly, boolean justWall) {
@@ -386,7 +393,7 @@ public class Board {
     for (Block c : this.listCrate) {
       int i = ((Crate)c).x;
       int j = ((Crate)c).y;
-      
+
       ArrayList<ArrayList<Integer>> listChain = crateChain(((Crate)c),i,j,new ArrayList<> (), false);
 
       if (this.isDead(c,i,j,false) && !((Crate)c).isPlaced()) {

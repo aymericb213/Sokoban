@@ -188,7 +188,7 @@ public class MapReader {
 
 	/**
 		* Mutateur de l'attribut map.
-		* @param newfile
+		* @param newFile
 		* Le nouveau chemin de fichier.
 	*/
 	public void setFile(String newFile) {
