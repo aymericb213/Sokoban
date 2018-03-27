@@ -15,7 +15,9 @@ public class State {
 		this.value=0.;
 	}
 
+
 	public void accessiblePushes() {
+		this.lPush.clear();
 		ArrayList<Block> lCrates=this.level.getCrates();
 		Player p = (Player)this.level.getPlayer();
 		Node start = new Node(p.getX(), p.getY());
