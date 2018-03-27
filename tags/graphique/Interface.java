@@ -260,8 +260,7 @@ public class Interface extends JFrame {
           int n = r.nextInt(nbMaps) + 1;
           Board b = new Board(n);
           b.setPlayerName(Interface.this.playerName);
-          MapReader map = new MapReader("");
-          map.setFile("maps/map" + n + ".xsb");
+          MapReader map = new MapReader("maps/map" + n + ".xsb",Interface.this.map.getFileCancel());
           map.readingMap();
           b.createGrid(map.getMap());
           Interface.this.dispose();
