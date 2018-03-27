@@ -1,7 +1,6 @@
 package graphique;
 
 import sokoban.*;
-import java.io.*;
 
 /**
   * Classe exécutable du package graphique
