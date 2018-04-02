@@ -19,6 +19,7 @@ public class SelectMap extends JFrame {
   private String playerName;
   private JPanel zoneCanvas;
   private CanvasGame can;
+  private int sizeTile;
   private boolean modeIad;
 
   public SelectMap (boolean modeIad, String playerName) {
@@ -26,7 +27,7 @@ public class SelectMap extends JFrame {
     this.modeIad = modeIad;
     this.playerName = playerName;
 
-    int sizeTile = 20;
+    this.sizeTile = 20;
 
     this.setResizable(true);
     this.setTitle("Select map");
@@ -92,8 +93,12 @@ public class SelectMap extends JFrame {
         MapReader map = new MapReader("maps/map" + (indice + 1) + ".xsb", "save/cancel_" + SelectMap.this.playerName + ".xsb");
         map.readingMap();
         b.createGrid(map.getMap());
-        SelectMap.this.can.setBoard(b);
-        SelectMap.this.can.update();
+        CanvasGame can = SelectMap.this.can;
+        can.setBoard(b);
+        int[] sizeGrid = b.getSize();
+        int sizeTile = SelectMap.this.sizeTile;
+        can.setPreferredSize(new Dimension(sizeTile*sizeGrid[0],sizeTile*sizeGrid[1]));
+        can.update();
         SelectMap.this.zoneCanvas.updateUI();
       }
     });

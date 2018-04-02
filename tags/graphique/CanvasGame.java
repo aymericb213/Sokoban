@@ -9,7 +9,7 @@ import sokoban.*;
 /**
   * Canvas avec la représentation des maps
   */
-public class CanvasGame extends Canvas {
+public class CanvasGame extends JPanel {
 
   private Board b;
   protected int sizeTile;
@@ -29,7 +29,7 @@ public class CanvasGame extends Canvas {
     this.star = Toolkit.getDefaultToolkit().getImage("graphique/images/star.png");
     this.sizeTile = sizeTile;
     int[] sizeGrid = b.getSize();
-    setSize(sizeTile*sizeGrid[0],sizeTile*sizeGrid[1]);
+    setPreferredSize(new Dimension(sizeTile*sizeGrid[0],sizeTile*sizeGrid[1]));
   }
 
   /**
@@ -77,7 +77,7 @@ public class CanvasGame extends Canvas {
     int[] size = b.getSize();
     int tailleStar = this.sizeTile/2;
     this.setSize(this.sizeTile*size[0],this.sizeTile*size[1]);
-    
+
     for (int i = 0; i<size[1] ; i++) {
       for (int j = 0; j<size[0]; j++) {
         if (grid[i][j] != null) {
