@@ -140,7 +140,7 @@ public class Main {
   				nextMove.add(0);
   				System.out.println("Entrez une commande valide.");
   			}
-        //manageMap.setCancel(b, playerName, map, playerLevel);
+        manageMap.setCancel(b, playerName, playerLevel);
   			((Player)b.player).move(b, nextMove);
   			nbMoves++;
   			System.out.println("\033[H\033[2J");
