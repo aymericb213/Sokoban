@@ -55,7 +55,7 @@ public class Solver {
 		System.out.println("résolu");
 	}
 
-	public boolean bruteForce() {
+	public ArrayList<Push> bruteForce() {
 		this.waiting_dico.clear();
 		this.waiting_dico.put(createKey(this.current_state),this.current_state);
 		this.waiting_list.add(createKey(this.current_state));
@@ -73,7 +73,7 @@ public class Solver {
 			if (current.allPlaced()) {
 				System.out.println(current.getLevel());
 				System.out.println(current);
-				return true;
+				return buildFullPath(current);
 			}
 			this.waiting_dico.remove(createKey(current));
 			// System.out.println(current);
@@ -95,8 +95,10 @@ public class Solver {
 						//System.out.println("wait : "+(this.waiting_dico.containsKey(createKey(s1.push(p)))));
 
 						if (!(this.waiting_dico.containsKey(createKey(s1.push(p))))) {
-
-							this.waiting_dico.put(createKey(s1.push(p)), s1.push(p));
+							State e = s1.push(p);
+							e.setPreviousKey(createKey(current));
+							e.setGenerator(p);
+							this.waiting_dico.put(createKey(s1.push(p)), e);
 							this.waiting_list.add(createKey(s1.push(p)));
 						}
 					}
@@ -108,7 +110,23 @@ public class Solver {
 			// System.out.println("fin while");
 			// System.out.println("===================================");
 		}
-		return false;
+		return null;
+	}
+
+	public ArrayList<Push> buildFullPath(State end) {
+		ArrayList<Push> bfp = new ArrayList<>();
+		bfp.add(end.getGenerator());
+		String end_key=end.getPreviousKey();
+		while (end_key!=null){
+			end = this.explored_list.get(end_key);
+			bfp.add(0,end.getGenerator());
+			end_key=end.getPreviousKey();
+		}
+		this.explored_list.clear();
+		this.waiting_dico.clear();
+		this.waiting_list.clear();
+		bfp.remove(0);
+		return bfp;
 	}
 
 	public String createKey(State s){

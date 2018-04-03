@@ -7,12 +7,15 @@ public class State {
 
 	private Board level;
 	private ArrayList<Push> lPush;
+	private Push generator;
+	private String previous_key;
 	private double value;//à minimiser
 
 	public State(Board level) {
 		this.level=level;
 		this.lPush=new ArrayList<Push>();
 		this.value=0.;
+		this.previous_key=null;
 	}
 
 
@@ -97,6 +100,14 @@ public class State {
 		this.level=newBoard;
 	}
 
+	public Push getGenerator() {
+		return this.generator;
+	}
+
+	public void setGenerator(Push p){
+		this.generator = p;
+	}
+
 	public Board getLevel() {
  	 return this.level;
   }
@@ -110,6 +121,14 @@ public class State {
 	 this.computeValue();
 	 return this.value;
  }
+
+	public String getPreviousKey(){
+		return this.previous_key;
+	}
+
+	public void setPreviousKey(String key){
+		this.previous_key=key;
+	}
 
  public String toString() {
 	 Player p = (Player)this.level.getPlayer();

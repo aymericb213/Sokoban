@@ -9,44 +9,83 @@ import java.util.logging.*;
 /**
 	* Classe exécutable du package sokoban.
 	*/
-public class Main {
+public class Main implements Runnable {
 
 	/**
 		* Résout un niveau de Sokoban à l'aide d'un algorithme de recherche de chemin.
 	*/
-	public static void main(String[] args) throws IOException, InterruptedException {
-		FileHandler debug_output = new FileHandler("debug%g.log");
-		debug_output.setFormatter(new SimpleFormatter());
-		MapReader map = new MapReader("maps/map2.xsb");
-		map.readingMap();
-		Board b= new Board();
-		b.createGrid(map.getMap());
-		// System.out.println(b);
+	public static void main(String[] args) {
+		try {
+			FileHandler debug_output = new FileHandler("debug%g.log");
+			debug_output.setFormatter(new SimpleFormatter());
+			MapReader map = new MapReader("ia/testmaps/multicrates.xsb");
+			map.readingMap();
+			Board b= new Board();
+			b.createGrid(map.getMap());
+			String total_path="";
 
-		// State test=new State(b);
-		// test.accessiblePushes();
-		// test.computeValue();
-		// System.out.println(test);
-		// test =test.push(test.getPushes().get(0));
-		// System.out.println(b);
-		// test.accessiblePushes();
-		// test.computeValue();
-		// System.out.println(test);
-		String total_path="";
+			Board search_board= new Board();
+			search_board.createGrid(map.getMap());
 
-		Board search_board= new Board();
-		search_board.createGrid(map.getMap());
+			ArrayList<State> list_state = new ArrayList<>();
+			State present_state=new State(b);
 
-		ArrayList<State> list_state = new ArrayList<>();
-		State present_state=new State(b);
+			Solver ia=new Solver(present_state);
+			ia.debug.addHandler(debug_output);
 
-		Solver ia=new Solver(present_state);
+			ArrayList<Push> solution = ia.bruteForce();
+			for (int i=0; i<solution.size(); i++) {
+				present_state.push(solution.get(i));
+				total_path+="";
+			}
+			if( present_state.getValue()==0 ) {
+				ia.debug.finest("résolu");
+				System.out.println(total_path);
+			} else if (present_state.getValue()==Double.POSITIVE_INFINITY){
+				ia.debug.severe("deadlock");
+			}
+		} catch (IOException e) {
+			System.out.println("Dommmmage" + e);
+		}
+	}
 
-		ia.debug.addHandler(debug_output);
-		System.out.println(ia.bruteForce());
-		 int depth=3;
+	public void run() {
+		try {
+			FileHandler debug_output = new FileHandler("debug%g.log");
+			debug_output.setFormatter(new SimpleFormatter());
+			MapReader map = new MapReader("ia/testmaps/multicrates.xsb");
+			map.readingMap();
+			Board b= new Board();
+			b.createGrid(map.getMap());
+			String total_path="";
 
-		 /*while (!(present_state.isFinished())){
+			Board search_board= new Board();
+			search_board.createGrid(map.getMap());
+
+			ArrayList<State> list_state = new ArrayList<>();
+			State present_state=new State(b);
+
+			Solver ia=new Solver(present_state);
+			ia.debug.addHandler(debug_output);
+
+			ArrayList<Push> solution = ia.bruteForce();
+			for (int i=0; i<solution.size(); i++) {
+				present_state.push(solution.get(i));
+				total_path+="";
+			}
+			if( present_state.getValue()==0 ) {
+				ia.debug.finest("résolu");
+				System.out.println(total_path);
+			} else if (present_state.getValue()==Double.POSITIVE_INFINITY){
+				ia.debug.severe("deadlock");
+			}
+		} catch (IOException e) {
+			System.out.println("Dommmmage" + e);
+		}
+
+/*
+		int depth=3;
+		 while (!(present_state.isFinished())){
 		 	ia.debug.info("itération while");
 		 	State eval=new State(search_board);
 		 	ia.setCurrentState(eval);
@@ -62,15 +101,9 @@ public class Main {
 		 	search_board.createGrid(gameboard_save);
 		 	list_state.add(present_state);
 
-		}*/
+		 }
 		 ia.debug.finer("Fin while");
-
-		 if( present_state.getValue()==0 ) {
-			ia.debug.finest("résolu");
-			System.out.println(total_path);
-		} else if (present_state.getValue()==Double.POSITIVE_INFINITY){
-			ia.debug.severe("deadlock");
-		}
+*/
 /*
 		Astar algo=new Astar();
 		Player p = (Player)b.getPlayer();
