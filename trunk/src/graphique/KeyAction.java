@@ -77,7 +77,7 @@ public class KeyAction extends KeyAdapter {
         nextMove.add(1);
         nextMove.add(0);
       } else if (!this.isDab && e.getKeyCode() == KeyEvent.VK_B) {
-        this.can.setPlayer("graphique/images/persoDab.png");
+        this.can.setPlayer("../ressources/images/persoDab.png");
         this.isDab = true;
         this.can.update(player.getY()*this.can.sizeTile,player.getX()*this.can.sizeTile,this.can.sizeTile,this.can.sizeTile);
       }
@@ -89,16 +89,16 @@ public class KeyAction extends KeyAdapter {
         if (this.b.isFinished()) {
           this.b.setOver(true);
           if (this.b.allPlaced()) {
-            this.can.setPlayer("graphique/images/persoDab.png");
+            this.can.setPlayer("../ressources/images/persoDab.png");
             PlayerReader read = new PlayerReader(this.b.getPlayerName());
             int niveauPlayer = read.getLevel();
-            int nbMaps = new File("maps").list().length;
+            int nbMaps = new File("../ressources/maps").list().length;
             if (this.b.getLevel() == niveauPlayer && this.b.getLevel() < nbMaps) {
               PlayerSave pSave = new PlayerSave(this.b.getPlayerName(), niveauPlayer + 1);
               pSave.savePlayer();
             }
           } else {
-            this.can.setPlayer("graphique/images/persoPerdu.png");
+            this.can.setPlayer("../ressources/images/persoPerdu.png");
           }
         }
       }
@@ -112,7 +112,7 @@ public class KeyAction extends KeyAdapter {
   public void keyReleased(KeyEvent e) {
     if (!this.b.getOver() && e.getKeyCode() == KeyEvent.VK_B) {
       Player player = ((Player)b.getPlayer());
-      this.can.setPlayer("graphique/images/perso.png");
+      this.can.setPlayer("../ressources/images/perso.png");
       this.can.update(player.getY()*this.can.sizeTile,player.getX()*this.can.sizeTile,this.can.sizeTile,this.can.sizeTile);
       this.isDab = false;
     }

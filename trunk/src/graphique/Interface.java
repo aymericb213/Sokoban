@@ -52,7 +52,7 @@ public class Interface extends JFrame {
         Interface.this.map.readingMap();
         Interface.this.b.createGrid(Interface.this.map.getMap());
         Interface.this.b.setOver(false);
-        Interface.this.can.setPlayer("graphique/images/perso.png");
+        Interface.this.can.setPlayer("../ressources/images/perso.png");
         Interface.this.can.update();
       }
     });
@@ -82,10 +82,10 @@ public class Interface extends JFrame {
     bLoad.addActionListener(new ActionListener () {
       @Override
       public void actionPerformed(ActionEvent e) {
-        String[] savesPlayers = new File("save/").list();
+        String[] savesPlayers = new File("../ressources/save/").list();
         ArrayList<String> listSavesPlayers = new ArrayList<>(Arrays.asList(savesPlayers));
         if (listSavesPlayers.contains(Interface.this.playerName + ".xsb")) {
-          MapReader mapLoad = new MapReader("save/" + Interface.this.playerName + ".xsb", Interface.this.map.getFileCancel());
+          MapReader mapLoad = new MapReader("../ressources/save/" + Interface.this.playerName + ".xsb", Interface.this.map.getFileCancel());
           mapLoad.readingMap();
           Interface.this.b.createGrid(mapLoad.getSaveMap());
           Interface.this.can.update();
@@ -121,20 +121,20 @@ public class Interface extends JFrame {
     bCancel.addActionListener(new ActionListener () {
         @Override
         public void actionPerformed(ActionEvent e){
-          String[] savesPlayers = new File("save/").list();
+          String[] savesPlayers = new File("../ressources/save/").list();
           ArrayList<String> listSavesPlayers = new ArrayList<>(Arrays.asList(savesPlayers));
           boolean popup = false;
           if (listSavesPlayers.contains("cancel_" + Interface.this.playerName + ".xsb")) {
-            MapReader cancelMap = new MapReader(Interface.this.map.getFile(),"save/cancel_" + Interface.this.playerName + ".xsb");
+            MapReader cancelMap = new MapReader(Interface.this.map.getFile(),"../ressources/save/cancel_" + Interface.this.playerName + ".xsb");
             String cMap = cancelMap.getCancelMapName();
             if (cMap.equals("map" + Interface.this.b.getLevel())) {
               Interface.this.map.readingCancel();
               Interface.this.b.createGrid(Interface.this.map.getCancel());
               if (!Interface.this.b.isFinished()) {
                 Interface.this.b.setOver(false);
-                Interface.this.can.setPlayer("graphique/images/perso.png");
+                Interface.this.can.setPlayer("../ressources/images/perso.png");
               } else {
-                Interface.this.can.setPlayer("graphique/images/persoPerdu.png");
+                Interface.this.can.setPlayer("../ressources/images/persoPerdu.png");
               }
               Interface.this.can.update();
             } else {
@@ -184,7 +184,7 @@ public class Interface extends JFrame {
       bNext.addActionListener(new ActionListener () {
         @Override
         public void actionPerformed(ActionEvent e) {
-          int nbMaps = new File("maps").list().length;
+          int nbMaps = new File("../ressources/maps").list().length;
           PlayerReader player = new PlayerReader(Interface.this.playerName);
           int levelPlayerMax = player.getLevel();
           if (nbMapPlay - 1 == nbMaps) {
@@ -218,7 +218,7 @@ public class Interface extends JFrame {
             Board b = new Board(Interface.nbMapPlay);
             b.setPlayerName(Interface.this.playerName);
             MapReader map = new MapReader("");
-            map.setFile("maps/map" + Interface.nbMapPlay + ".xsb");
+            map.setFile("../ressources/maps/map" + Interface.nbMapPlay + ".xsb");
             map.readingMap();
             b.createGrid(map.getMap());
             Interface.this.dispose();
@@ -260,7 +260,7 @@ public class Interface extends JFrame {
           int n = r.nextInt(nbMaps) + 1;
           Board b = new Board(n);
           b.setPlayerName(Interface.this.playerName);
-          MapReader map = new MapReader("maps/map" + n + ".xsb",Interface.this.map.getFileCancel());
+          MapReader map = new MapReader("../ressources/maps/map" + n + ".xsb",Interface.this.map.getFileCancel());
           map.readingMap();
           b.createGrid(map.getMap());
           Interface.this.dispose();

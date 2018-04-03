@@ -41,7 +41,7 @@ public class SelectMap extends JFrame {
         if (!SelectMap.this.list.isSelectionEmpty()) {
           Board b = new Board(indice + 1);
           b.setPlayerName(SelectMap.this.playerName);
-          MapReader map = new MapReader("maps/map" + (indice + 1) + ".xsb", "save/cancel_" + SelectMap.this.playerName + ".xsb");
+          MapReader map = new MapReader("../ressources/maps/map" + (indice + 1) + ".xsb", "../ressources/save/cancel_" + SelectMap.this.playerName + ".xsb");
           map.readingMap();
           b.createGrid(map.getMap());
           SelectMap.this.dispose();
@@ -63,7 +63,7 @@ public class SelectMap extends JFrame {
     zoneButton.add(bBack);
     zoneButton.setLayout(new GridLayout(2,1,10,10));
 
-    int nbMapsTotal = new File("maps").list().length;
+    int nbMapsTotal = new File("../ressources/maps").list().length;
     PlayerReader player = new PlayerReader(this.playerName);
     int levelPlayerMax = player.getLevel();
 
@@ -89,7 +89,7 @@ public class SelectMap extends JFrame {
         int indice = SelectMap.this.list.getSelectedIndex();
         Board b = new Board(indice + 1);
         b.setPlayerName(SelectMap.this.playerName);
-        MapReader map = new MapReader("maps/map" + (indice + 1) + ".xsb", "save/cancel_" + SelectMap.this.playerName + ".xsb");
+        MapReader map = new MapReader("../ressources/maps/map" + (indice + 1) + ".xsb", "../ressources/save/cancel_" + SelectMap.this.playerName + ".xsb");
         map.readingMap();
         b.createGrid(map.getMap());
         SelectMap.this.can.setBoard(b);
@@ -109,7 +109,7 @@ public class SelectMap extends JFrame {
     listAndNbMapUnlocked.add(scrollPane,cList);
 
     Board b = new Board(1);
-    MapReader map = new MapReader("maps/map1.xsb", "save/cancel_" + SelectMap.this.playerName + ".xsb");
+    MapReader map = new MapReader("../ressources/maps/map1.xsb", "../ressources/save/cancel_" + SelectMap.this.playerName + ".xsb");
     map.readingMap();
     b.createGrid(map.getMap());
 

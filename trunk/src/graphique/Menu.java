@@ -31,7 +31,7 @@ public class Menu extends JFrame {
     JPanel contenent = new JPanel();
 
     JPanel title = new JPanel();
-    JLabel image = new JLabel(new ImageIcon("graphique/images/titre.png"));
+    JLabel image = new JLabel(new ImageIcon("../ressources/images/titre.png"));
     title.add(image);
 
     int fontSize = 20;
@@ -46,7 +46,7 @@ public class Menu extends JFrame {
           int niveau = player.getLevel();
           Board b = new Board(niveau);
           b.setPlayerName(Menu.this.playerName);
-          MapReader map = new MapReader("maps/map" + niveau + ".xsb", "save/cancel_" + Menu.this.playerName + ".xsb");
+          MapReader map = new MapReader("../ressources/maps/map" + niveau + ".xsb", "../ressources/save/cancel_" + Menu.this.playerName + ".xsb");
           map.readingMap();
           b.createGrid(map.getMap());
           Menu.this.dispose();
@@ -88,7 +88,7 @@ public class Menu extends JFrame {
         int n = r.nextInt(nbMaps) + 1;
         Board b = new Board(n);
         b.setPlayerName(Menu.this.playerName);
-        MapReader map = new MapReader("maps/map" + n + ".xsb","save/cancel_" + Menu.this.playerName + ".xsb");
+        MapReader map = new MapReader("../ressources/maps/map" + n + ".xsb","../ressources/save/cancel_" + Menu.this.playerName + ".xsb");
         map.readingMap();
         b.createGrid(map.getMap());
         Menu.this.dispose();
@@ -106,7 +106,7 @@ public class Menu extends JFrame {
       }
     });
 
-    JLabel backgroundButton = new JLabel(new ImageIcon("graphique/images/caisseMenu.png"));
+    JLabel backgroundButton = new JLabel(new ImageIcon("../ressources/images/caisseMenu.png"));
 
     JPanel menu = new JPanel();
     backgroundButton.setLayout(new FlowLayout(FlowLayout.CENTER,0,95));
@@ -131,7 +131,7 @@ public class Menu extends JFrame {
 
     contenent.add(backgroundButton,BorderLayout.SOUTH);
 
-    JLabel background = new JLabel(new ImageIcon("graphique/images/fondMenu.png"));
+    JLabel background = new JLabel(new ImageIcon("../ressources/images/fondMenu.png"));
     background.setLayout(new FlowLayout());
     background.add(contenent);
 

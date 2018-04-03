@@ -22,11 +22,11 @@ public class CanvasGame extends Canvas {
 
   public CanvasGame (Board b, int sizeTile) {
     this.b = b;
-    this.crate = Toolkit.getDefaultToolkit().getImage("graphique/images/caisse.png");
-    this.wall = Toolkit.getDefaultToolkit().getImage("graphique/images/mur.jpg");
-    this.freeTile = Toolkit.getDefaultToolkit().getImage("graphique/images/sol.png");
-    this.player = Toolkit.getDefaultToolkit().getImage("graphique/images/perso.png");
-    this.star = Toolkit.getDefaultToolkit().getImage("graphique/images/star.png");
+    this.crate = Toolkit.getDefaultToolkit().getImage("../ressources/images/caisse.png");
+    this.wall = Toolkit.getDefaultToolkit().getImage("../ressources/images/mur.jpg");
+    this.freeTile = Toolkit.getDefaultToolkit().getImage("../ressources/images/sol.png");
+    this.player = Toolkit.getDefaultToolkit().getImage("../ressources/images/perso.png");
+    this.star = Toolkit.getDefaultToolkit().getImage("../ressources/images/star.png");
     this.sizeTile = sizeTile;
     int[] sizeGrid = b.getSize();
     setSize(sizeTile*sizeGrid[0],sizeTile*sizeGrid[1]);
@@ -77,7 +77,7 @@ public class CanvasGame extends Canvas {
     int[] size = b.getSize();
     int tailleStar = this.sizeTile/2;
     this.setSize(this.sizeTile*size[0],this.sizeTile*size[1]);
-    
+
     for (int i = 0; i<size[1] ; i++) {
       for (int j = 0; j<size[0]; j++) {
         if (grid[i][j] != null) {
