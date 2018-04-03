@@ -56,27 +56,57 @@ public class Solver {
 	}
 
 	public boolean bruteForce() {
+		this.waiting_dico.clear();
 		this.waiting_dico.put(createKey(this.current_state),this.current_state);
 		this.waiting_list.add(createKey(this.current_state));
 		while (!(this.waiting_list.isEmpty())) {
+			// System.out.println("===================================");
+			// System.out.println("debut while");
+			// System.out.println("===================================");
+			//
+			// System.out.println("waiting list : " +this.waiting_list);
 			//System.out.println(this.waiting_list.toString());
 			//System.out.println(this.explored_list.toString());
+			// System.out.println("currentKey : "+this.waiting_list.get(0));
 			State current= this.waiting_dico.get(this.waiting_list.get(0));
-			System.out.println(current.getLevel());
+			// System.out.println(current.getLevel());
 			if (current.allPlaced()) {
+				System.out.println(current.getLevel());
+				System.out.println(current);
 				return true;
 			}
 			this.waiting_dico.remove(createKey(current));
-			this.waiting_list.remove(createKey(current));
+			// System.out.println(current);
+			// System.out.println(this.waiting_list.contains(createKey(current)));
+			this.waiting_list.remove(0);
 			this.explored_list.put(createKey(current), current);
 			for (Push p : current.getPushes()) {
-				if (!(this.explored_list.containsKey(createKey(current.push(p))))) {
-					if (!(this.waiting_dico.containsKey(createKey(current.push(p))))) {
-						this.waiting_dico.put(createKey(current.push(p)), current.push(p));
-						this.waiting_list.add(createKey(current.push(p)));
+
+				ArrayList<String> gameboard_save=current.getLevel().createArrayList();
+				Board b= new Board();
+				b.createGrid(gameboard_save);
+				State s1=new State(b);
+
+				//System.out.println("push : "+p);
+				//System.out.println("explo : "+(this.explored_list.containsKey(createKey(s1.push(p)))));
+				if (!(createKey(s1.push(p)).contains("y"))){
+					if (!(this.explored_list.containsKey(createKey(s1.push(p))))) {
+						//System.out.println("waiting list : " +this.waiting_list);
+						//System.out.println("wait : "+(this.waiting_dico.containsKey(createKey(s1.push(p)))));
+
+						if (!(this.waiting_dico.containsKey(createKey(s1.push(p))))) {
+
+							this.waiting_dico.put(createKey(s1.push(p)), s1.push(p));
+							this.waiting_list.add(createKey(s1.push(p)));
+						}
 					}
 				}
 			}
+			// System.out.println("===================================");
+			// System.out.println(this.waiting_list);
+			// System.out.println("===================================");
+			// System.out.println("fin while");
+			// System.out.println("===================================");
 		}
 		return false;
 	}
@@ -85,7 +115,7 @@ public class Solver {
 		String key = "";
 		ArrayList<Block> list_crate=s.getLevel().getCrates();
 		for(Block c : list_crate){
-			key+=((Crate) c).getX()+","+((Crate) c).getY()+"/";
+			key+=((Crate) c).getX()+";"+((Crate) c).getY()+"/";
 		}
 		key+=s.getValue();
 		return key;
@@ -93,65 +123,39 @@ public class Solver {
 
 	public double minmin(State s, int depth){
 
-				debug.entering("Solver","minmin", new Object[]{s,depth});
+			debug.entering("Solver","minmin", new Object[]{s,depth});
+			debug.info("\n"+s.getLevel().toString());
+			if (depth!=3 && s.getLevel().toString().equals(this.previous_state.getLevel().toString())){
+				debug.warning("Mouvement inutile");
+				return Double.POSITIVE_INFINITY;
+			}
 
-				debug.info("\n"+s.getLevel().toString());
+			if (depth==0 || s.isFinished()){
+				double value = s.getValue();
+				debug.info("Feuille atteinte ; valeur : " + value);
+				return value;
+			}
 
-				if (depth!=3 && s.getLevel().toString().equals(this.previous_state.getLevel().toString())){
+			double m = Double.POSITIVE_INFINITY;
+			ArrayList<Push> l=s.getPushes();
+			debug.info("Liste des coups : " + l);
+			for (Push coup : l) {
+				ArrayList<String> gameboard_save=s.getLevel().createArrayList();
+				Board b= new Board();
+				b.createGrid(gameboard_save);
+				State s1=new State(b);
+				double val=minmin(s1.push(coup), depth-1);
+				debug.info("profondeur : " + depth + "; recherche pour le coup : " + coup + "; value : " + val);
 
-								debug.warning("Mouvement inutile");
-
-								return Double.POSITIVE_INFINITY;
-
+				if (val <= m) {
+					debug.fine("Mise à jour coup optimal");
+					m = val;
+					this.best_push=coup;
 				}
-
-				if (depth==0 || s.isFinished()){
-
-								double value = s.getValue();
-
-								debug.info("Feuille atteinte ; valeur : " + value);
-
-								return value;
-
-				}
-
-				double m = Double.POSITIVE_INFINITY;
-
-				ArrayList<Push> l=s.getPushes();
-
-				debug.info("Liste des coups : " + l);
-
-for (Push coup : l) {
-
-												ArrayList<String> gameboard_save=s.getLevel().createArrayList();
-
-												Board b= new Board();
-
-												b.createGrid(gameboard_save);
-
-												State s1=new State(b);
-
-double val=minmin(s1.push(coup), depth-1);
-
-												debug.info("profondeur : " + depth + "; recherche pour le coup : " + coup + "; value : " + val);
-
-if (val <= m) {
-
-																debug.fine("Mise à jour coup optimal");
-
-	m = val;
-
-																this.best_push=coup;
-
-																}
-
-				}
-
-				debug.exiting("Solver","minmin", this.best_push);
-
-				return m;
-
-}
+			}
+			debug.exiting("Solver","minmin", this.best_push);
+			return m;
+	}
 
 	public State getPreviousState() {
 		return this.previous_state;
