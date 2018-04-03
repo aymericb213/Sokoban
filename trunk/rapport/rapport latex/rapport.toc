@@ -1,2 +1,8 @@
 \select@language {french}
-\contentsline {section}{Introduction}{2}
+\contentsline {section}{Objectifs}{2}
+\contentsline {subsection}{Description du Sokoban}{2}
+\contentsline {subsection}{Les fonctionnalit\IeC {\'e}s attendues}{2}
+\contentsline {section}{\numberline {1}Fonctionnalit\IeC {\'e}s impl\IeC {\'e}ment\IeC {\'e}es}{2}
+\contentsline {subsection}{\numberline {1.1}Description des fonctionnalit\IeC {\'e}s}{2}
+\contentsline {subsubsection}{Attendues}{2}
+\contentsline {subsubsection}{Ajout\IeC {\'e}es}{3}
