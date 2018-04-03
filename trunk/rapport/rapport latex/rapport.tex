@@ -49,7 +49,7 @@ L2-Info-groupe-4A
 
 \newpage
 
-\tableofcontents{}
+\tableofcontents
 
 \newpage
 
@@ -58,7 +58,51 @@ L2-Info-groupe-4A
 %------------------------------
 
 
-\section*{Introduction}
-\addcontentsline{toc}{section}{Introduction}
+\section*{Objectifs}
+\addcontentsline{toc}{section}{Objectifs}
+
+\subsection*{Description du Sokoban}
+\addcontentsline{toc}{subsection}{Description du Sokoban}
+
+Le Sokoban est un jeu de réflexion de type puzzle où le joueur doit placer des caisses sur des objectifs placés à l'avance sur la carte. Le joueur gagne si toutes les caisses sont placées sur les objectifs et il ne peut pousser qu'une seule caisse à la fois. Il existe de nombreux niveaux dont la difficulté est variante.
+
+\begin{center}
+\includegraphics[scale=0.5]{images/sokoban.png}
+\end{center}
+
+\subsection*{Les fonctionnalités attendues}
+\addcontentsline{toc}{subsection}{Les fonctionnalités attendues}
+
+Pour ce projet, nous devions mettre au point une version jouable pour un humain en console, en prenant en compte l'importation de niveaux (au format \textbf{.xsb}). Il était également demandé de réaliser une interface graphique et une fonctionnalité permettant une résolution automatique de niveau.\\
+Enfin, permettre de faire jouer en parallèle un humain et un ordinateur, et rendre \textit{anytime} l'algorithme de l'intelligence artificielle. C'est à dire le fait que lorsque le joueur fait un mouvement, l'intelligence artificielle doit en faire un.
+
+
+\section{Fonctionnalités implémentées}
+
+\subsection{Description des fonctionnalités}
+
+\subsubsection*{Attendues}
+\addcontentsline{toc}{subsubsection}{Attendues}
+
+La version console fonctionne à l'aide de saisies de l'utilisateur qui lui permettent de contrôler le jeu. Une fois un niveau terminé, on demande au joueur si il souhaite passer au niveau suivant.\\
+
+La carte est chargée à partir d'un fichier \textbf{.xsb} contenant des lignes de caractères, que l'on transforment en liste de caractères.\\
+La carte est donc modélisée par des chaînes de caractères:
+\begin{itemize}
+\item \textbf{\#} pour un mur
+\item \textbf{\$} pour une caisse
+\item \textbf{@} pour le joueur
+\item \textbf{.} pour un objectif
+\item \textbf{*} pour une caisse sur un objectif
+\item \textbf{+} pour le joueur sur un objectif
+\item \textbf{espace} pour les cases vides
+\end{itemize}
+
+\begin{center}
+\includegraphics[scale=0.6]{images/Capture.png}
+\end{center}
+
+\subsubsection*{Ajoutées}
+\addcontentsline{toc}{subsubsection}{Ajoutées}
 
 \end{document}
