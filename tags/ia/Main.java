@@ -18,7 +18,7 @@ public class Main implements Runnable {
 		try {
 			FileHandler debug_output = new FileHandler("debug%g.log");
 			debug_output.setFormatter(new SimpleFormatter());
-			MapReader map = new MapReader("ia/testmaps/multicrates.xsb");
+			MapReader map = new MapReader(args[0]);
 			map.readingMap();
 			Board b= new Board();
 			b.createGrid(map.getMap());
