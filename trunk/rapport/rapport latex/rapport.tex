@@ -99,10 +99,21 @@ La carte est donc modélisée par des chaînes de caractères:
 \end{itemize}
 
 \begin{center}
-\includegraphics[scale=0.6]{images/Capture.png}
+\includegraphics[scale=0.6]{images/Capture.png}\\
 \end{center}
+
+Au niveau de l'interface graphique, nous avons une zone de jeu dans laquelle on dessine le niveau et des boutons pour gérer les différentes fonctionnalités. Le personnage est déplaçable avec les flèches directionnelles ou ZQSD, si le joueur a bloqué une caisse ou si il a gagné, il ne peut plus bouger et doit recommencer le niveau ou passer au suivant (seulement si il a gagné). Si le joueur gagne, le personnage effectue le Dab et si il perd, le personnage pleure.
+
+\begin{center}
+\includegraphics[scale=0.5]{images/Capture2.png}
+\end{center} 
 
 \subsubsection*{Ajoutées}
 \addcontentsline{toc}{subsubsection}{Ajoutées}
+
+Au lancement du programme, l'utilisateur peut choisir un profil ou en créer un nouveau.\\
+En fonction de l'avancement du profil donné, le joueur a débloqué un certain nombre de carte, pour débloquer la carte suivante il faut finir le niveau en cours. Lorsqu'un profil est chargé, la dernière carte non terminée est lancée automatiquement.\\
+
+Nous proposons également à l'utilisateur de sauvegarder sa partie à un instant du niveau donné, de charger sa sauvegarde (il n'y a pas de conflit entre la sauvegarde de chaque utilisateur), d'annuler le coup précédemment joué (cette fonctionnalité n'annule qu'un seul coup en arrière) et enfin de recommencer le niveau courant.
 
 \end{document}
