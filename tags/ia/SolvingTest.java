@@ -9,13 +9,16 @@ public class SolvingTest {
 	public static void main(String[] args) {
 		String dirname="maps";
 		File directory = new File(dirname);
-		String[] playlist = directory.list(/*new FilenameFilter() {
+		String[] playlist = directory.list(new FilenameFilter() {
 																				@Override
 																				public boolean accept(File dir, String name) {
-																					return name.matches("*.xsb$");
-																				}
-																			}*/);
-		System.out.println(playlist.);
+																					return name.matches("^map...xsb$");
+																				}//TODO : trouver une meilleure regexp
+																			});
+		java.util.Arrays.sort(playlist);
+		/*for (int i=0; i<playlist.length ; i++) {
+			System.out.println(playlist[i]);
+		}*/
 		for (String map: playlist) {
 			Main test=new Main();
 			long start = System.currentTimeMillis();

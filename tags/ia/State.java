@@ -62,6 +62,19 @@ public class State {
 		}
 	}
 
+	public void hamming() {
+		this.value=0;
+		if (this.level.isFinished() && !(this.level.allPlaced())) {
+				this.value=Double.POSITIVE_INFINITY;
+		} else {
+			for (Block c : this.level.getCrates()) {
+				if (!(((Crate)c).isPlaced())) {
+					this.value+=1.;
+				}
+			}
+		}
+	}
+
 	public State push(Push move) {
 		Player p = (Player)this.level.getPlayer();
 		Node start = new Node(p.getX(), p.getY());
@@ -109,18 +122,23 @@ public class State {
 	}
 
 	public Board getLevel() {
- 	 return this.level;
-  }
+		return this.level;
+	}
 
- public ArrayList<Push> getPushes() {
-	 this.accessiblePushes();
-	 return this.lPush;
- }
+	public ArrayList<Push> getPushes() {
+		this.accessiblePushes();
+		return this.lPush;
+	}
 
- public double getValue() {
-	 this.computeValue();
-	 return this.value;
- }
+	public double getValue() {
+		this.computeValue();
+		return this.value;
+	}
+
+	public double getHammingDist() {
+		this.hamming();
+		return this.value;
+	}
 
 	public String getPreviousKey(){
 		return this.previous_key;

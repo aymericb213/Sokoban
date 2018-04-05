@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.logging.*;
 import java.util.Random;
+import java.util.PriorityQueue;
+import java.util.Comparator;
 
 public class Solver {
 
@@ -13,9 +15,8 @@ public class Solver {
 	private Push best_push;
 	private HashMap<String,Board> explored_states;
 	private HashMap<String,State> explored_list;
-	private ArrayList<String> waiting_list;
+	private PriorityQueue<String> p_queue;
 	private HashMap<String,State> waiting_dico;
-	private ArrayList<Push> movelist;
 	public static final Logger debug = Logger.getLogger("debug IA");
 
 	public Solver() {
@@ -24,9 +25,33 @@ public class Solver {
 		this.current_state=null;
 		this.best_push=null;
 		this.explored_list = new HashMap<String,State>();
-		this.waiting_list = new ArrayList<String>();
+		this.p_queue = new PriorityQueue<String>(11, new Comparator<String>() {
+																											@Override
+																											public int compare(String first, String second) {
+																												MapReader map = new MapReader(first);
+																												map.readingMap();
+																												Board b1= new Board();
+																												b1.createGrid(map.getMap());
+																												State s1=new State(b1);
+
+																												map.setFile(second);
+																												map.readingMap();
+																												Board b2= new Board();
+																												b2.createGrid(map.getMap());
+																												State s2=new State(b2);
+
+																												Double value_first = s1.getValue();
+																												Double value_second = s2.getValue();
+																												if (value_first < value_second) {
+																													return -1;
+																												} else if (value_first == value_second) {
+																													return 0;
+																												} else {
+																													return 1;
+																												}
+																											}
+																										});
 		this.waiting_dico = new HashMap<String,State>();
-		this.movelist=new ArrayList<Push>();
 	}
 
 	public Solver(State state) {
@@ -57,55 +82,52 @@ public class Solver {
 
 	public ArrayList<Push> bruteForce() {
 		this.waiting_dico.clear();
-		this.waiting_dico.put(createKey(this.current_state),this.current_state);
-		this.waiting_list.add(createKey(this.current_state));
-		while (!(this.waiting_list.isEmpty())) {
+		String init_key=this.createKey(this.current_state);
+		this.waiting_dico.put(init_key,this.current_state);
+		this.p_queue.offer(init_key);
+		while (this.p_queue.size()!=0) {
 			// System.out.println("===================================");
 			// System.out.println("debut while");
 			// System.out.println("===================================");
 			//
-			// System.out.println("waiting list : " +this.waiting_list);
-			//System.out.println(this.waiting_list.toString());
+			// System.out.println("waiting list : " +this.p_queue);
+			//System.out.println(this.p_queue.toString());
 			//System.out.println(this.explored_list.toString());
-			// System.out.println("currentKey : "+this.waiting_list.get(0));
-			State current= this.waiting_dico.get(this.waiting_list.get(0));
+			// System.out.println("currentKey : "+this.p_queue.get(0));
+			State current= this.waiting_dico.get(this.p_queue.poll());
 			// System.out.println(current.getLevel());
 			if (current.allPlaced()) {
 				System.out.println(current.getLevel());
 				System.out.println(current);
 				return buildFullPath(current);
 			}
-			this.waiting_dico.remove(createKey(current));
+			String current_key = this.createKey(current);
+			this.waiting_dico.remove(current_key);
 			// System.out.println(current);
-			// System.out.println(this.waiting_list.contains(createKey(current)));
-			this.waiting_list.remove(0);
-			this.explored_list.put(createKey(current), current);
+			// System.out.println(this.p_queue.contains(createKey(current)));
+			this.explored_list.put(current_key, current);
 			for (Push p : current.getPushes()) {
 
 				ArrayList<String> gameboard_save=current.getLevel().createArrayList();
 				Board b= new Board();
 				b.createGrid(gameboard_save);
-				State s1=new State(b);
-
+				State new_current=new State(b);
+				String successor_key=this.createKey(new_current.push(p));
 				//System.out.println("push : "+p);
-				//System.out.println("explo : "+(this.explored_list.containsKey(createKey(s1.push(p)))));
-				if (!(createKey(s1.push(p)).contains("y"))){
-					if (!(this.explored_list.containsKey(createKey(s1.push(p))))) {
-						//System.out.println("waiting list : " +this.waiting_list);
-						//System.out.println("wait : "+(this.waiting_dico.containsKey(createKey(s1.push(p)))));
+				//System.out.println("explo : "+(this.explored_list.containsKey(createKey(new_current.push(p)))));
 
-						if (!(this.waiting_dico.containsKey(createKey(s1.push(p))))) {
-							State e = s1.push(p);
-							e.setPreviousKey(createKey(current));
-							e.setGenerator(p);
-							this.waiting_dico.put(createKey(s1.push(p)), e);
-							this.waiting_list.add(createKey(s1.push(p)));
-						}
-					}
+				if ((!(successor_key.contains("y"))) && (!(this.explored_list.containsKey(successor_key))) && (!(this.waiting_dico.containsKey(successor_key)))) {
+					//System.out.println("waiting list : " +this.p_queue);
+					//System.out.println("wait : "+(this.waiting_dico.containsKey(createKey(new_current.push(p)))));
+					State e = new_current.push(p);
+					e.setPreviousKey(current_key);
+					e.setGenerator(p);
+					this.waiting_dico.put(successor_key, e);
+					this.p_queue.offer(successor_key);
 				}
 			}
 			// System.out.println("===================================");
-			// System.out.println(this.waiting_list);
+			// System.out.println(this.p_queue);
 			// System.out.println("===================================");
 			// System.out.println("fin while");
 			// System.out.println("===================================");
@@ -124,7 +146,7 @@ public class Solver {
 		}
 		this.explored_list.clear();
 		this.waiting_dico.clear();
-		this.waiting_list.clear();
+		this.p_queue.clear();
 		bfp.remove(0);
 		return bfp;
 	}
@@ -161,8 +183,8 @@ public class Solver {
 				ArrayList<String> gameboard_save=s.getLevel().createArrayList();
 				Board b= new Board();
 				b.createGrid(gameboard_save);
-				State s1=new State(b);
-				double val=minmin(s1.push(coup), depth-1);
+				State new_current=new State(b);
+				double val=minmin(new_current.push(coup), depth-1);
 				debug.info("profondeur : " + depth + "; recherche pour le coup : " + coup + "; value : " + val);
 
 				if (val <= m) {
