@@ -1,8 +1,13 @@
 \select@language {french}
-\contentsline {section}{Objectifs}{2}
-\contentsline {subsection}{Description du Sokoban}{2}
-\contentsline {subsection}{Les fonctionnalit\IeC {\'e}s attendues}{2}
-\contentsline {section}{\numberline {1}Fonctionnalit\IeC {\'e}s impl\IeC {\'e}ment\IeC {\'e}es}{2}
-\contentsline {subsection}{\numberline {1.1}Description des fonctionnalit\IeC {\'e}s}{2}
-\contentsline {subsubsection}{Attendues}{2}
-\contentsline {subsubsection}{Ajout\IeC {\'e}es}{3}
+\contentsline {section}{Objectifs}{2}{section*.2}
+\contentsline {subsection}{Description du Sokoban}{2}{section*.3}
+\contentsline {subsection}{Les fonctionnalit\IeC {\'e}s attendues}{2}{section*.4}
+\contentsline {section}{\numberline {1}Fonctionnalit\IeC {\'e}s impl\IeC {\'e}ment\IeC {\'e}es}{2}{section.1}
+\contentsline {subsection}{\numberline {1.1}Description des fonctionnalit\IeC {\'e}s}{2}{subsection.1.1}
+\contentsline {subsubsection}{Attendues}{2}{section*.5}
+\contentsline {subsubsection}{Ajout\IeC {\'e}es}{3}{section*.6}
+\contentsline {subsection}{\numberline {1.2}Organisation du projet}{4}{subsection.1.2}
+\contentsline {section}{\numberline {2}\IeC {\'E}l\IeC {\'e}ments techniques}{5}{section.2}
+\contentsline {section}{\numberline {3}Architecture du projet}{5}{section.3}
+\contentsline {section}{\numberline {4}Exp\IeC {\'e}rimentations et usages}{5}{section.4}
+\contentsline {section}{Conclusion}{5}{section*.7}
