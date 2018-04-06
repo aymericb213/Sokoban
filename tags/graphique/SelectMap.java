@@ -27,7 +27,7 @@ public class SelectMap extends JFrame {
     this.modeIad = modeIad;
     this.playerName = playerName;
 
-    this.sizeTile = 20;
+    this.sizeTile = 18;
 
     this.setResizable(true);
     this.setTitle("Select map");
@@ -124,7 +124,7 @@ public class SelectMap extends JFrame {
     b.createGrid(map.getMap());
 
     this.zoneCanvas = new JPanel();
-    zoneCanvas.setLayout(new FlowLayout(FlowLayout.CENTER,0,50));
+    zoneCanvas.setLayout(new FlowLayout(FlowLayout.CENTER,0,10));
     zoneCanvas.setPreferredSize(new Dimension(400,320));
 
     this.can = new CanvasGame(b,sizeTile);
