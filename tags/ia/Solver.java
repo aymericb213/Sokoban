@@ -71,16 +71,14 @@ public class Solver {
 	}
 
 	public ArrayList<Push> bruteForce() {
+		long timer = 0;
 		this.waiting_dico.clear();
 		String init_key=this.createKey(this.current_state);
 		this.waiting_dico.put(init_key,this.current_state);
 		this.p_queue.offer(init_key);
-		while (this.p_queue.size()!=0) {
-			// System.out.println("===================================");
-			// System.out.println("debut while");
-			// System.out.println("===================================");
-			//
-			// System.out.println("waiting list : " +this.p_queue);
+		while (this.p_queue.size()!=0 || timer<150000) {
+			long start = System.currentTimeMillis();
+			//System.out.println("file de priorité : " +this.p_queue);
 			//System.out.println(this.p_queue.toString());
 			//System.out.println(this.explored_list.toString());
 			// System.out.println("currentKey : "+this.p_queue.get(0));
@@ -89,6 +87,8 @@ public class Solver {
 			if (current.allPlaced()) {
 				System.out.println(current.getLevel());
 				System.out.println(current);
+				timer+=(System.currentTimeMillis()-start);
+				System.out.println("Résolu : " + timer);
 				return buildFullPath(current);
 			}
 			String current_key = this.createKey(current);
@@ -103,10 +103,8 @@ public class Solver {
 				b.createGrid(gameboard_save);
 				State new_current=new State(b);
 				String successor_key=this.createKey(new_current.push(p));
-				//System.out.println("push : "+p);
-				//System.out.println("explo : "+(this.explored_list.containsKey(createKey(new_current.push(p)))));
 
-				if ((!(successor_key.contains("y"))) && (!(this.explored_list.containsKey(successor_key))) && (!(this.waiting_dico.containsKey(successor_key)))) {
+				if (!((successor_key.contains("Infinity")) || (this.explored_list.containsKey(successor_key)) || (this.waiting_dico.containsKey(successor_key)))) {
 					//System.out.println("waiting list : " +this.p_queue);
 					//System.out.println("wait : "+(this.waiting_dico.containsKey(createKey(new_current.push(p)))));
 					State e = new_current.push(p);
@@ -116,12 +114,10 @@ public class Solver {
 					this.p_queue.offer(successor_key);
 				}
 			}
-			// System.out.println("===================================");
+			timer+=(System.currentTimeMillis()-start);
 			// System.out.println(this.p_queue);
-			// System.out.println("===================================");
-			// System.out.println("fin while");
-			// System.out.println("===================================");
 		}
+		System.out.println("Trop long : " + timer);
 		return null;
 	}
 
@@ -147,7 +143,7 @@ public class Solver {
 		for(Block c : list_crate){
 			key+=((Crate) c).getX()+";"+((Crate) c).getY()+"/";
 		}
-		key+=s.getValue();
+		key+=s.getHammingDist();
 		return key;
 	}
 

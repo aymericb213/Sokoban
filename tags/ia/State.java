@@ -154,6 +154,6 @@ public class State {
 	 for (Block c : this.level.getCrates()) {
 		 chCrates+="(" + ((Crate) c).getX()+","+((Crate)c).getY() + ") ; ";
 	 }
-	 return "Position du joueur : (" + p.getX() + "," + p.getY() + ")\nPosition des caisses : " + chCrates + "\nListe des coups : " + this.getPushes() + "\nEtat final : " + this.level.getOver() + "\nValeur : " + this.getValue();
+	 return "Position du joueur : (" + p.getX() + "," + p.getY() + ")\nPosition des caisses : " + chCrates + "\nListe des coups : " + this.getPushes() + "\nEtat final : " + this.isFinished() + "\nValeur : " + this.getValue();
  }
 }

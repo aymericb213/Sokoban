@@ -7,30 +7,27 @@ import java.io.FilenameFilter;
 public class SolvingTest {
 
 	public static void main(String[] args) {
-		String dirname="maps";
+		String dirname="ia/testmaps";
 		File directory = new File(dirname);
 		String[] playlist = directory.list(new FilenameFilter() {
 																				@Override
 																				public boolean accept(File dir, String name) {
-																					return name.matches("^map...xsb$");
+																					return name.matches("^map...xsb$") || name.matches("^map..xsb$");
 																				}//TODO : trouver une meilleure regexp
 																			});
 		java.util.Arrays.sort(playlist);
-		/*for (int i=0; i<playlist.length ; i++) {
+		for (int i=0; i<playlist.length ; i++) {
 			System.out.println(playlist[i]);
-		}*/
+		}
 		for (String map: playlist) {
 			try {
 			Main test=new Main();
-			long start = System.currentTimeMillis();
 			String[] arg= new String[1];
 			arg[0]=dirname +"/"+ map;
 			test.main(arg);
-			long time = System.currentTimeMillis()-start;
-			System.out.println(map + " : " + time);
 			} catch (OutOfMemoryError e) {
 				System.gc();
-				System.out.println("Dépassement mémoire");
+				System.out.println(map + " : Dépassement mémoire");
 				continue;
 			}
 		}

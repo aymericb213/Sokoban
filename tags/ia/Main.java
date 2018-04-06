@@ -27,13 +27,13 @@ public class Main implements Runnable {
 			Board search_board= new Board();
 			search_board.createGrid(map.getMap());
 
-			ArrayList<State> list_state = new ArrayList<>();
 			State present_state=new State(b);
 
 			Solver ia=new Solver(present_state);
 			ia.debug.addHandler(debug_output);
 
 			ArrayList<Push> solution = ia.bruteForce();
+			System.out.println(solution);
 			for (int i=0; i<solution.size(); i++) {
 				present_state.push(solution.get(i));
 				total_path+="";

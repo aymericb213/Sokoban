@@ -64,7 +64,12 @@ public class SelectMap extends JFrame {
     zoneButton.add(bBack);
     zoneButton.setLayout(new GridLayout(2,1,10,10));
 
-    int nbMapsTotal = new File("maps").list().length;
+    int nbMapsTotal = new File("maps").list(new FilenameFilter() {
+																						@Override
+																						public boolean accept(File dir, String name) {
+																							return name.matches("^map...xsb$") || name.matches("^map..xsb$");
+																						}
+																					}).length;
     PlayerReader player = new PlayerReader(this.playerName);
     int levelPlayerMax = player.getLevel();
 
