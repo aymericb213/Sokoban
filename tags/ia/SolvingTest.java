@@ -20,6 +20,7 @@ public class SolvingTest {
 			System.out.println(playlist[i]);
 		}*/
 		for (String map: playlist) {
+			try {
 			Main test=new Main();
 			long start = System.currentTimeMillis();
 			String[] arg= new String[1];
@@ -27,6 +28,11 @@ public class SolvingTest {
 			test.main(arg);
 			long time = System.currentTimeMillis()-start;
 			System.out.println(map + " : " + time);
+			} catch (OutOfMemoryError e) {
+				System.gc();
+				System.out.println("Dépassement mémoire");
+				continue;
+			}
 		}
 	}
 }

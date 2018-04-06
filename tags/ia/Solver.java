@@ -28,20 +28,10 @@ public class Solver {
 		this.p_queue = new PriorityQueue<String>(11, new Comparator<String>() {
 																											@Override
 																											public int compare(String first, String second) {
-																												MapReader map = new MapReader(first);
-																												map.readingMap();
-																												Board b1= new Board();
-																												b1.createGrid(map.getMap());
-																												State s1=new State(b1);
-
-																												map.setFile(second);
-																												map.readingMap();
-																												Board b2= new Board();
-																												b2.createGrid(map.getMap());
-																												State s2=new State(b2);
-
-																												Double value_first = s1.getValue();
-																												Double value_second = s2.getValue();
+																												String[] s_first = first.split("/");
+																												String[] s_second = second.split("/");
+																												Double value_first = Double.parseDouble(s_first[s_first.length-1]);
+																												Double value_second = Double.parseDouble(s_second[s_second.length-1]);
 																												if (value_first < value_second) {
 																													return -1;
 																												} else if (value_first == value_second) {
