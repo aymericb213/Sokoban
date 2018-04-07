@@ -7,7 +7,7 @@ import java.io.FilenameFilter;
 public class SolvingTest {
 
 	public static void main(String[] args) {
-		String dirname="ia/testmaps";
+		String dirname="maps";
 		File directory = new File(dirname);
 		String[] playlist = directory.list(new FilenameFilter() {
 																				@Override

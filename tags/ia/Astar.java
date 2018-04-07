@@ -45,6 +45,7 @@ public class Astar {
 				//System.out.println("Chemin vers " + this.goal + " trouvé");
 				pathFound=true;
 				buildFullPath();
+				break;
 			}
 			this.waitingList.remove(current);
 			this.exploredList.add(current);

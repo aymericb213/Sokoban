@@ -17,6 +17,7 @@ public class Solver {
 	private HashMap<String,State> explored_list;
 	private PriorityQueue<String> p_queue;
 	private HashMap<String,State> waiting_dico;
+	private ArrayList<Push> movelist;
 	public static final Logger debug = Logger.getLogger("debug IA");
 
 	public Solver() {
@@ -42,6 +43,7 @@ public class Solver {
 																											}
 																										});
 		this.waiting_dico = new HashMap<String,State>();
+		this.movelist= null;
 	}
 
 	public Solver(State state) {
@@ -70,13 +72,13 @@ public class Solver {
 		System.out.println("résolu");
 	}
 
-	public ArrayList<Push> bruteForce() {
+	public void aStarSolve() {
 		long timer = 0;
 		this.waiting_dico.clear();
 		String init_key=this.createKey(this.current_state);
 		this.waiting_dico.put(init_key,this.current_state);
 		this.p_queue.offer(init_key);
-		while (this.p_queue.size()!=0 || timer<150000) {
+		while ((this.p_queue.size()!=0) || (timer<100000)) {
 			long start = System.currentTimeMillis();
 			//System.out.println("file de priorité : " +this.p_queue);
 			//System.out.println(this.p_queue.toString());
@@ -88,8 +90,9 @@ public class Solver {
 				System.out.println(current.getLevel());
 				System.out.println(current);
 				timer+=(System.currentTimeMillis()-start);
-				System.out.println("Résolu : " + timer);
-				return buildFullPath(current);
+				System.out.println("Résolu en " + timer + " ms");
+				buildFullPath(current);
+				break;
 			}
 			String current_key = this.createKey(current);
 			this.waiting_dico.remove(current_key);
@@ -102,12 +105,12 @@ public class Solver {
 				Board b= new Board();
 				b.createGrid(gameboard_save);
 				State new_current=new State(b);
-				String successor_key=this.createKey(new_current.push(p));
+				String successor_key=this.createKey(new_current.tp(p));
 
 				if (!((successor_key.contains("Infinity")) || (this.explored_list.containsKey(successor_key)) || (this.waiting_dico.containsKey(successor_key)))) {
 					//System.out.println("waiting list : " +this.p_queue);
 					//System.out.println("wait : "+(this.waiting_dico.containsKey(createKey(new_current.push(p)))));
-					State e = new_current.push(p);
+					State e = new_current.tp(p);
 					e.setPreviousKey(current_key);
 					e.setGenerator(p);
 					this.waiting_dico.put(successor_key, e);
@@ -118,23 +121,21 @@ public class Solver {
 			// System.out.println(this.p_queue);
 		}
 		System.out.println("Trop long : " + timer);
-		return null;
 	}
 
-	public ArrayList<Push> buildFullPath(State end) {
-		ArrayList<Push> bfp = new ArrayList<>();
-		bfp.add(end.getGenerator());
+	public void buildFullPath(State end) {
+		this.movelist= new ArrayList<Push>();
+		movelist.add(end.getGenerator());
 		String end_key=end.getPreviousKey();
 		while (end_key!=null){
 			end = this.explored_list.get(end_key);
-			bfp.add(0,end.getGenerator());
+			movelist.add(0,end.getGenerator());
 			end_key=end.getPreviousKey();
 		}
 		this.explored_list.clear();
 		this.waiting_dico.clear();
 		this.p_queue.clear();
-		bfp.remove(0);
-		return bfp;
+		movelist.remove(0);
 	}
 
 	public String createKey(State s){
@@ -170,7 +171,7 @@ public class Solver {
 				Board b= new Board();
 				b.createGrid(gameboard_save);
 				State new_current=new State(b);
-				double val=minmin(new_current.push(coup), depth-1);
+				double val=minmin(new_current.tp(coup), depth-1);
 				debug.info("profondeur : " + depth + "; recherche pour le coup : " + coup + "; value : " + val);
 
 				if (val <= m) {
@@ -204,30 +205,36 @@ public class Solver {
 		return this.best_push;
 	}
 
+	public ArrayList<Push> getMovelist() {
+		return this.movelist;
+	}
+
 	public String toString() {
 		String res="";
 		Player p = (Player)this.current_state.getLevel().getPlayer();
 		Node start = new Node(p.getX(), p.getY());
-		Astar dep = new Astar();
-		Node goal= new Node(this.best_push.getX(), this.best_push.getY());
-		dep.setLevel(this.current_state.getLevel());
-		dep.setStart(start);
-		dep.setGoal(goal);
-		dep.pathSearch();
-		res+=dep.toString();
-		switch (this.best_push.getDir()) {
-			case UP:
-				res+="U";
-				break;
-			case DOWN:
-				res+="D";
-				break;
-			case LEFT:
-				res+="L";
-				break;
-			case RIGHT:
-				res+="R";
-				break;
+		for (Push move : this.movelist) {
+			Astar dep = new Astar();
+			dep.setLevel(this.current_state.getLevel());
+			dep.setStart(start);
+			Node goal= new Node(move.getX(), move.getY());
+			dep.setGoal(goal);
+			dep.pathSearch();
+			res+=dep.toString();
+			switch (move.getDir()) {
+				case UP:
+					res+="U";
+					break;
+				case DOWN:
+					res+="D";
+					break;
+				case LEFT:
+					res+="L";
+					break;
+				case RIGHT:
+					res+="R";
+					break;
+			}
 		}
 		return res;
 	}
