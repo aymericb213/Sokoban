@@ -138,13 +138,52 @@ Nous avons rencontrés des difficultés pour la détection d'une caisse qui est 
 
 Ensuite, nous nous sommes séparés en trois groupes, deux d'entre nous se sont lancés sur l'IA avec l'algorithme A*, puis une autre personne s'est lancée dans la création d'un main et toute la gestions de fichiers (sauvegarde, chargement, traduction entre une carte enregistré dans un fichier et notre représentation d'un niveau de notre code). Enfin la dernière personne s'est occupée de gérer des cas plus complexes de détections de caisses bloquées puis est partie dans la mis en place de l'interface graphique.
 
-L'interface graphique ayant bien avancé, des nouvelles fonctionnalités ont étaient ajoutées dans celle-ci et des réglages dans la manière de sauvegarder une map a était changé ce qui a posé un problème au niveau du main qui faisait fonctionner le jeu en version console, celle-ci n'était plus à jour il a fallut donc revoir notre main de la console pour qu'elle la fonctionnalité de sélection de profils qui a était implémenté d'abord en version graphique, changer la manière de sauvegarder une map car dans la première version, la méthode ne nous permettait pas de recommencer le niveau courant.\\
+L'interface graphique ayant bien avancé, des nouvelles fonctionnalités ont été ajoutées dans celle-ci et des réglages dans la manière de sauvegarder une map ont été changés ce qui a posé un problème au niveau du main qui faisait fonctionner le jeu en version console, celle-ci n'était plus à jour il a fallut donc revoir notre main de la console pour que la fonctionnalité de sélection de profils qui a été implémentée d'abord en version graphique, changer la manière de sauvegarder une map car dans la première version, la méthode ne nous permettait pas de recommencer le niveau courant.\\
 
 Au niveau de l'IA, nous avions réussi assez tardivement à faire résoudre une grande partie de nos maps en quelques secondes, en effet nous avions rencontré pas mal de problèmes en ce qui concerne les choix que doit effectuer l'IA et de comprendre pourquoi elle ne faisait pas ce que l'on attendait.
 
 \section{Éléments techniques}
 
 \section{Architecture du projet}
+
+\subsection{Organisation des packages}
+
+Notre projet se décompose en trois packages distincts:
+\begin{itemize}
+\item le package \textbf{sokoban}, le package principal qui gère toute la version console, le chargement de fichier, et est utilisé dans les deux autres packages;
+\item le package \textbf{graphique}, qui gère l'interface graphique en utilisant plusieurs classes du package précédent;
+\item le package \textbf{ia}, qui implémente les algorithmes de résolution automatique.
+\end{itemize}
+
+En créant ces trois packages, nous avons pu travaillé en parallèle sur différents aspects du projet sans pour autant se gêner les uns les autres.
+Ainsi, une modification du package \textbf{ia} ne changeait rien au fonctionnement du sokoban en version console ou graphique.
+\\
+Cependant, après modification du package \textbf{sokoban}, tout le groupe devait récupérer la version la plus récente, car ce package est utilisé par les deux autres.
+
+\subsection{Organisation des classes}
+
+\subsubsection{Package sokoban}
+
+Notre package principal comporte treize classes réparties en différentes catégories:
+\begin{itemize}
+\item les classes gérant les entités (personnage, murs, ...);
+\item les classes permettant d'enregistrer/charger une sauvegarde;
+\item les classes permettant de lancer le programme.
+\end{itemize}
+
+Toutes les classes de gestion des entités héritent de la classe \textit{Block}, elles permettent de déplacer facilement le personnage et les caisses, de gérer les collisions, les blocages et la fin d'une partie.
+
+Les classes gérant les fichiers permettent de lire et d'écrire dans des fichiers situés dans un dossier "maps" contenant toutes les cartes du jeu, ou dans un fichier "save" stockant les profils et leur sauvegarde/cancel.
+
+Les classes permettant de lancer le programme sont le Board, qui créer la grille de jeu, et le Main.
+
+\subsubsection{Package graphique}
+
+Ce package permet simplement de gérer la version graphique du Sokoban et de jouer sans les entrées claviers (en appuyant directement sur une touche, on peut déplacer le joueur).
+
+\subsubsection{Package ia}
+
+Le package \textbf{ia} a permit d'effectuer de nombreux tests sans que cela bloque le fonctionnement du jeu. Il est constitué de plusieurs classes implémentant différents algorithmes comme \textit{A*}, il permet également de calculer le coût d'un chemin, grâce à la classe \textit{PathCost}.
 
 \section{Expérimentations et usages}
 

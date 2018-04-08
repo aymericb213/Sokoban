@@ -1,4 +1,4 @@
-\select@language {french}
+\babel@toc {french}{}
 \contentsline {section}{Objectifs}{2}{section*.2}
 \contentsline {subsection}{Description du Sokoban}{2}{section*.3}
 \contentsline {subsection}{Les fonctionnalit\IeC {\'e}s attendues}{2}{section*.4}
@@ -9,5 +9,10 @@
 \contentsline {subsection}{\numberline {1.2}Organisation du projet}{4}{subsection.1.2}
 \contentsline {section}{\numberline {2}\IeC {\'E}l\IeC {\'e}ments techniques}{5}{section.2}
 \contentsline {section}{\numberline {3}Architecture du projet}{5}{section.3}
+\contentsline {subsection}{\numberline {3.1}Organisation des packages}{5}{subsection.3.1}
+\contentsline {subsection}{\numberline {3.2}Organisation des classes}{5}{subsection.3.2}
+\contentsline {subsubsection}{\numberline {3.2.1}Package sokoban}{5}{subsubsection.3.2.1}
+\contentsline {subsubsection}{\numberline {3.2.2}Package graphique}{5}{subsubsection.3.2.2}
+\contentsline {subsubsection}{\numberline {3.2.3}Package ia}{5}{subsubsection.3.2.3}
 \contentsline {section}{\numberline {4}Exp\IeC {\'e}rimentations et usages}{5}{section.4}
 \contentsline {section}{Conclusion}{5}{section*.7}
