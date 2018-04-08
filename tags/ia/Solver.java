@@ -51,34 +51,13 @@ public class Solver {
 		this.current_state=state;
 	}
 
-	public void solve() {
-		Board debut = this.current_state.getLevel();
-		ArrayList<String> gameboard_save=debut.createArrayList();
-		Board b= new Board();
-		b.createGrid(gameboard_save);
-		Random r = new Random();
-		while (!(this.current_state.allPlaced())) {
-			ArrayList<Push> l =this.current_state.getPushes();
-			System.out.println(this.current_state.getLevel());
-			Push c = l.get(r.nextInt(l.size()));
-			State newstate= this.current_state.push(c);
-			if (newstate.isFinished() && !(newstate.allPlaced())) {
-				this.current_state=new State(b);
-			} else {
-				this.current_state=newstate;
-			}
-		}
-		System.out.println(this.current_state.getLevel());
-		System.out.println("résolu");
-	}
-
 	public void aStarSolve() {
 		long timer = 0;
 		this.waiting_dico.clear();
 		String init_key=this.createKey(this.current_state);
 		this.waiting_dico.put(init_key,this.current_state);
 		this.p_queue.offer(init_key);
-		while ((this.p_queue.size()!=0) /*&& (timer<100000)*/ && (this.explored_list.size()<175000)) {
+		while ((this.p_queue.size()!=0) && (timer<600000) && (this.explored_list.size()<180000)) {
 			long start = System.currentTimeMillis();
 			//System.out.println("file de priorité : " +this.p_queue);
 			//System.out.println(this.p_queue.toString());

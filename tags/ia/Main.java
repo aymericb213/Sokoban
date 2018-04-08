@@ -53,14 +53,13 @@ public class Main implements Runnable {
 			 ia.debug.finer("Fin while");*/
 
 			ia.aStarSolve();
-			System.out.println(ia.getMovelist());
 			for (int i=0; i<ia.getMovelist().size(); i++) {
 				present_state.push(ia.getMovelist().get(i));
 			}
 			total_path=ia.toString();
 			if( present_state.getHammingDist()==0 ) {
 				ia.debug.finest("résolu");
-				System.out.println(total_path);
+				System.out.println("Itinéraire de résolution : \n" + total_path);
 			} else if (present_state.getHammingDist()==Double.POSITIVE_INFINITY){
 				ia.debug.severe("deadlock");
 			}

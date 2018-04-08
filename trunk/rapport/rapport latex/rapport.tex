@@ -63,12 +63,12 @@ L2-Info-groupe-4A
 \subsection*{Description du Sokoban}
 \addcontentsline{toc}{subsection}{Description du Sokoban}
 
-Le Sokoban est un jeu de réflexion de type puzzle où le joueur doit placer des caisses sur des objectifs placés à l'avance sur la carte. Le joueur gagne si toutes les caisses sont placées sur les objectifs et il ne peut pousser qu'une seule caisse à la fois. Il existe de nombreux niveaux dont la difficulté est variante.
+Le Sokoban est un jeu de réflexion de type puzzle où le joueur doit placer des caisses sur des objectifs placés à l'avance sur la carte. Le joueur gagne si toutes les caisses sont placées sur les objectifs et il ne peut pousser qu'une seule caisse à la fois. Il existe de nombreux niveaux dont la difficulté est variable.
 
 \begin{figure}[!h]
 \centering
 \includegraphics[scale=0.5]{images/sokoban.png}
-\caption{Niveau du Sokoban}
+\caption{Niveau de Sokoban}
 \end{figure}
 
 \subsection*{Les fonctionnalités attendues}
@@ -107,7 +107,7 @@ La carte est donc modélisée par des chaînes de caractères:
 
 Au niveau de l'interface graphique, nous avons une zone de jeu dans laquelle on dessine le niveau et des boutons pour gérer les différentes fonctionnalités. Le personnage est déplaçable avec les flèches directionnelles ou ZQSD, si le joueur a bloqué une caisse ou si il a gagné, il ne peut plus bouger et doit recommencer le niveau ou passer au suivant (seulement si il a gagné). Si le joueur gagne, le personnage effectue le Dab et si il perd, le personnage pleure.
 
-
+Il est possible de demander la résolution automatique du niveau.
 \begin{figure}[!h]
 \centering
 \includegraphics[scale=0.5]{images/Capture2.png}
@@ -118,31 +118,41 @@ Au niveau de l'interface graphique, nous avons une zone de jeu dans laquelle on 
 \addcontentsline{toc}{subsubsection}{Ajoutées}
 
 Au lancement du programme, l'utilisateur peut choisir un profil ou en créer un nouveau.\\
-En fonction de l'avancement du profil donné, le joueur a débloqué un certain nombre de carte, pour débloquer la carte suivante il faut finir le niveau en cours. Lorsqu'un profil est chargé, la dernière carte non terminée est lancée automatiquement.\\
+En fonction de l'avancement du profil donné, le joueur a débloqué un certain nombre de cartes ; pour débloquer la carte suivante il faut finir le niveau en cours. Lorsqu'un profil est chargé, la dernière carte non terminée est lancée automatiquement.\\
 
-Nous proposons également à l'utilisateur de sauvegarder sa partie à un instant du niveau donné, de charger sa sauvegarde (il n'y a pas de conflit entre la sauvegarde de chaque utilisateur), d'annuler le coup précédemment joué (cette fonctionnalité n'annule qu'un seul coup en arrière) et enfin de recommencer le niveau courant.
+Nous proposons également à l'utilisateur de sauvegarder sa partie à un instant du niveau donné, de charger sa sauvegarde (il n'y a pas de conflit entre les sauvegardes des différents utilisateurs), d'annuler le dernier coup joué  et enfin de recommencer le niveau courant.
 
 \subsection{Organisation du projet}
 
-Pour le début du projet, nous avons tous travaillés ensemble sur la création de la structure de base du jeu sur comment on va représenter chaque éléments qui composent le jeu (joueur, case vide, caisse ou encore la carte qui les contiendra). Ensuite nous nous sommes interrogé sur la manière de déplacer le joueur ainsi que faire pousser les caisse par le joueur et faire en sorte de gérer les collisions avec les murs.\\
-Nous avons rencontrés des difficultés pour la détection d'une caisse qui est bloqué, nous avons d'abord dit qu'une caisse est bloquée si elle se trouve entre deux murs qui se trouve sur deux axes différents (cas de gauche de la \textbf{figure \ref{figure4}}). Nous nous sommes rendu vite compte que ce n'était pas le seul cas de caisse bloquée, comme on peut le voir sur la deuxième image de la \textbf{figure \ref{figure4}}, on ne peut déplacer aucune des deux caisses car elles se bloquent entre elles, nous avons donc gérer ce cas mais même en fin de projet nous avions oubliés certains cas de caisses bloquées (le fait d'avoir un amas de caisse rendait la détection plus compliquée et les cas étaient particuliers).
+Pour le début du projet, nous avons tous travaillé sur la conception du modèle du jeu : comment représenter chaque élément qui compose le jeu (joueur, case vide, caisse ou encore la carte qui les contiendra). Ensuite nous nous sommes interrogés sur la manière de déplacer le joueur ainsi que faire pousser les caisses par le joueur et faire en sorte de gérer les collisions avec les murs.\\
+Nous avons rencontrés des difficultés pour la détection d'une caisse bloquée. Nous nous sommes d'abord contentés de considérer le cas où une caisse est bloquée par deux murs de telle façon qu'il est impossible de la déplacer (cas de gauche de la \textbf{figure \ref{figure4}}).\\
+Nous nous sommes vite rendus compte que ce n'était pas le seul cas de caisse bloquée, comme on peut le voir sur la deuxième image de la \textbf{figure \ref{figure4}}. En effet, on ne peut déplacer aucune des deux caisses car elles se bloquent entre elles. Nous avons donc gérer ce cas, mais il était loin d'être le dernier, le sokoban étant un jeu très facile à bloquer. Les cas plus complexes sont traités dans la partie \hyperref[et]{Eléments techniques}.
 
 \begin{figure}[!h]
 \centering
 \includegraphics[scale=0.5]{images/Capture3.PNG}
 \hspace{1cm}
-\includegraphics[scale=0.5]{images/Capture4.png}
-\caption{Blocage simple de caisse(s)}
+\includegraphics[scale=0.5]{images/Capture4.PNG}
+\caption{Blocage simple de caisses}
 \label{figure4}
 \end{figure}
 
-Ensuite, nous nous sommes séparés en trois groupes, deux d'entre nous se sont lancés sur l'IA avec l'algorithme A*, puis une autre personne s'est lancée dans la création d'un main et toute la gestions de fichiers (sauvegarde, chargement, traduction entre une carte enregistré dans un fichier et notre représentation d'un niveau de notre code). Enfin la dernière personne s'est occupée de gérer des cas plus complexes de détections de caisses bloquées puis est partie dans la mis en place de l'interface graphique.
+Ensuite, nous nous sommes séparés en trois groupes, deux d'entre nous ont débuté la conception d'une IA capable de résoudre des niveaux du jeu, et une autre personne s'est lancée dans la création de la classe principale avec interface console ainsi que toute la gestion de fichiers (sauvegarde, chargement, traduction entre une carte enregistrée dans un fichier et notre représentation d'un niveau de notre code). Le dernier membre s'est occupé de gérer les cas complexes de détections de caisses bloquées puis s'est attelé au développement de l'interface graphique.\\
 
-L'interface graphique ayant bien avancé, des nouvelles fonctionnalités ont été ajoutées dans celle-ci et des réglages dans la manière de sauvegarder une map ont été changés ce qui a posé un problème au niveau du main qui faisait fonctionner le jeu en version console, celle-ci n'était plus à jour il a fallut donc revoir notre main de la console pour que la fonctionnalité de sélection de profils qui a été implémentée d'abord en version graphique, changer la manière de sauvegarder une map car dans la première version, la méthode ne nous permettait pas de recommencer le niveau courant.\\
+L'interface graphique ayant bien avancé, des nouvelles fonctionnalités ont été ajoutées dans celle-ci (telles que la sélection de profils) et des réglages dans la manière de sauvegarder une map ont été modifiés, ce qui a posé problème : le modèle était devenu obsolète par rapport à l'interface graphique. Il a donc fallu revoir notre classe principale pour y implémenter la gestion de profils, et changer la manière de sauvegarder une map car la première version ne nous permettait pas de recommencer le niveau courant.\\
 
-Au niveau de l'IA, nous avions réussi assez tardivement à faire résoudre une grande partie de nos maps en quelques secondes, en effet nous avions rencontré pas mal de problèmes en ce qui concerne les choix que doit effectuer l'IA et de comprendre pourquoi elle ne faisait pas ce que l'on attendait.
+Au niveau de l'IA, nous avons d'abord conçu un système de déplacement automatique du joueur avant de concevoir un solveur. Nous avons passé beaucoup de temps sur une première implémentation techniquement fonctionnelle mais incapable de résoudre des niveaux qui ne soient pas extrêmement simples, avant de passer à une seconde implémentation bien plus efficace et utilisant les outils développés pour la première. 
 
-\section{Éléments techniques}
+\section{Éléments techniques}\label{et}
+
+\subsection{Gestion des deadlocks}
+
+\subsection{Structures de données utilisées}
+
+Le niveau de sokoban, une fois lu dans un fichier .xsb, est stocké dans une grille d'objets pour les manipulations ultérieures. Le principal avantage de cette méthode est l'intuitivité de la représentation.
+
+
+\subsection{Algorithmes de l'IA}
 
 \section{Architecture du projet}
 
@@ -150,15 +160,21 @@ Au niveau de l'IA, nous avions réussi assez tardivement à faire résoudre une 
 
 Notre projet se décompose en trois packages distincts:
 \begin{itemize}
-\item le package \textbf{sokoban}, le package principal qui gère toute la version console, le chargement de fichier, et est utilisé dans les deux autres packages;
-\item le package \textbf{graphique}, qui gère l'interface graphique en utilisant plusieurs classes du package précédent;
+\item le package \textbf{sokoban}, le package principal contenant le modèle du sokoban, et la gestion de fichier, utilisé dans les deux autres packages;
+\item le package \textbf{graphique}, qui gère l'interface graphique;
 \item le package \textbf{ia}, qui implémente les algorithmes de résolution automatique.
 \end{itemize}
 
-En créant ces trois packages, nous avons pu travaillé en parallèle sur différents aspects du projet sans pour autant se gêner les uns les autres.
+En créant ces trois packages, nous avons pu travailler en parallèle sur différents aspects du projet sans pour autant se gêner les uns les autres.
 Ainsi, une modification du package \textbf{ia} ne changeait rien au fonctionnement du sokoban en version console ou graphique.
 \\
-Cependant, après modification du package \textbf{sokoban}, tout le groupe devait récupérer la version la plus récente, car ce package est utilisé par les deux autres.
+Cependant, après modification du package \textbf{sokoban}, tout le groupe devait récupérer la version la plus récente, car ce package est utilisé par les deux autres puisqu'il contient le modèle.
+
+\begin{figure}[!h]
+\centering
+\includegraphics[scale=0.5]{images/packages.png}
+\caption{Diagramme du projet}
+\end{figure}
 
 \subsection{Organisation des classes}
 
@@ -177,15 +193,29 @@ Les classes gérant les fichiers permettent de lire et d'écrire dans des fichie
 
 Les classes permettant de lancer le programme sont le Board, qui créer la grille de jeu, et le Main.
 
+\begin{figure}[!h]
+\centering
+\includegraphics[scale=0.5]{images/diag_sokoban.png}
+\caption{Diagramme du package sokoban}
+\end{figure}
+
 \subsubsection{Package graphique}
 
 Ce package permet simplement de gérer la version graphique du Sokoban et de jouer sans les entrées claviers (en appuyant directement sur une touche, on peut déplacer le joueur).
 
 \subsubsection{Package ia}
 
-Le package \textbf{ia} a permit d'effectuer de nombreux tests sans que cela bloque le fonctionnement du jeu. Il est constitué de plusieurs classes implémentant différents algorithmes comme \textit{A*}, il permet également de calculer le coût d'un chemin, grâce à la classe \textit{PathCost}.
+Ce package contient tout ce qui a trait à la résolution automatique du jeu. On y trouve des classes décrivant des concepts du jeu, 
+
+\begin{figure}[!h]
+\centering
+\includegraphics[scale=0.5]{images/diag_ia.png}
+\caption{Diagramme du package ia}
+\end{figure}
 
 \section{Expérimentations et usages}
+
+\subsection{Performance du solveur}
 
 \section*{Conclusion}
 \addcontentsline{toc}{section}{Conclusion}

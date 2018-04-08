@@ -7,7 +7,7 @@ import java.io.FilenameFilter;
 public class SolvingTest {
 
 	public static void main(String[] args) {
-		String dirname="maps";
+		String dirname="maps/junior";
 		File directory = new File(dirname);
 		String[] playlist = directory.list(new FilenameFilter() {
 																				@Override
@@ -21,6 +21,7 @@ public class SolvingTest {
 		}*/
 		for (String map: playlist) {
 			try {
+			System.out.println(map);
 			Main test=new Main();
 			String[] arg= new String[1];
 			arg[0]=dirname +"/"+ map;
