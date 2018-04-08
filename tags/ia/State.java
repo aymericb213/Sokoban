@@ -25,19 +25,21 @@ public class State {
 		Player p = (Player)this.level.getPlayer();
 		Node start = new Node(p.getX(), p.getY());
 		for (Block c : lCrates) {
-			Astar compN=new Astar();
-			compN.setLevel(this.level);
-			ArrayList<Node> crateNeighbours=compN.neighbours(new Node(((Crate) c).getX(),((Crate)c).getY()));
-			for (Node n : crateNeighbours) {
-				Astar compP = new Astar();
-				compP.setLevel(this.level);
-				compP.setStart(start);
-				compP.setGoal(n);
-				compP.pathSearch();
-				if (!(compP.getPath().isEmpty())) {
-					Push newpush= new Push(n.getX(),n.getY());
-					newpush.setDir(((Crate) c).getX()-n.getX(),((Crate)c).getY()-n.getY());
-					this.lPush.add(newpush);
+		if (!((((Crate)c).isPlaced()) && (this.level.testCrate(c)))) {
+				Astar compN=new Astar();
+				compN.setLevel(this.level);
+				ArrayList<Node> crateNeighbours=compN.neighbours(new Node(((Crate) c).getX(),((Crate)c).getY()));
+				for (Node n : crateNeighbours) {
+					Astar compP = new Astar();
+					compP.setLevel(this.level);
+					compP.setStart(start);
+					compP.setGoal(n);
+					compP.pathSearch();
+					if (!(compP.getPath().isEmpty())) {
+						Push newpush= new Push(n.getX(),n.getY());
+						newpush.setDir(((Crate) c).getX()-n.getX(),((Crate)c).getY()-n.getY());
+						this.lPush.add(newpush);
+					}
 				}
 			}
 		}

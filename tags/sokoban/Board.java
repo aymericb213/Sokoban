@@ -379,49 +379,56 @@ public class Board {
       return false;
     }
 
+	public boolean testCrate(Block c) {
+		boolean test = true;
+		int i = ((Crate)c).x;
+		int j = ((Crate)c).y;
+
+		ArrayList<ArrayList<Integer>> listChain = crateChain(((Crate)c),i,j,new ArrayList<> (), false);
+
+		if (this.isDead(c,i,j,false)) {
+			if (this.hasSquare(listChain)) {
+				((Crate)c).setDeadlock(true);
+				return true;
+			} else {
+				test = true;
+				for (ArrayList<Integer> coord : listChain) {
+					if (!this.isDead(c,coord.get(1),coord.get(0),false)) {
+						test = false;
+					}
+					if (this.hasDeadWall(coord)) {
+						((Crate)c).setDeadlock(true);
+						return true;
+					}
+				}
+				if (test) {
+					((Crate)c).setDeadlock(true);
+					return true;
+				} else {
+					if (this.isDead(c,i,j,true,true)) {
+						((Crate)c).setDeadlock(true);
+						return true;
+					}
+				}
+			}
+		}
+		return false;
+	}
+
 	/**
 		* Détermine la fin de partie, c'est-à-dire si l'état du plateau ne permet aucun mouvement ultérieur,
 		* ou si toutes les caisses sont rangées.
 		* @return Le résultat du test.
 	*/
   public boolean isFinished() {
-    boolean test = true;
     if (this.allPlaced()) {
       return true;
     }
 
     for (Block c : this.listCrate) {
-      int i = ((Crate)c).x;
-      int j = ((Crate)c).y;
-
-      ArrayList<ArrayList<Integer>> listChain = crateChain(((Crate)c),i,j,new ArrayList<> (), false);
-
-      if (this.isDead(c,i,j,false) && !((Crate)c).isPlaced()) {
-        if (this.hasSquare(listChain)) {
-          ((Crate)c).setDeadlock(true);
-          return true;
-        } else {
-          test = true;
-          for (ArrayList<Integer> coord : listChain) {
-            if (!this.isDead(c,coord.get(1),coord.get(0),false)) {
-              test = false;
-            }
-            if (this.hasDeadWall(coord)) {
-              ((Crate)c).setDeadlock(true);
-              return true;
-            }
-          }
-          if (test) {
-            ((Crate)c).setDeadlock(true);
-            return true;
-          } else {
-            if (this.isDead(c,i,j,true,true)) {
-              ((Crate)c).setDeadlock(true);
-              return true;
-            }
-          }
-        }
-      }
+			if (testCrate(c) && (!((Crate)c).isPlaced())) {
+				return true;
+			}
     }
     return false;
   }

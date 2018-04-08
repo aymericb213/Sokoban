@@ -24,9 +24,6 @@ public class Main implements Runnable {
 			b.createGrid(map.getMap());
 			String total_path="";
 
-			Board search_board= new Board();
-			search_board.createGrid(map.getMap());
-
 			State present_state=new State(b);
 
 			Solver ia=new Solver(present_state);
@@ -34,6 +31,8 @@ public class Main implements Runnable {
 			/*
 			ArrayList<State> list_state= new ArrayList<State>();
 			int depth=3;
+			Board search_board= new Board();
+			search_board.createGrid(map.getMap());
 			 while (!(present_state.isFinished())){
 			 	ia.debug.info("itération while");
 			 	State eval=new State(search_board);

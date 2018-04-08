@@ -43,7 +43,7 @@ public class Solver {
 																											}
 																										});
 		this.waiting_dico = new HashMap<String,State>();
-		this.movelist= null;
+		this.movelist= new ArrayList<Push>();
 	}
 
 	public Solver(State state) {
@@ -78,7 +78,7 @@ public class Solver {
 		String init_key=this.createKey(this.current_state);
 		this.waiting_dico.put(init_key,this.current_state);
 		this.p_queue.offer(init_key);
-		while ((this.p_queue.size()!=0) || (timer<100000)) {
+		while ((this.p_queue.size()!=0) /*&& (timer<100000)*/ && (this.explored_list.size()<175000)) {
 			long start = System.currentTimeMillis();
 			//System.out.println("file de priorité : " +this.p_queue);
 			//System.out.println(this.p_queue.toString());
@@ -120,7 +120,7 @@ public class Solver {
 			timer+=(System.currentTimeMillis()-start);
 			// System.out.println(this.p_queue);
 		}
-		System.out.println("Trop long : " + timer);
+		System.out.println(timer + " " + this.explored_list.size());
 	}
 
 	public void buildFullPath(State end) {

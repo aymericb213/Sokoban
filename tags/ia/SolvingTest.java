@@ -16,9 +16,9 @@ public class SolvingTest {
 																				}//TODO : trouver une meilleure regexp
 																			});
 		java.util.Arrays.sort(playlist);
-		for (int i=0; i<playlist.length ; i++) {
+		/*for (int i=0; i<playlist.length ; i++) {
 			System.out.println(playlist[i]);
-		}
+		}*/
 		for (String map: playlist) {
 			try {
 			Main test=new Main();
@@ -27,7 +27,6 @@ public class SolvingTest {
 			test.main(arg);
 			} catch (OutOfMemoryError e) {
 				System.gc();
-				System.out.println(map + " : Dépassement mémoire");
 				continue;
 			}
 		}
