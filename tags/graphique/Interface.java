@@ -57,6 +57,18 @@ public class Interface extends JFrame {
       }
     });
 
+    JButton bSolve = new JButton("Solve");
+    bSolve.setRequestFocusEnabled(false);
+    bSolve.addActionListener(new ActionListener () {
+      @Override
+      public void actionPerformed(ActionEvent e) {
+        String[] arg = new String[1];
+        arg[0] = map.getFile();
+        ia.Main.main(arg);
+        Interface.this.repaint();
+      }
+    });
+
     JButton bSave = new JButton("Save");
     bSave.setRequestFocusEnabled(false);
     bSave.addActionListener(new ActionListener () {
@@ -170,10 +182,11 @@ public class Interface extends JFrame {
     this.setLayout(new GridBagLayout());
     GridBagConstraints gc = new GridBagConstraints();
 
-    zoneControl.setLayout(new GridLayout(7,1,10,10));
+    zoneControl.setLayout(new GridLayout(8,1,10,10));
 
     zoneControl.add(numberMap);
     zoneControl.add(bReset);
+    zoneControl.add(bSolve);
 
 
     if (!this.modeIad && !this.modeSelect && !this.random) {

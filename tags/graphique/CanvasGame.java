@@ -5,6 +5,7 @@ import java.awt.*;
 import java.awt.Image.*;
 import javax.swing.*;
 import sokoban.*;
+import java.util.ArrayList;
 
 /**
   * Canvas avec la représentation des maps
@@ -66,6 +67,20 @@ public class CanvasGame extends JPanel {
     */
   public void update (int x, int y, int width, int height) {
     repaint(x,y,width,height);
+  }
+
+  /**
+    * Actualise la zone utile à actualiser du canvas
+    * @param nextMove meme argument que Player.move
+    */
+  public void movePlayer (ArrayList<Integer> nextMove) {
+    Player player = ((Player)b.getPlayer());
+    player.move(b,nextMove);
+    int minW = Math.min(player.getY()-nextMove.get(1),player.getY()+nextMove.get(1));
+    int minH = Math.min(player.getX()-nextMove.get(0),player.getX()+nextMove.get(0));
+    this.update(minW*this.sizeTile, minH*this.sizeTile,
+                    this.sizeTile + Math.abs(nextMove.get(1))*this.sizeTile*2,
+                    this.sizeTile + Math.abs(nextMove.get(0))*this.sizeTile*2);
   }
 
   /**
