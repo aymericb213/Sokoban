@@ -301,12 +301,7 @@ public class Board {
 			if (this.hasSquare(coord)) {
 				((Crate)c).setDeadlock(true);
 				return true;
-			} else {
-					if (this.hasDeadWall(coord)) {
-						((Crate)c).setDeadlock(true);
-						return true;
-					}
-				}
+			}
 					if (this.isDead(c,i,j,true,true)) {
 						((Crate)c).setDeadlock(true);
 						return true;
