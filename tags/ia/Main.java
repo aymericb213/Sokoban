@@ -9,7 +9,7 @@ import java.util.logging.*;
 /**
 	* Classe exécutable du package sokoban.
 	*/
-public class Main implements Runnable {
+public class Main {
 
 	/**
 		* Résout un niveau de Sokoban à l'aide d'un algorithme de recherche de chemin.
@@ -66,34 +66,5 @@ public class Main implements Runnable {
 		} catch (IOException e) {
 			System.out.println("Dommmmage" + e);
 		}
-	}
-
-	public void run() {
-/*
-		Astar algo=new Astar();
-		Player p = (Player)b.getPlayer();
-		Node start = new Node(p.getX(), p.getY());
-
-		Objective o = ((Objective)b.getObjectives().get(0));
-		Node goal = new Node(o.getX(), o.getY());
-
-		algo.setLevel(b);
-		algo.setStart(start);
-		algo.setGoal(goal);
-		algo.pathSearch();
-		total_path+=algo.getPath();
-		int iter=0;
-		for (int i=1; i<algo.getPath().size(); i++) {
-			iter++;
-			Thread.sleep(250);
-			ArrayList<Integer> nextMove = new ArrayList<>();
-			nextMove.add(algo.getPath().get(i).getX()-p.getX());
-			nextMove.add(algo.getPath().get(i).getY()-p.getY());
-			p.move(b,nextMove);
-			System.out.println("\033[H\033[2J");
-			System.out.println(b);
-			System.out.println("itération " + iter);
-		}
-		System.out.println(algo);*/
 	}
 }

@@ -68,10 +68,10 @@ public class Solver {
 			State current= this.waiting_dico.get(this.p_queue.poll());
 			// System.out.println(current.getLevel());
 			if (current.allPlaced()) {
-				System.out.println(current.getLevel());
-				System.out.println(current);
+				//System.out.println(current.getLevel());
+				//System.out.println(current);
 				timer+=(System.currentTimeMillis()-start);
-				System.out.println("Résolu en " + timer + " ms");
+				//System.out.println("Résolu en " + timer + " ms");
 				buildFullPath(current);
 				break;
 			}
@@ -101,7 +101,7 @@ public class Solver {
 			timer+=(System.currentTimeMillis()-start);
 			// System.out.println(this.p_queue);
 		}
-		System.out.println(timer + " " + this.explored_list.size());
+		//System.out.println(timer + " " + this.explored_list.size());
 	}
 
 	public void buildFullPath(State end) {

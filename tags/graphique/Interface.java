@@ -313,6 +313,8 @@ public class Interface extends JFrame {
       canIa.setFocusable(false);
       gc.gridx = 2;
       add(canIa,gc);
+      Runnable threadIa = new ThreadIa(this.b,canIa);
+      new Thread(threadIa).start();
     }
 
 
