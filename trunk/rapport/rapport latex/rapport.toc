@@ -12,13 +12,13 @@
 \contentsline {subsection}{\numberline {2.2}Structures de donn\IeC {\'e}es utilis\IeC {\'e}es}{5}{subsection.2.2}
 \contentsline {subsection}{\numberline {2.3}Algorithmes de l'IA}{5}{subsection.2.3}
 \contentsline {subsubsection}{\numberline {2.3.1}D\IeC {\'e}placement du joueur}{5}{subsubsection.2.3.1}
-\contentsline {subsubsection}{\numberline {2.3.2}Solveurs}{5}{subsubsection.2.3.2}
-\contentsline {section}{\numberline {3}Architecture du projet}{5}{section.3}
-\contentsline {subsection}{\numberline {3.1}Organisation des packages}{5}{subsection.3.1}
+\contentsline {subsubsection}{\numberline {2.3.2}Solveurs}{6}{subsubsection.2.3.2}
+\contentsline {section}{\numberline {3}Architecture du projet}{6}{section.3}
+\contentsline {subsection}{\numberline {3.1}Organisation des packages}{6}{subsection.3.1}
 \contentsline {subsection}{\numberline {3.2}Organisation des classes}{6}{subsection.3.2}
 \contentsline {subsubsection}{\numberline {3.2.1}Package sokoban}{6}{subsubsection.3.2.1}
-\contentsline {subsubsection}{\numberline {3.2.2}Package graphique}{6}{subsubsection.3.2.2}
-\contentsline {subsubsection}{\numberline {3.2.3}Package ia}{6}{subsubsection.3.2.3}
-\contentsline {section}{\numberline {4}Exp\IeC {\'e}rimentations et usages}{7}{section.4}
-\contentsline {subsection}{\numberline {4.1}Performance du solveur}{7}{subsection.4.1}
-\contentsline {section}{Conclusion}{7}{section*.7}
+\contentsline {subsubsection}{\numberline {3.2.2}Package graphique}{8}{subsubsection.3.2.2}
+\contentsline {subsubsection}{\numberline {3.2.3}Package ia}{8}{subsubsection.3.2.3}
+\contentsline {section}{\numberline {4}Exp\IeC {\'e}rimentations et usages}{8}{section.4}
+\contentsline {subsection}{\numberline {4.1}Performance du solveur}{8}{subsection.4.1}
+\contentsline {section}{Conclusion}{8}{section*.7}

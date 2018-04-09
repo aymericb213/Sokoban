@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2017.9.9)  9 APR 2018 02:21
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2017.9.9)  9 APR 2018 15:38
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -893,26 +893,28 @@ Package uniquecounter Info: New unique counter `rerunfilecheck' on input line 2
 )
 \Hy@SectionHShift=\skip52
 )
+Package hyperref Info: Option `colorlinks' set `true' on input line 20.
+
 (./rapport.aux)
 \openout1 = `rapport.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 14.
-LaTeX Font Info:    ... okay on input line 14.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 14.
-LaTeX Font Info:    ... okay on input line 14.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 14.
-LaTeX Font Info:    ... okay on input line 14.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 14.
-LaTeX Font Info:    ... okay on input line 14.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 14.
-LaTeX Font Info:    ... okay on input line 14.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 14.
-LaTeX Font Info:    ... okay on input line 14.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 14.
-LaTeX Font Info:    ... okay on input line 14.
-LaTeX Info: Redefining \degres on input line 14.
-LaTeX Info: Redefining \dots on input line 14.
-LaTeX Info: Redefining \up on input line 14.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 22.
+LaTeX Font Info:    ... okay on input line 22.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 22.
+LaTeX Font Info:    ... okay on input line 22.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 22.
+LaTeX Font Info:    ... okay on input line 22.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 22.
+LaTeX Font Info:    ... okay on input line 22.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 22.
+LaTeX Font Info:    ... okay on input line 22.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 22.
+LaTeX Font Info:    ... okay on input line 22.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 22.
+LaTeX Font Info:    ... okay on input line 22.
+LaTeX Info: Redefining \degres on input line 22.
+LaTeX Info: Redefining \dots on input line 22.
+LaTeX Info: Redefining \up on input line 22.
 
 *geometry* driver: auto-detecting
 *geometry* detected driver: pdftex
@@ -978,7 +980,7 @@ e
 ))
 ABD: EveryShipout initializing macros
 \AtBeginShipoutBox=\box40
-Package hyperref Info: Link coloring OFF on input line 14.
+Package hyperref Info: Link coloring ON on input line 22.
 
 (/usr/share/texlive/texmf-dist/tex/latex/hyperref/nameref.sty
 Package: nameref 2012/10/27 v2.43 Cross-referencing by name of section
@@ -988,9 +990,9 @@ Package: gettitlestring 2010/12/03 v1.4 Cleanup title references (HO)
 )
 \c@section@level=\count142
 )
-LaTeX Info: Redefining \ref on input line 14.
-LaTeX Info: Redefining \pageref on input line 14.
-LaTeX Info: Redefining \nameref on input line 14.
+LaTeX Info: Redefining \ref on input line 22.
+LaTeX Info: Redefining \pageref on input line 22.
+LaTeX Info: Redefining \nameref on input line 22.
 
 (./rapport.out) (./rapport.out)
 \@outlinefile=\write4
@@ -1000,7 +1002,7 @@ LaTeX Info: Redefining \nameref on input line 14.
 <images/unicaen.png, id=99, 652.4375pt x 235.88126pt>
 File: images/unicaen.png Graphic file (type png)
  <use images/unicaen.png>
-Package pdftex.def Info: images/unicaen.png used on input line 22.
+Package pdftex.def Info: images/unicaen.png used on input line 30.
 (pdftex.def)             Requested size: 195.73276pt x 70.76491pt.
 
 [1
@@ -1023,15 +1025,15 @@ pdfTeX warning (ext4): destination with the same identifier (name{page.1}) has
 been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.54 \newpage
+l.62 \newpage
               [1] <images/sokoban.png, id=139, 400.49625pt x 401.5pt>
 File: images/sokoban.png Graphic file (type png)
 
 <use images/sokoban.png>
-Package pdftex.def Info: images/sokoban.png used on input line 71.
+Package pdftex.def Info: images/sokoban.png used on input line 79.
 (pdftex.def)             Requested size: 200.24763pt x 200.7495pt.
 
-Underfull \hbox (badness 10000) in paragraph at lines 89--90
+Underfull \hbox (badness 10000) in paragraph at lines 97--98
 
  []
 
@@ -1040,10 +1042,10 @@ Underfull \hbox (badness 10000) in paragraph at lines 89--90
 File: images/Capture.png Graphic file (type png)
 
 <use images/Capture.png>
-Package pdftex.def Info: images/Capture.png used on input line 105.
+Package pdftex.def Info: images/Capture.png used on input line 113.
 (pdftex.def)             Requested size: 288.07553pt x 191.2139pt.
 
-Underfull \hbox (badness 10000) in paragraph at lines 109--110
+Underfull \hbox (badness 10000) in paragraph at lines 117--118
 
  []
 
@@ -1051,10 +1053,10 @@ Underfull \hbox (badness 10000) in paragraph at lines 109--110
 File: images/Capture2.png Graphic file (type png)
 
 <use images/Capture2.png>
-Package pdftex.def Info: images/Capture2.png used on input line 115.
+Package pdftex.def Info: images/Capture2.png used on input line 123.
 (pdftex.def)             Requested size: 245.91814pt x 211.79073pt.
 
-Underfull \hbox (badness 10000) in paragraph at lines 122--124
+Underfull \hbox (badness 10000) in paragraph at lines 130--132
 
  []
 
@@ -1063,87 +1065,113 @@ Underfull \hbox (badness 10000) in paragraph at lines 122--124
 File: images/Capture3.PNG Graphic file (type png)
 
 <use images/Capture3.PNG>
-Package pdftex.def Info: images/Capture3.PNG used on input line 135.
+Package pdftex.def Info: images/Capture3.PNG used on input line 143.
 (pdftex.def)             Requested size: 47.05066pt x 46.29784pt.
 
 <images/Capture4.PNG, id=160, 121.95563pt x 92.59593pt>
 File: images/Capture4.PNG Graphic file (type png)
 
 <use images/Capture4.PNG>
-Package pdftex.def Info: images/Capture4.PNG used on input line 137.
+Package pdftex.def Info: images/Capture4.PNG used on input line 145.
 (pdftex.def)             Requested size: 60.97765pt x 46.29784pt.
 
-Underfull \hbox (badness 10000) in paragraph at lines 142--143
+Underfull \hbox (badness 10000) in paragraph at lines 150--151
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 144--145
+Underfull \hbox (badness 10000) in paragraph at lines 152--153
 
  []
 
 [4 <./images/Capture3.PNG> <./images/Capture4.PNG>]
-Underfull \hbox (badness 10000) in paragraph at lines 154--156
+Underfull \hbox (badness 10000) in paragraph at lines 162--164
 
  []
 
-<images/packages.png, id=169, 773.71411pt x 460.54411pt>
+
+Underfull \hbox (badness 10000) in paragraph at lines 176--177
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 194--195
+
+ []
+
+[5] <images/packages.png, id=176, 773.71411pt x 460.54411pt>
 File: images/packages.png Graphic file (type png)
 
 <use images/packages.png>
-Package pdftex.def Info: images/packages.png used on input line 206.
+Package pdftex.def Info: images/packages.png used on input line 257.
 (pdftex.def)             Requested size: 386.85611pt x 230.27148pt.
 
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-[5] <images/diag_sokoban.png, id=175, 1493.58pt x 809.1406pt>
+<images/diag_sokoban.png, id=177, 1493.58pt x 809.1406pt>
 File: images/diag_sokoban.png Graphic file (type png)
 
 <use images/diag_sokoban.png>
-Package pdftex.def Info: images/diag_sokoban.png used on input line 229.
+Package pdftex.def Info: images/diag_sokoban.png used on input line 280.
 (pdftex.def)             Requested size: 746.78818pt x 404.5693pt.
 
-Overfull \hbox (263.09131pt too wide) in paragraph at lines 229--230
+Overfull \hbox (263.09131pt too wide) in paragraph at lines 280--281
  [][] 
  []
 
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-<images/diag_ia.png, id=176, 1446.81706pt x 738.28764pt>
+<images/graphique.png, id=178, 1295.19176pt x 991.94118pt>
+File: images/graphique.png Graphic file (type png)
+
+<use images/graphique.png>
+Package pdftex.def Info: images/graphique.png used on input line 290.
+(pdftex.def)             Requested size: 518.06754pt x 396.76944pt.
+
+Overfull \hbox (34.37067pt too wide) in paragraph at lines 290--291
+ [][] 
+ []
+
+[6]
+
+LaTeX Warning: Text page 7 contains only floats.
+
+[7 <./images/packages.png> <./images/diag_sokoban.png>]
+<images/diag_ia.png, id=192, 1446.81706pt x 738.28764pt>
 File: images/diag_ia.png Graphic file (type png)
 
 <use images/diag_ia.png>
-Package pdftex.def Info: images/diag_ia.png used on input line 243.
+Package pdftex.def Info: images/diag_ia.png used on input line 300.
 (pdftex.def)             Requested size: 723.40677pt x 369.14291pt.
 
-Overfull \hbox (239.7099pt too wide) in paragraph at lines 243--244
+Overfull \hbox (239.7099pt too wide) in paragraph at lines 300--301
  [][] 
  []
 
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-[6 <./images/packages.png>] [7 <./images/diag_sokoban.png>]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 255.
- [8 <./images/diag_ia.png>]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 255.
+[8 <./images/graphique.png>]
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 312.
+ [9 <./images/diag_ia.png>]
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 312.
  (./rapport.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 255.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 255.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 312.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 312.
 Package rerunfilecheck Info: File `rapport.out' has not changed.
 (rerunfilecheck)             Checksum: 5E3D5096BBF4FA50EF7E7D9288DE264A;1589.
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 255.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 312.
  ) 
 Here is how much of TeX's memory you used:
- 17875 strings out of 494883
- 323211 string characters out of 6178694
- 392360 words of memory out of 5000000
- 20808 multiletter control sequences out of 15000+600000
+ 17926 strings out of 494883
+ 324114 string characters out of 6178694
+ 395368 words of memory out of 5000000
+ 20855 multiletter control sequences out of 15000+600000
  15044 words of font info for 41 fonts, out of 8000000 for 9000
  36 hyphenation exceptions out of 8191
- 55i,8n,54p,605b,634s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 55i,8n,54p,605b,660s stack positions out of 5000i,500n,10000p,200000b,80000s
  </home/aymeric/.texmf-var/fonts/pk/ljfour/jknappen/ec/ecti1200.600pk> </home
 /aymeric/.texmf-var/fonts/pk/ljfour/jknappen/ec/eccc1200.600pk> </home/aymeric/
 .texmf-var/fonts/pk/ljfour/jknappen/ec/ecbx1440.600pk> </home/aymeric/.texmf-va
@@ -1151,11 +1179,13 @@ r/fonts/pk/ljfour/jknappen/ec/ecrm1200.600pk> </home/aymeric/.texmf-var/fonts/p
 k/ljfour/jknappen/ec/ecbx1200.600pk> </home/aymeric/.texmf-var/fonts/pk/ljfour/
 jknappen/ec/ecbx1728.600pk> </home/aymeric/.texmf-var/fonts/pk/ljfour/jknappen/
 ec/ecrm1440.600pk> </home/aymeric/.texmf-var/fonts/pk/ljfour/jknappen/ec/ecrm24
-88.600pk>
-Output written on rapport.pdf (9 pages, 443530 bytes).
+88.600pk></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.p
+fb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></us
+r/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb>
+Output written on rapport.pdf (10 pages, 522488 bytes).
 PDF statistics:
- 494 PDF objects out of 1000 (max. 8388607)
- 207 compressed objects within 3 object streams
- 41 named destinations out of 1000 (max. 500000)
- 242 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 522 PDF objects out of 1000 (max. 8388607)
+ 222 compressed objects within 3 object streams
+ 44 named destinations out of 1000 (max. 500000)
+ 247 words of extra memory for PDF output out of 10000 (max. 10000000)
 

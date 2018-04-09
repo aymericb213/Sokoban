@@ -10,6 +10,14 @@
 \usepackage{amsmath}
 \usepackage{tikz}
 \usepackage{hyperref}
+\hypersetup{
+	hidelinks,
+    colorlinks,
+    citecolor=black,
+    filecolor=black,
+    linkcolor=black,
+    urlcolor=black
+}
 
 \begin{document} %début du document
 
@@ -161,6 +169,36 @@ Le solveur lui-même tient sa performance d'une file de priorité qui guide la r
 
 \subsubsection{Déplacement du joueur}
 
+Pour obtenir une granularité dans le déplacement du joueur par l'IA, nous avons implémenté l'algorithme de recherche de chemin A*. On utilise des objets \textbf{Node} qui possédent en attribut des coordonnées et un nœud prédécesseur. Pour chaque nœud, on calcul le coût du chemin entre le départ et la destination passant par ce nœud. Le coût du chemin s'exprime :
+
+$$ f(x) = g(x) + h(x)$$
+
+où $g(x)$ est le coût du chemin depuis le départ et $h(x)$ est une fonction heuristique estimant le coût pour atteindre la destination.\\
+
+Le calcul de $g(x)$ consiste à compter récursivement les prédécesseurs du nœud jusqu'à arriver au départ.\\
+L'heuristique utilisée pour $h(x)$ est la distance de Manhattan : la décomposition de la distance euclidienne entre deux points en une composante verticale et une composante horizontale. Cette heuristique est adaptée au Sokoban étant donné qu'on ne peut pas se déplacer en diagonale. Elle est également admissible pour A* : elle ne sous-estime jamais la distance à l'arrivée. Cela garantit que le chemin trouvé est optimal.
+
+\begin{figure}[!h]
+\centering
+\begin{tikzpicture}
+\node (depart) at (0,0) {A};
+\node (arrivee) at (2,2) {B};
+\coordinate (x) at (2,0);
+\draw[color=blue] (depart) -- node[left] {Distance euclidienne}(arrivee);
+\draw[color=red] (depart) -- node[below] {Distance de Manhattan} (x);
+\draw[color=red] (x) -- (arrivee);
+\end{tikzpicture}
+\caption{Illustration de la distance de Manhattan}
+\end{figure}
+
+Le fonctionnement de cet algorithme est le suivant :\\
+
+\begin{itemize}
+\item On initialise l'algorithme avec les positions du joueur et de sa destination et on ajoute la position du joueur dans une liste d'attente. On crée aussi deux tables de hashage avec autant de clés qu'il y a de positions libres dans la grille. Les clés sont des objets Node ; à ces clés sont associées la valeur du nœud que l'on initialise à +$\infty$.
+\item On retire de la liste d'attente l'élément ayant le plus faible $f(x)$ et on vérifie si il correspond à la destination. Si ce n'est pas le cas, on le met dans une liste des noeuds explorés.
+\item On 
+\end{itemize}
+  
 \begin{figure}[!h]
 \centering
 \begin{tikzpicture}
@@ -177,11 +215,24 @@ Le solveur lui-même tient sa performance d'une file de priorité qui guide la r
 \node at (1,2) {5};
 \draw (1,2) circle(0.5);
 \node[draw=black] at (2,1) {\#};
-\node at (2,2) {6};
+\node at (2,2) {.};
 \draw (2,2) circle(0.5);
+\node at (3,0) {6};
+\draw (3,0) circle(0.5);
+\node at (3,1) {8};
+\draw (3,1) circle(0.5);
+\node at (3,2) {9};
+\draw (3,2) circle(0.5);
 \node[draw=black] at (1,1) {\#};
+\draw[->, color=red] (0,0) -- (0,1);
+\draw[->, color=red] (0,1) -- node[left] {chemin trouvé} (0,2);
+\draw[->, color=red] (0,2) -- (1,2);
+\draw[->, color=red] (1,2) -- (2,2);
+\draw[->] (0,0) -- (1,0);
+\draw[->] (1,0) -- node[below] {chemin exploré} (2,0);
+\draw[->] (2,0) -- (3,0);
 \end{tikzpicture}
-\caption{Schéma}
+\caption{Exemple d'exécution de A* pour le déplacement}
 \end{figure}
 
 \subsubsection{Solveurs}
@@ -233,6 +284,12 @@ Les classes permettant de lancer le programme sont le Board, qui créer la grill
 \subsubsection{Package graphique}
 
 Ce package permet simplement de gérer la version graphique du Sokoban et de jouer sans les entrées claviers (en appuyant directement sur une touche, on peut déplacer le joueur).
+
+\begin{figure}[!h]
+\centering
+\includegraphics[scale=0.4]{images/graphique.png}
+\caption{Diagramme du package graphique}
+\end{figure}
 
 \subsubsection{Package ia}
 
