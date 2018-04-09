@@ -19,6 +19,7 @@ public class Solver {
 	private HashMap<String,State> waiting_dico;
 	private ArrayList<Push> movelist;
 	public static final Logger debug = Logger.getLogger("debug IA");
+	private ArrayList<ArrayList<Integer>> move_relatif;
 
 	public Solver() {
 		debug.setLevel(Level.ALL);
@@ -44,6 +45,7 @@ public class Solver {
 																										});
 		this.waiting_dico = new HashMap<String,State>();
 		this.movelist= new ArrayList<Push>();
+		this.move_relatif= new ArrayList<ArrayList<Integer>>();
 	}
 
 	public Solver(State state) {
@@ -161,6 +163,31 @@ public class Solver {
 			}
 			debug.exiting("Solver","minmin", this.best_push);
 			return m;
+	}
+
+	public ArrayList<ArrayList<Integer>> getMoveRelatif(){
+		this.move_relatif.clear();
+		ArrayList<Integer> tempList= new ArrayList<Integer>();
+		String[] path=this.toString().split("");
+		for(String x : path){
+			tempList=new ArrayList<Integer>();
+			if (x.equals("u") || x.equals("U")){
+				tempList.add(-1);
+				tempList.add(0);
+			}else if (x.equals("d") || x.equals("D")){
+				tempList.add(1);
+				tempList.add(0);
+			}else if (x.equals("r") || x.equals("R")){
+				tempList.add(0);
+				tempList.add(1);
+			}else if (x.equals("l") || x.equals("L")){
+				tempList.add(0);
+				tempList.add(-1);
+			}
+			this.move_relatif.add(tempList);
+		}
+
+		return this.move_relatif;
 	}
 
 	public State getPreviousState() {
