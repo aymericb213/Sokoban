@@ -211,93 +211,6 @@ public class Board {
     return true;
   }
 
-  /**
-    * Ajoute la coordonnées [j,i] dans la liste listCoord
-    * @param c
-		* La caisse en [j,i]
-    * @param i
-		* La coordonnée en Y
-    * @param j
-		* La coordonnée en X
-    * @param listCoord
-		* La liste des coordonnée dont on va ajouter [j,i]
-    * @param deadMode
-		* mode de propagation voir <i>crateChain</i>
-    * @note Cette fonction sert uniquement pour <i>crateChain</i>.
-  */
-  private void addListCoord(Crate c, int i, int j, ArrayList<ArrayList<Integer>> listCoord, boolean deadMode) {
-    ArrayList<Integer> listTest = new ArrayList<> ();
-    listTest.add(j);
-    listTest.add(i);
-    if (!listCoord.contains(listTest)) {
-      crateChain(c,i,j,listCoord,deadMode);
-    }
-  }
-
-	/**
-    * Crée une liste des coordonnées d'une chaîne de caisses placées les unes à côté des autres.
-    * @param c
-		* La caisse étant en [j,i].
-    * @param i
-		* La coordonnée en Y de la caisse.
-    * @param j
-		* La coordonnée en X de la caisse.
-    * @param listCoord
-		* Liste des coordonnée des caisses.
-    * @param deadMode
-		* Mode de propagation selon des caisses bloquée à true et false selon n'importe quelle caisses
-    * @return La liste des coordonnée de la chaîne
-  */
-  public ArrayList<ArrayList<Integer>> crateChain (Crate c, int i, int j, ArrayList<ArrayList<Integer>> listCoord, boolean deadMode) {
-    ArrayList<Integer> listTemp = new ArrayList<> ();
-    listTemp.add(j);
-    listTemp.add(i);
-    listCoord.add(listTemp);
-
-    if (this.isDead(c,i,j,false) && !((Crate)c).isPlaced()) {
-      if (this.grid[i-1][j] instanceof Crate) {
-        if (deadMode) {
-          if (this.isDead(this.grid[i-1][j],i-1,j,false)) {
-            addListCoord(c,i-1,j,listCoord,deadMode);
-          }
-        } else {
-          addListCoord(c,i-1,j,listCoord,deadMode);
-        }
-      }
-
-      if (this.grid[i+1][j] instanceof Crate) {
-        if (deadMode) {
-          if (this.isDead(this.grid[i+1][j],i+1,j,false)) {
-            addListCoord(c,i+1,j,listCoord,deadMode);
-          }
-        } else {
-            addListCoord(c,i+1,j,listCoord,deadMode);
-        }
-      }
-
-      if (this.grid[i][j-1] instanceof Crate) {
-        if (deadMode) {
-          if (this.isDead(this.grid[i][j-1],i,j-1,false)) {
-            addListCoord(c,i,j-1,listCoord,deadMode);
-          }
-        } else {
-          addListCoord(c,i,j-1,listCoord,deadMode);
-        }
-      }
-
-      if (this.grid[i][j+1] instanceof Crate) {
-        if (deadMode) {
-          if (this.isDead(this.grid[i][j+1],i,j+1,false)) {
-            addListCoord(c,i,j+1,listCoord,deadMode);
-          }
-        } else {
-          addListCoord(c,i,j+1,listCoord,deadMode);
-        }
-      }
-    }
-    return listCoord;
-  }
-
 	/**
     * Teste si dans une liste de coordonnées de caisses, [j,i] est une partie d'un carré.
     * @param listChain
@@ -312,41 +225,38 @@ public class Board {
 		* décalage en X pour avoir le coin.
     * @return Le résultat du test.
   */
-  public boolean testCube(ArrayList<ArrayList<Integer>> listChain, int i, int j, int decaleWidth, int decaleHeight) {
+  public boolean testCube(int i, int j, int decaleWidth, int decaleHeight) {
     ArrayList<Integer> coordTemp;
     coordTemp = new ArrayList<> ();
     coordTemp.add(i);
     coordTemp.add(j + decaleWidth);
-    if (listChain.contains(coordTemp) || this.grid[coordTemp.get(1)][coordTemp.get(0)] instanceof Wall) {
+    if (this.grid[coordTemp.get(1)][coordTemp.get(0)] instanceof Crate || this.grid[coordTemp.get(1)][coordTemp.get(0)] instanceof Wall) {
       coordTemp = new ArrayList<> ();
       coordTemp.add(i + decaleHeight);
       coordTemp.add(j);
-      if (listChain.contains(coordTemp) || this.grid[coordTemp.get(1)][coordTemp.get(0)] instanceof Wall) {
+      if (this.grid[coordTemp.get(1)][coordTemp.get(0)] instanceof Crate || this.grid[coordTemp.get(1)][coordTemp.get(0)] instanceof Wall) {
         coordTemp = new ArrayList<> ();
         coordTemp.add(i + decaleHeight);
         coordTemp.add(j + decaleWidth);
-        if (listChain.contains(coordTemp) || this.grid[coordTemp.get(1)][coordTemp.get(0)] instanceof Wall) {
+        if (this.grid[coordTemp.get(1)][coordTemp.get(0)] instanceof Crate || this.grid[coordTemp.get(1)][coordTemp.get(0)] instanceof Wall) {
           return true;
         }
       }
-
     }
     return false;
   }
 
 	/**
-    * Teste si un carré est formé par des caisses de la liste.
-    * @param listChain
-		* Liste des coordonnées des caisses de la chaine.
+    * Teste si un carré est formé a partir des coordonnées données.
+    * @param coord
+		* coordonnées de la caisse.
     * @return Le résultat du test.
   */
-  public boolean hasSquare (ArrayList<ArrayList<Integer>> listChain) {
-    for (ArrayList<Integer> coord : listChain) {
-      int i = coord.get(0);
-      int j = coord.get(1);
-      if (!((Crate)this.grid[j][i]).isPlaced() && (testCube(listChain,i,j,-1,-1) || testCube(listChain,i,j,-1,1) || testCube(listChain,i,j,1,-1) ||testCube(listChain,i,j,1,1))) {
-        return true;
-      }
+  public boolean hasSquare (ArrayList<Integer> coord) {
+    int i = coord.get(0);
+    int j = coord.get(1);
+    if (!((Crate)this.grid[j][i]).isPlaced() && (testCube(i,j,-1,-1) || testCube(i,j,-1,1) || testCube(i,j,1,-1) ||testCube(i,j,1,1))) {
+      return true;
     }
     return false;
   }
@@ -383,35 +293,25 @@ public class Board {
 		boolean test = true;
 		int i = ((Crate)c).x;
 		int j = ((Crate)c).y;
-
-		ArrayList<ArrayList<Integer>> listChain = crateChain(((Crate)c),i,j,new ArrayList<> (), false);
+    ArrayList<Integer> coord = new ArrayList<> ();
+    coord.add(j);
+    coord.add(i);
 
 		if (this.isDead(c,i,j,false)) {
-			if (this.hasSquare(listChain)) {
+			if (this.hasSquare(coord)) {
 				((Crate)c).setDeadlock(true);
 				return true;
 			} else {
-				test = true;
-				for (ArrayList<Integer> coord : listChain) {
-					if (!this.isDead(c,coord.get(1),coord.get(0),false)) {
-						test = false;
-					}
 					if (this.hasDeadWall(coord)) {
 						((Crate)c).setDeadlock(true);
 						return true;
 					}
 				}
-				if (test) {
-					((Crate)c).setDeadlock(true);
-					return true;
-				} else {
 					if (this.isDead(c,i,j,true,true)) {
 						((Crate)c).setDeadlock(true);
 						return true;
-					}
 				}
 			}
-		}
 		return false;
 	}
 
