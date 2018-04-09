@@ -156,28 +156,36 @@ Au niveau de l'IA, nous avons d'abord conçu un système de déplacement automat
 
 \section{Éléments techniques}\label{et}
 
+\subsection{Structures de données utilisées}
+
+Le niveau de sokoban, une fois lu dans un fichier .xsb, est représenté avec une grille d'objets. Le principal avantage de cette méthode est l'intuitivité de la représentation.
+Les positions des caisses et des objectifs sont stockées dans des listes du fait de l'importance de ces informations. Cela évite de devoir charger la grille dès qu'on a besoin d'une position.\\
+
+Dans le package ia, nous utilisons des tables de hashage avec les algorithmes de recherche en tant que mémoire. Cela nous permet de pouvoir vérifier rapidement si un élément a déjà été vu, surtout lorsque l'on explore plusieurs centaines de milliers d'états.
+Le solveur lui-même tient sa performance d'une file de priorité qui guide la recherche de la solution.
+
 \subsection{Gestion des deadlocks}
 
-Les caisses en deadLock (qui bloquent le jeu), ont plusieurs niveaux de test à passer avant d'être déclarées bloquées, il faut pas seulement regarder son voisinage car une caisse peut ne pas pouvoir être déplacé sans que la partie soit finie.
+Les caisses en deadlock (qui bloquent définitivement le jeu) ont plusieurs niveaux de test à passer avant d'être déclarées bloquées, il ne faut pas seulement regarder leur voisinage car une caisse peut ne pas pouvoir être déplacée sans que la partie soit finie pour autant.
 
 \subsubsection{Cas du simple voisinage}
 
-Une caisse est bloquée si elle possède deux éléments de type caisse et/ou de type mur sur chaque axe. Dans ce cas, il est impossible de pousser cette caisse car un des deux éléments est situé derrière.\\
+Une caisse est bloquée si elle possède deux voisins de type caisse et/ou de type mur. Dans ce cas, il est impossible de pousser cette caisse car un des deux éléments est situé derrière.\\
 
 Cas simples de caisse bloquée (en rouge) : 
 
 \begin{figure}[!h]
 \centering
 \begin{tabular}{ l c r }
-\# &  \textcolor{red}{\$} & \ \\
-\  &      \$             & \ \\
+\# & \textcolor{red}{\$} & \ \\
+\  &      \#             & \ \\
 \\
 \hline
 \end{tabular}
 
 \begin{tabular}{ l c r }\\
 \$ & \textcolor{red}{\$} & \ \\
-\  &      \$             & \ \\
+\  &      \#             & \ \\
 \\
 \hline
 \end{tabular}
@@ -190,17 +198,17 @@ Cas simples de caisse bloquée (en rouge) :
 \end{tabular}
 
 \begin{tabular}{ l c r }\\
-\$ & \textcolor{red}{\$} & \ \\
-\  &      \$             & \ \\
+\$  &   \textcolor{red}{\$}  & \ \\
+\   &        \$              & \ \\
 \end{tabular}
 
-\caption{Cas possible de deadlock du point de vue d'une caisse}
+\caption{Cas possibles de deadlock du point de vue d'une caisse}
 \end{figure}
 
 \subsubsection{Le cas des caisses bloquées entre elles}
 \label{cBetween}
 
-Le second cas c'est quand deux caisses se bloquent mutuellement. Dans l'exemple de la figure \ref{DL2}, la caisse de gauche à un mur sous-elle et est à côté d'une caisse qui à aussi un mur dans le même axe donc elles se bloquent entre elles car on peut pousser aucunes des deux.
+Le second cas c'est quand deux caisses se bloquent mutuellement. Dans l'exemple de la figure \ref{DL2}, la caisse de gauche à un mur sous elle et est à côté d'une caisse qui à aussi un mur dans le même axe donc elles se bloquent entre elles car on ne peut pousser aucune des deux.
 
 \begin{figure}[!h]
 \centering
@@ -208,11 +216,11 @@ Le second cas c'est quand deux caisses se bloquent mutuellement. Dans l'exemple 
 \textcolor{red}{\$} & \textcolor{red}{\$} \\
 \#                  &     \#              \\
 \end{tabular}
-\caption{Exemple de cas possible de deadlock du point de vue d'une caisse}
+\caption{Formation d'un carré avec des murs}
 \label{DL2}
 \end{figure}
 
-Un autre exemple de blocage mais sans murs cette fois, c'est le cas où quatre caisses forme un carré.
+Un autre exemple de blocage mais sans murs cette fois, c'est le cas où quatre caisses forment un carré.
 
 \begin{figure}[!h]
 \centering
@@ -221,13 +229,13 @@ Un autre exemple de blocage mais sans murs cette fois, c'est le cas où quatre c
 \textcolor{red}{\$} & \textcolor{red}{\$} \\
 \end{tabular}
 \caption{Formation d'un carré avec des caisses}
-\label{DL2}
 \end{figure}
 
 \subsubsection{Trouver un deadlock dans un état donné}
 
-Maintenant que nous avons vu les cas possibles de deadlock, il faut maintenant les mettre en communs afin de pouvoir détecter les différents cas. Nous allons parcourir la liste des caisses et pour chaque caisse nous testerons les cas vu précédemment. On test d'abord si la caisse est entourée d'au moins deux murs sur chaque axe, si c'est le cas les est forcément en deadlock. Ensuite nous regarderons si elle est bloquée par au plus un mur et au minimum une autre caisse sur chaque axe, si c'est le cas, on test si on se trouve dans le cas du \ref{cBetween} c'est à dire si elle se bloque pas avec la caisse à côté d'elle. Si la caisse est dite bloquée avec au plus un mur alors 
-qu'elle n'as aucun mur autour d'elle et donc qu'elle est bloquée entre deux caisses et ne peut pas être directement déplacée, pour trouver ce cas on test si la caisse forme un carré avec quatre autres caisses (ou éventuellement un mur voir figure \ref{DLcarreMur}).
+Maintenant que nous avons vu les cas possibles de deadlock, il faut maintenant les mettre en commun afin de pouvoir détecter les différents cas. Nous parcourons la liste des caisses et pour chaque caisse nous testons les cas vus précédemment. On teste d'abord si la caisse est entourée d'au moins deux murs sur chaque axe, si c'est le cas elle est forcément en deadlock.\\
+Ensuite nous regardons si elle est bloquée par au plus un mur et au minimum une autre caisse sur chaque axe. Si c'est le cas, on teste si on se trouve dans le cas du \ref{cBetween}, c'est-à-dire si elle se bloque avec la caisse à côté d'elle.\\
+Si la caisse est dite bloquée avec au plus un mur alors qu'elle n'a aucun mur autour d'elle, c'est donc qu'elle est bloquée entre deux caisses et ne peut pas être directement déplacée. Pour trouver ce cas, on teste si la caisse forme un carré avec quatre autres caisses ou éventuellement un mur (voir figure \ref{DLcarreMur}).
 
 \begin{figure}[!h]
 \centering
@@ -241,29 +249,25 @@ qu'elle n'as aucun mur autour d'elle et donc qu'elle est bloquée entre deux cai
 
 \subsubsection{Étude d'un cas complexe}
 
-Pour cet étude, nous allons supposer avoir l'état de la figure \ref{DLCompl}, Nous pouvons voir que la caisse bleu est bloquée par la caisse verte et un mur mais que la caisse verte peut être déplacé à gauche ou à droite pour ne plus bloquée la caisse bleu donc cette caisse bleu n'est pas un deadlock.\\
-Si on continu de regarder la liste des caisses et qu'on tombe sur une des caisses rouges, on s'aperçoit qu'elle forme un carré avec les autres caisses rouges donc nous avons trouvé un deadlock et on retourne l'information comme quoi le niveau ne peut pas être terminé dans l'état actuel. La caisse orange n'est pas considérée comme un deadlock malgré le fait qu'elle soit bloquée avec la caisse noir car la caisse noir n'a pas de mur de le même axe que la caisse orange et ne forme pas de carré avec des murs et/ou caisses.
+Pour cette étude, nous allons supposer avoir l'état de la figure \ref{DLCompl}. Nous pouvons voir que la caisse bleue est bloquée par la caisse verte et un mur, mais que la caisse verte peut être déplacée à gauche ou à droite pour ne plus bloquer la caisse bleue. La caisse bleue n'est donc pas en deadlock.\\
+Si on continue de parcourir la liste des caisses et qu'on tombe sur une des caisses rouges, on s'aperçoit qu'elles forment un carré avec les autres caisses rouges. Nous avons trouvé un deadlock et on retourne alors l'information que le niveau ne peut pas être terminé dans l'état actuel. La caisse orange n'est pas considérée comme un deadlock malgré le fait qu'elle soit bloquée avec la caisse noire car cette dernière n'a pas de mur dans le même axe que la caisse orange et ne forme pas de carré avec des murs et/ou caisses.
 
 \begin{figure}[!h]
 \centering
 \begin{tabular}{ l*{4} c*{5} r }
-\  & \  & \# & \textcolor{blue}{\$} \\
-\  & \  & \  & \textcolor{green}{\$} \\
-\  & \  & \textcolor{orange}{\$} & \$ \\
-\textcolor{red}{\$} & \textcolor{red}{\$} & \# & \  \\
-\textcolor{red}{\$} & \textcolor{red}{\$} & \  & \  \\
+\# & \# & \# & \# & \# & \# & \#\\
+\# & \ & \ & \ & \ & \ & \#\\
+\# & \  & \  & \# & \textcolor{blue}{\$} & \ & \#\\
+\# & \  & \  & \  & \textcolor{green}{\$} & \ & \#\\
+\# & \  & \  & \textcolor{orange}{\$} & \$ & \ & \#\\
+\# & \textcolor{red}{\$} & \textcolor{red}{\$} & \# & \ & \ & \#\\
+\# & \textcolor{red}{\$} & \textcolor{red}{\$} & \  & \ & \ & \#\\
+\# & \ & \ & \ & \ & \ & \#\\
+\# & \# & \# & \# & \# & \# & \#\\
 \end{tabular}
 \caption{Exemple de cas complexe}
 \label{DLCompl}
 \end{figure}
-
-\subsection{Structures de données utilisées}
-
-Le niveau de sokoban, une fois lu dans un fichier .xsb, est représenté avec une grille d'objets. Le principal avantage de cette méthode est l'intuitivité de la représentation.
-Les positions des caisses et des objectifs sont stockées dans des listes du fait de l'importance de ces informations. Cela évite de devoir charger la grille dès qu'on a besoin d'une position.\\
-
-Dans le package ia, nous utilisons des tables de hashage avec les algorithmes de recherche en tant que mémoire. Cela nous permet de pouvoir vérifier rapidement si un élément a déjà été vu, surtout lorsque l'on explore plusieurs centaines de milliers d'états.
-Le solveur lui-même tient sa performance d'une file de priorité qui guide la recherche de la solution.
 
 \subsection{Algorithmes de l'IA}
 
@@ -295,9 +299,10 @@ Le fonctionnement de cet algorithme est le suivant :\\
 
 \begin{itemize}
 \item On initialise l'algorithme avec les positions du joueur et de sa destination et on ajoute la position du joueur dans une liste d'attente. On crée aussi deux tables de hashage avec autant de clés qu'il y a de positions libres dans la grille. Les clés sont des objets Node ; à ces clés sont associées la valeur du nœud que l'on initialise à +$\infty$.
-\item On retire de la liste d'attente l'élément ayant le plus faible $f(x)$ et on vérifie si il correspond à la destination. Si ce n'est pas le cas, on le met dans une liste des noeuds explorés.
-\item On calcule les voisins du noeud. Toute case n'étant pas un mur est considérée comme un noeud dans ce calcul. On ajoute à la liste d'attente les voisins pas encore explorés.
-\item On 
+\item On retire de la liste d'attente l'élément ayant le plus faible $f(x)$ et on vérifie si il correspond à la destination. Si ce n'est pas le cas, on le met dans une liste des nœuds explorés. On calcule aussi $g(voisin)=g(en\_cours)+1$, une estimation de la distance entre les voisins et le départ.
+\item On calcule les voisins du nœud. Toute case n'étant pas un mur est considérée comme un nœud dans ce calcul. On ajoute à la liste d'attente les voisins pas encore explorés.
+\item Pour chaque voisin, on compare $g(voisin)$ à la valeur correspondante dans la table de hashage de \textit{g}. Si $g(voisin)$ est plus petit que la valeur stockée alors on met à jour les deux tables de hashage pour le voisin et on lui attribue le nœud courant comme prédécesseur.
+\item Lors que le nœud de destination est atteint, on construit le chemin trouvé en remontant récursivement les prédécesseurs du nœud d'arrivée jusqu'au nœud de départ. On obtient ainsi la liste des nœuds composant le chemin.
 \end{itemize}
   
 \begin{figure}[!h]
@@ -335,6 +340,8 @@ Le fonctionnement de cet algorithme est le suivant :\\
 \end{tikzpicture}
 \caption{Exemple d'exécution de A* pour le déplacement}
 \end{figure}
+
+La façon dont nous avons conçu la méthode de calcul de voisins pousse l'algorithme à explorer le graphe dans le sens horaire : d'abord le voisin du haut, puis à droite, etc. Ainsi, si deux chemins équivalents existent entre deux points, celui allant le plus vers le haut du niveau sera retenu. Ce biais ne semble toutefois pas influer sur l'efficacité de la recherche.
 
 \subsubsection{Solveurs}
 
