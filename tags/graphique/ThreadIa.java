@@ -24,7 +24,7 @@ public class ThreadIa implements Runnable {
         for (ArrayList<Integer> move : listMove) {
           this.can.movePlayer(move);
           try {
-            Thread.sleep(1000);
+            Thread.sleep(50);
           } catch (Exception e) {
             System.out.println("catch");
           }

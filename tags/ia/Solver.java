@@ -10,6 +10,7 @@ import java.util.Comparator;
 
 public class Solver {
 
+	private Board initial_board;
 	private State current_state;
 	private State previous_state;
 	private Push best_push;
@@ -23,6 +24,7 @@ public class Solver {
 
 	public Solver() {
 		debug.setLevel(Level.ALL);
+
 		this.previous_state=null;
 		this.current_state=null;
 		this.best_push=null;
@@ -51,6 +53,10 @@ public class Solver {
 	public Solver(State state) {
 		this();
 		this.current_state=state;
+		ArrayList<String> gameboard_save=this.current_state.getLevel().createArrayList();
+		Board b= new Board();
+		b.createGrid(gameboard_save);
+		this.initial_board=b;
 	}
 
 	public void aStarSolve() {
@@ -186,7 +192,6 @@ public class Solver {
 			}
 			this.move_relatif.add(tempList);
 		}
-
 		return this.move_relatif;
 	}
 
@@ -217,11 +222,12 @@ public class Solver {
 
 	public String toString() {
 		String res="";
-		Player p = (Player)this.current_state.getLevel().getPlayer();
-		Node start = new Node(p.getX(), p.getY());
+		State cb = new State(this.initial_board);
 		for (Push move : this.movelist) {
+			Player p = (Player)cb.getLevel().getPlayer();
+			Node start = new Node(p.getX(), p.getY());
 			Astar dep = new Astar();
-			dep.setLevel(this.current_state.getLevel());
+			dep.setLevel(cb.getLevel());
 			dep.setStart(start);
 			Node goal= new Node(move.getX(), move.getY());
 			dep.setGoal(goal);
@@ -241,6 +247,8 @@ public class Solver {
 					res+="R";
 					break;
 			}
+			cb.push(move);
+
 		}
 		return res;
 	}
