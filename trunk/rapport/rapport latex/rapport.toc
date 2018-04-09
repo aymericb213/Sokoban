@@ -5,18 +5,20 @@
 \contentsline {section}{\numberline {1}Fonctionnalit\IeC {\'e}s impl\IeC {\'e}ment\IeC {\'e}es}{2}{section.1}
 \contentsline {subsection}{\numberline {1.1}Description des fonctionnalit\IeC {\'e}s}{2}{subsection.1.1}
 \contentsline {subsubsection}{Attendues}{2}{section*.5}
-\contentsline {subsubsection}{Ajout\IeC {\'e}es}{3}{section*.6}
+\contentsline {subsubsection}{Ajout\IeC {\'e}es}{4}{section*.6}
 \contentsline {subsection}{\numberline {1.2}Organisation du projet}{4}{subsection.1.2}
 \contentsline {section}{\numberline {2}\IeC {\'E}l\IeC {\'e}ments techniques}{5}{section.2}
 \contentsline {subsection}{\numberline {2.1}Gestion des deadlocks}{5}{subsection.2.1}
 \contentsline {subsection}{\numberline {2.2}Structures de donn\IeC {\'e}es utilis\IeC {\'e}es}{5}{subsection.2.2}
 \contentsline {subsection}{\numberline {2.3}Algorithmes de l'IA}{5}{subsection.2.3}
+\contentsline {subsubsection}{\numberline {2.3.1}D\IeC {\'e}placement du joueur}{5}{subsubsection.2.3.1}
+\contentsline {subsubsection}{\numberline {2.3.2}Solveurs}{5}{subsubsection.2.3.2}
 \contentsline {section}{\numberline {3}Architecture du projet}{5}{section.3}
 \contentsline {subsection}{\numberline {3.1}Organisation des packages}{5}{subsection.3.1}
-\contentsline {subsection}{\numberline {3.2}Organisation des classes}{5}{subsection.3.2}
-\contentsline {subsubsection}{\numberline {3.2.1}Package sokoban}{5}{subsubsection.3.2.1}
+\contentsline {subsection}{\numberline {3.2}Organisation des classes}{6}{subsection.3.2}
+\contentsline {subsubsection}{\numberline {3.2.1}Package sokoban}{6}{subsubsection.3.2.1}
 \contentsline {subsubsection}{\numberline {3.2.2}Package graphique}{6}{subsubsection.3.2.2}
-\contentsline {subsubsection}{\numberline {3.2.3}Package ia}{7}{subsubsection.3.2.3}
+\contentsline {subsubsection}{\numberline {3.2.3}Package ia}{6}{subsubsection.3.2.3}
 \contentsline {section}{\numberline {4}Exp\IeC {\'e}rimentations et usages}{7}{section.4}
 \contentsline {subsection}{\numberline {4.1}Performance du solveur}{7}{subsection.4.1}
 \contentsline {section}{Conclusion}{7}{section*.7}

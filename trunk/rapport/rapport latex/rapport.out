@@ -10,12 +10,14 @@
 \BOOKMARK [2][-]{subsection.2.1}{Gestion des deadlocks}{section.2}% 10
 \BOOKMARK [2][-]{subsection.2.2}{Structures de donn\351es utilis\351es}{section.2}% 11
 \BOOKMARK [2][-]{subsection.2.3}{Algorithmes de l'IA}{section.2}% 12
-\BOOKMARK [1][-]{section.3}{Architecture du projet}{}% 13
-\BOOKMARK [2][-]{subsection.3.1}{Organisation des packages}{section.3}% 14
-\BOOKMARK [2][-]{subsection.3.2}{Organisation des classes}{section.3}% 15
-\BOOKMARK [3][-]{subsubsection.3.2.1}{Package sokoban}{subsection.3.2}% 16
-\BOOKMARK [3][-]{subsubsection.3.2.2}{Package graphique}{subsection.3.2}% 17
-\BOOKMARK [3][-]{subsubsection.3.2.3}{Package ia}{subsection.3.2}% 18
-\BOOKMARK [1][-]{section.4}{Exp\351rimentations et usages}{}% 19
-\BOOKMARK [2][-]{subsection.4.1}{Performance du solveur}{section.4}% 20
-\BOOKMARK [1][-]{section*.7}{Conclusion}{}% 21
+\BOOKMARK [3][-]{subsubsection.2.3.1}{D\351placement du joueur}{subsection.2.3}% 13
+\BOOKMARK [3][-]{subsubsection.2.3.2}{Solveurs}{subsection.2.3}% 14
+\BOOKMARK [1][-]{section.3}{Architecture du projet}{}% 15
+\BOOKMARK [2][-]{subsection.3.1}{Organisation des packages}{section.3}% 16
+\BOOKMARK [2][-]{subsection.3.2}{Organisation des classes}{section.3}% 17
+\BOOKMARK [3][-]{subsubsection.3.2.1}{Package sokoban}{subsection.3.2}% 18
+\BOOKMARK [3][-]{subsubsection.3.2.2}{Package graphique}{subsection.3.2}% 19
+\BOOKMARK [3][-]{subsubsection.3.2.3}{Package ia}{subsection.3.2}% 20
+\BOOKMARK [1][-]{section.4}{Exp\351rimentations et usages}{}% 21
+\BOOKMARK [2][-]{subsection.4.1}{Performance du solveur}{section.4}% 22
+\BOOKMARK [1][-]{section*.7}{Conclusion}{}% 23

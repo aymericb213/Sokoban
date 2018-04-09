@@ -8,6 +8,7 @@
 \usepackage{url}
 \usepackage{verbatim}
 \usepackage{amsmath}
+\usepackage{tikz}
 \usepackage{hyperref}
 
 \begin{document} %début du document
@@ -105,9 +106,10 @@ La carte est donc modélisée par des chaînes de caractères:
 \caption{Interface console}
 \end{figure}
 
-Au niveau de l'interface graphique, nous avons une zone de jeu dans laquelle on dessine le niveau et des boutons pour gérer les différentes fonctionnalités. Le personnage est déplaçable avec les flèches directionnelles ou ZQSD, si le joueur a bloqué une caisse ou si il a gagné, il ne peut plus bouger et doit recommencer le niveau ou passer au suivant (seulement si il a gagné). Si le joueur gagne, le personnage effectue le Dab et si il perd, le personnage pleure.
+Au niveau de l'interface graphique, nous avons une zone de jeu dans laquelle on dessine le niveau et des boutons pour gérer les différentes fonctionnalités. Le personnage est déplaçable avec les flèches directionnelles ou ZQSD, si le joueur a bloqué une caisse ou si il a gagné, il ne peut plus bouger et doit recommencer le niveau ou passer au suivant (seulement si il a gagné). Si le joueur gagne, le personnage effectue le Dab et si il perd, le personnage pleure.\\
 
-Il est possible de demander la résolution automatique du niveau.
+Il est possible de demander la résolution automatique du niveau. Un solveur calcule alors un itinéraire permettant de ranger toutes les caisses à partir de la position du joueur.
+
 \begin{figure}[!h]
 \centering
 \includegraphics[scale=0.5]{images/Capture2.png}
@@ -149,10 +151,40 @@ Au niveau de l'IA, nous avons d'abord conçu un système de déplacement automat
 
 \subsection{Structures de données utilisées}
 
-Le niveau de sokoban, une fois lu dans un fichier .xsb, est stocké dans une grille d'objets pour les manipulations ultérieures. Le principal avantage de cette méthode est l'intuitivité de la représentation.
+Le niveau de sokoban, une fois lu dans un fichier .xsb, est représenté avec une grille d'objets. Le principal avantage de cette méthode est l'intuitivité de la représentation.
+Les positions des caisses et des objectifs sont stockées dans des listes du fait de l'importance de ces informations. Cela évite de devoir charger la grille dès qu'on a besoin d'une position.\\
 
+Dans le package ia, nous utilisons des tables de hashage avec les algorithmes de recherche en tant que mémoire. Cela nous permet de pouvoir vérifier rapidement si un élément a déjà été vu, surtout lorsque l'on explore plusieurs centaines de milliers d'états.
+Le solveur lui-même tient sa performance d'une file de priorité qui guide la recherche de la solution.
 
 \subsection{Algorithmes de l'IA}
+
+\subsubsection{Déplacement du joueur}
+
+\begin{figure}[!h]
+\centering
+\begin{tikzpicture}
+\node at (0,0) {@};
+\draw (0,0) circle(0.5);
+\node at (1,0) {2};
+\draw (1,0) circle(0.5);
+\node at (2,0) {4};
+\draw (2,0) circle(0.5);
+\node at (0,1) {1};
+\draw (0,1) circle(0.5);
+\node at (0,2) {3};
+\draw (0,2) circle(0.5);
+\node at (1,2) {5};
+\draw (1,2) circle(0.5);
+\node[draw=black] at (2,1) {\#};
+\node at (2,2) {6};
+\draw (2,2) circle(0.5);
+\node[draw=black] at (1,1) {\#};
+\end{tikzpicture}
+\caption{Schéma}
+\end{figure}
+
+\subsubsection{Solveurs}
 
 \section{Architecture du projet}
 
@@ -166,8 +198,7 @@ Notre projet se décompose en trois packages distincts:
 \end{itemize}
 
 En créant ces trois packages, nous avons pu travailler en parallèle sur différents aspects du projet sans pour autant se gêner les uns les autres.
-Ainsi, une modification du package \textbf{ia} ne changeait rien au fonctionnement du sokoban en version console ou graphique.
-\\
+Ainsi, une modification du package \textbf{ia} ne changeait rien au fonctionnement du sokoban en version console ou graphique.\\
 Cependant, après modification du package \textbf{sokoban}, tout le groupe devait récupérer la version la plus récente, car ce package est utilisé par les deux autres puisqu'il contient le modèle.
 
 \begin{figure}[!h]
