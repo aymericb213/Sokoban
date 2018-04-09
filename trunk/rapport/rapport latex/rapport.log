@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2017.9.9)  9 APR 2018 23:35
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2017.9.9)  10 APR 2018 00:51
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1008,7 +1008,7 @@ LaTeX Info: Redefining \nameref on input line 23.
 \openout4 = `rapport.out'.
 
 
-<images/unicaen.png, id=115, 652.4375pt x 235.88126pt>
+<images/unicaen.png, id=123, 652.4375pt x 235.88126pt>
 File: images/unicaen.png Graphic file (type png)
 
 <use images/unicaen.png>
@@ -1036,7 +1036,7 @@ been already used, duplicate ignored
 <to be read again> 
                    \relax 
 l.63 \newpage
-              [1] <images/sokoban.png, id=159, 400.49625pt x 401.5pt>
+              [1] <images/sokoban.png, id=169, 400.49625pt x 401.5pt>
 File: images/sokoban.png Graphic file (type png)
 
 <use images/sokoban.png>
@@ -1048,7 +1048,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 98--99
  []
 
 [2 <./images/sokoban.png>]
-<images/Capture.png, id=168, 576.1525pt x 382.42876pt>
+<images/Capture.png, id=179, 576.1525pt x 382.42876pt>
 File: images/Capture.png Graphic file (type png)
 
 <use images/Capture.png>
@@ -1059,7 +1059,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 118--119
 
  []
 
-<images/Capture2.png, id=169, 491.8375pt x 423.5825pt>
+<images/Capture2.png, id=180, 491.8375pt x 423.5825pt>
 File: images/Capture2.png Graphic file (type png)
 
 <use images/Capture2.png>
@@ -1071,14 +1071,14 @@ Underfull \hbox (badness 10000) in paragraph at lines 131--133
  []
 
 [3 <./images/Capture.png> <./images/Capture2.png>]
-<images/Capture3.PNG, id=180, 94.10156pt x 92.59593pt>
+<images/Capture3.PNG, id=190, 94.10156pt x 92.59593pt>
 File: images/Capture3.PNG Graphic file (type png)
 
 <use images/Capture3.PNG>
 Package pdftex.def Info: images/Capture3.PNG used on input line 144.
 (pdftex.def)             Requested size: 47.05066pt x 46.29784pt.
 
-<images/Capture4.PNG, id=181, 121.95563pt x 92.59593pt>
+<images/Capture4.PNG, id=191, 121.95563pt x 92.59593pt>
 File: images/Capture4.PNG Graphic file (type png)
 
 <use images/Capture4.PNG>
@@ -1109,79 +1109,93 @@ Underfull \hbox (badness 10000) in paragraph at lines 173--174
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
 [6]
-Underfull \hbox (badness 10000) in paragraph at lines 280--281
+Underfull \hbox (badness 10000) in paragraph at lines 278--279
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 298--299
+Underfull \hbox (badness 10000) in paragraph at lines 296--297
 
  []
 
-[7] <images/packages.png, id=215, 773.71411pt x 460.54411pt>
+[7]
+Missing character: There is no ; in font nullfont!
+
+Underfull \hbox (badness 10000) in paragraph at lines 344--345
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 346--350
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 354--355
+
+ []
+
+[8] <images/packages.png, id=231, 773.71411pt x 460.54411pt>
 File: images/packages.png Graphic file (type png)
 
 <use images/packages.png>
-Package pdftex.def Info: images/packages.png used on input line 365.
+Package pdftex.def Info: images/packages.png used on input line 411.
 (pdftex.def)             Requested size: 232.11603pt x 138.16429pt.
-
-
-LaTeX Warning: `!h' float specifier changed to `!ht'.
-
-[8] <images/diag_sokoban.png, id=221, 1762.82118pt x 1183.24411pt>
+ [9 <./images/packages.png>]
+<images/diag_sokoban.png, id=238, 1762.82118pt x 1183.24411pt>
 File: images/diag_sokoban.png Graphic file (type png)
 
 <use images/diag_sokoban.png>
-Package pdftex.def Info: images/diag_sokoban.png used on input line 388.
+Package pdftex.def Info: images/diag_sokoban.png used on input line 434.
 (pdftex.def)             Requested size: 528.85043pt x 354.97597pt.
 
-Overfull \hbox (45.15356pt too wide) in paragraph at lines 388--389
+Overfull \hbox (45.15356pt too wide) in paragraph at lines 434--435
  [][] 
  []
 
-<images/graphique.png, id=222, 1295.19176pt x 991.94118pt>
+<images/graphique.png, id=239, 1295.19176pt x 991.94118pt>
 File: images/graphique.png Graphic file (type png)
 
 <use images/graphique.png>
-Package pdftex.def Info: images/graphique.png used on input line 398.
+Package pdftex.def Info: images/graphique.png used on input line 444.
 (pdftex.def)             Requested size: 518.06754pt x 396.76944pt.
 
-Overfull \hbox (34.37067pt too wide) in paragraph at lines 398--399
+Overfull \hbox (34.37067pt too wide) in paragraph at lines 444--445
  [][] 
  []
 
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-<images/diag_ia.png, id=223, 1319.28177pt x 1298.02588pt>
+<images/diag_ia.png, id=240, 1319.28177pt x 1298.02588pt>
 File: images/diag_ia.png Graphic file (type png)
 
 <use images/diag_ia.png>
-Package pdftex.def Info: images/diag_ia.png used on input line 408.
+Package pdftex.def Info: images/diag_ia.png used on input line 454.
 (pdftex.def)             Requested size: 395.78758pt x 389.41077pt.
- [9 <./images/packages.png> <./images/diag_sokoban.png>]
+ [10 <./images/diag_sokoban.png>]
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-[10 <./images/graphique.png>]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 420.
- [11 <./images/diag_ia.png>]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 420.
+[11 <./images/graphique.png>]
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 466.
+ [12 <./images/diag_ia.png>]
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 466.
  (./rapport.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 420.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 420.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 466.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 466.
 Package rerunfilecheck Info: File `rapport.out' has not changed.
-(rerunfilecheck)             Checksum: 9968FE3E3371495B6788A39B7262820D;1964.
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 420.
+(rerunfilecheck)             Checksum: A1CAEEDFC72B122DBC43B20354456C08;2133.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 466.
  ) 
 Here is how much of TeX's memory you used:
- 17959 strings out of 494883
- 324717 string characters out of 6178694
- 395715 words of memory out of 5000000
- 20870 multiletter control sequences out of 15000+600000
+ 18029 strings out of 494883
+ 325712 string characters out of 6178694
+ 394714 words of memory out of 5000000
+ 20936 multiletter control sequences out of 15000+600000
  16574 words of font info for 43 fonts, out of 8000000 for 9000
  36 hyphenation exceptions out of 8191
- 55i,8n,54p,605b,660s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 55i,8n,54p,605b,630s stack positions out of 5000i,500n,10000p,200000b,80000s
  </home/aymeric/.texmf-var/fonts/pk/ljfour/jknappen/ec/ecti1200.600pk> </home
 /aymeric/.texmf-var/fonts/pk/ljfour/jknappen/ec/eccc1200.600pk> </home/aymeric/
 .texmf-var/fonts/pk/ljfour/jknappen/ec/ecbx1440.600pk> </home/aymeric/.texmf-va
@@ -1190,12 +1204,13 @@ k/ljfour/jknappen/ec/ecbx1200.600pk> </home/aymeric/.texmf-var/fonts/pk/ljfour/
 jknappen/ec/ecbx1728.600pk> </home/aymeric/.texmf-var/fonts/pk/ljfour/jknappen/
 ec/ecrm1440.600pk> </home/aymeric/.texmf-var/fonts/pk/ljfour/jknappen/ec/ecrm24
 88.600pk></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.p
-fb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></us
-r/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb>
-Output written on rapport.pdf (12 pages, 522842 bytes).
+fb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb></us
+r/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/share
+/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb>
+Output written on rapport.pdf (13 pages, 535852 bytes).
 PDF statistics:
- 569 PDF objects out of 1000 (max. 8388607)
- 259 compressed objects within 3 object streams
- 55 named destinations out of 1000 (max. 500000)
- 279 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 589 PDF objects out of 1000 (max. 8388607)
+ 277 compressed objects within 3 object streams
+ 59 named destinations out of 1000 (max. 500000)
+ 295 words of extra memory for PDF output out of 10000 (max. 10000000)
 

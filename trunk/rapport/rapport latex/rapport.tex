@@ -269,11 +269,9 @@ Si on continue de parcourir la liste des caisses et qu'on tombe sur une des cais
 \label{DLCompl}
 \end{figure}
 
-\subsection{Algorithmes de l'IA}
+\subsection{Déplacement du joueur par l'IA}
 
-\subsubsection{Déplacement du joueur}
-
-Pour obtenir une granularité dans le déplacement du joueur par l'IA, nous avons implémenté l'algorithme de recherche de chemin A*. On utilise des objets \textbf{Node} qui possédent en attribut des coordonnées et un nœud prédécesseur. Pour chaque nœud, on calcul le coût du chemin entre le départ et la destination passant par ce nœud. Le coût du chemin s'exprime :
+Pour obtenir une granularité dans le déplacement du joueur par l'IA, nous avons implémenté l'algorithme de recherche de chemin A*. On utilise des objets \textbf{Node} qui possèdent en attribut des coordonnées et un nœud prédécesseur. Pour chaque nœud, on calcule le coût du chemin entre le départ et la destination passant par ce nœud. Le coût du chemin s'exprime :
 
 $$ f(x) = g(x) + h(x)$$
 
@@ -309,31 +307,27 @@ Le fonctionnement de cet algorithme est le suivant :\\
 \centering
 \begin{tikzpicture}
 \node at (0,0) {@};
-\draw (0,0) circle(0.5);
+\draw[color=red] (0,0) circle(0.5);
 \node at (1,0) {2};
 \draw (1,0) circle(0.5);
 \node at (2,0) {4};
 \draw (2,0) circle(0.5);
 \node at (0,1) {1};
-\draw (0,1) circle(0.5);
+\draw[color=red] (0,1) node[left] {chemin trouvé} circle(0.5);
 \node at (0,2) {3};
-\draw (0,2) circle(0.5);
+\draw[color=red] (0,2) circle(0.5);
 \node at (1,2) {5};
-\draw (1,2) circle(0.5);
+\draw[color=red] (1,2) circle(0.5);
 \node[draw=black] at (2,1) {\#};
 \node at (2,2) {.};
-\draw (2,2) circle(0.5);
+\draw[color=red] (2,2) circle(0.5);
 \node at (3,0) {6};
 \draw (3,0) circle(0.5);
 \node at (3,1) {8};
 \draw (3,1) circle(0.5);
 \node at (3,2) {9};
 \draw (3,2) circle(0.5);
-\node[draw=black] at (1,1) {\#};
-\draw[->, color=red] (0,0) -- (0,1);
-\draw[->, color=red] (0,1) -- node[left] {chemin trouvé} (0,2);
-\draw[->, color=red] (0,2) -- (1,2);
-\draw[->, color=red] (1,2) -- (2,2);
+\node[draw=black] at (1,1) {\#};;
 \draw[->] (0,0) -- (1,0);
 \draw[->] (1,0) -- node[below] {chemin exploré} (2,0);
 \draw[->] (2,0) -- (3,0);
@@ -343,7 +337,60 @@ Le fonctionnement de cet algorithme est le suivant :\\
 
 La façon dont nous avons conçu la méthode de calcul de voisins pousse l'algorithme à explorer le graphe dans le sens horaire : d'abord le voisin du haut, puis à droite, etc. Ainsi, si deux chemins équivalents existent entre deux points, celui allant le plus vers le haut du niveau sera retenu. Ce biais ne semble toutefois pas influer sur l'efficacité de la recherche.
 
-\subsubsection{Solveurs}
+\subsection{Solveurs}
+
+\subsubsection{Modélisation du problème}
+
+Le sokoban est un problème complexe à résoudre du fait de plusieurs facteurs tels que le nombre de déplacements nécessaires, la facilité à tomber dans un état bloquant ou l'ordre de rangement des caisses. Il est néanmoins possible de modéliser un état du jeu et de programmer un algorithme capable d'effectuer une recherche sur ces états pour trouver un état solution du problème.\\
+
+Avant d'implémenter un solveur, nous avons d'abord défini ce que nous considérons comme un état du jeu. Un état est représenté par un objet Board décrivant le plateau de jeu, une liste de coups et une valeur.\\
+Un coup représente la poussée d'une caisse, il est défini comme une position et une direction de poussée. La poussée est l'action la plus importante du sokoban car elle modifie la disposition du plateau : elle permet la transition entre deux états du jeu.
+Nous pouvons donc nous contenter de faire une exploration d'états de poussée en poussée et non de mouvement en mouvement. Cela réduit énormément le nombre d'états à parcourir.\\
+La valeur d'un état est calculée par une fonction d'évaluation heuristique. C'est elle qui permet de guider la recherche pour réduire le temps de calcul et le nombre d'états explorés. Dans le cadre de ce projet, nous avons réalisé deux fonctions heuristiques :\\
+\begin{itemize}
+\item La première est la somme des distances de Manhattan entre chaque caisse et l'objectif le plus proche : $$h_m= \Sigma(d_m(caisse))$$
+\item La seconde est une distance de Hamming : on compte le nombre de caisses qui ne sont pas placées sur un objectif.
+\end{itemize}
+Dans les deux cas, on passe la valeur à +$\infty$ si l'état comporte un deadlock, et un état résolu vaut 0. Le solveur va donc chercher les états de valeur minimale.\\
+
+\subsubsection{Première implémentation}
+
+Le premier solveur que nous avons codé est inspiré de l'algorithme minmax. On entre un état et une profondeur de recherche, et l'algorithme compare les valeurs des états successeurs de l'état entré jusqu'à atteindre les feuilles de l'arbre de recherche. Bien entendu, on ne veut ici que minimiser la valeur puisqu'il n'y a qu'un seul joueur.
+
+\begin{figure}[!h]
+\centering
+\begin{tikzpicture}
+\node (dep) at (0,0) {26};
+\draw[color=red] (0,0) circle(0.5);
+\node (e1) at (-1.25,-2) {26};
+\draw[color=red] (-1.25,-2) circle(0.5);
+\node (e2) at (1.25,-2) {41};
+\draw (1.25,-2) circle(0.5);
+\node (e3) at (-3,-4) {33};
+\draw (-3,-4) circle(0.5);
+\node (e4) at (-1.5,-4) {26};
+\draw[color=red] (-1.5,-4) circle(0.5);
+\node (e5) at (0,-4) {54};
+\draw (0,-4) circle(0.5);
+\node (e6) at (2,-4) {41};
+\draw (2,-4) circle(0.5);
+\node (e7) at (4,-4) {42};
+\draw (4,-4) circle(0.5);
+\draw[color=red] (dep) -- (e1);
+\draw (dep) -- (e2);
+\draw (e1) -- (e3);
+\draw[color=red] (e1) -- (e4);
+\draw (e1) -- (e5);
+\draw (e2) -- (e6);
+\draw (e2) -- (e7);
+\end{tikzpicture}
+\caption{Illustration du fonctionnement du solveur "minmin"}
+\end{figure}
+
+Malheureusement, bien que l'algorithme fonctionne, ce solveur n'a pas permis de résoudre même des niveaux très simples avec une seule caisse.
+
+\subsubsection{Solveur A*}
+
 
 \section{Architecture du projet}
 

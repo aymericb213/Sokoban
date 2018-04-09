@@ -13,15 +13,17 @@
 \BOOKMARK [3][-]{subsubsection.2.2.2}{Le cas des caisses bloqu\351es entre elles}{subsection.2.2}% 13
 \BOOKMARK [3][-]{subsubsection.2.2.3}{Trouver un deadlock dans un \351tat donn\351}{subsection.2.2}% 14
 \BOOKMARK [3][-]{subsubsection.2.2.4}{\311tude d'un cas complexe}{subsection.2.2}% 15
-\BOOKMARK [2][-]{subsection.2.3}{Algorithmes de l'IA}{section.2}% 16
-\BOOKMARK [3][-]{subsubsection.2.3.1}{D\351placement du joueur}{subsection.2.3}% 17
-\BOOKMARK [3][-]{subsubsection.2.3.2}{Solveurs}{subsection.2.3}% 18
-\BOOKMARK [1][-]{section.3}{Architecture du projet}{}% 19
-\BOOKMARK [2][-]{subsection.3.1}{Organisation des packages}{section.3}% 20
-\BOOKMARK [2][-]{subsection.3.2}{Organisation des classes}{section.3}% 21
-\BOOKMARK [3][-]{subsubsection.3.2.1}{Package sokoban}{subsection.3.2}% 22
-\BOOKMARK [3][-]{subsubsection.3.2.2}{Package graphique}{subsection.3.2}% 23
-\BOOKMARK [3][-]{subsubsection.3.2.3}{Package ia}{subsection.3.2}% 24
-\BOOKMARK [1][-]{section.4}{Exp\351rimentations et usages}{}% 25
-\BOOKMARK [2][-]{subsection.4.1}{Performance du solveur}{section.4}% 26
-\BOOKMARK [1][-]{section*.7}{Conclusion}{}% 27
+\BOOKMARK [2][-]{subsection.2.3}{D\351placement du joueur par l'IA}{section.2}% 16
+\BOOKMARK [2][-]{subsection.2.4}{Solveurs}{section.2}% 17
+\BOOKMARK [3][-]{subsubsection.2.4.1}{Mod\351lisation du probl\350me}{subsection.2.4}% 18
+\BOOKMARK [3][-]{subsubsection.2.4.2}{Premi\350re impl\351mentation}{subsection.2.4}% 19
+\BOOKMARK [3][-]{subsubsection.2.4.3}{Solveur A*}{subsection.2.4}% 20
+\BOOKMARK [1][-]{section.3}{Architecture du projet}{}% 21
+\BOOKMARK [2][-]{subsection.3.1}{Organisation des packages}{section.3}% 22
+\BOOKMARK [2][-]{subsection.3.2}{Organisation des classes}{section.3}% 23
+\BOOKMARK [3][-]{subsubsection.3.2.1}{Package sokoban}{subsection.3.2}% 24
+\BOOKMARK [3][-]{subsubsection.3.2.2}{Package graphique}{subsection.3.2}% 25
+\BOOKMARK [3][-]{subsubsection.3.2.3}{Package ia}{subsection.3.2}% 26
+\BOOKMARK [1][-]{section.4}{Exp\351rimentations et usages}{}% 27
+\BOOKMARK [2][-]{subsection.4.1}{Performance du solveur}{section.4}% 28
+\BOOKMARK [1][-]{section*.7}{Conclusion}{}% 29
