@@ -196,6 +196,7 @@ Le fonctionnement de cet algorithme est le suivant :\\
 \begin{itemize}
 \item On initialise l'algorithme avec les positions du joueur et de sa destination et on ajoute la position du joueur dans une liste d'attente. On crée aussi deux tables de hashage avec autant de clés qu'il y a de positions libres dans la grille. Les clés sont des objets Node ; à ces clés sont associées la valeur du nœud que l'on initialise à +$\infty$.
 \item On retire de la liste d'attente l'élément ayant le plus faible $f(x)$ et on vérifie si il correspond à la destination. Si ce n'est pas le cas, on le met dans une liste des noeuds explorés.
+\item On calcule les voisins du noeud. Toute case n'étant pas un mur est considérée comme un noeud dans ce calcul. On ajoute à la liste d'attente les voisins pas encore explorés.
 \item On 
 \end{itemize}
   
