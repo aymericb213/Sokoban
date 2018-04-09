@@ -20,7 +20,10 @@
 \gdef\HyperFirstAtBeginDocument#1{#1}
 \providecommand\HyField@AuxAddToFields[1]{}
 \providecommand\HyField@AuxAddToCoFields[2]{}
-\babel@aux{french}{}
+\select@language{french}
+\@writefile{toc}{\select@language{french}}
+\@writefile{lof}{\select@language{french}}
+\@writefile{lot}{\select@language{french}}
 \@writefile{toc}{\contentsline {section}{Objectifs}{2}{section*.2}}
 \@writefile{toc}{\contentsline {subsection}{Description du Sokoban}{2}{section*.3}}
 \@writefile{lof}{\contentsline {figure}{\numberline {1}{\ignorespaces Niveau de Sokoban}}{2}{figure.1}}
@@ -37,22 +40,36 @@
 \@writefile{toc}{\contentsline {section}{\numberline {2}\IeC {\'E}l\IeC {\'e}ments techniques}{5}{section.2}}
 \newlabel{et}{{2}{5}{Éléments techniques}{section.2}{}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {2.1}Gestion des deadlocks}{5}{subsection.2.1}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {2.2}Structures de donn\IeC {\'e}es utilis\IeC {\'e}es}{5}{subsection.2.2}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {2.3}Algorithmes de l'IA}{5}{subsection.2.3}}
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {2.3.1}D\IeC {\'e}placement du joueur}{5}{subsubsection.2.3.1}}
-\@writefile{lof}{\contentsline {figure}{\numberline {5}{\ignorespaces Illustration de la distance de Manhattan}}{5}{figure.5}}
-\@writefile{lof}{\contentsline {figure}{\numberline {6}{\ignorespaces Exemple d'ex\IeC {\'e}cution de A* pour le d\IeC {\'e}placement}}{6}{figure.6}}
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {2.3.2}Solveurs}{6}{subsubsection.2.3.2}}
-\@writefile{toc}{\contentsline {section}{\numberline {3}Architecture du projet}{6}{section.3}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.1}Organisation des packages}{6}{subsection.3.1}}
-\@writefile{lof}{\contentsline {figure}{\numberline {7}{\ignorespaces Diagramme du projet}}{6}{figure.7}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.2}Organisation des classes}{7}{subsection.3.2}}
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.2.1}Package sokoban}{7}{subsubsection.3.2.1}}
-\@writefile{lof}{\contentsline {figure}{\numberline {8}{\ignorespaces Diagramme du package sokoban}}{7}{figure.8}}
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.2.2}Package graphique}{7}{subsubsection.3.2.2}}
-\@writefile{lof}{\contentsline {figure}{\numberline {9}{\ignorespaces Diagramme du package graphique}}{8}{figure.9}}
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.2.3}Package ia}{8}{subsubsection.3.2.3}}
-\@writefile{toc}{\contentsline {section}{\numberline {4}Exp\IeC {\'e}rimentations et usages}{8}{section.4}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {4.1}Performance du solveur}{8}{subsection.4.1}}
-\@writefile{toc}{\contentsline {section}{Conclusion}{8}{section*.7}}
-\@writefile{lof}{\contentsline {figure}{\numberline {10}{\ignorespaces Diagramme du package ia}}{9}{figure.10}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {2.1.1}Cas du simple voisinage}{5}{subsubsection.2.1.1}}
+\@writefile{lof}{\contentsline {figure}{\numberline {5}{\ignorespaces Cas possible de deadlock du point de vue d'une caisse}}{5}{figure.5}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {2.1.2}Le cas des caisses bloqu\IeC {\'e}es entre elles}{5}{subsubsection.2.1.2}}
+\newlabel{cBetween}{{2.1.2}{5}{Le cas des caisses bloquées entre elles}{subsubsection.2.1.2}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {6}{\ignorespaces Exemple de cas possible de deadlock du point de vue d'une caisse}}{5}{figure.6}}
+\newlabel{DL2}{{6}{5}{Exemple de cas possible de deadlock du point de vue d'une caisse}{figure.6}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {7}{\ignorespaces Formation d'un carr\IeC {\'e} avec des caisses}}{6}{figure.7}}
+\newlabel{DL2}{{7}{6}{Formation d'un carré avec des caisses}{figure.7}{}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {2.1.3}Trouver un deadlock dans un \IeC {\'e}tat donn\IeC {\'e}}{6}{subsubsection.2.1.3}}
+\@writefile{lof}{\contentsline {figure}{\numberline {8}{\ignorespaces Formation d'un carr\IeC {\'e} avec trois caisses et un mur}}{6}{figure.8}}
+\newlabel{DLcarreMur}{{8}{6}{Formation d'un carré avec trois caisses et un mur}{figure.8}{}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {2.1.4}\IeC {\'E}tude d'un cas complexe}{6}{subsubsection.2.1.4}}
+\@writefile{lof}{\contentsline {figure}{\numberline {9}{\ignorespaces Exemple de cas complexe}}{6}{figure.9}}
+\newlabel{DLCompl}{{9}{6}{Exemple de cas complexe}{figure.9}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.2}Structures de donn\IeC {\'e}es utilis\IeC {\'e}es}{6}{subsection.2.2}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.3}Algorithmes de l'IA}{7}{subsection.2.3}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {2.3.1}D\IeC {\'e}placement du joueur}{7}{subsubsection.2.3.1}}
+\@writefile{lof}{\contentsline {figure}{\numberline {10}{\ignorespaces Illustration de la distance de Manhattan}}{7}{figure.10}}
+\@writefile{lof}{\contentsline {figure}{\numberline {11}{\ignorespaces Exemple d'ex\IeC {\'e}cution de A* pour le d\IeC {\'e}placement}}{8}{figure.11}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {2.3.2}Solveurs}{8}{subsubsection.2.3.2}}
+\@writefile{toc}{\contentsline {section}{\numberline {3}Architecture du projet}{8}{section.3}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.1}Organisation des packages}{8}{subsection.3.1}}
+\@writefile{lof}{\contentsline {figure}{\numberline {12}{\ignorespaces Diagramme du projet}}{8}{figure.12}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.2}Organisation des classes}{8}{subsection.3.2}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.2.1}Package sokoban}{8}{subsubsection.3.2.1}}
+\@writefile{lof}{\contentsline {figure}{\numberline {13}{\ignorespaces Diagramme du package sokoban}}{9}{figure.13}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.2.2}Package graphique}{9}{subsubsection.3.2.2}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.2.3}Package ia}{9}{subsubsection.3.2.3}}
+\@writefile{toc}{\contentsline {section}{\numberline {4}Exp\IeC {\'e}rimentations et usages}{9}{section.4}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.1}Performance du solveur}{9}{subsection.4.1}}
+\@writefile{toc}{\contentsline {section}{Conclusion}{9}{section*.7}}
+\@writefile{lof}{\contentsline {figure}{\numberline {14}{\ignorespaces Diagramme du package graphique}}{10}{figure.14}}
+\@writefile{lof}{\contentsline {figure}{\numberline {15}{\ignorespaces Diagramme du package ia}}{11}{figure.15}}

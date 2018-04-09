@@ -8,6 +8,7 @@
 \usepackage{url}
 \usepackage{verbatim}
 \usepackage{amsmath}
+\usepackage{color}
 \usepackage{tikz}
 \usepackage{hyperref}
 \hypersetup{
@@ -156,6 +157,105 @@ Au niveau de l'IA, nous avons d'abord conçu un système de déplacement automat
 \section{Éléments techniques}\label{et}
 
 \subsection{Gestion des deadlocks}
+
+Les deadLocks (les caisses étant bloquées), ont plusieurs niveaux de test à passer avant d'être déclarée bloquée, il faut pas non seulement regarder son voisinage car une caisse peut ne pas pouvoir être déplacer sans que la partie soit fini.
+
+\subsubsection{Cas du simple voisinage}
+
+Une caisse est bloquée si elle possède deux éléments de type caisse et/ou de type mur sur chaque axe. Dans ce cas, il est impossible de pousser cette caisse car un des deux éléments est situé derrière.\\
+
+Cas simples de caisse bloquée (en rouge) : 
+
+\begin{figure}[!h]
+\centering
+\begin{tabular}{ l c r }
+\# &  \textcolor{red}{\$} & \ \\
+\  &      \$             & \ \\
+\\
+\hline
+\end{tabular}
+
+\begin{tabular}{ l c r }\\
+\$ & \textcolor{red}{\$} & \ \\
+\  &      \$             & \ \\
+\\
+\hline
+\end{tabular}
+
+\begin{tabular}{ l c r }\\
+\# & \textcolor{red}{\$} & \ \\
+\  &      \$             & \ \\
+\\
+\hline
+\end{tabular}
+
+\begin{tabular}{ l c r }\\
+\$ & \textcolor{red}{\$} & \ \\
+\  &      \$             & \ \\
+\end{tabular}
+
+\caption{Cas possible de deadlock du point de vue d'une caisse}
+\end{figure}
+
+\subsubsection{Le cas des caisses bloquées entre elles}
+\label{cBetween}
+
+Le second cas c'est quand deux caisses se bloquent mutuellement. Dans l'exemple de la figure \ref{DL2}, la caisse de gauche à un mur sous-elle et est à côté d'une caisse qui à aussi un mur dans le même axe donc elles se bloquent entre elles car on peut pousser aucunes des deux.
+
+\begin{figure}[!h]
+\centering
+\begin{tabular}{ l c r }
+\textcolor{red}{\$} & \textcolor{red}{\$} \\
+\#                  &     \#              \\
+\end{tabular}
+\caption{Exemple de cas possible de deadlock du point de vue d'une caisse}
+\label{DL2}
+\end{figure}
+
+Un autre exemple de blocage mais sans murs cette fois, c'est le cas où quatre caisses forme un carré.
+
+\begin{figure}[!h]
+\centering
+\begin{tabular}{ l c r }
+\textcolor{red}{\$} & \textcolor{red}{\$} \\
+\textcolor{red}{\$} & \textcolor{red}{\$} \\
+\end{tabular}
+\caption{Formation d'un carré avec des caisses}
+\label{DL2}
+\end{figure}
+
+\subsubsection{Trouver un deadlock dans un état donné}
+
+Maintenant que nous avons vu les cas possibles de deadlock, il faut maintenant les mettre en communs afin de pouvoir détecter les différents cas. Nous allons parcourir la liste des caisses et pour chaque caisse nous testerons les cas vu précédemment. On test d'abord si la caisse est entourée d'au moins deux murs sur chaque axe, si c'est le cas les est forcément en deadlock. Ensuite nous regarderons si elle est bloquée par au plus un mur et au minimum une autre caisse sur chaque axe, si c'est le cas, on test si on se trouve dans le cas du \ref{cBetween} c'est à dire si elle se bloque pas avec la caisse à côté d'elle. Si la caisse est dite bloquée avec au plus un mur alors 
+qu'elle n'as aucun mur autour d'elle et donc qu'elle est bloquée entre deux caisses et ne peut pas être directement déplacée, pour trouver ce cas on test si la caisse forme un carré avec quatre autres caisses (ou éventuellement un mur voir figure \ref{DLcarreMur}).
+
+\begin{figure}[!h]
+\centering
+\begin{tabular}{ l c r }
+\$                  & \# \\
+\textcolor{red}{\$} & \$ \\
+\end{tabular}
+\caption{Formation d'un carré avec trois caisses et un mur}
+\label{DLcarreMur}
+\end{figure}
+
+\subsubsection{Étude d'un cas complexe}
+
+Pour cet étude, nous allons supposer avoir l'état de la figure \ref{DLCompl}, Nous pouvons voir que la caisse bleu est bloquée par la caisse verte et un mur mais que la caisse verte peut être déplacé à gauche ou à droite pour ne plus bloquée la caisse bleu donc cette caisse bleu n'est pas un deadlock.\\
+Si on continu de regarder la liste des caisses et qu'on tombe sur une des caisses rouges, on s'aperçoit qu'elle forme un carré avec les autres caisses rouges donc nous avons trouver un deadlock et on retourne l'information comme quoi le niveau ne peut pas être terminé dans l'état actuel. La caisse orange n'est pas considérée comme un deadlock malgré le fait qu'elle soit bloquée avec la caisse noir car la caisse noir n'a pas de mur de le même axe que la caisse orange et ne forme pas de carré avec des murs et/ou caisses.
+
+\begin{figure}[!h]
+\centering
+\begin{tabular}{ l*{4} c*{5} r }
+\  & \  & \# & \textcolor{blue}{\$} \\
+\  & \  & \  & \textcolor{green}{\$} \\
+\  & \  & \textcolor{orange}{\$} & \$ \\
+\textcolor{red}{\$} & \textcolor{red}{\$} & \# & \  \\
+\textcolor{red}{\$} & \textcolor{red}{\$} & \  & \  \\
+\end{tabular}
+\caption{Exemple de cas complexe}
+\label{DLCompl}
+\end{figure}
 
 \subsection{Structures de données utilisées}
 
