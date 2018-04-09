@@ -158,7 +158,7 @@ Au niveau de l'IA, nous avons d'abord conçu un système de déplacement automat
 
 \subsection{Gestion des deadlocks}
 
-Les deadLocks (les caisses étant bloquées), ont plusieurs niveaux de test à passer avant d'être déclarée bloquée, il faut pas non seulement regarder son voisinage car une caisse peut ne pas pouvoir être déplacer sans que la partie soit fini.
+Les caisses en deadLock (qui bloquent le jeu), ont plusieurs niveaux de test à passer avant d'être déclarées bloquées, il faut pas non seulement regarder son voisinage car une caisse peut ne pas pouvoir être déplacer sans que la partie soit fini.
 
 \subsubsection{Cas du simple voisinage}
 
@@ -242,7 +242,7 @@ qu'elle n'as aucun mur autour d'elle et donc qu'elle est bloquée entre deux cai
 \subsubsection{Étude d'un cas complexe}
 
 Pour cet étude, nous allons supposer avoir l'état de la figure \ref{DLCompl}, Nous pouvons voir que la caisse bleu est bloquée par la caisse verte et un mur mais que la caisse verte peut être déplacé à gauche ou à droite pour ne plus bloquée la caisse bleu donc cette caisse bleu n'est pas un deadlock.\\
-Si on continu de regarder la liste des caisses et qu'on tombe sur une des caisses rouges, on s'aperçoit qu'elle forme un carré avec les autres caisses rouges donc nous avons trouver un deadlock et on retourne l'information comme quoi le niveau ne peut pas être terminé dans l'état actuel. La caisse orange n'est pas considérée comme un deadlock malgré le fait qu'elle soit bloquée avec la caisse noir car la caisse noir n'a pas de mur de le même axe que la caisse orange et ne forme pas de carré avec des murs et/ou caisses.
+Si on continu de regarder la liste des caisses et qu'on tombe sur une des caisses rouges, on s'aperçoit qu'elle forme un carré avec les autres caisses rouges donc nous avons trouvé un deadlock et on retourne l'information comme quoi le niveau ne peut pas être terminé dans l'état actuel. La caisse orange n'est pas considérée comme un deadlock malgré le fait qu'elle soit bloquée avec la caisse noir car la caisse noir n'a pas de mur de le même axe que la caisse orange et ne forme pas de carré avec des murs et/ou caisses.
 
 \begin{figure}[!h]
 \centering
