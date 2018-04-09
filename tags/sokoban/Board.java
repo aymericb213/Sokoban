@@ -261,34 +261,11 @@ public class Board {
     return false;
   }
 
-
-	/**
-		* Teste si une caisse est bloquée par une autre le long d'un mur.
-		* Exemple : <p>$$<br>##</p>
-		* @param coord
-		* Coordonnées de la caisse à tester.
-		* @return Le résultat du test
-	*/
-  public boolean hasDeadWall (ArrayList<Integer> coord) {
-      int i = coord.get(1);
-      int j = coord.get(0);
-
-      if (this.grid[i-1][j] instanceof Crate && this.isDead(this.grid[i-1][j],i-1,j,true)) {
-        if ((this.grid[i-1][j-1] instanceof Wall && this.grid[i][j-1] instanceof Wall) ||
-        (this.grid[i-1][j+1] instanceof Wall && this.grid[i][j+1] instanceof Wall)) {
-          return true;
-        }
-      }
-
-      if (this.grid[i][j-1] instanceof Crate && this.isDead(this.grid[i][j-1],i,j-1,true)) {
-        if ((this.grid[i+1][j-1] instanceof Wall && this.grid[i+1][j] instanceof Wall) ||
-        (this.grid[i-1][j-1] instanceof Wall && this.grid[i-1][j] instanceof Wall)) {
-          return true;
-        }
-      }
-      return false;
-    }
-
+  /**
+    * Test si la caisse forme un carre
+    * @param c la caisse a tester
+    * @return le résultat du test
+    */
 	public boolean testCrate(Block c) {
 		boolean test = true;
 		int i = ((Crate)c).x;
@@ -302,11 +279,11 @@ public class Board {
 				((Crate)c).setDeadlock(true);
 				return true;
 			}
-					if (this.isDead(c,i,j,true,true)) {
-						((Crate)c).setDeadlock(true);
-						return true;
-				}
+		  if (this.isDead(c,i,j,true,true)) {
+				((Crate)c).setDeadlock(true);
+				return true;
 			}
+		}
 		return false;
 	}
 
