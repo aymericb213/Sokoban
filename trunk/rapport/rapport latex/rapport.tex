@@ -399,6 +399,19 @@ Nous avons ensuite amélioré le solveur en passant du parcours en largeur à l'
 Cependant le solveur a de gros problèmes de mémoire : la taille de la table de hashage qui mémorise les états explorés pousse le garbage collector de Java à envoyer une OutOfMemoryError et termine prématurément le programme. Cela est causé par le nombre d'états à explorer dans des niveaux complexes et la mémoire que prend chaque état. Nous avons évalué le nombre maximal d'états stockables avant de dépasser la mémoire allouée à 190 000.
 Nous avons alors essayé d'optimiser le solveur, par exemple en faisant téléporter le joueur entre les coups plutôt que de lancer une recherche de chemin A* systématique ou en empêchant les caisses en deadlock sur un objectif de générer des coups. Cela a amélioré la vitesse de résolution mais n'a pas suffi a résoudre le problème de mémoire.
 
+\subsection{Gestion de fichiers}
+
+Afin de faciliter la lecture et l'écriture de fichiers, nous avons codé une classe \textit{FileManagement}. Cette classe contient des méthodes permettant d'enregistrer un Board, en faisant simplement appel à une classe \textit{Save} puis à une méthode de cette classe.
+Ainsi, dans le Main, nous n'avons besoin que d'une ligne pour sauvegarder.
+\\
+
+Cette classe contient également des méthodes pour charger une sauvegarde, ou pour charger un fichier cancel (fichier que l'on charge lorsque l'utilisateur décide de revenir un coup en arrière). Pour ce faire nous faisons simplement appel aux méthodes de la classe \textit{MapReader}
+\\
+
+Lorsque l'on sauvegarde un Board, qui est une grille de \textit{Block}, dans un fichier, on transforme la grille en liste de String dans laquelle chaque type de Block a un caractère associé. On obtient donc une liste de String où chaque élément correspond à une sous-liste de notre grille.\\
+
+Ensuite on fait appel à une méthode de \textit{FileManagement} en lui passant en paramètre la liste créée. Cette méthode fera appel à une méthode de \textit{Save}. Cette dernière parcourt la liste de String créée précédemment et pour chaque String on l'ajoute à une variable temporaire, que l'on écrira ensuite dans le fichier.
+
 \section{Architecture du projet}
 
 \subsection{Organisation des packages}
