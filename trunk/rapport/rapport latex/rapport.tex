@@ -269,7 +269,7 @@ Si on continue de parcourir la liste des caisses et qu'on tombe sur une des cais
 \label{DLCompl}
 \end{figure}
 
-\subsection{Déplacement du joueur par l'IA}
+\subsection{Déplacement du joueur par l'IA}\label{astar}
 
 Pour obtenir une granularité dans le déplacement du joueur par l'IA, nous avons implémenté l'algorithme de recherche de chemin A*. On utilise des objets \textbf{Node} qui possèdent en attribut des coordonnées et un nœud prédécesseur. Pour chaque nœud, on calcule le coût du chemin entre le départ et la destination passant par ce nœud. Le coût du chemin s'exprime :
 
@@ -391,6 +391,13 @@ Malheureusement, bien que l'algorithme fonctionne, ce solveur n'a pas permis de 
 
 \subsubsection{Solveur A*}
 
+Nous avons décidé de repartir du modèle que nous avions défini pour faire un autre solveur plus simple faisant un parcours en largeur des états.
+Ce second solveur commence à un état initial, génère tous les états successeurs (en essayant chaque coup disponible qui modifie la position des caisses), les mémorise puis les stocke dans une liste d'attente avant de recommencer avec le premier état de la liste jusqu'à trouver une solution.\\
+Avec cette version, nous avons été capable de résoudre plusieurs niveaux en une quinzaine de secondes en moyenne.\\
+
+Nous avons ensuite amélioré le solveur en passant du parcours en largeur à l'algorithme A* décrit en \ref{astar}. Dans les faits, nous avons remplacé la liste d'attente par une file de priorité capable de trier les états selon leur valeur. Nous avons ainsi pu résoudre plus de niveaux et beaucoup plus rapidement ( de l'ordre de la seconde).\\
+Cependant le solveur a de gros problèmes de mémoire : la taille de la table de hashage qui mémorise les états explorés pousse le garbage collector de Java à envoyer une OutOfMemoryError et termine prématurément le programme. Cela est causé par le nombre d'états à explorer dans des niveaux complexes et la mémoire que prend chaque état. Nous avons évalué le nombre maximal d'états stockables avant de dépasser la mémoire allouée à 190 000.
+Nous avons alors essayé d'optimiser le solveur, par exemple en faisant téléporter le joueur entre les coups plutôt que de lancer une recherche de chemin A* systématique ou en empêchant les caisses en deadlock sur un objectif de générer des coups. Cela a amélioré la vitesse de résolution mais n'a pas suffi a résoudre le problème de mémoire.
 
 \section{Architecture du projet}
 
@@ -460,6 +467,7 @@ Ce package contient tout ce qui a trait à la résolution automatique du jeu. On
 
 \subsection{Performance du solveur}
 
+Nous avons réalisé des tests 
 \section*{Conclusion}
 \addcontentsline{toc}{section}{Conclusion}
 
