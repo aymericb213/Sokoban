@@ -2,4 +2,4 @@
 
 cd $(dirname $0)/..
 [ -d doc ] || mkdir doc
-javadoc -d doc src/*/*.java
+javadoc -charset utf8 -d doc src/*/*.java
