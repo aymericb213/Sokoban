@@ -119,6 +119,8 @@ Au niveau de l'interface graphique, nous avons une zone de jeu dans laquelle on 
 
 Il est possible de demander la résolution automatique du niveau. Un solveur calcule alors un itinéraire permettant de ranger toutes les caisses à partir de la position du joueur.
 
+On peut également jouer contre l'IA en simultané.
+
 \begin{figure}[!h]
 \centering
 \includegraphics[scale=0.5]{images/Capture2.png}
@@ -302,7 +304,7 @@ Le fonctionnement de cet algorithme est le suivant :\\
 \item Pour chaque voisin, on compare $g(voisin)$ à la valeur correspondante dans la table de hashage de \textit{g}. Si $g(voisin)$ est plus petit que la valeur stockée alors on met à jour les deux tables de hashage pour le voisin et on lui attribue le nœud courant comme prédécesseur.
 \item Lors que le nœud de destination est atteint, on construit le chemin trouvé en remontant récursivement les prédécesseurs du nœud d'arrivée jusqu'au nœud de départ. On obtient ainsi la liste des nœuds composant le chemin.
 \end{itemize}
-  
+
 \begin{figure}[!h]
 \centering
 \begin{tikzpicture}
@@ -499,7 +501,7 @@ Niveaux considérés comme insolubles  &    0      &    20      \\
 \section*{Conclusion}
 \addcontentsline{toc}{section}{Conclusion}
 
-Nous avons atteint tous les objectifs demandés, nous avons réalisé un jeu Sokoban jouable avec une version console ainsi qu'une interface graphique et également une implémentation d'une IA permettant de résoudre les niveau et un algorithme anytime.
+Nous avons atteint tous les objectifs demandés, nous avons réalisé un jeu Sokoban jouable avec une version console ainsi qu'une interface graphique et également une implémentation d'une IA permettant de résoudre les niveaux et un mode de compétition avec l'IA munie d'un algorithme anytime.
 
 Ce projet nous a été bénéfique du fait que nous avons travaillé en groupe en se partageant le travail et en le rassemblant à la fin afin d'avoir un projet fonctionnel. En effet, c'est la première fois que nous faisions un vrai projet à plusieurs (non guidé dans la création des classes et des fonctions) et cela nous a permis d'apprendre à travailler ensemble sur le même projet mais pas sur des parties différentes.
 
