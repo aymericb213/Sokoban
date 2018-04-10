@@ -27,7 +27,6 @@ public class ThreadIa implements Runnable {
         	this.can.movePlayer(move);
 				} else {
 					ArrayList<ArrayList<Integer>> listMove = solver.getMoveRelatif();
-					System.out.println(this.can);
 	        for (ArrayList<Integer> move : listMove) {
 	          this.can.movePlayer(move);
 	          try {
@@ -38,5 +37,6 @@ public class ThreadIa implements Runnable {
 					}
 				}
       }
+      this.can.setSolving(false);
     }
 }
