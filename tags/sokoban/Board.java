@@ -212,9 +212,7 @@ public class Board {
   }
 
 	/**
-    * Teste si dans une liste de coordonnées de caisses, [j,i] est une partie d'un carré.
-    * @param listChain
-		* Liste des coordonnées des caisses d'une chaine à tester.
+    * Teste si la caisse en [j,i] forme un cube avec son alentour
     * @param i
 		* La coordonnée en Y de la caisse.
     * @param j
@@ -288,7 +286,7 @@ public boolean hasDeadWall (ArrayList<Integer> coord) {
 
 
   /**
-    * Test si la caisse forme un carre
+    * Test si la caisse forme un deadlock
     * @param c la caisse a tester
     * @return le résultat du test
     */
@@ -380,6 +378,10 @@ public boolean hasDeadWall (ArrayList<Integer> coord) {
     }
   }
 
+  /**
+    * Créer une ArrayList de string à partir de la grille
+    * @return liste créer
+    */
   public ArrayList<String> createArrayList () {
     ArrayList<String> res = new ArrayList<> ();
     for (Block[] line : this.grid) {
