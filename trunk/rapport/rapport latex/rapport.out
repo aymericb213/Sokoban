@@ -19,12 +19,13 @@
 \BOOKMARK [3][-]{subsubsection.2.4.2}{Premi\350re impl\351mentation}{subsection.2.4}% 19
 \BOOKMARK [3][-]{subsubsection.2.4.3}{Solveur A*}{subsection.2.4}% 20
 \BOOKMARK [2][-]{subsection.2.5}{Gestion de fichiers}{section.2}% 21
-\BOOKMARK [1][-]{section.3}{Architecture du projet}{}% 22
-\BOOKMARK [2][-]{subsection.3.1}{Organisation des packages}{section.3}% 23
-\BOOKMARK [2][-]{subsection.3.2}{Organisation des classes}{section.3}% 24
-\BOOKMARK [3][-]{subsubsection.3.2.1}{Package sokoban}{subsection.3.2}% 25
-\BOOKMARK [3][-]{subsubsection.3.2.2}{Package graphique}{subsection.3.2}% 26
-\BOOKMARK [3][-]{subsubsection.3.2.3}{Package ia}{subsection.3.2}% 27
-\BOOKMARK [1][-]{section.4}{Exp\351rimentations et usages}{}% 28
-\BOOKMARK [2][-]{subsection.4.1}{Performance du solveur}{section.4}% 29
-\BOOKMARK [1][-]{section*.7}{Conclusion}{}% 30
+\BOOKMARK [2][-]{subsection.2.6}{Course contre l'IA}{section.2}% 22
+\BOOKMARK [1][-]{section.3}{Architecture du projet}{}% 23
+\BOOKMARK [2][-]{subsection.3.1}{Organisation des packages}{section.3}% 24
+\BOOKMARK [2][-]{subsection.3.2}{Organisation des classes}{section.3}% 25
+\BOOKMARK [3][-]{subsubsection.3.2.1}{Package sokoban}{subsection.3.2}% 26
+\BOOKMARK [3][-]{subsubsection.3.2.2}{Package graphique}{subsection.3.2}% 27
+\BOOKMARK [3][-]{subsubsection.3.2.3}{Package ia}{subsection.3.2}% 28
+\BOOKMARK [1][-]{section.4}{Exp\351rimentations et usages}{}% 29
+\BOOKMARK [2][-]{subsection.4.1}{Performance du solveur}{section.4}% 30
+\BOOKMARK [1][-]{section*.7}{Conclusion}{}% 31
