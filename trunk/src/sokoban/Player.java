@@ -31,6 +31,10 @@ public class Player extends Block {
   		return this.x;
   	}
 
+		public void setX(int new_x) {
+			this.x=new_x;
+		}
+
   /**
   	* Accesseur de l'abscisse du joueur.
   	* @return La valeur de y.
@@ -38,6 +42,10 @@ public class Player extends Block {
   	public int getY() {
   		return this.y;
   	}
+
+		public void setY(int new_y) {
+			this.y=new_y;
+		}
 
 	/**
 		* Accesseur permettant de tester si le joueur se trouve sur un objectif.

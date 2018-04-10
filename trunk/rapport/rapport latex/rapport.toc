@@ -1,4 +1,4 @@
-\select@language {french}
+\babel@toc {french}{}
 \contentsline {section}{Objectifs}{2}{section*.2}
 \contentsline {subsection}{Description du Sokoban}{2}{section*.3}
 \contentsline {subsection}{Les fonctionnalit\IeC {\'e}s attendues}{2}{section*.4}
@@ -19,13 +19,13 @@
 \contentsline {subsubsection}{\numberline {2.4.1}Mod\IeC {\'e}lisation du probl\IeC {\`e}me}{8}{subsubsection.2.4.1}
 \contentsline {subsubsection}{\numberline {2.4.2}Premi\IeC {\`e}re impl\IeC {\'e}mentation}{9}{subsubsection.2.4.2}
 \contentsline {subsubsection}{\numberline {2.4.3}Solveur A*}{9}{subsubsection.2.4.3}
-\contentsline {subsection}{\numberline {2.5}Gestion de fichiers}{9}{subsection.2.5}
+\contentsline {subsection}{\numberline {2.5}Gestion de fichiers}{10}{subsection.2.5}
 \contentsline {section}{\numberline {3}Architecture du projet}{10}{section.3}
 \contentsline {subsection}{\numberline {3.1}Organisation des packages}{10}{subsection.3.1}
 \contentsline {subsection}{\numberline {3.2}Organisation des classes}{11}{subsection.3.2}
 \contentsline {subsubsection}{\numberline {3.2.1}Package sokoban}{11}{subsubsection.3.2.1}
 \contentsline {subsubsection}{\numberline {3.2.2}Package graphique}{11}{subsubsection.3.2.2}
 \contentsline {subsubsection}{\numberline {3.2.3}Package ia}{12}{subsubsection.3.2.3}
-\contentsline {section}{\numberline {4}Exp\IeC {\'e}rimentations et usages}{12}{section.4}
-\contentsline {subsection}{\numberline {4.1}Performance du solveur}{12}{subsection.4.1}
-\contentsline {section}{Conclusion}{13}{section*.7}
+\contentsline {section}{\numberline {4}Exp\IeC {\'e}rimentations et usages}{13}{section.4}
+\contentsline {subsection}{\numberline {4.1}Performance du solveur}{13}{subsection.4.1}
+\contentsline {section}{Conclusion}{14}{section*.7}

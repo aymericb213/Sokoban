@@ -1,5 +1,6 @@
 package sokoban;
 
+import ia.*;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -96,7 +97,7 @@ public class Main {
   			System.out.println(". : objectif");
   			System.out.println("$ : caisse (* si placée sur un objectif)");
   			System.out.println("@ : joueur (+ si placé sur un objectif)");
-  			System.out.println("\nz,q,s,d : déplacer joueur    Save : sauvegarder    l : charger    a : annuler    r : restart    e : quitter");
+  			System.out.println("\nz,q,s,d : déplacer joueur    Save : sauvegarder    l : charger    c : annuler    r : restart    a : résolution    e : quitter");
   			String input=sc.nextLine();
   			ArrayList<Integer> nextMove = new ArrayList<>();
 				if (input.equals("E") || input.equals("e")) {
@@ -112,13 +113,20 @@ public class Main {
           System.out.println("Fichier sauvegardé");
           continue;
         }
-        if (input.equals("A") || input.equals("a")) {
+        if (input.equals("C") || input.equals("c")) {
           b.createGrid(manageMap.loadCancel(playerName, map).getCancel());
         }
         if (input.equals("R") || input.equals("r")) {
           map.readingMap();
           b.createGrid(map.getMap());
         }
+				if (input.equals("A") || input.equals("a")) {
+					String[] arg = new String[1];
+					arg[0] = map.getFile();
+					System.out.println("\033[H\033[2J \nRésolution...");
+					ia.Main.main(arg);
+					break end;
+				}
   			if (input.equals("Z") || input.equals("z")) {
   				nextMove.add(-1);
   				nextMove.add(0);
@@ -172,6 +180,7 @@ public class Main {
             playerSave.savePlayer();
           }
         }
+
   			System.out.println("Niveau terminé en " + nbMoves + " déplacements");
         nbMoves = 0;
         System.out.println("Lancer le prochain niveau ? (O/N)");

@@ -273,7 +273,7 @@ Si on continue de parcourir la liste des caisses et qu'on tombe sur une des cais
 
 \subsection{Déplacement du joueur par l'IA}\label{astar}
 
-Pour obtenir une granularité dans le déplacement du joueur par l'IA, nous avons implémenté l'algorithme de recherche de chemin A*. On utilise des objets \textbf{Node} qui possèdent en attribut des coordonnées et un nœud prédécesseur. Pour chaque nœud, on calcule le coût du chemin entre le départ et la destination passant par ce nœud. Le coût du chemin s'exprime :
+Pour obtenir une granularité dans le déplacement du joueur par l'IA, nous avons implémenté l'algorithme de recherche de chemin A* \cite{AStar}. On utilise des objets \textbf{Node} qui possèdent en attribut des coordonnées et un nœud prédécesseur. Pour chaque nœud, on calcule le coût du chemin entre le départ et la destination passant par ce nœud. Le coût du chemin s'exprime :
 
 $$ f(x) = g(x) + h(x)$$
 
@@ -301,7 +301,7 @@ Le fonctionnement de cet algorithme est le suivant :\\
 \item On initialise l'algorithme avec les positions du joueur et de sa destination et on ajoute la position du joueur dans une liste d'attente. On crée aussi deux tables de hashage avec autant de clés qu'il y a de positions libres dans la grille. Les clés sont des objets Node ; à ces clés sont associées la valeur du nœud que l'on initialise à +$\infty$.
 \item On retire de la liste d'attente l'élément ayant le plus faible $f(x)$ et on vérifie si il correspond à la destination. Si ce n'est pas le cas, on le met dans une liste des nœuds explorés. On calcule aussi $g(voisin)=g(en\_cours)+1$, une estimation de la distance entre les voisins et le départ.
 \item On calcule les voisins du nœud. Toute case n'étant pas un mur est considérée comme un nœud dans ce calcul. On ajoute à la liste d'attente les voisins pas encore explorés.
-\item Pour chaque voisin, on compare $g(voisin)$ à la valeur correspondante dans la table de hashage de \textit{g}. Si $g(voisin)$ est plus petit que la valeur stockée alors on met à jour les deux tables de hashage pour le voisin et on lui attribue le nœud courant comme prédécesseur.
+\item Pour chaque voisin, on compare $g(voisin)$ à la valeur correspondante dans la table de hashage de \textit{g}. Si $g(voisin)$ est plus petit que la valeur stockée alors on met à jour les deux tables de hashage pour le voisin et on lui attribue le nœud courant comme prédécesseur. Nous avons surchargé la méthode equals de l'objet Node pour comparer les coordonnées \cite{EffectiveJava}.
 \item Lors que le nœud de destination est atteint, on construit le chemin trouvé en remontant récursivement les prédécesseurs du nœud d'arrivée jusqu'au nœud de départ. On obtient ainsi la liste des nœuds composant le chemin.
 \end{itemize}
 
@@ -464,7 +464,7 @@ Ce package permet simplement de gérer la version graphique du Sokoban et de jou
 
 \begin{figure}[!h]
 \centering
-\includegraphics[scale=0.4]{images/graphique.png}
+\includegraphics[scale=0.3]{images/graphique.png}
 \caption{Diagramme du package graphique}
 \end{figure}
 
@@ -478,13 +478,15 @@ Ce package contient tout ce qui a trait à la résolution automatique du jeu. On
 \caption{Diagramme du package ia}
 \end{figure}
 
+ \newpage
+ 
 \section{Expérimentations et usages}
 
 \subsection{Performance du solveur}
 
-Sur la série de niveaux originaux de Sokoban, le solveur n'est capable de résoudre que le premier, en 1,5 secondes. Les autres causent des dépassements mémoire. Cela dit, les niveaux originaux deviennent vite grands, complexes, et comportent de nombreuses caisses. Notre solveur étant plutôt simple, il n'est donc pas surprenant qu'il ne parvienne pas  résoudre ces niveaux.\\
+Sur la série de niveaux originaux de Sokoban \cite{git}, le solveur n'est capable de résoudre que le premier, en 1,5 secondes. Les autres causent des dépassements mémoire. Cela dit, les niveaux originaux deviennent vite grands, complexes, et comportent de nombreuses caisses. Notre solveur étant plutôt simple, il n'est donc pas surprenant qu'il ne parvienne pas  résoudre ces niveaux.\\
 
-Nous avons ensuite réalisé des tests sur la série de niveaux Sokoban junior, constitués de 58 niveaux plus simples que l'original.
+Nous avons ensuite réalisé des tests sur la série de niveaux Sokoban junior \cite{SokobanJunior}, constitués de 58 niveaux plus simples que l'original.
 
 \begin{figure}[!h]
 \centering
@@ -506,7 +508,16 @@ Nous avons atteint tous les objectifs demandés, nous avons réalisé un jeu Sok
 Ce projet nous a été bénéfique du fait que nous avons travaillé en groupe en se partageant le travail et en le rassemblant à la fin afin d'avoir un projet fonctionnel. En effet, c'est la première fois que nous faisions un vrai projet à plusieurs (non guidé dans la création des classes et des fonctions) et cela nous a permis d'apprendre à travailler ensemble sur le même projet mais pas sur des parties différentes.
 Nous avons aussi appris comment utiliser et adapter des algorithmes complexes à notre projet.\\
 
-Les améliorations possibles seraient de ne pas stocker le Board pour économiser de la mémoire  dans l'IA et d'utiliser une meilleure heuristique. Passer d'une représentation de grille d'objet à une simple liste pour gagner du temps lors des calcules. Nous aurions pu recycler la mémoire de l'IA afin de retirer les coups inutiles qu'elle testera. Nous aurions pu également ajouter un compteur de coups lors des parties.
+Les améliorations possibles seraient de ne pas stocker le Board pour économiser de la mémoire  dans l'IA et d'utiliser une meilleure heuristique. \cite{Sokobano} Passer d'une représentation de grille d'objet à une simple liste pour gagner du temps lors des calcules. Nous aurions pu recycler la mémoire de l'IA afin de retirer les coups inutiles qu'elle testera. Nous aurions pu également ajouter un compteur de coups lors des parties.
+
+
+\begin{thebibliography}{1}
+\bibitem{EffectiveJava} Joshua Bloch, Effective Java, Chapter 3
+\bibitem{SokobanJunior} \url{https://www.sokobanonline.com/}
+\bibitem{AStar} \url{https://en.wikipedia.org/wiki/A*_search_algorithm}
+\bibitem{Sokobano} \url{http://www.sokobano.de/wiki/index.php?title=Solver}
+\bibitem{git} \url{https://github.com/BR903/cgames/tree/master/csokoban/series}
+\end{thebibliography}
 
 \end{document}
 
