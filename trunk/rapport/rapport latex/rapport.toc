@@ -1,4 +1,4 @@
-\babel@toc {french}{}
+\select@language {french}
 \contentsline {section}{Objectifs}{2}{section*.2}
 \contentsline {subsection}{Description du Sokoban}{2}{section*.3}
 \contentsline {subsection}{Les fonctionnalit\IeC {\'e}s attendues}{2}{section*.4}
