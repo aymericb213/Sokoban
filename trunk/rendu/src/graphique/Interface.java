@@ -60,7 +60,7 @@ public class Interface extends JFrame {
         Interface.this.map.readingMap();
         Interface.this.b.createGrid(Interface.this.map.getMap());
         Interface.this.b.setOver(false);
-        Interface.this.can.setPlayer("graphique/images/perso.png");
+        Interface.this.can.setPlayer("../ressources/images/perso.png");
         Interface.this.can.update();
 
         Interface.this.t.stop();
@@ -70,7 +70,7 @@ public class Interface extends JFrame {
           Board bIa = new Board(nbMapPlay);
           bIa.createGrid(map.getMap());
           Interface.this.canIa.setBoard(bIa);
-          Interface.this.canIa.setPlayer("graphique/images/perso.png");
+          Interface.this.canIa.setPlayer("../ressources/images/perso.png");
           Interface.this.canIa.update();
           Runnable threadIa = new ThreadIa(Interface.this.b,canIa, false);
           new Thread(threadIa).start();
@@ -170,9 +170,9 @@ public class Interface extends JFrame {
               Interface.this.b.createGrid(Interface.this.map.getCancel());
               if (!Interface.this.b.isFinished()) {
                 Interface.this.b.setOver(false);
-                Interface.this.can.setPlayer("graphique/images/perso.png");
+                Interface.this.can.setPlayer("../ressources/images/perso.png");
               } else {
-                Interface.this.can.setPlayer("graphique/images/persoPerdu.png");
+                Interface.this.can.setPlayer("../ressources/images/persoPerdu.png");
               }
               Interface.this.can.update();
             } else {
@@ -342,7 +342,6 @@ public class Interface extends JFrame {
 					@Override
 					public void keyPressed(KeyEvent e) {
 						if ((e.getKeyCode() == KeyEvent.VK_LEFT) || (e.getKeyCode() == KeyEvent.VK_Q) || (e.getKeyCode() == KeyEvent.VK_RIGHT) || (e.getKeyCode() == KeyEvent.VK_D) || (e.getKeyCode() == KeyEvent.VK_UP) || (e.getKeyCode() == KeyEvent.VK_Z) || (e.getKeyCode() == KeyEvent.VK_DOWN) || (e.getKeyCode() == KeyEvent.VK_S)) {
-							System.out.println("stop");
 							Interface.this.t.interrupt();
 						}
 					}
@@ -353,7 +352,6 @@ public class Interface extends JFrame {
 					 @Override
 					 public void keyReleased(KeyEvent e) {
 						if ((e.getKeyCode() == KeyEvent.VK_LEFT) || (e.getKeyCode() == KeyEvent.VK_Q) || (e.getKeyCode() == KeyEvent.VK_RIGHT) || (e.getKeyCode() == KeyEvent.VK_D) || (e.getKeyCode() == KeyEvent.VK_UP) || (e.getKeyCode() == KeyEvent.VK_Z) || (e.getKeyCode() == KeyEvent.VK_DOWN) || (e.getKeyCode() == KeyEvent.VK_S)) {
-							System.out.println("start");
 							Interface.this.t=new Thread(threadIa);
 							Interface.this.t.start();
 						}

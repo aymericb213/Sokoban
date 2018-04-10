@@ -19,7 +19,7 @@ public class PlayerReader {
 		* Nom du joueur.
     */
   public PlayerReader(String name) {
-    this.file = "save/players/" + name + ".txt";
+    this.file = "../ressources/save/players/" + name + ".txt";
     this.level = this.readLevel(this.file);
   }
 

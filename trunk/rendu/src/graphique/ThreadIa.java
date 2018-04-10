@@ -35,7 +35,6 @@ public class ThreadIa implements Runnable {
 	          try {
 	            Thread.sleep(50);
 	          } catch (Exception e) {
-	            System.out.println("catch");
 	          }
 					}
 				}

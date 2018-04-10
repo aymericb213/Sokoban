@@ -16,7 +16,7 @@ public class Main {
 		* @param args Le chemin de la map à résoudre.
 	*/
 	public static void main(String[] args) {
-			MapReader map = new MapReader(args[0]);
+			MapReader map = new MapReader("../ressources/maps/"+args[0]);
 			map.readingMap();
 			Board b= new Board();
 			b.createGrid(map.getMap());

@@ -37,7 +37,7 @@ public class FileManagement {
     * @return l'instance de MapReader modifiée.
     */
   public MapReader loadMap(String playerName, MapReader map) {
-    map.setFile("save/"+playerName+".xsb");
+    map.setFile("../ressources/save/"+playerName+".xsb");
     map.readingMap();
     return map;
   }
@@ -51,7 +51,7 @@ public class FileManagement {
     * @return l'instance de MapReader modifiée.
     */
   public MapReader loadCancel(String playerName, MapReader map) {
-    map.setFileCancel("save/cancel_"+playerName+".xsb");
+    map.setFileCancel("../ressources/save/cancel_"+playerName+".xsb");
     map.readingCancel();
     return map;
   }

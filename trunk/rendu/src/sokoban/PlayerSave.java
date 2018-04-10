@@ -22,9 +22,9 @@ public class PlayerSave {
 		* Dernier niveau que le joueur a débloqué.
     */
   public PlayerSave (String name, int level) {
-    this.path = "save/players/" + name + ".txt";
-    this.pathSave = "save/" + name + ".xsb";
-    this.pathCancel = "save/cancel_" + name + ".xsb";
+    this.path = "../ressources/save/players/" + name + ".txt";
+    this.pathSave = "../ressources/save/" + name + ".xsb";
+    this.pathCancel = "../ressources/save/cancel_" + name + ".xsb";
     this.level = level;
   }
 

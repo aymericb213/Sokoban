@@ -24,7 +24,7 @@ public class Save {
     */
   public Save(ArrayList<String> mapToSave, String name) {
     this.map = mapToSave;
-    this.path = "save/save.xsb";
+    this.path = "../ressources/save/save.xsb";
     this.name = name;
   }
 
@@ -40,7 +40,7 @@ public class Save {
     */
   public Save(ArrayList<String> mapToSave, String file, String name) {
     this.map = mapToSave;
-    this.path = "save/" + file + ".xsb";
+    this.path = "../ressources/save/" + file + ".xsb";
     this.name = name;
   }
 
