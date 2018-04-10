@@ -92,7 +92,7 @@ public class KeyAction extends KeyAdapter {
             this.can.setPlayer("../ressources/images/persoDab.png");
             PlayerReader read = new PlayerReader(this.b.getPlayerName());
             int niveauPlayer = read.getLevel();
-            int nbMaps = new File("../ressources/maps").list().length;
+            int nbMaps = new File("maps").list().length;
             if (this.b.getLevel() == niveauPlayer && this.b.getLevel() < nbMaps) {
               PlayerSave pSave = new PlayerSave(this.b.getPlayerName(), niveauPlayer + 1);
               pSave.savePlayer();

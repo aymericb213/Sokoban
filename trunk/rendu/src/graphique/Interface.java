@@ -23,10 +23,12 @@ public class Interface extends JFrame {
   private MapReader map;
   private CanvasGame can;
   private String playerName;
+  private CanvasGame canIa;
   private boolean modeIad;
   private boolean modeSelect;
   private boolean random;
   private static int nbMapPlay = 1;
+	private Thread t;
 
   public Interface(Board b, MapReader map, String playerName, boolean modeIad, boolean modeSelect, boolean random) {
     this.b = b;
@@ -38,6 +40,12 @@ public class Interface extends JFrame {
     this.random = random;
     this.setResizable(false);
     this.setTitle("Sokoban");
+
+		Board bIa = new Board(nbMapPlay);
+		bIa.createGrid(map.getMap());
+		this.canIa = new CanvasGame(bIa,30);
+		Runnable threadIa = new ThreadIa(this.b,this.canIa,false);
+		this.t= new Thread(threadIa);
 
     JPanel zoneControl = new JPanel();
 
@@ -54,6 +62,36 @@ public class Interface extends JFrame {
         Interface.this.b.setOver(false);
         Interface.this.can.setPlayer("../ressources/images/perso.png");
         Interface.this.can.update();
+
+        Interface.this.t.stop();
+        Interface.this.can.setSolving(false);
+
+        if (Interface.this.modeIad) {
+          Board bIa = new Board(nbMapPlay);
+          bIa.createGrid(map.getMap());
+          Interface.this.canIa.setBoard(bIa);
+          Interface.this.canIa.setPlayer("../ressources/images/perso.png");
+          Interface.this.canIa.update();
+          Runnable threadIa = new ThreadIa(Interface.this.b,canIa, false);
+          new Thread(threadIa).start();
+        }
+      }
+    });
+
+    JButton bSolve = new JButton("Solve");
+    bSolve.setRequestFocusEnabled(false);
+    bSolve.addActionListener(new ActionListener () {
+      @Override
+      public void actionPerformed(ActionEvent e) {
+        if (!Interface.this.can.getSolving()) {
+          Interface.this.can.setSolving(true);
+          Runnable threadIa = new ThreadIa(Interface.this.b,Interface.this.can, false);
+          Interface.this.t = new Thread(threadIa);
+          Interface.this.t.start();
+        } else {
+          Interface.this.t.stop();
+          Interface.this.can.setSolving(false);
+        }
       }
     });
 
@@ -82,7 +120,7 @@ public class Interface extends JFrame {
     bLoad.addActionListener(new ActionListener () {
       @Override
       public void actionPerformed(ActionEvent e) {
-        String[] savesPlayers = new File("../ressources/save/").list();
+        String[] savesPlayers = new File("save/").list();
         ArrayList<String> listSavesPlayers = new ArrayList<>(Arrays.asList(savesPlayers));
         if (listSavesPlayers.contains(Interface.this.playerName + ".xsb")) {
           MapReader mapLoad = new MapReader("../ressources/save/" + Interface.this.playerName + ".xsb", Interface.this.map.getFileCancel());
@@ -121,11 +159,11 @@ public class Interface extends JFrame {
     bCancel.addActionListener(new ActionListener () {
         @Override
         public void actionPerformed(ActionEvent e){
-          String[] savesPlayers = new File("../ressources/save/").list();
+          String[] savesPlayers = new File("../ressourcessave/").list();
           ArrayList<String> listSavesPlayers = new ArrayList<>(Arrays.asList(savesPlayers));
           boolean popup = false;
           if (listSavesPlayers.contains("cancel_" + Interface.this.playerName + ".xsb")) {
-            MapReader cancelMap = new MapReader(Interface.this.map.getFile(),"../ressources/save/cancel_" + Interface.this.playerName + ".xsb");
+            MapReader cancelMap = new MapReader(Interface.this.map.getFile(),"../ressourcessave/cancel_" + Interface.this.playerName + ".xsb");
             String cMap = cancelMap.getCancelMapName();
             if (cMap.equals("map" + Interface.this.b.getLevel())) {
               Interface.this.map.readingCancel();
@@ -170,10 +208,11 @@ public class Interface extends JFrame {
     this.setLayout(new GridBagLayout());
     GridBagConstraints gc = new GridBagConstraints();
 
-    zoneControl.setLayout(new GridLayout(7,1,10,10));
+    zoneControl.setLayout(new GridLayout(8,1,10,10));
 
     zoneControl.add(numberMap);
     zoneControl.add(bReset);
+    zoneControl.add(bSolve);
 
 
     if (!this.modeIad && !this.modeSelect && !this.random) {
@@ -294,12 +333,32 @@ public class Interface extends JFrame {
     add(zoneControl,gc);
 
     if (this.modeIad) {
-      Board bIa = new Board(nbMapPlay);
-      bIa.createGrid(map.getMap());
-      CanvasGame canIa = new CanvasGame(bIa,30);
-      canIa.setFocusable(false);
-      gc.gridx = 2;
-      add(canIa,gc);
+
+			canIa.setFocusable(false);
+			gc.gridx = 2;
+			add(canIa,gc);
+				this.t.start();
+				addKeyListener(new KeyListener() {
+					@Override
+					public void keyPressed(KeyEvent e) {
+						if ((e.getKeyCode() == KeyEvent.VK_LEFT) || (e.getKeyCode() == KeyEvent.VK_Q) || (e.getKeyCode() == KeyEvent.VK_RIGHT) || (e.getKeyCode() == KeyEvent.VK_D) || (e.getKeyCode() == KeyEvent.VK_UP) || (e.getKeyCode() == KeyEvent.VK_Z) || (e.getKeyCode() == KeyEvent.VK_DOWN) || (e.getKeyCode() == KeyEvent.VK_S)) {
+							System.out.println("stop");
+							Interface.this.t.interrupt();
+						}
+					}
+					 @Override
+					 public void keyTyped(KeyEvent e) {
+
+					 }
+					 @Override
+					 public void keyReleased(KeyEvent e) {
+						if ((e.getKeyCode() == KeyEvent.VK_LEFT) || (e.getKeyCode() == KeyEvent.VK_Q) || (e.getKeyCode() == KeyEvent.VK_RIGHT) || (e.getKeyCode() == KeyEvent.VK_D) || (e.getKeyCode() == KeyEvent.VK_UP) || (e.getKeyCode() == KeyEvent.VK_Z) || (e.getKeyCode() == KeyEvent.VK_DOWN) || (e.getKeyCode() == KeyEvent.VK_S)) {
+							System.out.println("start");
+							Interface.this.t=new Thread(threadIa);
+							Interface.this.t.start();
+						}
+					 }
+				});
     }
 
 

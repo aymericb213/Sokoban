@@ -19,6 +19,7 @@ public class SelectMap extends JFrame {
   private String playerName;
   private JPanel zoneCanvas;
   private CanvasGame can;
+  private int sizeTile;
   private boolean modeIad;
 
   public SelectMap (boolean modeIad, String playerName) {
@@ -26,7 +27,7 @@ public class SelectMap extends JFrame {
     this.modeIad = modeIad;
     this.playerName = playerName;
 
-    int sizeTile = 20;
+    this.sizeTile = 18;
 
     this.setResizable(true);
     this.setTitle("Select map");
@@ -63,7 +64,12 @@ public class SelectMap extends JFrame {
     zoneButton.add(bBack);
     zoneButton.setLayout(new GridLayout(2,1,10,10));
 
-    int nbMapsTotal = new File("../ressources/maps").list().length;
+    int nbMapsTotal = new File("../ressources/maps").list(new FilenameFilter() {
+																						@Override
+																						public boolean accept(File dir, String name) {
+																							return name.matches("^map...xsb$") || name.matches("^map..xsb$");
+																						}
+																					}).length;
     PlayerReader player = new PlayerReader(this.playerName);
     int levelPlayerMax = player.getLevel();
 
@@ -92,8 +98,12 @@ public class SelectMap extends JFrame {
         MapReader map = new MapReader("../ressources/maps/map" + (indice + 1) + ".xsb", "../ressources/save/cancel_" + SelectMap.this.playerName + ".xsb");
         map.readingMap();
         b.createGrid(map.getMap());
-        SelectMap.this.can.setBoard(b);
-        SelectMap.this.can.update();
+        CanvasGame can = SelectMap.this.can;
+        can.setBoard(b);
+        int[] sizeGrid = b.getSize();
+        int sizeTile = SelectMap.this.sizeTile;
+        can.setPreferredSize(new Dimension(sizeTile*sizeGrid[0],sizeTile*sizeGrid[1]));
+        can.update();
         SelectMap.this.zoneCanvas.updateUI();
       }
     });
@@ -109,12 +119,12 @@ public class SelectMap extends JFrame {
     listAndNbMapUnlocked.add(scrollPane,cList);
 
     Board b = new Board(1);
-    MapReader map = new MapReader("../ressources/maps/map1.xsb", "../ressources/save/cancel_" + SelectMap.this.playerName + ".xsb");
+    MapReader map = new MapReader("../ressources/maps/map1.xsb", "save/cancel_" + SelectMap.this.playerName + ".xsb");
     map.readingMap();
     b.createGrid(map.getMap());
 
     this.zoneCanvas = new JPanel();
-    zoneCanvas.setLayout(new FlowLayout(FlowLayout.CENTER,0,50));
+    zoneCanvas.setLayout(new FlowLayout(FlowLayout.CENTER,0,10));
     zoneCanvas.setPreferredSize(new Dimension(400,320));
 
     this.can = new CanvasGame(b,sizeTile);

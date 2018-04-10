@@ -5,11 +5,12 @@ import java.awt.*;
 import java.awt.Image.*;
 import javax.swing.*;
 import sokoban.*;
+import java.util.ArrayList;
 
 /**
   * Canvas avec la représentation des maps
   */
-public class CanvasGame extends Canvas {
+public class CanvasGame extends JPanel {
 
   private Board b;
   protected int sizeTile;
@@ -19,9 +20,11 @@ public class CanvasGame extends Canvas {
   private Image player;
   private Image star;
   private Image backgroundCanvas;
+  private boolean isSolving;
 
   public CanvasGame (Board b, int sizeTile) {
     this.b = b;
+    this.isSolving = false;
     this.crate = Toolkit.getDefaultToolkit().getImage("../ressources/images/caisse.png");
     this.wall = Toolkit.getDefaultToolkit().getImage("../ressources/images/mur.jpg");
     this.freeTile = Toolkit.getDefaultToolkit().getImage("../ressources/images/sol.png");
@@ -29,7 +32,7 @@ public class CanvasGame extends Canvas {
     this.star = Toolkit.getDefaultToolkit().getImage("../ressources/images/star.png");
     this.sizeTile = sizeTile;
     int[] sizeGrid = b.getSize();
-    setSize(sizeTile*sizeGrid[0],sizeTile*sizeGrid[1]);
+    setPreferredSize(new Dimension(sizeTile*sizeGrid[0],sizeTile*sizeGrid[1]));
   }
 
   /**
@@ -50,6 +53,14 @@ public class CanvasGame extends Canvas {
     this.setSize(sizeTile*sizeGrid[0],sizeTile*sizeGrid[1]);
   }
 
+  public void setSolving(boolean solve) {
+    this.isSolving = solve;
+  }
+
+  public boolean getSolving() {
+    return this.isSolving;
+  }
+
   /**
     * Actualise le canvas entier
     */
@@ -66,6 +77,26 @@ public class CanvasGame extends Canvas {
     */
   public void update (int x, int y, int width, int height) {
     repaint(x,y,width,height);
+  }
+
+  /**
+    * Actualise la zone utile à actualiser du canvas
+    * @param nextMove meme argument que Player.move
+    */
+  public void movePlayer (ArrayList<Integer> nextMove) {
+    Player player = ((Player)b.getPlayer());
+    player.move(b,nextMove);
+    int minW = Math.min(player.getY()-nextMove.get(1),player.getY()+nextMove.get(1));
+    int minH = Math.min(player.getX()-nextMove.get(0),player.getX()+nextMove.get(0));
+    this.update(minW*this.sizeTile, minH*this.sizeTile,
+                    this.sizeTile + Math.abs(nextMove.get(1))*this.sizeTile*2,
+                    this.sizeTile + Math.abs(nextMove.get(0))*this.sizeTile*2);
+    if (this.b.isFinished()) {
+      this.b.setOver(true);
+      if (this.b.allPlaced()) {
+        this.setPlayer("../ressources/images/persoDab.png");
+      }
+    }
   }
 
   /**
