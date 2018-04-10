@@ -395,7 +395,7 @@ Nous avons décidé de repartir du modèle que nous avions défini pour faire un
 Ce second solveur commence à un état initial, génère tous les états successeurs (en essayant chaque coup disponible qui modifie la position des caisses), les mémorise puis les stocke dans une liste d'attente avant de recommencer avec le premier état de la liste jusqu'à trouver une solution.\\
 Avec cette version, nous avons été capable de résoudre plusieurs niveaux en une quinzaine de secondes en moyenne.\\
 
-Nous avons ensuite amélioré le solveur en passant du parcours en largeur à l'algorithme A* décrit en \ref{astar}. Dans les faits, nous avons remplacé la liste d'attente par une file de priorité capable de trier les états selon leur valeur. Nous avons ainsi pu résoudre plus de niveaux et beaucoup plus rapidement ( de l'ordre de la seconde).\\
+Nous avons ensuite amélioré le solveur en passant du parcours en largeur à l'algorithme A* décrit en \ref{astar}. Dans les faits, nous avons remplacé la liste d'attente par une file de priorité capable de trier les états selon leur valeur. Nous avons aussi découvert que la distance de Hamming était une heuristique plus efficace que notre calcul de distances de Manhattan. Nous avons ainsi pu résoudre plus de niveaux et beaucoup plus rapidement ( de l'ordre de la seconde).\\
 Cependant le solveur a de gros problèmes de mémoire : la taille de la table de hashage qui mémorise les états explorés pousse le garbage collector de Java à envoyer une OutOfMemoryError et termine prématurément le programme. Cela est causé par le nombre d'états à explorer dans des niveaux complexes et la mémoire que prend chaque état. Nous avons évalué le nombre maximal d'états stockables avant de dépasser la mémoire allouée à 190 000.
 Nous avons alors essayé d'optimiser le solveur, par exemple en faisant téléporter le joueur entre les coups plutôt que de lancer une recherche de chemin A* systématique ou en empêchant les caisses en deadlock sur un objectif de générer des coups. Cela a amélioré la vitesse de résolution mais n'a pas suffi a résoudre le problème de mémoire.
 
@@ -480,7 +480,21 @@ Ce package contient tout ce qui a trait à la résolution automatique du jeu. On
 
 \subsection{Performance du solveur}
 
-Nous avons réalisé des tests sur la série de niveaux Sokoban junior
+Sur la série de niveaux originaux de Sokoban, le solveur n'est capable de résoudre que le premier, en 1,5 secondes. Les autres causent des dépassements mémoire. Cela dit, les niveaux originaux deviennent vite grands, complexes, et comportent de nombreuses caisses. Notre solveur étant plutôt simple, il n'est donc pas surprenant qu'il ne parvienne pas  résoudre ces niveaux.\\
+
+Nous avons ensuite réalisé des tests sur la série de niveaux Sokoban junior, constitués de 58 niveaux plus simples que l'original.
+
+\begin{figure}[!h]
+\centering
+\begin{tabular}{ l*{5} | c*{3} r }
+Heuristique                          & Hamming   & Manhanttan \\
+Limite de temps                      & 5 minutes & 10 minutes \\
+Limite d'états en mémoire            & 175 000   & 180 000    \\
+Niveaux résolus                      &    34     &    12      \\
+Niveaux considérés comme insolubles  &    0      &    20      \\
+\end{tabular}
+\caption{Tableau de résultats d'expérimentation}
+\end{figure}
 
 \section*{Conclusion}
 \addcontentsline{toc}{section}{Conclusion}
