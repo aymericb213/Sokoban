@@ -23,11 +23,12 @@ public class Interface extends JFrame {
   private MapReader map;
   private CanvasGame can;
   private String playerName;
-  private CanvasGame canIa = null;
+  private CanvasGame canIa;
   private boolean modeIad;
   private boolean modeSelect;
   private boolean random;
   private static int nbMapPlay = 1;
+	private Thread t;
 
   public Interface(Board b, MapReader map, String playerName, boolean modeIad, boolean modeSelect, boolean random) {
     this.b = b;
@@ -39,6 +40,12 @@ public class Interface extends JFrame {
     this.random = random;
     this.setResizable(false);
     this.setTitle("Sokoban");
+
+		Board bIa = new Board(nbMapPlay);
+		bIa.createGrid(map.getMap());
+		this.canIa = new CanvasGame(bIa,30);
+		Runnable threadIa = new ThreadIa(this.b,this.canIa,false);
+		this.t= new Thread(threadIa);
 
     JPanel zoneControl = new JPanel();
 
@@ -61,12 +68,12 @@ public class Interface extends JFrame {
           Interface.this.canIa.setBoard(bIa);
           Interface.this.canIa.setPlayer("graphique/images/perso.png");
           Interface.this.canIa.update();
-          Runnable threadIa = new ThreadIa(Interface.this.b,canIa);
+          Runnable threadIa = new ThreadIa(Interface.this.b,canIa, false);
           new Thread(threadIa).start();
         }
       }
     });
-    
+
     JButton bSolve = new JButton("Solve");
     bSolve.setRequestFocusEnabled(false);
     bSolve.addActionListener(new ActionListener () {
@@ -317,14 +324,32 @@ public class Interface extends JFrame {
     add(zoneControl,gc);
 
     if (this.modeIad) {
-      Board bIa = new Board(nbMapPlay);
-      bIa.createGrid(map.getMap());
-      this.canIa = new CanvasGame(bIa,30);
-      canIa.setFocusable(false);
-      gc.gridx = 2;
-      add(canIa,gc);
-      Runnable threadIa = new ThreadIa(this.b,canIa);
-      new Thread(threadIa).start();
+
+			canIa.setFocusable(false);
+			gc.gridx = 2;
+			add(canIa,gc);
+				this.t.start();
+				addKeyListener(new KeyListener() {
+					@Override
+					public void keyPressed(KeyEvent e) {
+						if ((e.getKeyCode() == KeyEvent.VK_LEFT) || (e.getKeyCode() == KeyEvent.VK_Q) || (e.getKeyCode() == KeyEvent.VK_RIGHT) || (e.getKeyCode() == KeyEvent.VK_D) || (e.getKeyCode() == KeyEvent.VK_UP) || (e.getKeyCode() == KeyEvent.VK_Z) || (e.getKeyCode() == KeyEvent.VK_DOWN) || (e.getKeyCode() == KeyEvent.VK_S)) {
+							System.out.println("stop");
+							Interface.this.t.interrupt();
+						}
+					}
+					 @Override
+					 public void keyTyped(KeyEvent e) {
+
+					 }
+					 @Override
+					 public void keyReleased(KeyEvent e) {
+						if ((e.getKeyCode() == KeyEvent.VK_LEFT) || (e.getKeyCode() == KeyEvent.VK_Q) || (e.getKeyCode() == KeyEvent.VK_RIGHT) || (e.getKeyCode() == KeyEvent.VK_D) || (e.getKeyCode() == KeyEvent.VK_UP) || (e.getKeyCode() == KeyEvent.VK_Z) || (e.getKeyCode() == KeyEvent.VK_DOWN) || (e.getKeyCode() == KeyEvent.VK_S)) {
+							System.out.println("start");
+							Interface.this.t=new Thread(threadIa);
+							Interface.this.t.start();
+						}
+					 }
+				});
     }
 
 

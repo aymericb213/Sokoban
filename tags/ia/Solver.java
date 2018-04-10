@@ -59,7 +59,7 @@ public class Solver {
 		this.initial_board=b;
 	}
 
-	public void aStarSolve() {
+	public void aStarSolve(boolean anytime) {
 		long timer = 0;
 		this.waiting_dico.clear();
 		String init_key=this.createKey(this.current_state);
@@ -67,24 +67,14 @@ public class Solver {
 		this.p_queue.offer(init_key);
 		while ((this.p_queue.size()!=0) && (timer<600000) && (this.explored_list.size()<180000)) {
 			long start = System.currentTimeMillis();
-			//System.out.println("file de priorité : " +this.p_queue);
-			//System.out.println(this.p_queue.toString());
-			//System.out.println(this.explored_list.toString());
-			// System.out.println("currentKey : "+this.p_queue.get(0));
 			State current= this.waiting_dico.get(this.p_queue.poll());
-			// System.out.println(current.getLevel());
-			if (current.allPlaced()) {
-				//System.out.println(current.getLevel());
-				//System.out.println(current);
-				timer+=(System.currentTimeMillis()-start);
-				//System.out.println("Résolu en " + timer + " ms");
+			if (((anytime) && (Thread.interrupted())) || ((!(anytime)) && (current.allPlaced()))) {
 				buildFullPath(current);
 				break;
 			}
+
 			String current_key = this.createKey(current);
 			this.waiting_dico.remove(current_key);
-			// System.out.println(current);
-			// System.out.println(this.p_queue.contains(createKey(current)));
 			this.explored_list.put(current_key, current);
 			for (Push p : current.getPushes()) {
 
@@ -95,8 +85,6 @@ public class Solver {
 				String successor_key=this.createKey(new_current.tp(p));
 
 				if (!((successor_key.contains("Infinity")) || (this.explored_list.containsKey(successor_key)) || (this.waiting_dico.containsKey(successor_key)))) {
-					//System.out.println("waiting list : " +this.p_queue);
-					//System.out.println("wait : "+(this.waiting_dico.containsKey(createKey(new_current.push(p)))));
 					State e = new_current.tp(p);
 					e.setPreviousKey(current_key);
 					e.setGenerator(p);
@@ -105,9 +93,7 @@ public class Solver {
 				}
 			}
 			timer+=(System.currentTimeMillis()-start);
-			// System.out.println(this.p_queue);
 		}
-		//System.out.println(timer + " " + this.explored_list.size());
 	}
 
 	public void buildFullPath(State end) {

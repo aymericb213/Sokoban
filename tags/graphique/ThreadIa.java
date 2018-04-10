@@ -7,28 +7,36 @@ import java.util.ArrayList;
 public class ThreadIa implements Runnable {
 
     private Board b;
-    private CanvasGame can;
+    public CanvasGame can;
+		private boolean anytime;
 
-    public ThreadIa(Board b, CanvasGame can) {
+    public ThreadIa(Board b, CanvasGame can, boolean anytime) {
       this.b = b;
       this.can = can;
+			this.anytime=anytime;
     }
 
     @Override
     public void run() {
       State state = new State(this.b);
       Solver solver = new Solver(state);
-      solver.aStarSolve();
+      solver.aStarSolve(anytime);
       if (!solver.getMovelist().isEmpty()) {
-        ArrayList<ArrayList<Integer>> listMove = solver.getMoveRelatif();
-        for (ArrayList<Integer> move : listMove) {
-          this.can.movePlayer(move);
-          try {
-            Thread.sleep(50);
-          } catch (Exception e) {
-            System.out.println("catch");
-          }
-        }
+				if (anytime) {
+        	ArrayList<Integer> move = solver.getMoveRelatif().get(0);
+        	this.can.movePlayer(move);
+				} else {
+					ArrayList<ArrayList<Integer>> listMove = solver.getMoveRelatif();
+					System.out.println(this.can);
+	        for (ArrayList<Integer> move : listMove) {
+	          this.can.movePlayer(move);
+	          try {
+	            Thread.sleep(50);
+	          } catch (Exception e) {
+	            System.out.println("catch");
+	          }
+					}
+				}
       }
     }
 }

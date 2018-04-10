@@ -52,7 +52,7 @@ public class Main {
 			 }
 			 ia.debug.finer("Fin while");*/
 
-			ia.aStarSolve();
+			ia.aStarSolve(false);
 			for (int i=0; i<ia.getMovelist().size(); i++) {
 				present_state.push(ia.getMovelist().get(i));
 			}
