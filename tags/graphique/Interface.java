@@ -23,6 +23,7 @@ public class Interface extends JFrame {
   private MapReader map;
   private CanvasGame can;
   private String playerName;
+  private CanvasGame canIa = null;
   private boolean modeIad;
   private boolean modeSelect;
   private boolean random;
@@ -54,9 +55,18 @@ public class Interface extends JFrame {
         Interface.this.b.setOver(false);
         Interface.this.can.setPlayer("graphique/images/perso.png");
         Interface.this.can.update();
+        if (Interface.this.modeIad) {
+          Board bIa = new Board(nbMapPlay);
+          bIa.createGrid(map.getMap());
+          Interface.this.canIa.setBoard(bIa);
+          Interface.this.canIa.setPlayer("graphique/images/perso.png");
+          Interface.this.canIa.update();
+          Runnable threadIa = new ThreadIa(Interface.this.b,canIa);
+          new Thread(threadIa).start();
+        }
       }
     });
-
+    
     JButton bSolve = new JButton("Solve");
     bSolve.setRequestFocusEnabled(false);
     bSolve.addActionListener(new ActionListener () {
@@ -309,7 +319,7 @@ public class Interface extends JFrame {
     if (this.modeIad) {
       Board bIa = new Board(nbMapPlay);
       bIa.createGrid(map.getMap());
-      CanvasGame canIa = new CanvasGame(bIa,30);
+      this.canIa = new CanvasGame(bIa,30);
       canIa.setFocusable(false);
       gc.gridx = 2;
       add(canIa,gc);

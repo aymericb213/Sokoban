@@ -81,6 +81,12 @@ public class CanvasGame extends JPanel {
     this.update(minW*this.sizeTile, minH*this.sizeTile,
                     this.sizeTile + Math.abs(nextMove.get(1))*this.sizeTile*2,
                     this.sizeTile + Math.abs(nextMove.get(0))*this.sizeTile*2);
+    if (this.b.isFinished()) {
+      this.b.setOver(true);
+      if (this.b.allPlaced()) {
+        this.setPlayer("graphique/images/persoDab.png");
+      }
+    }
   }
 
   /**
