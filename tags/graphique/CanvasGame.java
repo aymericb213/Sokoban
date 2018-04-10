@@ -20,9 +20,11 @@ public class CanvasGame extends JPanel {
   private Image player;
   private Image star;
   private Image backgroundCanvas;
+  private boolean isSolving;
 
   public CanvasGame (Board b, int sizeTile) {
     this.b = b;
+    this.isSolving = false;
     this.crate = Toolkit.getDefaultToolkit().getImage("graphique/images/caisse.png");
     this.wall = Toolkit.getDefaultToolkit().getImage("graphique/images/mur.jpg");
     this.freeTile = Toolkit.getDefaultToolkit().getImage("graphique/images/sol.png");
@@ -49,6 +51,14 @@ public class CanvasGame extends JPanel {
     this.b = newBoard;
     int[] sizeGrid = b.getSize();
     this.setSize(sizeTile*sizeGrid[0],sizeTile*sizeGrid[1]);
+  }
+
+  public void setSolving(boolean solve) {
+    this.isSolving = solve;
+  }
+
+  public boolean getSolving() {
+    return this.isSolving;
   }
 
   /**

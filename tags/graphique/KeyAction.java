@@ -58,7 +58,7 @@ public class KeyAction extends KeyAdapter {
   @Override
   public void keyPressed(KeyEvent e) {
 
-    if (!this.b.getOver()) {
+    if (!this.b.getOver() && !this.can.getSolving()) {
       ArrayList<Integer> nextMove = new ArrayList<>();
       Player player = ((Player)b.getPlayer());
       int x = player.getX();

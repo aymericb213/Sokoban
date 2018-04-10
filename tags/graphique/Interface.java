@@ -62,6 +62,10 @@ public class Interface extends JFrame {
         Interface.this.b.setOver(false);
         Interface.this.can.setPlayer("graphique/images/perso.png");
         Interface.this.can.update();
+
+        Interface.this.t.stop();
+        Interface.this.can.setSolving(false);
+
         if (Interface.this.modeIad) {
           Board bIa = new Board(nbMapPlay);
           bIa.createGrid(map.getMap());
@@ -79,10 +83,15 @@ public class Interface extends JFrame {
     bSolve.addActionListener(new ActionListener () {
       @Override
       public void actionPerformed(ActionEvent e) {
-        String[] arg = new String[1];
-        arg[0] = map.getFile();
-        ia.Main.main(arg);
-        Interface.this.repaint();
+        if (!Interface.this.can.getSolving()) {
+          Interface.this.can.setSolving(true);
+          Runnable threadIa = new ThreadIa(Interface.this.b,Interface.this.can, false);
+          Interface.this.t = new Thread(threadIa);
+          Interface.this.t.start();
+        } else {
+          Interface.this.t.stop();
+          Interface.this.can.setSolving(false);
+        }
       }
     });
 
