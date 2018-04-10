@@ -4,6 +4,9 @@ import ia.*;
 import sokoban.*;
 import java.util.ArrayList;
 
+/**
+	* Processus de résolution du niveau lancé dans le mode IA battle ou en cas de demande de résolution.
+	*/
 public class ThreadIa implements Runnable {
 
     private Board b;

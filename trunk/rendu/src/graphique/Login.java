@@ -27,7 +27,7 @@ public class Login extends JFrame {
     JPanel zoneRegister = new JPanel();
 
     this.vect = new Vector<>();
-    String[] players = new File("../ressources/save/players").list();
+    String[] players = new File("save/players").list();
     for (String s : players){
       vect.add(s.split("\\.")[0]);
     }

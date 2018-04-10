@@ -23,7 +23,7 @@ public class Main {
     FileManagement manageMap = new FileManagement();
     String playerName = "";
     Scanner sc= new Scanner(System.in);
-    String[] players = new File("../ressources/save/players").list();
+    String[] players = new File("save/players").list();
     System.out.println("Select a player: ");
     for (int i = 0; i<players.length; i++) {
       System.out.println((i+1)+" : "+players[i].split("\\.")[0]);
@@ -41,7 +41,7 @@ public class Main {
 		int nbMoves = 0;
     int levelCourant = 0;
     int nbMapsInDossier = 0;
-    File repertoire = new File("../ressources/maps/");
+    File repertoire = new File("maps/");
     File[] f = repertoire.listFiles();
     nbMapsInDossier = f.length;
 		int nextMapNb = 0;
@@ -57,10 +57,10 @@ public class Main {
         r = new Random();
         int n = r.nextInt(nbMaps) + 1;
         b.setLevel(n);
-				map.setFile("../ressources/maps/map" + n + ".xsb");
+				map.setFile("maps/map" + n + ".xsb");
 			} else if (args[0].equals("-l")) {
         b.setLevel(playerLevel.getLevel());
-        map.setFile("../ressources/save/"+playerName+".xsb");
+        map.setFile("save/"+playerName+".xsb");
         b.createGrid(map.getSaveMap());
         map.readingSaveMap();
 
@@ -69,17 +69,17 @@ public class Main {
         if (Integer.parseInt(args[0]) > nbMaps) {
           nextMapNb = nbMaps;
           b.setLevel(nbMaps);
-          map.setFile("../ressources/maps/map" + nbMaps + ".xsb");
+          map.setFile("maps/map" + nbMaps + ".xsb");
         } else {
           nextMapNb = Integer.parseInt(args[0]);
           b.setLevel(Integer.parseInt(args[0]));
-          map.setFile("../ressources/maps/map" + args[0] + ".xsb");
+          map.setFile("maps/map" + args[0] + ".xsb");
         }
 			}
 		} else {
       nextMapNb = nbMaps;
       b.setLevel(nbMaps);
-			map.setFile("../ressources/maps/map"+nbMaps+".xsb");
+			map.setFile("maps/map"+nbMaps+".xsb");
 		}
 
 		end :
@@ -188,14 +188,14 @@ public class Main {
         if (input2.equals("O") || input2.equals("o")) {
           if (args.length > 0 && args[0].equals("-r")) {
     				int temp = r.nextInt(nbMaps)+1;
-						map.setFile("../ressources/maps/map" + temp + ".xsb");
+						map.setFile("maps/map" + temp + ".xsb");
           } else {
             nextMapNb++;
             if (nextMapNb+2 > nbMapsInDossier) {
               System.out.println("Il n'y a plus de map disponible");
 							break end;
             } else {
-              map.setFile("../ressources/maps/map" + nextMapNb + ".xsb");
+              map.setFile("maps/map" + nextMapNb + ".xsb");
             }
           }
         }

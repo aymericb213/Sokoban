@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.io.*;
 
 /**
-  * Classe permettant de sauvegarder un joueur
+  * Classe permettant de sauvegarder un joueur.
   */
 public class PlayerSave {
 
@@ -15,36 +15,39 @@ public class PlayerSave {
 
   /**
     * Constructeur de la classe.
-    * Initialise les chemins des fichiers correspondant au joueur
-    * @param name nom du joueur
-    * @param level dernier niveau que le joueur à débloqué
+    * Initialise les chemins des fichiers correspondant au joueur.
+    * @param name
+		* Nom du joueur.
+    * @param level
+		* Dernier niveau que le joueur a débloqué.
     */
   public PlayerSave (String name, int level) {
-    this.path = "../ressources/save/players/" + name + ".txt";
-    this.pathSave = "../ressources/save/" + name + ".xsb";
-    this.pathCancel = "../ressources/save/cancel_" + name + ".xsb";
+    this.path = "save/players/" + name + ".txt";
+    this.pathSave = "save/" + name + ".xsb";
+    this.pathCancel = "save/cancel_" + name + ".xsb";
     this.level = level;
   }
 
   /**
     * Constructeur de la classe.
     * Initialise les chemins des fichiers correspondant au joueur
-    * @param name nom du joueur
+		* @param name
+		* Nom du joueur.
     */
   public PlayerSave (String name) {
     this(name,1);
   }
 
   /**
-    * Getter du chemin de retour au dernier coup
-    * @return le chemin du fichier de retour
+    * Getter du chemin de retour au dernier coup.
+    * @return le chemin du fichier de retour.
     */
   public String getPathCancel() {
     return this.pathCancel;
   }
 
   /**
-    * Sauvegarde le joueur au fichier this.path
+    * Sauvegarde le joueur au fichier this.path.
     */
   public void savePlayer() {
     try {
@@ -68,8 +71,9 @@ public class PlayerSave {
   }
 
   /**
-    * Supprime le fichier donné si il existe
-    * @param file fichier à supprimer
+    * Supprime le fichier donné si il existe.
+    * @param file
+		* Fichier à supprimer.
     */
   public void deleteFile(File file) {
     if (file.exists()){

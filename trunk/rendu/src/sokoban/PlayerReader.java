@@ -6,7 +6,7 @@ import java.io.*;
 
 /**
 	* Classe permettant la lecture de joueur.txt et le niveau auquel il est arrivé
-	* sous la forme d'un entier
+	* sous la forme d'un entier.
 */
 public class PlayerReader {
 
@@ -14,11 +14,12 @@ public class PlayerReader {
   private int level;
 
   /**
-    * Constructeur de la Classe
-    * @param name nom du joueur
+    * Constructeur de la Classe.
+    * @param name
+		* Nom du joueur.
     */
   public PlayerReader(String name) {
-    this.file = "../ressources/save/players/" + name + ".txt";
+    this.file = "save/players/" + name + ".txt";
     this.level = this.readLevel(this.file);
   }
 
@@ -48,10 +49,11 @@ public class PlayerReader {
   }
 
   /**
-    * Lit le fichier du chemin du parametre file et retourne le
-    * niveau de la premiere ligne
-    * @param file le chemin du fichier
-    * @return le numero du niveau du joueur
+    * Lit le fichier du chemin du paramètre file et retourne le
+    * niveau de la première ligne.
+    * @param file
+		* Le chemin du fichier.
+    * @return Le numéro du niveau du joueur.
     */
   public int readLevel(String file) {
     try {

@@ -99,7 +99,7 @@ public class MapReader {
       BufferedReader map = new BufferedReader (new FileReader (this.file));
       ArrayList<String> mapToString = new ArrayList<>();
       String line = map.readLine();
-      this.file = "../ressources/maps/" + line + ".xsb";
+      this.file = "maps/" + line + ".xsb";
       while ((line = map.readLine()) != null) {
         mapToString.add(line);
       }

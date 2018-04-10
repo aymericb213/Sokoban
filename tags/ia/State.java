@@ -3,6 +3,9 @@ package ia;
 import sokoban.*;
 import java.util.ArrayList;
 
+/**
+	* Modélisation de l'état du jeu.
+	*/
 public class State {
 
 	private Board level;
@@ -11,6 +14,11 @@ public class State {
 	private String previous_key;
 	private double value;//à minimiser
 
+	/**
+		* Constructeur de la classe.
+		* @param level
+		* Le plateau de jeu.
+		*/
 	public State(Board level) {
 		this.level=level;
 		this.lPush=new ArrayList<Push>();
@@ -18,7 +26,9 @@ public class State {
 		this.previous_key=null;
 	}
 
-
+	/**
+		* Remplit l'attribut lPush avec tous les coups viables d'après la position du joueur.
+		*/
 	public void accessiblePushes() {
 		this.lPush.clear();
 		ArrayList<Block> lCrates=this.level.getCrates();
@@ -45,6 +55,10 @@ public class State {
 		}
 	}
 
+	/**
+		* Calcule la valeur de l'état d'après une heuristique faisant la somme des distances de Manhattan entre
+		* chaque caisse et l'objectif le plus proche.
+		*/
 	public void computeValue() {
 		this.value=0;
 		if (this.level.isFinished() && !(this.level.allPlaced())) {
@@ -64,6 +78,9 @@ public class State {
 		}
 	}
 
+	/**
+		* Calcule la valeur de l'état d'après une heuristique comptant le nombre de caisses qui ne se trouvent pas sur un objectif.
+		*/
 	public void hamming() {
 		this.value=0;
 		if (this.level.isFinished() && !(this.level.allPlaced())) {
@@ -77,6 +94,14 @@ public class State {
 		}
 	}
 
+	/**
+		* Effectue une transition d'état avec une poussée de caisse.
+		* Le joueur se déplace jusqu'à la caisse selon le plus court chemin.
+		* Utilisé pour l'affichage.
+		* @param move
+		* Le coup de transition.
+		* @return L'état post transition.
+		*/
 	public State push(Push move) {
 		Player p = (Player)this.level.getPlayer();
 		Node start = new Node(p.getX(), p.getY());
@@ -97,6 +122,14 @@ public class State {
 		return succ_state;
 	}
 
+	/**
+		* Effectue une transition d'état avec une poussée de caisse.
+		* Le joueur se téléporte jusqu'à la caisse selon le plus court chemin.
+		* Utilisé par le solveur.
+		* @param move
+		* Le coup de transition.
+		* @return L'état post transition.
+		*/
 	public State tp(Push move) {
 		Player p = (Player)this.level.getPlayer();
 		ArrayList<Integer> path = new ArrayList<Integer>();
@@ -108,10 +141,17 @@ public class State {
 		return succ_state;
 	}
 
+	/**
+		* Teste si un état est final ou non.
+		* @return Le résultat du test.
+		*/
 	public boolean isFinished(){
 		return this.level.isFinished();
 	}
 
+	/** Teste si un état est solution.
+		* @return Le résultat du test.
+		*/
 	public boolean allPlaced(){
 		return this.level.allPlaced();
 	}
@@ -125,47 +165,84 @@ public class State {
 		this.level=newBoard;
 	}
 
+	/**
+		* Accesseur du coup ayant généré l'état.
+		* @return L'attribut generator.
+		*/
 	public Push getGenerator() {
 		return this.generator;
 	}
 
+	/**
+		* Mutateur du coup ayant généré l'état.
+		* @param p
+		* Le nouveau coup.
+	*/
 	public void setGenerator(Push p){
 		this.generator = p;
 	}
 
+	/**
+		* Accesseur du niveau.
+		* @return L'attribut level.
+	*/
 	public Board getLevel() {
 		return this.level;
 	}
 
+	/**
+		* Accesseur de la liste de coups remplie.
+		* @return L'attribut lPush.
+		*/
 	public ArrayList<Push> getPushes() {
 		this.accessiblePushes();
 		return this.lPush;
 	}
 
+	/**
+		* Calcule et retourne la valeur de l'état d'après l'heuristique Manhattan.
+		* @return L'attribut value.
+		*/
 	public double getValue() {
 		this.computeValue();
 		return this.value;
 	}
 
+	/**
+		* Calcule et retourne la valeur de l'état d'après l'heuristique Hamming.
+		* @return L'attribut value.
+		*/
 	public double getHammingDist() {
 		this.hamming();
 		return this.value;
 	}
 
+	/**
+		* Accesseur de la clé d'accès à l'état prédécesseur.
+		* @return L'attribut previous_key.
+		*/
 	public String getPreviousKey(){
 		return this.previous_key;
 	}
 
+	/**
+		* Mutateur de la clé d'accès à l'état prédécesseur.
+		* @param key La nouvelle clé.
+		*/
 	public void setPreviousKey(String key){
 		this.previous_key=key;
 	}
 
- public String toString() {
-	 Player p = (Player)this.level.getPlayer();
-	 String chCrates="";
-	 for (Block c : this.level.getCrates()) {
-		 chCrates+="(" + ((Crate) c).getX()+","+((Crate)c).getY() + ") ; ";
-	 }
-	 return "Position du joueur : (" + p.getX() + "," + p.getY() + ")\nPosition des caisses : " + chCrates + "\nListe des coups : " + this.getPushes() + "\nEtat final : " + this.isFinished() + "\nValeur : " + this.value;
+	/**
+		* Description de l'état.
+		* @return Les informations sur l'état.
+		*/
+	public String toString() {
+		Player p = (Player)this.level.getPlayer();
+		String chCrates="";
+		for (Block c : this.level.getCrates()) {
+			chCrates+="(" + ((Crate) c).getX()+","+((Crate)c).getY() + ") ; ";
+		}
+		return "Position du joueur : (" + p.getX() + "," + p.getY() + ")\nPosition des caisses : " + chCrates + "\nListe des coups : " + this.getPushes() + "\nEtat final : " + this.isFinished() + "\nValeur : " + this.value;
  }
 }

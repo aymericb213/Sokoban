@@ -2,8 +2,14 @@ package ia;
 
 import java.util.ArrayList;
 
+/**
+	* Modélisation de la poussée d'une caisse.
+	*/
 public class Push {
 
+/**
+	* Enum représentant les quatre directions de poussée possibles.
+ 	*/
 	public enum Direction {
 		UP (-1,0),
 		LEFT (0,-1),
@@ -13,11 +19,18 @@ public class Push {
 		private final int x;
 		private final int y;
 
+		/**
+			* Constructeur de l'enum.
+			*/
 		Direction(int x, int y) {
 			this.x=x;
 			this.y=y;
 		}
 
+		/**
+			* Accesseur des attributs de l'enum.
+			* @return Les coordonnées de l'instance de l'enum.
+			*/
 		public ArrayList<Integer> getCoords() {
 			ArrayList<Integer> l = new ArrayList<Integer>();
 			l.add(this.x);
@@ -30,12 +43,20 @@ public class Push {
 	private int y;
 	private Direction dir;
 
+	/**
+		* Constructeur sans argument de la classe.
+		*/
 	public Push() {
 		this.x=-1;
 		this.y=-1;
 		this.dir=dir.UP;
 	}
 
+	/**
+		* Constructeur avec arguments de la classe.
+		* @param x Ordonnée de la position du joueur lors de la poussée.
+		* @param y Abscisse de la position du joueur lors de la poussée.
+		*/
 	public Push(int x, int y) {
 		this.x=x;
 		this.y=y;
@@ -84,7 +105,7 @@ public class Push {
 
 /**
 	* Retourne la description du coup.
-	* @return Une chaîne de caractères comportant les informations sur le coup..
+	* @return Une chaîne de caractères comportant les informations sur le coup.
 	*/
 	public String toString(){
 		return "("+this.x+","+this.y+","+this.dir+")";

@@ -4,8 +4,14 @@ import sokoban.*;
 import java.io.File;
 import java.io.FilenameFilter;
 
+/**
+	* Classe principale alternative permettant de tester la résolution d'une série de niveaux.
+	*/
 public class SolvingTest {
 
+	/**
+		* Tente de résoudre tous les niveaux d'un dossier.
+		*/
 	public static void main(String[] args) {
 		String dirname="maps/junior";
 		File directory = new File(dirname);

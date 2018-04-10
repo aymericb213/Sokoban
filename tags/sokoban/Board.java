@@ -16,7 +16,7 @@ public class Board {
   private int level = 1;
 
 	/**
-		* Constructeur de la classe.
+		* Constructeur sans argument de la classe.
 		* Initialise les listes de caisses et d'objectifs.
 	*/
   public Board() {
@@ -25,10 +25,14 @@ public class Board {
     this.over = false;
   }
 
+	/**
+		* Constructeur de la classe.
+		* Initialise les listes de caisses et d'objectifs.
+		* @param level
+		* Le numéro du niveau.
+	*/
   public Board(int level) {
-		this.listCrate = new ArrayList<>();
-		this.listObjective = new ArrayList<>();
-    this.over = false;
+		this();
     this.level = level;
   }
 
@@ -88,9 +92,9 @@ public class Board {
   }
 
   /**
-  * Retourne les dimensions de grid.
-  * Méthode sans argument pour faciliter l'utilisation dans le package ia.
-  * @return Un tableau contenant la largeur et la hauteur de grid.
+  	* Retourne les dimensions de grid.
+  	* Méthode sans argument pour faciliter l'utilisation dans le package ia.
+  	* @return Un tableau contenant la largeur et la hauteur de grid.
   */
   public int[] getSize() {
     int[] tab= new int[2];
@@ -100,24 +104,24 @@ public class Board {
   }
 
   /**
-    * Geter de la variable qui indique que la partie est finie.
-    * @return la variable over.
+    * Getter de la variable qui indique que la partie est finie.
+    * @return La variable over.
     */
   public boolean getOver() {
     return this.over;
   }
 
   /**
-    * Geter de la variable du nom du joueur.
-    * @return la variable playerName.
+    * Getter de la variable du nom du joueur.
+    * @return La variable playerName.
     */
   public String getPlayerName() {
     return this.playerName;
   }
 
   /**
-    * Geter de la variable du niveau jouer.
-    * @return la variable level.
+    * Getter de la variable du niveau joué.
+    * @return La variable level.
     */
   public int getLevel() {
     return this.level;
@@ -165,7 +169,7 @@ public class Board {
   }
 
 	/**
-		* Teste si une caisse est bloquée, c'est-à-dire qu'elle ne peut pas être déplacée directement..
+		* Teste si une caisse est bloquée, c'est-à-dire qu'elle ne peut pas être déplacée directement.
 		* @param c
 		* La caisse en [j,i].
 		* @param i
@@ -212,7 +216,7 @@ public class Board {
   }
 
 	/**
-    * Teste si la caisse en [j,i] forme un cube avec son alentour
+    * Teste si la caisse en [j,i] forme un cube avec ses alentours.
     * @param i
 		* La coordonnée en Y de la caisse.
     * @param j
@@ -286,9 +290,10 @@ public boolean hasDeadWall (ArrayList<Integer> coord) {
 
 
   /**
-    * Test si la caisse forme un deadlock
-    * @param c la caisse a tester
-    * @return le résultat du test
+    * Test si la caisse forme un deadlock.
+    * @param c
+		* La caisse a tester.
+    * @return Le résultat du test.
     */
 	public boolean testCrate(Block c) {
 		boolean test = true;
@@ -379,8 +384,8 @@ public boolean hasDeadWall (ArrayList<Integer> coord) {
   }
 
   /**
-    * Créer une ArrayList de string à partir de la grille
-    * @return liste créer
+    * Crée une ArrayList de String à partir de la grille.
+    * @return liste créée.
     */
   public ArrayList<String> createArrayList () {
     ArrayList<String> res = new ArrayList<> ();

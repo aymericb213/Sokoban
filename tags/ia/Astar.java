@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import sokoban.*;
 
 /**
-	* Classe implémentant l'algorithme A*.
+	* Classe implémentant l'algorithme A* pour le déplacement automatique du joueur.
 */
 public class Astar {
 
@@ -33,7 +33,6 @@ public class Astar {
 */
 	public void pathSearch() {
 		PathCost evals= new PathCost();
-		boolean pathFound=false;
 		this.waitingList.add(this.start);
 		evals.setExplMap(evals.initMap(this.level.getSize()));
 		evals.setFullMap(evals.initMap(this.level.getSize()));
@@ -42,8 +41,6 @@ public class Astar {
 			Node current= minimumCost(evals.getFullMap());
 			if (current.equals(this.goal)) {
 				this.goal=current;
-				//System.out.println("Chemin vers " + this.goal + " trouvé");
-				pathFound=true;
 				buildFullPath();
 				break;
 			}
@@ -65,9 +62,6 @@ public class Astar {
 					evals.putFullValue(n, evals.getExplMap().get(n)+evals.manhattan(n,this.goal));
 				}
 			}
-		}
-		if(!(pathFound)) {
-		//System.out.println("Aucun chemin possible vers " + this.goal);
 		}
 	}
 
@@ -140,13 +134,17 @@ public class Astar {
 	}
 
 /**
-	* Accesseur du niveau sur lequel on applique A*..
+	* Accesseur du niveau sur lequel on applique A*.
 	* @return L'attribut level.
 */
 	public Board getLevel() {
 		return this.level;
 	}
 
+	/**
+		* Accesseur du chemin trouvé par A*.
+		* @return L'attribut path.
+	*/
 	public ArrayList<Node> getPath() {
 		return this.path;
 	}
@@ -178,6 +176,10 @@ public class Astar {
 		this.level=newBoard;
 	}
 
+	/**
+		* Représentation de l'itinéraire trouvé par A*.
+		* @return La séquence de directions entre le départ et l'arrivée de l'instance.
+		*/
 	public String toString() {
 		String res="";
 		for (int i=0; i+1<this.path.size(); i++) {

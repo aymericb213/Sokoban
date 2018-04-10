@@ -8,6 +8,9 @@ import java.util.Random;
 import java.util.PriorityQueue;
 import java.util.Comparator;
 
+/**
+	* Classe contenant les solveurs de niveau de Sokoban.
+	*/
 public class Solver {
 
 	private Board initial_board;
@@ -22,8 +25,11 @@ public class Solver {
 	public static final Logger debug = Logger.getLogger("debug IA");
 	private ArrayList<ArrayList<Integer>> move_relatif;
 
+	/**
+		* Constructeur sans argument de la classe.
+		*/
 	public Solver() {
-		debug.setLevel(Level.ALL);
+		debug.setLevel(Level.OFF);
 
 		this.previous_state=null;
 		this.current_state=null;
@@ -50,6 +56,10 @@ public class Solver {
 		this.move_relatif= new ArrayList<ArrayList<Integer>>();
 	}
 
+	/**
+		* Constructeur avec arguments de la classe.
+		* @param state Etat à partir duquel le niveau doit être résolu.
+		*/
 	public Solver(State state) {
 		this();
 		this.current_state=state;
@@ -59,6 +69,11 @@ public class Solver {
 		this.initial_board=b;
 	}
 
+	/**
+		* Solveur utlisant un parcours d'état avec l'algorithme A*.
+		* @param anytime
+		* Détermine si l'algorithme s'exécute de façon anytime ou non.
+		*/
 	public void aStarSolve(boolean anytime) {
 		long timer = 0;
 		this.waiting_dico.clear();
@@ -96,6 +111,11 @@ public class Solver {
 		}
 	}
 
+	/**
+		* Construit la liste de coups permettant de résoudre le niveau.
+		* @param end
+		* L'état solution obtenu.
+		*/
 	public void buildFullPath(State end) {
 		this.movelist= new ArrayList<Push>();
 		movelist.add(end.getGenerator());
@@ -111,6 +131,11 @@ public class Solver {
 		movelist.remove(0);
 	}
 
+	/**
+		* Crée une clé liée à un état pour le stockage dans une HashMap.
+		* @param s L'état dont on veut obtenir la clé.
+		* @return La chaîne de caractère décrivant l'état et utilisable comme clé.
+		*/
 	public String createKey(State s){
 		String key = "";
 		ArrayList<Block> list_crate=s.getLevel().getCrates();
@@ -121,6 +146,15 @@ public class Solver {
 		return key;
 	}
 
+	/**
+		* Solveur inspiré de l'algorithme minmax.
+		* Théoriquement fonctionnel mais très peu performant.
+		* @param s
+		* Etat de départ du solveur.
+		* @param depth
+		* Profondeur de recherche du solveur.
+		* @return La valeur du meilleur état trouvé. Nécessaire au fonctionnement de la récursion.
+		*/
 	public double minmin(State s, int depth){
 
 			debug.entering("Solver","minmin", new Object[]{s,depth});
@@ -157,6 +191,10 @@ public class Solver {
 			return m;
 	}
 
+	/**
+		* Décompose l'itinéraire de résolution en une série de vecteurs utilisable pour le déplacement automatique.
+		* @return Une liste de couples de coordoonées de vecteurs.
+		*/
 	public ArrayList<ArrayList<Integer>> getMoveRelatif(){
 		this.move_relatif.clear();
 		ArrayList<Integer> tempList= new ArrayList<Integer>();
@@ -181,31 +219,58 @@ public class Solver {
 		return this.move_relatif;
 	}
 
+	/**
+		* Accesseur de de l'état précédent
+		* @return La valeur de previous_state.
+		*/
 	public State getPreviousState() {
 		return this.previous_state;
 	}
 
+	/**
+		* Mutateur de l'état précédent.
+		* @param state La valeur du nouvel état.
+		*/
 	public void setPreviousState(State state) {
 		this.previous_state=state;
 	}
 
-
+	/**
+		* Accesseur de l'état précédent.
+		* @return La valeur de l'attribut current_state.
+		*/
 	public State getCurrentState() {
 		return this.current_state;
 	}
 
+	/**
+		* Mutateur de l'état courant.
+		* @param state La valeur du nouvel état.
+		*/
 	public void setCurrentState(State state) {
 		this.current_state=state;
 	}
 
+	/**
+		* Accesseur du meilleur coup trouvé par minmin.
+		* @return La valeur de l'attribut best_push.
+		*/
 	public Push getBestPush(){
 		return this.best_push;
 	}
 
+	/**
+		* Accesseur de la liste de coups solution.
+		* @return La valeur de l'attribut movelist.
+		*/
 	public ArrayList<Push> getMovelist() {
 		return this.movelist;
 	}
 
+	/**
+		* Représentation de l'itinéraire de résolution.
+		* @return La séquence de directions à suivre pour terminer le niveau.
+		*/
 	public String toString() {
 		String res="";
 		State cb = new State(this.initial_board);

@@ -25,11 +25,11 @@ public class CanvasGame extends JPanel {
   public CanvasGame (Board b, int sizeTile) {
     this.b = b;
     this.isSolving = false;
-    this.crate = Toolkit.getDefaultToolkit().getImage("../ressources/images/caisse.png");
-    this.wall = Toolkit.getDefaultToolkit().getImage("../ressources/images/mur.jpg");
-    this.freeTile = Toolkit.getDefaultToolkit().getImage("../ressources/images/sol.png");
-    this.player = Toolkit.getDefaultToolkit().getImage("../ressources/images/perso.png");
-    this.star = Toolkit.getDefaultToolkit().getImage("../ressources/images/star.png");
+    this.crate = Toolkit.getDefaultToolkit().getImage("graphique/images/caisse.png");
+    this.wall = Toolkit.getDefaultToolkit().getImage("graphique/images/mur.jpg");
+    this.freeTile = Toolkit.getDefaultToolkit().getImage("graphique/images/sol.png");
+    this.player = Toolkit.getDefaultToolkit().getImage("graphique/images/perso.png");
+    this.star = Toolkit.getDefaultToolkit().getImage("graphique/images/star.png");
     this.sizeTile = sizeTile;
     int[] sizeGrid = b.getSize();
     setPreferredSize(new Dimension(sizeTile*sizeGrid[0],sizeTile*sizeGrid[1]));
@@ -94,7 +94,7 @@ public class CanvasGame extends JPanel {
     if (this.b.isFinished()) {
       this.b.setOver(true);
       if (this.b.allPlaced()) {
-        this.setPlayer("../ressources/images/persoDab.png");
+        this.setPlayer("graphique/images/persoDab.png");
       }
     }
   }
