@@ -27,10 +27,11 @@ public class Interface extends JFrame {
   private boolean modeIad;
   private boolean modeSelect;
   private boolean random;
+  private boolean anyTime;
   private static int nbMapPlay = 1;
 	private Thread t;
 
-  public Interface(Board b, MapReader map, String playerName, boolean modeIad, boolean modeSelect, boolean random) {
+  public Interface(Board b, MapReader map, String playerName, boolean modeIad, boolean modeSelect, boolean random, boolean anyTime) {
     this.b = b;
     nbMapPlay = b.getLevel();
     this.map = map;
@@ -38,13 +39,14 @@ public class Interface extends JFrame {
     this.modeIad = modeIad;
     this.modeSelect = modeSelect;
     this.random = random;
+    this.anyTime = anyTime;
     this.setResizable(false);
     this.setTitle("Sokoban");
 
 		Board bIa = new Board(nbMapPlay);
 		bIa.createGrid(map.getMap());
 		this.canIa = new CanvasGame(bIa,30);
-		Runnable threadIa = new ThreadIa(this.b,this.canIa,false);
+		Runnable threadIa = new ThreadIa(this.b,this.canIa,this.anyTime);
 		this.t= new Thread(threadIa);
 
     JPanel zoneControl = new JPanel();
@@ -201,6 +203,7 @@ public class Interface extends JFrame {
         public void actionPerformed(ActionEvent e){
           Interface.nbMapPlay = 1;
           Interface.this.dispose();
+          Interface.this.t.stop();
           new Menu(Interface.this.playerName);
         }
     });
@@ -338,25 +341,27 @@ public class Interface extends JFrame {
 			gc.gridx = 2;
 			add(canIa,gc);
 				this.t.start();
-				addKeyListener(new KeyListener() {
-					@Override
-					public void keyPressed(KeyEvent e) {
-						if ((e.getKeyCode() == KeyEvent.VK_LEFT) || (e.getKeyCode() == KeyEvent.VK_Q) || (e.getKeyCode() == KeyEvent.VK_RIGHT) || (e.getKeyCode() == KeyEvent.VK_D) || (e.getKeyCode() == KeyEvent.VK_UP) || (e.getKeyCode() == KeyEvent.VK_Z) || (e.getKeyCode() == KeyEvent.VK_DOWN) || (e.getKeyCode() == KeyEvent.VK_S)) {
-							Interface.this.t.interrupt();
-						}
-					}
-					 @Override
-					 public void keyTyped(KeyEvent e) {
+        if (this.anyTime) {
+          addKeyListener(new KeyListener() {
+            @Override
+            public void keyPressed(KeyEvent e) {
+              if ((e.getKeyCode() == KeyEvent.VK_LEFT) || (e.getKeyCode() == KeyEvent.VK_Q) || (e.getKeyCode() == KeyEvent.VK_RIGHT) || (e.getKeyCode() == KeyEvent.VK_D) || (e.getKeyCode() == KeyEvent.VK_UP) || (e.getKeyCode() == KeyEvent.VK_Z) || (e.getKeyCode() == KeyEvent.VK_DOWN) || (e.getKeyCode() == KeyEvent.VK_S)) {
+                Interface.this.t.interrupt();
+              }
+            }
+            @Override
+            public void keyTyped(KeyEvent e) {
 
-					 }
-					 @Override
-					 public void keyReleased(KeyEvent e) {
-						if ((e.getKeyCode() == KeyEvent.VK_LEFT) || (e.getKeyCode() == KeyEvent.VK_Q) || (e.getKeyCode() == KeyEvent.VK_RIGHT) || (e.getKeyCode() == KeyEvent.VK_D) || (e.getKeyCode() == KeyEvent.VK_UP) || (e.getKeyCode() == KeyEvent.VK_Z) || (e.getKeyCode() == KeyEvent.VK_DOWN) || (e.getKeyCode() == KeyEvent.VK_S)) {
-							Interface.this.t=new Thread(threadIa);
-							Interface.this.t.start();
-						}
-					 }
-				});
+            }
+            @Override
+            public void keyReleased(KeyEvent e) {
+              if ((e.getKeyCode() == KeyEvent.VK_LEFT) || (e.getKeyCode() == KeyEvent.VK_Q) || (e.getKeyCode() == KeyEvent.VK_RIGHT) || (e.getKeyCode() == KeyEvent.VK_D) || (e.getKeyCode() == KeyEvent.VK_UP) || (e.getKeyCode() == KeyEvent.VK_Z) || (e.getKeyCode() == KeyEvent.VK_DOWN) || (e.getKeyCode() == KeyEvent.VK_S)) {
+                Interface.this.t=new Thread(threadIa);
+                Interface.this.t.start();
+              }
+            }
+          });
+        }
     }
 
     pack();
@@ -365,6 +370,10 @@ public class Interface extends JFrame {
     this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     this.setVisible(true);
 
+  }
+
+  public Interface(Board b, MapReader map, String playerName, boolean modeIad, boolean modeSelect, boolean random) {
+    this(b,map,playerName,modeIad,modeSelect,random,false);
   }
 
 }

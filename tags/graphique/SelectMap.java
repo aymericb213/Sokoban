@@ -19,6 +19,7 @@ public class SelectMap extends JFrame {
   private String playerName;
   private JPanel zoneCanvas;
   private CanvasGame can;
+  private JToggleButton toggleButton;
   private int sizeTile;
   private boolean modeIad;
 
@@ -46,8 +47,28 @@ public class SelectMap extends JFrame {
           map.readingMap();
           b.createGrid(map.getMap());
           SelectMap.this.dispose();
-          new Interface(b,map,SelectMap.this.playerName,SelectMap.this.modeIad,true,false);
+          new Interface(b,map,SelectMap.this.playerName,SelectMap.this.modeIad,true,false,SelectMap.this.toggleButton.isSelected());
         }
+      }
+    });
+
+    JPanel zoneAnyTime = new JPanel();
+
+    JLabel labAnyTime = new JLabel("Any Time : ");
+
+    this.toggleButton = new JToggleButton("No", false);
+    this.toggleButton.setRequestFocusEnabled(false);
+    toggleButton.addActionListener(new ActionListener() {
+      @Override
+      public void actionPerformed(ActionEvent e) {
+        if (!SelectMap.this.toggleButton.isSelected()) {
+          SelectMap.this.toggleButton.setText("No");
+          SelectMap.this.toggleButton.setSelected(false);
+        } else {
+          SelectMap.this.toggleButton.setText("Yes");
+          SelectMap.this.toggleButton.setSelected(true);
+        }
+        SelectMap.this.toggleButton.repaint();
       }
     });
 
@@ -61,8 +82,15 @@ public class SelectMap extends JFrame {
     });
 
     zoneButton.add(bPlay);
+
+    if (this.modeIad) {
+      zoneAnyTime.add(labAnyTime);
+      zoneAnyTime.add(this.toggleButton);
+      zoneAnyTime.setLayout(new GridLayout(1,2));
+      zoneButton.add(zoneAnyTime);
+    }
     zoneButton.add(bBack);
-    zoneButton.setLayout(new GridLayout(2,1,10,10));
+    zoneButton.setLayout(new GridLayout(3,1,10,10));
 
     int nbMapsTotal = new File("maps").list(new FilenameFilter() {
 																						@Override
