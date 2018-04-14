@@ -4,6 +4,7 @@
 \usecolortheme[rgb={0.2,0.4,1}]{structure}
 \definecolor{grayColor}{rgb}{0.255,0.25,0.275}
 \setbeamercolor{section in head/foot}{bg=grayColor,fg=white}
+\setbeamerfont{subsection in head/foot}{size=\small}
 
 \usepackage[T1]{fontenc}
 \usepackage[utf8]{inputenc}
@@ -22,14 +23,40 @@
 \section{Objectifs du projet}
 \subsection{Description}
 \begin{frame} % premier transparent
-\frametitle{test}
+\begin{columns}
+\hspace{0.5cm}
+\begin{column}{5cm}
 \includegraphics[scale=0.3]{images/sokoban.png}
+\end{column}
+\begin{column}{6cm}
+\begin{itemize}
+\item puzzle
+\item réflexion
+\item déplacement de caisses sur les objectifs
+\end{itemize}
+\end{column}
+\end{columns}
 \end{frame}
 
 \section{Eléments techniques}
+\subsection{Deadlocks}
 
 \begin{frame}
 
+\begin{block}{Définition}
+Une caisse en deadlock, est une caisse qu'on ne peut plus déplacer directement ou indirectement. Le jeu est donc bloqué.
+\end{block}
+\vspace{0.5cm}
+\begin{center}
+\begin{columns}
+\begin{column}{4cm}
+\includegraphics[scale=0.7]{images/deadlock1.PNG}
+\end{column}
+\begin{column}{4cm}
+\includegraphics[scale=0.7]{images/deadlock2.PNG}
+\end{column}
+\end{columns}
+\end{center}
 \end{frame}
 
 \begin{frame}
