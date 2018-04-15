@@ -6,6 +6,7 @@
 \setbeamercolor{section in head/foot}{bg=grayColor,fg=white}
 \setbeamerfont{subsection in head/foot}{size=\small}
 
+\usepackage{multimedia}
 \usepackage[T1]{fontenc}
 \usepackage[utf8]{inputenc}
 \setbeamertemplate{footline}[frame number]{}
@@ -20,8 +21,19 @@
 
 \frame{\tableofcontents}
 
-\section{Objectifs du projet}
-\subsection{Description}
+\section{Notre projet}
+
+\subsection{Objectifs}
+\begin{frame}
+\begin{itemize}
+\item Programmer le jeu Sokoban
+\item Ajout d'une interface graphique
+\item Résolution automatique de niveau
+\item Jouer contre l'ordinateur en temps réel
+\end{itemize}
+\end{frame}
+
+\subsection{Présentation du sokoban}
 \begin{frame} % premier transparent
 \begin{columns}
 \hspace{0.5cm}
@@ -30,9 +42,9 @@
 \end{column}
 \begin{column}{6cm}
 \begin{itemize}
-\item puzzle
-\item réflexion
-\item déplacement de caisses sur les objectifs
+\item Jeu de réflexion (puzzle)
+\item Poussée de caisses
+\item Objectif : ranger toutes les caisses 
 \end{itemize}
 \end{column}
 \end{columns}
@@ -59,8 +71,10 @@ Une caisse en deadlock, est une caisse qu'on ne peut plus déplacer directement 
 \end{center}
 \end{frame}
 
+\subsection{Solveur}
 \begin{frame}
-
+\frametitle{Démonstration}
+\movie[autostart]{\includegraphics[scale=0.25]{images/im_solver.png}}{images/solveur.flv}
 \end{frame}
 
 \section{Architecture du projet}

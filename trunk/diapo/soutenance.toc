@@ -1,8 +1,10 @@
 \beamer@endinputifotherversion {3.36pt}
-\beamer@sectionintoc {1}{Objectifs du projet}{3}{0}{1}
-\beamer@subsectionintoc {1}{1}{Description}{3}{0}{1}
-\beamer@sectionintoc {2}{El\IeC {\'e}ments techniques}{4}{0}{2}
-\beamer@subsectionintoc {2}{1}{Deadlocks}{4}{0}{2}
-\beamer@sectionintoc {3}{Architecture du projet}{6}{0}{3}
-\beamer@sectionintoc {4}{Exp\IeC {\'e}rimentations et usages}{7}{0}{4}
-\beamer@sectionintoc {5}{Conclusion}{8}{0}{5}
+\beamer@sectionintoc {1}{Notre projet}{3}{0}{1}
+\beamer@subsectionintoc {1}{1}{Objectifs}{3}{0}{1}
+\beamer@subsectionintoc {1}{2}{Pr\IeC {\'e}sentation du sokoban}{4}{0}{1}
+\beamer@sectionintoc {2}{El\IeC {\'e}ments techniques}{5}{0}{2}
+\beamer@subsectionintoc {2}{1}{Deadlocks}{5}{0}{2}
+\beamer@subsectionintoc {2}{2}{Solveur}{6}{0}{2}
+\beamer@sectionintoc {3}{Architecture du projet}{7}{0}{3}
+\beamer@sectionintoc {4}{Exp\IeC {\'e}rimentations et usages}{8}{0}{4}
+\beamer@sectionintoc {5}{Conclusion}{9}{0}{5}
