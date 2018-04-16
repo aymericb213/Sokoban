@@ -1,4 +1,4 @@
-\beamer@endinputifotherversion {3.36pt}
+\beamer@endinputifotherversion {3.24pt}
 \headcommand {\slideentry {0}{0}{1}{1/1}{}{0}}
 \headcommand {\beamer@framepages {1}{1}}
 \headcommand {\slideentry {0}{0}{2}{2/2}{}{0}}
@@ -12,32 +12,39 @@
 \headcommand {\beamer@subsectionentry {0}{1}{2}{4}{Pr\IeC {\'e}sentation du sokoban}}\headcommand {\beamer@subsectionpages {3}{3}}
 \headcommand {\slideentry {1}{2}{1}{4/4}{Pr\IeC {\'e}sentation du sokoban}{0}}
 \headcommand {\beamer@framepages {4}{4}}
-\headcommand {\sectionentry {2}{El\IeC {\'e}ments techniques}{5}{El\IeC {\'e}ments techniques}{0}}
-\headcommand {\beamer@sectionpages {3}{4}}
-\headcommand {\beamer@subsectionpages {4}{4}}
-\headcommand {\beamer@subsectionentry {0}{2}{1}{5}{Deadlocks}}\headcommand {\beamer@subsectionpages {5}{4}}
-\headcommand {\slideentry {2}{1}{1}{5/5}{Deadlocks}{0}}
+\headcommand {\beamer@subsectionentry {0}{1}{3}{5}{Organisation du projet}}\headcommand {\beamer@subsectionpages {4}{4}}
+\headcommand {\slideentry {1}{3}{1}{5/5}{Organisation du projet}{0}}
 \headcommand {\beamer@framepages {5}{5}}
-\headcommand {\beamer@subsectionentry {0}{2}{2}{6}{Solveur}}\headcommand {\beamer@subsectionpages {5}{5}}
-\headcommand {\slideentry {2}{2}{1}{6/6}{Solveur}{0}}
+\headcommand {\sectionentry {2}{Architecture du projet}{6}{Architecture du projet}{0}}
+\headcommand {\beamer@sectionpages {3}{5}}
+\headcommand {\beamer@subsectionpages {5}{5}}
+\headcommand {\slideentry {2}{0}{1}{6/6}{}{0}}
 \headcommand {\beamer@framepages {6}{6}}
-\headcommand {\sectionentry {3}{Architecture du projet}{7}{Architecture du projet}{0}}
-\headcommand {\beamer@sectionpages {5}{6}}
+\headcommand {\sectionentry {3}{El\IeC {\'e}ments techniques}{7}{El\IeC {\'e}ments techniques}{0}}
+\headcommand {\beamer@sectionpages {6}{6}}
 \headcommand {\beamer@subsectionpages {6}{6}}
-\headcommand {\slideentry {3}{0}{1}{7/7}{}{0}}
+\headcommand {\beamer@subsectionentry {0}{3}{1}{7}{Deadlocks}}\headcommand {\beamer@subsectionpages {7}{6}}
+\headcommand {\slideentry {3}{1}{1}{7/7}{Deadlocks}{0}}
 \headcommand {\beamer@framepages {7}{7}}
-\headcommand {\sectionentry {4}{Exp\IeC {\'e}rimentations et usages}{8}{Exp\IeC {\'e}rimentations et usages}{0}}
-\headcommand {\beamer@sectionpages {7}{7}}
-\headcommand {\beamer@subsectionpages {7}{7}}
-\headcommand {\slideentry {4}{0}{1}{8/8}{}{0}}
+\headcommand {\beamer@subsectionentry {0}{3}{2}{8}{Solveur}}\headcommand {\beamer@subsectionpages {7}{7}}
+\headcommand {\slideentry {3}{2}{1}{8/8}{Solveur}{0}}
 \headcommand {\beamer@framepages {8}{8}}
-\headcommand {\sectionentry {5}{Conclusion}{9}{Conclusion}{0}}
-\headcommand {\beamer@sectionpages {8}{8}}
+\headcommand {\sectionentry {4}{Exp\IeC {\'e}rimentations et usages}{9}{Exp\IeC {\'e}rimentations et usages}{0}}
+\headcommand {\beamer@sectionpages {7}{8}}
 \headcommand {\beamer@subsectionpages {8}{8}}
-\headcommand {\slideentry {5}{0}{1}{9/9}{}{0}}
+\headcommand {\slideentry {4}{0}{1}{9/9}{}{0}}
 \headcommand {\beamer@framepages {9}{9}}
-\headcommand {\beamer@partpages {1}{9}}
-\headcommand {\beamer@subsectionpages {9}{9}}
+\headcommand {\sectionentry {5}{Conclusion}{10}{Conclusion}{0}}
 \headcommand {\beamer@sectionpages {9}{9}}
-\headcommand {\beamer@documentpages {9}}
-\headcommand {\def \inserttotalframenumber {9}}
+\headcommand {\beamer@subsectionpages {9}{9}}
+\headcommand {\beamer@subsectionentry {0}{5}{1}{10}{R\IeC {\'e}alisation des objectifs}}\headcommand {\beamer@subsectionpages {10}{9}}
+\headcommand {\slideentry {5}{1}{1}{10/10}{R\IeC {\'e}alisation des objectifs}{0}}
+\headcommand {\beamer@framepages {10}{10}}
+\headcommand {\beamer@subsectionentry {0}{5}{2}{11}{Am\IeC {\'e}liorations possibles}}\headcommand {\beamer@subsectionpages {10}{10}}
+\headcommand {\slideentry {5}{2}{1}{11/11}{Am\IeC {\'e}liorations possibles}{0}}
+\headcommand {\beamer@framepages {11}{11}}
+\headcommand {\beamer@partpages {1}{11}}
+\headcommand {\beamer@subsectionpages {11}{11}}
+\headcommand {\beamer@sectionpages {10}{11}}
+\headcommand {\beamer@documentpages {11}}
+\headcommand {\def \inserttotalframenumber {11}}
