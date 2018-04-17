@@ -28,25 +28,27 @@
 \headcommand {\beamer@subsectionentry {0}{4}{1}{7}{Deadlocks}}\headcommand {\beamer@subsectionpages {7}{6}}
 \headcommand {\slideentry {4}{1}{1}{7/7}{Deadlocks}{0}}
 \headcommand {\beamer@framepages {7}{7}}
-\headcommand {\beamer@subsectionentry {0}{4}{2}{8}{Solveur}}\headcommand {\beamer@subsectionpages {7}{7}}
-\headcommand {\slideentry {4}{2}{1}{8/8}{Solveur}{0}}
+\headcommand {\slideentry {4}{1}{2}{8/8}{Deadlocks}{0}}
 \headcommand {\beamer@framepages {8}{8}}
-\headcommand {\sectionentry {5}{Exp\IeC {\'e}rimentations et usages}{9}{Exp\IeC {\'e}rimentations et usages}{0}}
-\headcommand {\beamer@sectionpages {7}{8}}
-\headcommand {\beamer@subsectionpages {8}{8}}
-\headcommand {\slideentry {5}{0}{1}{9/9}{}{0}}
+\headcommand {\beamer@subsectionentry {0}{4}{2}{9}{Solveur}}\headcommand {\beamer@subsectionpages {7}{8}}
+\headcommand {\slideentry {4}{2}{1}{9/9}{Solveur}{0}}
 \headcommand {\beamer@framepages {9}{9}}
-\headcommand {\sectionentry {6}{Conclusion}{10}{Conclusion}{0}}
-\headcommand {\beamer@sectionpages {9}{9}}
+\headcommand {\sectionentry {5}{Exp\IeC {\'e}rimentations et usages}{10}{Exp\IeC {\'e}rimentations et usages}{0}}
+\headcommand {\beamer@sectionpages {7}{9}}
 \headcommand {\beamer@subsectionpages {9}{9}}
-\headcommand {\beamer@subsectionentry {0}{6}{1}{10}{R\IeC {\'e}alisation des objectifs}}\headcommand {\beamer@subsectionpages {10}{9}}
-\headcommand {\slideentry {6}{1}{1}{10/10}{R\IeC {\'e}alisation des objectifs}{0}}
+\headcommand {\slideentry {5}{0}{1}{10/10}{}{0}}
 \headcommand {\beamer@framepages {10}{10}}
-\headcommand {\beamer@subsectionentry {0}{6}{2}{11}{Am\IeC {\'e}liorations possibles}}\headcommand {\beamer@subsectionpages {10}{10}}
-\headcommand {\slideentry {6}{2}{1}{11/11}{Am\IeC {\'e}liorations possibles}{0}}
+\headcommand {\sectionentry {6}{Conclusion}{11}{Conclusion}{0}}
+\headcommand {\beamer@sectionpages {10}{10}}
+\headcommand {\beamer@subsectionpages {10}{10}}
+\headcommand {\beamer@subsectionentry {0}{6}{1}{11}{R\IeC {\'e}alisation des objectifs}}\headcommand {\beamer@subsectionpages {11}{10}}
+\headcommand {\slideentry {6}{1}{1}{11/11}{R\IeC {\'e}alisation des objectifs}{0}}
 \headcommand {\beamer@framepages {11}{11}}
-\headcommand {\beamer@partpages {1}{11}}
-\headcommand {\beamer@subsectionpages {11}{11}}
-\headcommand {\beamer@sectionpages {10}{11}}
-\headcommand {\beamer@documentpages {11}}
-\headcommand {\def \inserttotalframenumber {11}}
+\headcommand {\beamer@subsectionentry {0}{6}{2}{12}{Am\IeC {\'e}liorations possibles}}\headcommand {\beamer@subsectionpages {11}{11}}
+\headcommand {\slideentry {6}{2}{1}{12/12}{Am\IeC {\'e}liorations possibles}{0}}
+\headcommand {\beamer@framepages {12}{12}}
+\headcommand {\beamer@partpages {1}{12}}
+\headcommand {\beamer@subsectionpages {12}{12}}
+\headcommand {\beamer@sectionpages {11}{12}}
+\headcommand {\beamer@documentpages {12}}
+\headcommand {\def \inserttotalframenumber {12}}
