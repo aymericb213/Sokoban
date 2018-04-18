@@ -16,8 +16,8 @@
 \author{Aymeric BEAUCHAMP\\Dimitri CHAGNEUX\\Valentin LEBLOND\\Baptiste MORI}
 \date{Avril 2018}
 
-\begin{document} 
-\maketitle 
+\begin{document}
+\maketitle
 \section*{}
 \subsection*{Sommaire}
 \frame{\tableofcontents}
@@ -45,7 +45,7 @@
 \begin{itemize}
 \item Jeu de réflexion (puzzle)
 \item Poussée de caisses
-\item Objectif : ranger toutes les caisses 
+\item Objectif : ranger toutes les caisses
 \end{itemize}
 \end{column}
 \end{columns}
@@ -110,7 +110,18 @@ Une caisse en deadlock, est une caisse qu'on ne peut plus déplacer directement 
 
 \section{Expérimentations et usages}
 \begin{frame}
-Expérimentations et usages
+  \centering
+  \begin{tabular}{|l|c|c|}
+  Heuristique                          & Hamming   & Manhanttan \\
+  \hline
+  Limite de temps                      & 5 minutes & 10 minutes \\
+  \hline
+  Limite d'états en mémoire            & 175 000   & 180 000    \\
+  \hline
+  Niveaux résolus                      &    34     &    12      \\
+  \hline
+  Niveaux considérés comme insolubles  &    0      &    20      \\
+  \end{tabular}
 \end{frame}
 
 \section{Conclusion}
@@ -119,7 +130,7 @@ Expérimentations et usages
 \begin{itemize}
 \item Globalement les objectifs ont été réalisés
 \item Première expérience de conception logicielle
-\item Travail en groupe 
+\item Travail en groupe
 \end{itemize}
 \end{frame}
 
