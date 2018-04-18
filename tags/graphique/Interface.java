@@ -168,6 +168,7 @@ public class Interface extends JFrame {
             MapReader cancelMap = new MapReader(Interface.this.map.getFile(),"save/cancel_" + Interface.this.playerName + ".xsb");
             String cMap = cancelMap.getCancelMapName();
             if (cMap.equals("map" + Interface.this.b.getLevel())) {
+              Interface.this.map = cancelMap;
               Interface.this.map.readingCancel();
               Interface.this.b.createGrid(Interface.this.map.getCancel());
               if (!Interface.this.b.isFinished()) {
