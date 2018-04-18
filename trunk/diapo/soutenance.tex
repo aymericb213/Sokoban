@@ -6,6 +6,7 @@
 \setbeamercolor{section in head/foot}{bg=grayColor,fg=white}
 \setbeamerfont{subsection in head/foot}{size=\small}
 
+\usepackage{tikz}
 \usepackage{multimedia}
 \usepackage[T1]{fontenc}
 \usepackage[utf8]{inputenc}
@@ -127,6 +128,37 @@ Heuristiques :
 \end{frame}
 
 \begin{frame}
+\begin{figure}[!h]
+\centering
+\begin{tikzpicture}
+\node (dep) at (0,0) {I};
+\draw[color=red] (0,0) circle(0.5);
+\node (e1) at (-1.25,-2) {};
+\draw[color=red] (-1.25,-2) circle(0.5);
+\node (e2) at (1.25,-2) {};
+\draw (1.25,-2) circle(0.5);
+\node (e3) at (-3,-4) {};
+\draw (-3,-4) circle(0.5);
+\node (e4) at (-1.5,-4) {S};
+\draw[color=red] (-1.5,-4) circle(0.5);
+\node (e5) at (0,-4) {};
+\draw (0,-4) circle(0.5);
+\node (e6) at (2,-4) {};
+\draw (2,-4) circle(0.5);
+\node (e7) at (4,-4) {};
+\draw (4,-4) circle(0.5);
+\draw[color=red] (dep) -- (e1);
+\draw (dep) -- (e2);
+\draw (e1) -- (e3);
+\draw[color=red] (e1) -- (e4);
+\draw (e1) -- (e5);
+\draw (e2) -- (e6);
+\draw (e2) -- (e7);
+\end{tikzpicture}
+\end{figure}
+\end{frame}
+
+\begin{frame}
 \frametitle{Démonstration}
 \movie[autostart]{\includegraphics[scale=0.25]{images/im_solver.png}}{images/solveur.flv}
 \end{frame}
@@ -138,7 +170,7 @@ Deux threads :
 \item Thread principal en charge de l'interface graphique et de l'écoute des entrées joueur
 \item Thread auxiliaire pour la recherche de chemin
 \end{itemize}
-Interruption et mise à jour lors du déplacement du joueur
+Interruption du thread auxiliaire lors du déplacement du joueur et mise à jour du canvas de l'ordinateur
 \end{frame}
 
 \section{Expérimentations et usages}
@@ -157,7 +189,7 @@ Interruption et mise à jour lors du déplacement du joueur
   Niveaux résolus                      &    34     &    12      \\
   \hline
   Niveaux considérés comme insolubles  &    0      &    20      \\
-  \hline
+  \hline  
   \end{tabular}
 \end{frame}
 
