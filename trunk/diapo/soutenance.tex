@@ -13,6 +13,7 @@
 \setbeamertemplate{footline}[frame number]{}
 \setbeamertemplate{navigation symbols}{}
 
+
 \title{Défier l'ordinateur au Sokoban}
 \author{Aymeric BEAUCHAMP\\Dimitri CHAGNEUX\\Valentin LEBLOND\\Baptiste MORI}
 \date{Avril 2018}
@@ -55,7 +56,7 @@
 \subsection{Organisation du projet}
 \begin{frame}
 \begin{itemize}
-\item 1ère séance : conception structure projet + début
+\item 1$^{ère}$ séance : conception structure projet + début
 \item Puis, 3 groupes :
 \begin{enumerate}
 \item Version console, gestion de sauvegarde/chargement de fichiers
@@ -110,13 +111,14 @@ Déplacement automatisé
 \begin{itemize}
 \item Algorithme A*
 \end{itemize}
+\movie[loop,autostart]{\includegraphics[scale=0.4]{images/gif/frame_0.png}}{images/dep.flv}
 \end{column}
 \pause
 \begin{column}{5cm}
 Solveurs
 \begin{itemize}
-\item 1er solveur inspiré de minmax (peu efficace)
-\item 2nd solveur basé sur A*
+\item $1^{er}$ solveur inspiré de minmax (peu efficace)
+\item $2^{nd}$ solveur basé sur A*
 \end{itemize}
 Heuristiques :
 \begin{itemize}
@@ -176,7 +178,7 @@ Interruption du thread auxiliaire lors du déplacement du joueur et mise à jour
 \section{Expérimentations et usages}
 \subsection{Performance du solveur}
 \begin{frame}
-  Série de niveaux Sokoban junior par Laura Wheeler (58 niveaux)
+  Série de niveaux Sokoban junior par Laura Wheeler (58 niveaux)\\
   \centering
   \begin{tabular}{|l|c|c|}
   \hline
@@ -212,10 +214,9 @@ Interruption du thread auxiliaire lors du déplacement du joueur et mise à jour
 \item Trouver de meilleurs chemins
 \end{itemize}
 \item Meilleur comportement de l'ordinateur en mode \textit{anytime}
-\item Ajouter des fonctionnalité de terrain (par exemple des téléporteurs,etc.)
+\item Ajouter des éléments de gameplay (téléporteurs, etc.)
 \item Statistiques (temps de résolution, nombre de coups)
 \end{itemize}
 \end{frame}
-
 
 \end{document}
