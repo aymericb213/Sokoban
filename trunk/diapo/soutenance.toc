@@ -7,8 +7,8 @@
 \beamer@subsectionintoc {3}{1}{Packages utilis\IeC {\'e}s}{6}{0}{2}
 \beamer@sectionintoc {4}{El\IeC {\'e}ments techniques}{7}{0}{3}
 \beamer@subsectionintoc {4}{1}{Deadlocks}{7}{0}{3}
-\beamer@subsectionintoc {4}{2}{Solveur}{9}{0}{3}
-\beamer@sectionintoc {5}{Exp\IeC {\'e}rimentations et usages}{10}{0}{4}
-\beamer@sectionintoc {6}{Conclusion}{11}{0}{5}
-\beamer@subsectionintoc {6}{1}{R\IeC {\'e}alisation des objectifs}{11}{0}{5}
-\beamer@subsectionintoc {6}{2}{Am\IeC {\'e}liorations possibles}{12}{0}{5}
+\beamer@subsectionintoc {4}{2}{R\IeC {\'e}solution automatique}{9}{0}{3}
+\beamer@sectionintoc {5}{Exp\IeC {\'e}rimentations et usages}{11}{0}{4}
+\beamer@sectionintoc {6}{Conclusion}{12}{0}{5}
+\beamer@subsectionintoc {6}{1}{R\IeC {\'e}alisation des objectifs}{12}{0}{5}
+\beamer@subsectionintoc {6}{2}{Am\IeC {\'e}liorations possibles}{13}{0}{5}

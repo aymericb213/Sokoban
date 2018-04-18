@@ -101,12 +101,34 @@ Une caisse en deadlock, est une caisse qu'on ne peut plus déplacer directement 
 \end{center}
 \end{frame}
 
-\subsection{Solveur}
+\subsection{Résolution automatique}
+\begin{frame}
+\begin{columns}
+\begin{column}{5cm}
+Déplacement automatisé
+\begin{itemize}
+\item Algorithme A*
+\end{itemize}
+Solveurs
+\begin{itemize}
+\item 1er solveur inspiré de minmax (peu efficace)
+\item 2nd solveur basé sur A*
+\end{itemize}
+\end{column}
+\begin{column}{5cm}
+Heuristiques :
+\begin{itemize}
+\item distances de Manhattan
+\item distance de Hamming
+\end{itemize}
+\end{column}
+\end{columns}
+\end{frame}
+
 \begin{frame}
 \frametitle{Démonstration}
 \movie[autostart]{\includegraphics[scale=0.25]{images/im_solver.png}}{images/solveur.flv}
 \end{frame}
-
 
 \section{Expérimentations et usages}
 \begin{frame}
