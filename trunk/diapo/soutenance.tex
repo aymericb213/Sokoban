@@ -109,13 +109,14 @@ Déplacement automatisé
 \begin{itemize}
 \item Algorithme A*
 \end{itemize}
+\end{column}
+\pause
+\begin{column}{5cm}
 Solveurs
 \begin{itemize}
 \item 1er solveur inspiré de minmax (peu efficace)
 \item 2nd solveur basé sur A*
 \end{itemize}
-\end{column}
-\begin{column}{5cm}
 Heuristiques :
 \begin{itemize}
 \item distances de Manhattan
@@ -130,8 +131,20 @@ Heuristiques :
 \movie[autostart]{\includegraphics[scale=0.25]{images/im_solver.png}}{images/solveur.flv}
 \end{frame}
 
-\section{Expérimentations et usages}
+\subsection{Fonctionnement anytime}
 \begin{frame}
+Deux threads :
+\begin{itemize}
+\item Thread principal en charge de l'interface graphique et de l'écoute des entrées joueur
+\item Thread auxiliaire pour la recherche de chemin
+\end{itemize}
+Interruption et mise à jour lors du déplacement du joueur
+\end{frame}
+
+\section{Expérimentations et usages}
+\subsection{Performance du solveur}
+\begin{frame}
+  Série de niveaux Sokoban junior par Laura Wheeler (58 niveaux)
   \centering
   \begin{tabular}{|l|c|c|}
   Heuristique                          & Hamming   & Manhanttan \\

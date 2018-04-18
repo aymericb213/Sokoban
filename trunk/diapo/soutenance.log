@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2017.9.9)  18 APR 2018 17:24
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2017.9.9)  18 APR 2018 19:05
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1239,7 +1239,7 @@ LaTeX Font Warning: Font shape `T1/cmss/m/n' in size <4> not available
 
 ] [3
 
-] <images/sokoban.png, id=146, 400.49625pt x 401.5pt>
+] <images/sokoban.png, id=157, 400.49625pt x 401.5pt>
 File: images/sokoban.png Graphic file (type png)
 
 <use images/sokoban.png>
@@ -1258,7 +1258,7 @@ File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 
  <./images/sokoban.png>] [5
 
-] <images/packages.png, id=172, 746.79pt x 619.2547pt>
+] <images/packages.png, id=183, 746.79pt x 619.2547pt>
 File: images/packages.png Graphic file (type png)
 
 <use images/packages.png>
@@ -1267,14 +1267,14 @@ Package pdftex.def Info: images/packages.png used on input line 75.
  [6
 
  <./images/packages.png>]
-<images/deadlock1.PNG, id=185, 151.3153pt x 151.3153pt>
+<images/deadlock1.PNG, id=196, 151.3153pt x 151.3153pt>
 File: images/deadlock1.PNG Graphic file (type png)
 
 <use images/deadlock1.PNG>
 Package pdftex.def Info: images/deadlock1.PNG used on input line 96.
 (pdftex.def)             Requested size: 105.91998pt x 105.91998pt.
 
-<images/deadlock2.PNG, id=187, 152.06813pt x 151.3153pt>
+<images/deadlock2.PNG, id=198, 152.06813pt x 151.3153pt>
 File: images/deadlock2.PNG Graphic file (type png)
 
 <use images/deadlock2.PNG>
@@ -1283,7 +1283,7 @@ Package pdftex.def Info: images/deadlock2.PNG used on input line 96.
  [7
 
  <./images/deadlock1.PNG> <./images/deadlock2.PNG>] <images/deadlock3.PNG, id=2
-02, 444.15938pt x 331.99031pt>
+14, 444.15938pt x 331.99031pt>
 File: images/deadlock3.PNG Graphic file (type png)
 
 <use images/deadlock3.PNG>
@@ -1297,25 +1297,43 @@ Overfull \vbox (6.81313pt too high) detected at line 102
 
  <./images/deadlock3.PNG>] [9
 
+] [10
+
 ]
-<images/im_solver.png, id=227, 1254.6875pt x 619.31375pt>
+<images/im_solver.png, id=254, 1254.6875pt x 619.31375pt>
 File: images/im_solver.png Graphic file (type png)
 
 <use images/im_solver.png>
-Package pdftex.def Info: images/im_solver.png used on input line 131.
+Package pdftex.def Info: images/im_solver.png used on input line 132.
 (pdftex.def)             Requested size: 313.67111pt x 154.82805pt.
 
-Overfull \hbox (6.38124pt too wide) in paragraph at lines 131--131
+Overfull \hbox (6.38124pt too wide) in paragraph at lines 132--132
 [][][][]  
  []
 
-[10
+[11
 
- <./images/im_solver.png>] [11
+ <./images/im_solver.png>]
 
-] [12
+! LaTeX Error: There's no line here to end.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.142 \end{frame}
+                 
+Your command was ignored.
+Type  I <command> <return>  to replace it with another command,
+or  <return>  to continue without it.
+
+[12
 
 ] [13
+
+] [14
+
+] [15
 
 ]
 \tf@nav=\write6
@@ -1327,25 +1345,25 @@ Overfull \hbox (6.38124pt too wide) in paragraph at lines 131--131
 \tf@snm=\write8
 \openout8 = `soutenance.snm'.
 
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 174.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 174.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 187.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 187.
  (./soutenance.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 174.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 174.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 187.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 187.
 Package rerunfilecheck Info: File `soutenance.out' has not changed.
-(rerunfilecheck)             Checksum: 13F93CB648F6F1131A54C358E78A4543;833.
+(rerunfilecheck)             Checksum: 3DC5357C4313470B1719F5A031163B5E;979.
 
 
 LaTeX Font Warning: Size substitutions with differences
 (Font)              up to 1.0pt have occurred.
 
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 174.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 187.
  ) 
 Here is how much of TeX's memory you used:
- 17446 strings out of 494883
- 331439 string characters out of 6178694
+ 17461 strings out of 494883
+ 331604 string characters out of 6178694
  393791 words of memory out of 5000000
- 20270 multiletter control sequences out of 15000+600000
+ 20279 multiletter control sequences out of 15000+600000
  15670 words of font info for 42 fonts, out of 8000000 for 9000
  36 hyphenation exceptions out of 8191
  48i,19n,62p,407b,645s stack positions out of 5000i,500n,10000p,200000b,80000s
@@ -1355,10 +1373,10 @@ Here is how much of TeX's memory you used:
 r/fonts/pk/ljfour/jknappen/ec/ecss1095.600pk> </home/aymeric/.texmf-var/fonts/p
 k/ljfour/jknappen/ec/ecss1440.600pk> </home/aymeric/.texmf-var/fonts/pk/ljfour/
 jknappen/ec/ecss0600.600pk>
-Output written on soutenance.pdf (13 pages, 1266690 bytes).
+Output written on soutenance.pdf (15 pages, 1271220 bytes).
 PDF statistics:
- 481 PDF objects out of 1000 (max. 8388607)
- 266 compressed objects within 3 object streams
- 42 named destinations out of 1000 (max. 500000)
- 239 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 529 PDF objects out of 1000 (max. 8388607)
+ 306 compressed objects within 4 object streams
+ 48 named destinations out of 1000 (max. 500000)
+ 255 words of extra memory for PDF output out of 10000 (max. 10000000)
 

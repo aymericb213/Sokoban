@@ -8,7 +8,9 @@
 \beamer@sectionintoc {4}{El\IeC {\'e}ments techniques}{7}{0}{3}
 \beamer@subsectionintoc {4}{1}{Deadlocks}{7}{0}{3}
 \beamer@subsectionintoc {4}{2}{R\IeC {\'e}solution automatique}{9}{0}{3}
-\beamer@sectionintoc {5}{Exp\IeC {\'e}rimentations et usages}{11}{0}{4}
-\beamer@sectionintoc {6}{Conclusion}{12}{0}{5}
-\beamer@subsectionintoc {6}{1}{R\IeC {\'e}alisation des objectifs}{12}{0}{5}
-\beamer@subsectionintoc {6}{2}{Am\IeC {\'e}liorations possibles}{13}{0}{5}
+\beamer@subsectionintoc {4}{3}{Fonctionnement anytime}{12}{0}{3}
+\beamer@sectionintoc {5}{Exp\IeC {\'e}rimentations et usages}{13}{0}{4}
+\beamer@subsectionintoc {5}{1}{Performance du solveur}{13}{0}{4}
+\beamer@sectionintoc {6}{Conclusion}{14}{0}{5}
+\beamer@subsectionintoc {6}{1}{R\IeC {\'e}alisation des objectifs}{14}{0}{5}
+\beamer@subsectionintoc {6}{2}{Am\IeC {\'e}liorations possibles}{15}{0}{5}
