@@ -1,14 +1,15 @@
 # Librairie de Sokoban.
 
 Reproduction du jeu Sokoban avec implémentation d'une IA qui résout les niveaux.
-
-<img src="https://github.com/aymericb213/Sokoban/blob/master/screenshots/menu.PNG" width="562" height="473" style="margin: auto;">
-
-![menu](https://github.com/aymericb213/Sokoban/blob/master/screenshots/menu.PNG)
+<div align="center">
+<img src="https://github.com/aymericb213/Sokoban/blob/master/screenshots/menu.PNG" width="562" height="473"alt="menu">  
+</div>
 
 Pour lancer dist.sh, déplacer dist.sh, README.txt et le dossier script dans le dossier parent du projet.
 
-
+<div align="center">
+<img src="https://github.com/aymericb213/Sokoban/blob/master/screenshots/demo.gif" width="792" height="340" alt="demo">
+</div>
 
 ## Les commandes principales sont:
 
