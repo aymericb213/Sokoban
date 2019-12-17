@@ -18,3 +18,15 @@ Pour lancer dist.sh, déplacer dist.sh, README.txt et le dossier script dans le 
 - "sh scripts/makejar.sh" pour créer un jar contenant tous les .class
 - "sh scripts/makedoc.sh" pour générer la javadoc (le fichier principal est doc/index.html)
 - "sh scripts/clean.sh" pour supprimer tous les fichiers générés (jar, javadoc, dossier build)
+
+## Jouer en parallèle d'une IA
+
+<div align="center">
+<img src="https://github.com/aymericb213/Sokoban/blob/master/screenshots/ia.gif" alt="ia">
+</div>
+
+## Rejouer les niveux réussis
+
+<div align="center">
+<img src="https://github.com/aymericb213/Sokoban/blob/master/screenshots/select_map.PNG" alt="select">
+</div>
