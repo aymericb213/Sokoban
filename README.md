@@ -25,7 +25,7 @@ Pour lancer dist.sh, déplacer dist.sh, README.txt et le dossier script dans le 
 <img src="https://github.com/aymericb213/Sokoban/blob/master/screenshots/ia.gif" alt="ia">
 </div>
 
-## Rejouer les niveux réussis
+## Rejouer les niveaux réussis
 
 <div align="center">
 <img src="https://github.com/aymericb213/Sokoban/blob/master/screenshots/select_map.PNG" alt="select">
